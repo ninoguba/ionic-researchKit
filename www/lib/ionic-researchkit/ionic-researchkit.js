@@ -194,7 +194,7 @@ function($timeout, $compile, $ionicSlideBoxDelegate, $ionicHistory, $ionicScroll
         			(attr.text ? '<p>'+attr.text+'</p>' : '')+
         			'</div>'+
         			'<div class="irk-offcentered-container"><div class="irk-offcentered-content">'+
-        			'<h4>{{'+attr.id+'}}</h4>'+
+        			'<h4>{{'+attr.id+' || \'&nbsp;\'}}</h4>'+
         			'<div class="range">'+
         			attr.min+
         			'<input type="range" name="'+attr.id+'" min="'+attr.min+'" max="'+attr.max+'" step="'+attr.step+'" value="'+attr.value+'" ng-model="'+attr.id+'">'+
