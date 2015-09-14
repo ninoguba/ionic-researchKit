@@ -2,6 +2,11 @@
 * Author: Nino Guba
 * Date: 08-26-2015
 * Directives for ResearsetchKit in Ionic
+*
+* Adapted from the following:
+* ion-slide-box (https://github.com/driftyco/ionic)
+* ion-wizard (https://github.com/arielfaur/ionic-wizard)
+*
 */
 angular.module('ionicResearchKit',[])
 //======================================================================================
@@ -12,13 +17,14 @@ angular.module('ionicResearchKit',[])
 // Usage: 
 // =====================================================================================
 .directive('irkOrderedTasks', [
+    '$rootScope',
     '$timeout',
     '$compile',
     '$ionicSlideBoxDelegate',
     '$ionicHistory',
     '$ionicScrollDelegate',
     '$ionicNavBarDelegate',
-    function($timeout, $compile, $ionicSlideBoxDelegate, $ionicHistory, $ionicScrollDelegate, $ionicNavBarDelegate) {
+    function($rootScope, $timeout, $compile, $ionicSlideBoxDelegate, $ionicHistory, $ionicScrollDelegate, $ionicNavBarDelegate) {
         return {
             restrict: 'E',
             replace: true,
@@ -95,10 +101,6 @@ angular.module('ionicResearchKit',[])
                     slider.load();
                 });
 
-                $scope.getSlidesCount = function() {
-                    return slider.slidesCount();
-                }
-
                 $scope.doCancel = function() {
                     console.log('Clicked cancel');
                 };
@@ -111,15 +113,34 @@ angular.module('ionicResearchKit',[])
                 $scope.doStepNext = function() {
                     console.log('Clicked next');
                     slider.next();
-                    $rootScope.inputChanged = false;
                 };
 
                 $scope.doSkip = function() {
                     console.log('Clicked skip');
                     slider.next();
-                    $rootScope.inputChanged = false;
                 };
 
+                var conditions = [];
+
+                this.addCondition = function(condition) {
+                    conditions.push(condition);
+                };
+
+                this.getCondition = function(index) {
+                    return conditions[index];
+                };
+
+                this.checkNextCondition = function(index) {
+                    return index > (conditions.length - 1)
+                        ? false
+                        : conditions[index].next();
+                };
+
+                this.checkPreviousCondition = function(index) {
+                    return index > (conditions.length - 1)
+                        ? false
+                        : conditions[index].prev();
+                };
             }],
 
             template:
@@ -134,7 +155,7 @@ angular.module('ionicResearchKit',[])
                 '</ion-footer-bar>'+
                 '</div>',
 
-            link: function($scope, $element, $attr) {
+            link: function(scope, element, attrs, controller) {
                 //Insert Header
                 var stepHeader = angular.element(
                     '<ion-header-bar>'+
@@ -147,8 +168,22 @@ angular.module('ionicResearchKit',[])
                     '</div>'+
                     '</ion-header-bar>'
                     );
-                $element.parent()[0].insertBefore(stepHeader[0], $element[0]);
-                $compile(stepHeader)($scope);
+                element.parent()[0].insertBefore(stepHeader[0], element[0]);
+                $compile(stepHeader)(scope);
+
+                var currentIndex = 0;
+
+                // Watch the current index's condition for changes and broadcast the new condition state on change
+                scope.$watch(function() {
+                    return controller.checkNextCondition(currentIndex) && controller.checkPreviousCondition(currentIndex);
+                }, function() {
+                    $rootScope.$broadcast("step:NextCondition", controller.checkNextCondition(currentIndex));
+                    $rootScope.$broadcast("step:PreviousCondition", controller.checkPreviousCondition(currentIndex));                    
+                });
+
+                scope.$on("slideBox.slideChanged", function(e, index) {
+                    currentIndex = index;
+                });
             }
         };
 }])
@@ -157,8 +192,30 @@ angular.module('ionicResearchKit',[])
     return {
         restrict: 'E',
         require: '^irkOrderedTasks',
-        compile: function(element) {
+        scope: {},
+        link: function(scope, element, attrs, controller) {
             element.addClass('slider-slide irk-slider-slide');
+
+            // Only enable next when form is dirtied
+            var nextFn = function() {
+                var currentForm = element.find('form');
+                if (currentForm.length != 0)
+                    return currentForm.hasClass('ng-dirty');
+                else
+                    return true;
+            };
+
+            // Going back is always allowed
+            var prevFn = function() {
+                return true;
+            };
+
+            var conditions = {
+                next: nextFn,
+                prev: prevFn
+            };
+
+            controller.addCondition(conditions);
         }
     };
 })
@@ -252,7 +309,7 @@ angular.module('ionicResearchKit',[])
                 '<h4>{{'+attr.id+' || \'&nbsp;\'}}</h4>'+
                 '<div class="range">'+
                 attr.min+
-                '<input type="range" name="'+attr.id+'" min="'+attr.min+'" max="'+attr.max+'" step="'+attr.step+'" value="'+attr.value+'" ng-model="'+attr.id+'" ng-change="$root.inputChanged=true">'+
+                '<input type="range" name="'+attr.id+'" min="'+attr.min+'" max="'+attr.max+'" step="'+attr.step+'" value="'+attr.value+'" ng-model="'+attr.id+'">'+
                 attr.max+
                 '</div>'+
                 '</div></div>'+
@@ -277,12 +334,12 @@ angular.module('ionicResearchKit',[])
                 '<div class="irk-offcentered-container"><div class="irk-offcentered-content">'+
                 '<div class="list">'+
                 '<label class="item item-radio">'+
-                '<input type="radio" name="'+attr.id+'" value="'+(attr.trueValue?attr.trueValue:'True')+'" ng-model="'+attr.id+'" ng-change="$root.inputChanged=true">'+
+                '<input type="radio" name="'+attr.id+'" value="'+(attr.trueValue?attr.trueValue:'True')+'" ng-model="'+attr.id+'">'+
                 '<div class="item-content irk-item-content">'+(attr.trueValue?attr.trueValue:'True')+'</div>'+
                 '<i class="radio-icon ion-checkmark"></i>'+
                 '</label>'+
                 '<label class="item item-radio">'+
-                '<input type="radio" name="'+attr.id+'" value="'+(attr.falseValue?attr.falseValue:'False')+'" ng-model="'+attr.id+'" ng-change="$root.inputChanged=true">'+
+                '<input type="radio" name="'+attr.id+'" value="'+(attr.falseValue?attr.falseValue:'False')+'" ng-model="'+attr.id+'">'+
                 '<div class="item-content irk-item-content">'+(attr.falseValue?attr.falseValue:'False')+'</div>'+
                 '<i class="radio-icon ion-checkmark"></i>'+
                 '</label>'+
@@ -306,7 +363,7 @@ angular.module('ionicResearchKit',[])
                 '<div class="irk-offcentered-container"><div class="irk-offcentered-content">'+
                 '<div class="range">'+
                 attr.min+
-                '<input type="range" name="'+attr.id+'" min="'+attr.min+'" max="'+attr.max+'" step="'+attr.step+'" value="'+attr.value+'" ng-model="'+attr.id+'" ng-change="$root.inputChanged=true">'+
+                '<input type="range" name="'+attr.id+'" min="'+attr.min+'" max="'+attr.max+'" step="'+attr.step+'" value="'+attr.value+'" ng-model="'+attr.id+'">'+
                 attr.max+
                 '</div>'+
                 '</div></div>'+
