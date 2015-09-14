@@ -9,7 +9,6 @@ angular.module('starter.controllers', [])
   }).then(function(modal) {
     $scope.modal = modal;
 	$scope.modal.show();
-	$ionicSlideBoxDelegate.update();
   });
 
   $scope.openModal = function() {
