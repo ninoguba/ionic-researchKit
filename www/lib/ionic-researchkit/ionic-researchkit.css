@@ -48,16 +48,8 @@
   text-align: center;
 }
 
-.irk-hidden {
-  display: none;
-}
-
-.irk-bottom {
-  z-index: 1000 !important;
-  position: fixed;
-  left: 0px;
-  bottom: 10px; 
-  width: 100%;
+.irk-bottom-bar {
+  background-image: none !important;
 }
 
 .irk-bottom-button {
@@ -66,6 +58,7 @@
   margin-left: auto;
   margin-right: auto;
   width: 90% !important;
+  font-size: 17px !important;
 }
 
 .irk-item-content {

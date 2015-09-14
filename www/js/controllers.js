@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('StepsCtrl', function($scope, $ionicModal) {
+.controller('StepsCtrl', function($scope, $ionicModal, $ionicSlideBoxDelegate) {
   $scope.data = {};
 
   $ionicModal.fromTemplateUrl('templates/modal-steps.html', {
@@ -9,6 +9,7 @@ angular.module('starter.controllers', [])
   }).then(function(modal) {
     $scope.modal = modal;
 	$scope.modal.show();
+	$ionicSlideBoxDelegate.update();
   });
 
   $scope.openModal = function() {
