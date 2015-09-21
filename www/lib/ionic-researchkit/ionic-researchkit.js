@@ -141,6 +141,13 @@ angular.module('ionicResearchKit',[])
                         ? false
                         : conditions[index].prev();
                 };
+
+                this.checkSkipCondition = function(index) {
+                    return index > (conditions.length - 1)
+                        ? false
+                        : conditions[index].skip();
+                };
+
             }],
 
             template:
@@ -148,10 +155,10 @@ angular.module('ionicResearchKit',[])
                 '<div class="slider-slides irk-slider-slides" ng-transclude>'+
                 '</div>'+
                 '<ion-footer-bar class="bar-subfooter irk-bottom-bar">'+
-                '<button id="stepnext-button" class="button button-block button-outline button-positive irk-bottom-button" ng-click="doStepNext()" irk-step-next>Next</button>'+
+                '<button class="button button-block button-outline button-positive irk-bottom-button" ng-click="doStepNext()" irk-step-next>Next</button>'+
                 '</ion-footer-bar>'+
                 '<ion-footer-bar class="irk-bottom-bar">'+
-                '<button id="stepskip-button" class="button button-block button-clear button-positive irk-bottom-button" ng-click="doSkip()">Skip this question</button>'+
+                '<button class="button button-block button-clear button-positive irk-bottom-button" ng-click="doSkip()" irk-step-skip>Skip this question</button>'+
                 '</ion-footer-bar>'+
                 '</div>',
 
@@ -160,11 +167,11 @@ angular.module('ionicResearchKit',[])
                 var stepHeader = angular.element(
                     '<ion-header-bar>'+
                     '<div class="buttons">'+
-                    '<button id="stepback-button" class="button button-clear button-positive icon ion-ios-arrow-left" ng-click="doStepBack()" irk-step-previous></button>'+
+                    '<button class="button button-clear button-positive icon ion-ios-arrow-left" ng-click="doStepBack()" irk-step-previous></button>'+
                     '</div>'+
                     '<h1 class="title" irk-step-title></h1>'+
                     '<div class="buttons">'+
-                    '<button id="stepcancel-button" class="button button-clear button-positive" ng-click="doCancel()">Cancel</button>'+
+                    '<button class="button button-clear button-positive" ng-click="doCancel()">Cancel</button>'+
                     '</div>'+
                     '</ion-header-bar>'
                     );
@@ -175,11 +182,22 @@ angular.module('ionicResearchKit',[])
 
                 // Watch the current index's condition for changes and broadcast the new condition state on change
                 scope.$watch(function() {
-                    return controller.checkNextCondition(currentIndex) && controller.checkPreviousCondition(currentIndex);
+                    return controller.checkNextCondition(currentIndex);
                 }, function() {
                     $rootScope.$broadcast("step:NextCondition", controller.checkNextCondition(currentIndex));
-                    $rootScope.$broadcast("step:PreviousCondition", controller.checkPreviousCondition(currentIndex));                    
                 });
+                scope.$watch(function() {
+                    return controller.checkSkipCondition(currentIndex);
+                }, function() {
+                    $rootScope.$broadcast("step:SkipCondition", controller.checkSkipCondition(currentIndex));
+                });
+                /*
+                scope.$watch(function() {
+                    return controller.checkPreviousCondition(currentIndex);
+                }, function() {
+                    $rootScope.$broadcast("step:PreviousCondition", controller.checkPreviousCondition(currentIndex));
+                });
+                */
 
                 scope.$on("slideBox.slideChanged", function(e, index) {
                     currentIndex = index;
@@ -196,13 +214,14 @@ angular.module('ionicResearchKit',[])
         link: function(scope, element, attrs, controller) {
             element.addClass('slider-slide irk-slider-slide');
 
-            // Only enable next when form is dirtied
+            // Only enable next when input is dirty
             var nextFn = function() {
-                var currentForm = element.find('form');
-                if (currentForm.length != 0)
-                    return currentForm.hasClass('ng-dirty');
-                else
-                    return true;
+                return element.find('form').length == 0 || (element.find('form').length != 0 && element.find('form').hasClass('ng-dirty'));
+            };
+
+            // Only show skip when input is not required
+            var skipFn = function() {
+                return element.find('form').length == 0 || (element.find('form').length != 0 && element.find('form').hasClass('ng-invalid-required'));
             };
 
             // Going back is always allowed
@@ -212,6 +231,7 @@ angular.module('ionicResearchKit',[])
 
             var conditions = {
                 next: nextFn,
+                skip: skipFn,
                 prev: prevFn
             };
 
@@ -232,7 +252,7 @@ angular.module('ionicResearchKit',[])
     }
 }])
 
-.directive('irkStepPrevious', ['$rootScope', '$ionicSlideBoxDelegate', function($rootScope, $ionicSlideBoxDelegate) {
+.directive('irkStepPrevious', ['$rootScope', function($rootScope) {
     return{
         restrict: 'EA',
         scope: {},
@@ -252,7 +272,7 @@ angular.module('ionicResearchKit',[])
     }
 }])
 
-.directive('irkStepNext', ['$rootScope', '$ionicSlideBoxDelegate', function($rootScope, $ionicSlideBoxDelegate) {
+.directive('irkStepNext', ['$rootScope', function($rootScope) {
     return{
         restrict: 'EA',
         scope: {},
@@ -270,6 +290,22 @@ angular.module('ionicResearchKit',[])
 
             scope.$on("step:NextCondition", function(e, condition) {
                 element.attr("disabled", !condition); 
+            });
+        }
+    }
+}])
+
+.directive('irkStepSkip', ['$rootScope', function($rootScope) {
+    return{
+        restrict: 'EA',
+        scope: {},
+        link: function(scope, element, attrs, controller) {
+            element.on('click', function() {
+                $rootScope.$broadcast("step:Skip");
+            });
+
+            scope.$on("step:SkipCondition", function(e, condition) {
+                element.toggleClass('ng-hide', !condition);
             });
         }
     }
@@ -309,7 +345,7 @@ angular.module('ionicResearchKit',[])
                 '<h4>{{'+attr.id+' || \'&nbsp;\'}}</h4>'+
                 '<div class="range">'+
                 attr.min+
-                '<input type="range" name="'+attr.id+'" min="'+attr.min+'" max="'+attr.max+'" step="'+attr.step+'" value="'+attr.value+'" ng-model="'+attr.id+'">'+
+                '<input type="range" name="'+attr.id+'" min="'+attr.min+'" max="'+attr.max+'" step="'+attr.step+'" value="'+attr.value+'" ng-model="'+attr.id+'" ng-required="{{!'+attr.optional+'}}">'+
                 attr.max+
                 '</div>'+
                 '</div></div>'+
