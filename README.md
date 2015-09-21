@@ -57,3 +57,25 @@ This is a clone of Apple's [ResearchKit Framework](https://github.com/ResearchKi
 # Demo
 
 ![App demo](https://cloud.githubusercontent.com/assets/4361804/9769406/dff8d760-56de-11e5-9a08-b6d2f82ad894.gif)
+
+# Roadmap
+
+- [ ] Task View Controller equivalent 
+  - [x] Show "Step x of y" title
+  - [x] Hide Back button on first step
+  - [x] Change Next button label to Done when on last step
+  - [ ] Enable Next button on input change (currently enabled only after to input change events)
+  - [ ] Hide Skip button when input is required
+  - [ ] Cancel button shows action sheet
+  - [ ] Done button exits task view
+- [ ] Results
+  - [ ] Collect results into LocalStorage
+  - [ ] Output results in JSON
+- [ ] Survey directives
+  - [x] Instruction Step directive
+  - [x] Scale Question Step directive
+  - [x] Boolean Question Step directive
+  - ...
+- [ ] Consent directives
+- [ ] Active Tasks directives
+  - 
