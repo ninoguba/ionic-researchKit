@@ -24,7 +24,8 @@ angular.module('ionicResearchKit',[])
     '$ionicHistory',
     '$ionicScrollDelegate',
     '$ionicNavBarDelegate',
-    function($rootScope, $timeout, $compile, $ionicSlideBoxDelegate, $ionicHistory, $ionicScrollDelegate, $ionicNavBarDelegate) {
+    '$ionicActionSheet',
+    function($rootScope, $timeout, $compile, $ionicSlideBoxDelegate, $ionicHistory, $ionicScrollDelegate, $ionicNavBarDelegate, $ionicActionSheet) {
         return {
             restrict: 'E',
             replace: true,
@@ -103,6 +104,19 @@ angular.module('ionicResearchKit',[])
 
                 $scope.doCancel = function() {
                     console.log('Clicked cancel');
+
+                    // Show the action sheet
+                    var hideSheet = $ionicActionSheet.show({
+                        destructiveText: 'End Task',
+                        cancelText: 'Cancel',
+                        cancel: function() {
+                            hideSheet();
+                        },
+                        destructiveButtonClicked: function(index) {
+                            console.log('Clicked end task');
+                            return true;
+                        }
+                    });
                 };
 
                 $scope.doStepBack = function() {
