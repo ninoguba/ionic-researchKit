@@ -63,11 +63,12 @@ This is a clone of Apple's [ResearchKit Framework](https://github.com/ResearchKi
 - [ ] Task View Controller equivalent 
   - [x] Show "Step x of y" title
   - [x] Hide Back button on first step
+  - [x] Cancel button shows action sheet
   - [x] Change Next button label to Done when on last step
   - [ ] Enable Next button on input change (currently enabled only after to input change events)
-  - [ ] Hide Skip button when input is required
-  - [ ] Cancel button shows action sheet
+  - [ ] Hide Skip button when input is required (currently hides button on subsequent steps too)
   - [ ] Done button exits task view
+  - [ ] End Task button (on action sheet) exits task view
 - [ ] Results
   - [ ] Collect results into LocalStorage
   - [ ] Output results in JSON
