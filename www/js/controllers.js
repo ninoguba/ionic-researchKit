@@ -8,7 +8,7 @@ angular.module('starter.controllers', [])
     animation: 'slide-in-up'
   }).then(function(modal) {
     $scope.modal = modal;
-    $scope.modal.show();
+    //$scope.modal.show();
   });
 
   $scope.openModal = function() {
