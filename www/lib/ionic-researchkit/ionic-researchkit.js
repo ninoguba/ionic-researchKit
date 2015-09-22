@@ -127,13 +127,20 @@ angular.module('ionicResearchKit',[])
 
                 $scope.doStepNext = function() {
                     console.log('Clicked next');
-                    slider.next();
+                    $scope.doNext();
                 };
 
                 $scope.doSkip = function() {
                     console.log('Clicked skip');
-                    slider.next();
+                    $scope.doNext();
                 };
+
+                $scope.doNext = function() {
+                    if (slider.currentIndex() < slider.slidesCount()-1)
+                        slider.next();
+                    else
+                        $scope.$parent.closeModal();
+                }
 
                 var conditions = [];
 
