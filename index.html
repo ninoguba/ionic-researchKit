@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Ionic-researchkit by ninoguba</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Ionic-researchkit</h1>
+        <h2>This is a clone of Apple&#39;s ResearchKit Framework built on Ionic which makes it easy to create cross-platform hybrid native apps for medical research or for other research projects.</h2>
+        <a href="https://github.com/ninoguba/ionic-researchKit" class="button"><small>View project on</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a id="what-is-ionicresearchkit" class="anchor" href="#what-is-ionicresearchkit" aria-hidden="true"><span class="octicon octicon-link"></span></a>What is ionicResearchKit?</h1>
+
+<p>This is a clone of Apple's <a href="https://github.com/ResearchKit/ResearchKit">ResearchKit Framework</a> built on <a href="https://github.com/driftyco/ionic">Ionic</a> which makes it easy to create cross-platform hybrid native apps for medical research or for other research projects.</p>
+
+<h1>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h1>
+
+<ol>
+<li>Download and import the plugin script.<br>
+<code>&lt;script src="lib/ionic-researchkit/ionic-researchkit.js"&gt;&lt;/script&gt;</code>
+</li>
+<li>Download and import the plugin stylesheet.<br>
+<code>&lt;link href="lib/ionic-researchkit/ionic-researchkit.css" rel="stylesheet"&gt;</code>
+</li>
+<li>Add <code>ionicResearchKit</code> to your angular app module dependencies list.<br>
+<code>angular.module('myApp', ['ionicResearchKit']);</code>
+</li>
+</ol>
+
+<h1>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h1>
+
+<ol>
+<li>Add a modal view to your app using <a href="http://ionicframework.com/docs/api/service/%24ionicModal/">$ionicModal</a>
+</li>
+<li>Add the following to your modal view template:</li>
+</ol>
+
+<pre><code>&lt;ion-modal-view class="irk-modal"&gt;
+
+  &lt;irk-ordered-tasks&gt;
+
+    &lt;irk-task&gt;
+        &lt;irk-instruction-step title="Your title here." text="Additional text can go here." /&gt;
+    &lt;/irk-task&gt;
+
+      &lt;irk-task&gt;
+        &lt;irk-scale-question-step id="data.q2" title="Your question here." text="Additional text can go here." 
+            min="1" max="10" step="1" value="5" /&gt;
+    &lt;/irk-task&gt;
+
+    &lt;irk-task&gt;
+        &lt;irk-boolean-question-step id="data.q2" title="Your question here." text="Additional text can go here." 
+            trueLabel="Yes" falseLabel="No"/&gt;
+      &lt;/irk-task&gt;
+
+  &lt;/irk-ordered-tasks&gt;
+
+&lt;/ion-modal-view&gt;
+</code></pre>
+
+<h1>
+<a id="directives" class="anchor" href="#directives" aria-hidden="true"><span class="octicon octicon-link"></span></a>Directives</h1>
+
+<p><code>&lt;irk-ordered-tasks&gt;</code> is the equivalent of the <code>ORKOrderedTask</code> class in ResearchKit and will encompass one or more <code>&lt;irk-task&gt;</code> elements.</p>
+
+<p><code>&lt;irk-task&gt;</code> is the equivalent of the <code>ORKTask</code> class in ResearchKit and will encompass one of the available <code>&lt;irk-*-step&gt;</code> elements.</p>
+
+<p><code>&lt;irk-instruction-step&gt;</code> is the equivalent of the <code>ORKInstructionStep</code> class in ResearchKit and includes the <code>title</code> and <code>text</code> attributes.</p>
+
+<p><code>&lt;irk-scale-question-step&gt;</code> is the equivalent of the <code>ORKQuestionStep</code> and <code>ORKScaleAnswerFormat</code> classes in ResearchKit combined and includes the <code>id</code>, <code>title</code>, <code>text</code>, <code>min</code>, <code>max</code>, <code>step</code>, and <code>value</code> attributes.</p>
+
+<p><code>&lt;irk-boolean-question-step&gt;</code> is the equivalent of the <code>ORKQuestionStep</code> and <code>ORKBooleanAnswerFormat</code> classes in ResearchKit combined and includes the <code>id</code>, <code>title</code>, <code>text</code>, <code>trueLabel</code>, and <code>falseLabel</code> attributes.</p>
+
+<p><em>These are still a work in progress and I plan to have equivalent directives to all classes in ResearchKit.</em></p>
+
+<h1>
+<a id="demo" class="anchor" href="#demo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Demo</h1>
+
+<p><img src="https://cloud.githubusercontent.com/assets/4361804/9769406/dff8d760-56de-11e5-9a08-b6d2f82ad894.gif" alt="App demo"></p>
+
+<h1>
+<a id="roadmap" class="anchor" href="#roadmap" aria-hidden="true"><span class="octicon octicon-link"></span></a>Roadmap</h1>
+
+<ul>
+<li>[ ] Task View Controller equivalent 
+
+<ul>
+<li>[x] Show "Step x of y" title</li>
+<li>[x] Hide Back button on first step</li>
+<li>[x] Cancel button shows action sheet</li>
+<li>[x] End Task button (on action sheet) exits task view</li>
+<li>[x] Change Next button label to Done when on last step</li>
+<li>[x] Done button exits task view</li>
+<li>[ ] Enable Next button on input change (currently enabled only after to input change events)</li>
+<li>[ ] Hide Skip button when input is required (currently hides button on subsequent steps too)</li>
+</ul>
+</li>
+<li>[ ] Results
+
+<ul>
+<li>[ ] Collect results into LocalStorage</li>
+<li>[ ] Output results in JSON</li>
+</ul>
+</li>
+<li>[ ] Survey directives
+
+<ul>
+<li>[x] Instruction Step directive</li>
+<li>[x] Scale Question Step directive</li>
+<li>[x] Boolean Question Step directive</li>
+<li>...</li>
+</ul>
+</li>
+<li>[ ] Consent directives</li>
+<li>[ ] Active Tasks directives
+
+<ul>
+<li>
+</ul>
+</li>
+</ul>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/ninoguba/ionic-researchKit/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/ninoguba/ionic-researchKit/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/ninoguba/ionic-researchKit"></a> is maintained by <a href="https://github.com/ninoguba">ninoguba</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
