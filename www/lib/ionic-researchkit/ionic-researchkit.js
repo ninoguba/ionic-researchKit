@@ -114,6 +114,7 @@ angular.module('ionicResearchKit',[])
                         },
                         destructiveButtonClicked: function(index) {
                             console.log('Clicked end task');
+                            $scope.$parent.closeModal();
                             return true;
                         }
                     });

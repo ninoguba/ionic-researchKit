@@ -1,14 +1,14 @@
 angular.module('starter.controllers', [])
 
-.controller('StepsCtrl', function($scope, $ionicModal, $ionicSlideBoxDelegate) {
+.controller('StepsCtrl', function($scope, $ionicModal) {
   $scope.data = {};
 
   $ionicModal.fromTemplateUrl('templates/modal-steps.html', {
-    //scope: $scope,
+    scope: $scope,
     animation: 'slide-in-up'
   }).then(function(modal) {
     $scope.modal = modal;
-	$scope.modal.show();
+    $scope.modal.show();
   });
 
   $scope.openModal = function() {
