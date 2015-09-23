@@ -3,21 +3,18 @@ angular.module('starter.controllers', [])
 .controller('StepsCtrl', function($scope, $ionicModal) {
   $scope.data = {};
 
-  $ionicModal.fromTemplateUrl('templates/modal-steps.html', {
-    scope: $scope,
-    animation: 'slide-in-up'
-  }).then(function(modal) {
-    $scope.modal = modal;
-    //$scope.modal.show();
-  });
-
   $scope.openModal = function() {
-    $scope.modal.show();
+    $ionicModal.fromTemplateUrl('templates/modal-steps.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modal = modal;
+      $scope.modal.show();
+    });
   };
 
   $scope.closeModal = function() {
-    $scope.modal.hide();
-    console.log('closed');
+    $scope.modal.remove();
   };
 
   // Cleanup the modal when we're done with it!
