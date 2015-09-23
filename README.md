@@ -69,6 +69,7 @@ This is a clone of Apple's [ResearchKit Framework](https://github.com/ResearchKi
   - [x] Done button exits task view
   - [ ] Enable Next button on input change (currently enabled only after to input change events)
   - [ ] Hide Skip button when input is required (currently hides button on subsequent steps too)
+  - [ ] Relaunch should re-init steps
 - [ ] Results
   - [ ] Collect results into LocalStorage
   - [ ] Output results in JSON
@@ -77,7 +78,8 @@ This is a clone of Apple's [ResearchKit Framework](https://github.com/ResearchKi
     - [x] Show optional link
     - [ ] Show optional image
     - [x] Show Get Started button
-    - [ ] Get Started button shows next step
+    - [x] Get Started button shows next step
+    - [ ] Hide Next and Skip buttons
   - [ ] Scale Question Step directive
     - [ ] Show step bars
     - [ ] Support vertical orientation
