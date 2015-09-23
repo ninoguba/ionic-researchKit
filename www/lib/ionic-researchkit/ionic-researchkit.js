@@ -215,12 +215,12 @@ angular.module('ionicResearchKit',[])
                 }, function() {
                     $rootScope.$broadcast("step:NextCondition", controller.checkNextCondition(currentIndex));
                 });
+                /*
                 scope.$watch(function() {
                     return controller.checkSkipCondition(currentIndex);
                 }, function() {
                     $rootScope.$broadcast("step:SkipCondition", controller.checkSkipCondition(currentIndex));
                 });
-                /*
                 scope.$watch(function() {
                     return controller.checkPreviousCondition(currentIndex);
                 }, function() {
@@ -250,7 +250,7 @@ angular.module('ionicResearchKit',[])
 
             // Only show skip when input is not required
             var skipFn = function() {
-                return element.find('form').length == 0 || (element.find('form').length != 0 && element.find('form').hasClass('ng-invalid-required'));
+                return true;
             };
 
             // Going back is always allowed
@@ -315,6 +315,10 @@ angular.module('ionicResearchKit',[])
                     element.text("Done");
                 else
                     element.text("Next");
+
+                //Hide for instruction step
+                var form = angular.element(document.querySelectorAll('irk-task.irk-slider-slide')[index]).find('form');
+                element.toggleClass('ng-hide', form.length == 0);
             });
 
             scope.$on("step:NextCondition", function(e, condition) {
@@ -333,8 +337,14 @@ angular.module('ionicResearchKit',[])
                 //$rootScope.$broadcast("step:Skip");
             });
 
+            //Hide when input is required
+            scope.$on("slideBox.slideChanged", function(e, index, count) {
+                var form = angular.element(document.querySelectorAll('irk-task.irk-slider-slide')[index]).find('form');
+                element.toggleClass('ng-hide', form.length == 0 || form.hasClass('ng-invalid-required') || form.hasClass('ng-valid-required'));
+            });
+
             scope.$on("step:SkipCondition", function(e, condition) {
-                element.toggleClass('ng-hide', !condition);
+                //element.toggleClass('ng-hide', !condition);
             });
         }
     }
