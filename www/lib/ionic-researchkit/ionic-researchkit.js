@@ -170,6 +170,13 @@ angular.module('ionicResearchKit',[])
                         : conditions[index].skip();
                 };
 
+                $scope.$on("step:Previous", function() {
+                    //$ionicSlideBoxDelegate.previous();
+                });
+                
+                $scope.$on("step:Next", function() {
+                    $scope.doNext();
+                });
             }],
 
             template:
@@ -280,7 +287,7 @@ angular.module('ionicResearchKit',[])
         scope: {},
         link: function(scope, element, attrs, controller) {
             element.on('click', function() {
-                $rootScope.$broadcast("step:Previous");
+                //$rootScope.$broadcast("step:Previous");
             });
 
             scope.$on("slideBox.slideChanged", function(e, index) {
@@ -300,7 +307,7 @@ angular.module('ionicResearchKit',[])
         scope: {},
         link: function(scope, element, attrs, controller) {
             element.on('click', function() {
-                $rootScope.$broadcast("step:Next");
+                //$rootScope.$broadcast("step:Next");
             });
 
             scope.$on("slideBox.slideChanged", function(e, index, count) {
@@ -323,7 +330,7 @@ angular.module('ionicResearchKit',[])
         scope: {},
         link: function(scope, element, attrs, controller) {
             element.on('click', function() {
-                $rootScope.$broadcast("step:Skip");
+                //$rootScope.$broadcast("step:Skip");
             });
 
             scope.$on("step:SkipCondition", function(e, condition) {
@@ -336,23 +343,32 @@ angular.module('ionicResearchKit',[])
 //======================================================================================
 // Usage: <irk-instruction-step title="Your title here." text="Additional text can go here." />
 // =====================================================================================
-.directive('irkInstructionStep', function () {
+.directive('irkInstructionStep', ['$rootScope', function($rootScope) {
     return {
         restrict: 'E',
         require: '^irkTask',
+        scope: {},
+        controller: ['$scope', '$rootScope', '$element', '$attrs', function($scope, $rootScope, $element, $attrs) {
+            $scope.doStart = function() {
+                $rootScope.$broadcast("step:Next");
+            }
+        }],
         template: function(elem, attr) {
             return 	'<div class="irk-offcentered-container"><div class="irk-offcentered-content">'+
                 '<h3>'+attr.title+'</h3>'+
                 (attr.text ? '<p>'+attr.text+'</p>' : '')+
+                (attr.link ? '<a class="button button-clear button-positive" href="'+attr.link+'" target="_system">'+(attr.linkText ? attr.linkText : 'Learn more')+'</a>' : '')+
+                '<br><br>'+
+                '<button class="button button-outline button-positive" ng-click="doStart()">'+(attr.buttonText ? attr.buttonText : 'Get Started')+'</button>'+
                 '</div></div>'
         }
     }
-})
+}])
 
 //======================================================================================
 // Usage: <irk-scale-question-step id="q1" title="Your question here." text="Additional text can go here." min="1" max="10" step="1" value="5" />
 // =====================================================================================
-.directive('irkScaleQuestionStep', function () {
+.directive('irkScaleQuestionStep', function() {
     return {
         restrict: 'E',
         require: '^irkTask',
@@ -379,7 +395,7 @@ angular.module('ionicResearchKit',[])
 //======================================================================================
 // Usage: <irk-boolean-question-step id="data.q1" title="Your question here." text="Additional text can go here." trueValue="" falseValue=""/>
 // =====================================================================================
-.directive('irkBooleanQuestionStep', function () {
+.directive('irkBooleanQuestionStep', function() {
     return {
         restrict: 'E',
         require: '^irkTask',
@@ -408,7 +424,7 @@ angular.module('ionicResearchKit',[])
     }
 })
 
-.directive('irkQuestionStep', function () {
+.directive('irkQuestionStep', function() {
     return {
         restrict: 'E',
         require: '^irkTask',
