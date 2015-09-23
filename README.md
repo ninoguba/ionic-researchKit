@@ -67,19 +67,19 @@ This is a clone of Apple's [ResearchKit Framework](https://github.com/ResearchKi
   - [x] End Task button (on action sheet) exits task view
   - [x] Change Next button label to Done when on last step
   - [x] Done button exits task view
-  - [ ] Enable Next button on input change (currently enabled only after to input change events)
-  - [ ] Hide Skip button when input is required (currently hides button on subsequent steps too)
   - [x] Relaunch should re-init steps
+  - [x] Hide Skip button when input is required (currently hides button on subsequent steps too)
+  - [ ] Enable Next button on input change (currently enabled only after to input change events)
 - [ ] Results
   - [ ] Collect results into LocalStorage
   - [ ] Output results in JSON
 - [ ] Survey directives
-  - [ ] Instruction Step directive
+  - [x] Instruction Step directive
     - [x] Show optional link
     - [ ] Show optional image
     - [x] Show Get Started button
     - [x] Get Started button shows next step
-    - [ ] Hide Next and Skip buttons
+    - [x] Hide Next and Skip buttons
   - [ ] Scale Question Step directive
     - [ ] Show step bars
     - [ ] Support vertical orientation
