@@ -73,10 +73,17 @@ This is a clone of Apple's [ResearchKit Framework](https://github.com/ResearchKi
   - [ ] Collect results into LocalStorage
   - [ ] Output results in JSON
 - [ ] Survey directives
-  - [x] Instruction Step directive
-  - [x] Scale Question Step directive
-  - [x] Boolean Question Step directive
+  - [ ] Instruction Step directive
+    - [x] Show optional link
+    - [ ] Show optional image
+    - [x] Show Get Started button
+    - [ ] Get Started button shows next step
+  - [ ] Scale Question Step directive
+    - [ ] Show step bars
+    - [ ] Support vertical orientation
+  - [ ] Boolean Question Step directive
+    - [ ] Apply radio fix (iOS9)
   - ...
 - [ ] Consent directives
 - [ ] Active Tasks directives
-  - 
+
