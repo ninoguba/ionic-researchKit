@@ -68,8 +68,8 @@ This is a clone of Apple's [ResearchKit Framework](https://github.com/ResearchKi
   - [x] Change Next button label to Done when on last step
   - [x] Done button exits task view
   - [x] Relaunch should re-init steps
-  - [x] Hide Skip button when input is required (currently hides button on subsequent steps too)
-  - [ ] Enable Next button on input change (currently enabled only after to input change events)
+  - [x] Hide Skip button when input is required
+  - [ ] Enable Next button on input change (currently enabled only after two input change events)
 - [ ] Results
   - [ ] Collect results into LocalStorage
   - [ ] Output results in JSON
