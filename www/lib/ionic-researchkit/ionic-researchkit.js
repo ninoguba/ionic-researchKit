@@ -251,8 +251,8 @@ angular.module('ionicResearchKit',[])
         link: function(scope, element, attrs, controller) {
             //Hide when input is required
             scope.$on("slideBox.slideChanged", function(e, index, count) {
-                var form = angular.element(document.querySelectorAll('irk-task.irk-slider-slide')[index]).find('form');
-                element.toggleClass('ng-hide', form.length == 0 || form.hasClass('ng-invalid-required') || form.hasClass('ng-valid-required'));
+                var input = angular.element(document.querySelectorAll('irk-task.irk-slider-slide')[index]).find('input');
+                element.toggleClass('ng-hide', input.length == 0 || scope.$eval(input.attr('ng-required')));
             });
         }
     }
@@ -301,7 +301,7 @@ angular.module('ionicResearchKit',[])
                 '<h4>{{'+attr.id+' || \'&nbsp;\'}}</h4>'+
                 '<div class="range">'+
                 attr.min+
-                '<input type="range" name="'+attr.id+'" min="'+attr.min+'" max="'+attr.max+'" step="'+attr.step+'" value="'+attr.value+'" ng-model="'+attr.id+'" ng-required="{{!'+attr.optional+'}}" ng-change="$parent.dirty()">'+
+                '<input type="range" name="'+attr.id+'" min="'+attr.min+'" max="'+attr.max+'" step="'+attr.step+'" value="'+attr.value+'" ng-model="'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.dirty()">'+
                 attr.max+
                 '</div>'+
                 '</div></div>'+
@@ -326,12 +326,12 @@ angular.module('ionicResearchKit',[])
                 '<div class="irk-offcentered-container"><div class="irk-offcentered-content">'+
                 '<div class="list">'+
                 '<label class="item item-radio">'+
-                '<input type="radio" name="'+attr.id+'" value="'+(attr.trueValue?attr.trueValue:'True')+'" ng-model="'+attr.id+'" ng-change="$parent.dirty()">'+
+                '<input type="radio" name="'+attr.id+'" value="'+(attr.trueValue?attr.trueValue:'True')+'" ng-model="'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.dirty()">'+
                 '<div class="item-content irk-item-content">'+(attr.trueValue?attr.trueValue:'True')+'</div>'+
                 '<i class="radio-icon ion-checkmark"></i>'+
                 '</label>'+
                 '<label class="item item-radio">'+
-                '<input type="radio" name="'+attr.id+'" value="'+(attr.falseValue?attr.falseValue:'False')+'" ng-model="'+attr.id+'" ng-change="$parent.dirty()">'+
+                '<input type="radio" name="'+attr.id+'" value="'+(attr.falseValue?attr.falseValue:'False')+'" ng-model="'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.dirty()">'+
                 '<div class="item-content irk-item-content">'+(attr.falseValue?attr.falseValue:'False')+'</div>'+
                 '<i class="radio-icon ion-checkmark"></i>'+
                 '</label>'+
@@ -355,7 +355,7 @@ angular.module('ionicResearchKit',[])
                 '<div class="irk-offcentered-container"><div class="irk-offcentered-content">'+
                 '<div class="range">'+
                 attr.min+
-                '<input type="range" name="'+attr.id+'" min="'+attr.min+'" max="'+attr.max+'" step="'+attr.step+'" value="'+attr.value+'" ng-model="'+attr.id+'" ng-change="$parent.dirty()">'+
+                '<input type="range" name="'+attr.id+'" min="'+attr.min+'" max="'+attr.max+'" step="'+attr.step+'" value="'+attr.value+'" ng-model="'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.dirty()">'+
                 attr.max+
                 '</div>'+
                 '</div></div>'+
