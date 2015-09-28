@@ -13,6 +13,9 @@ angular.module('starter.controllers', [])
     });
   };
 
+  //Start modal on launch
+  $scope.openModal();
+
   $scope.closeModal = function() {
     $scope.modal.remove();
   };

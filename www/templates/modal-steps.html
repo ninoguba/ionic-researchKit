@@ -3,15 +3,23 @@
 <irk-ordered-tasks>
 
   <irk-task>
-    <irk-instruction-step title="Your title here." text="Additional text can go here."/>
+    <irk-instruction-step title="Hello." text="This is a sample survey."/>
   </irk-task>
 
   <irk-task>
-    <irk-scale-question-step id="q1" title="Your question here." text="Additional text can go here." min="1" max="10" step="1" value="5"/>
+    <irk-scale-question-step id="q1" title="A scale question." text="This is not required so you can skip this." min="1" max="10" step="1" value="5"/>
   </irk-task>
 
   <irk-task>
-    <irk-boolean-question-step id="q2" title="Your question here." text="Additional text can go here."/>
+    <irk-scale-question-step id="q2" title="A scale question." text="This is required so you have to answer." min="1" max="10" step="1" value="5" optional="false"/>
+  </irk-task>
+
+  <irk-task>
+    <irk-boolean-question-step id="q3" title="A boolean question." text="This is not required so you can skip this."/>
+  </irk-task>
+
+  <irk-task>
+    <irk-boolean-question-step id="q4" title="A boolean question." text="This is required so you have to answer." optional="false"/>
   </irk-task>
 
 </irk-ordered-tasks>
