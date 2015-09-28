@@ -142,34 +142,6 @@ angular.module('ionicResearchKit',[])
                         $scope.$parent.closeModal();
                 }
 
-                var conditions = [];
-
-                this.addCondition = function(condition) {
-                    conditions.push(condition);
-                };
-
-                this.getCondition = function(index) {
-                    return conditions[index];
-                };
-
-                this.checkNextCondition = function(index) {
-                    return index > (conditions.length - 1)
-                        ? false
-                        : conditions[index].next();
-                };
-
-                this.checkPreviousCondition = function(index) {
-                    return index > (conditions.length - 1)
-                        ? false
-                        : conditions[index].prev();
-                };
-
-                this.checkSkipCondition = function(index) {
-                    return index > (conditions.length - 1)
-                        ? false
-                        : conditions[index].skip();
-                };
-
                 $scope.$on("step:Previous", function() {
                     //$ionicSlideBoxDelegate.previous();
                 });
@@ -184,7 +156,7 @@ angular.module('ionicResearchKit',[])
                 '<div class="slider-slides irk-slider-slides" ng-transclude>'+
                 '</div>'+
                 '<ion-footer-bar class="bar-subfooter irk-bottom-bar">'+
-                '<button class="button button-block button-outline button-positive irk-bottom-button" ng-click="doStepNext()" irk-step-next>Next</button>'+
+                '<button class="button button-block button-outline button-positive irk-bottom-button" ng-click="doStepNext()" ng-disabled="isPristine()" irk-step-next>Next</button>'+
                 '</ion-footer-bar>'+
                 '<ion-footer-bar class="irk-bottom-bar">'+
                 '<button class="button button-block button-clear button-positive irk-bottom-button" ng-click="doSkip()" irk-step-skip>Skip this question</button>'+
@@ -206,31 +178,6 @@ angular.module('ionicResearchKit',[])
                     );
                 element.parent()[0].insertBefore(stepHeader[0], element[0]);
                 $compile(stepHeader)(scope);
-
-                var currentIndex = 0;
-
-                // Watch the current index's condition for changes and broadcast the new condition state on change
-                scope.$watch(function() {
-                    return controller.checkNextCondition(currentIndex);
-                }, function() {
-                    $rootScope.$broadcast("step:NextCondition", controller.checkNextCondition(currentIndex));
-                });
-                /*
-                scope.$watch(function() {
-                    return controller.checkSkipCondition(currentIndex);
-                }, function() {
-                    $rootScope.$broadcast("step:SkipCondition", controller.checkSkipCondition(currentIndex));
-                });
-                scope.$watch(function() {
-                    return controller.checkPreviousCondition(currentIndex);
-                }, function() {
-                    $rootScope.$broadcast("step:PreviousCondition", controller.checkPreviousCondition(currentIndex));
-                });
-                */
-
-                scope.$on("slideBox.slideChanged", function(e, index) {
-                    currentIndex = index;
-                });
             }
         };
 }])
@@ -242,29 +189,6 @@ angular.module('ionicResearchKit',[])
         scope: {},
         link: function(scope, element, attrs, controller) {
             element.addClass('slider-slide irk-slider-slide');
-
-            // Only enable next when input is dirty
-            var nextFn = function() {
-                return element.find('form').length == 0 || (element.find('form').length != 0 && element.find('form').hasClass('ng-dirty'));
-            };
-
-            // Only show skip when input is not required
-            var skipFn = function() {
-                return true;
-            };
-
-            // Going back is always allowed
-            var prevFn = function() {
-                return true;
-            };
-
-            var conditions = {
-                next: nextFn,
-                skip: skipFn,
-                prev: prevFn
-            };
-
-            controller.addCondition(conditions);
         }
     };
 })
@@ -286,16 +210,8 @@ angular.module('ionicResearchKit',[])
         restrict: 'EA',
         scope: {},
         link: function(scope, element, attrs, controller) {
-            element.on('click', function() {
-                //$rootScope.$broadcast("step:Previous");
-            });
-
             scope.$on("slideBox.slideChanged", function(e, index) {
                 element.toggleClass('ng-hide', index == 0);
-            });
-
-            scope.$on("step:PreviousCondition", function(e, condition) {
-                element.attr("disabled", !condition);
             });
         }
     }
@@ -306,10 +222,6 @@ angular.module('ionicResearchKit',[])
         restrict: 'EA',
         scope: {},
         link: function(scope, element, attrs, controller) {
-            element.on('click', function() {
-                //$rootScope.$broadcast("step:Next");
-            });
-
             scope.$on("slideBox.slideChanged", function(e, index, count) {
                 if (index == count - 1)
                     element.text("Done");
@@ -319,10 +231,11 @@ angular.module('ionicResearchKit',[])
                 //Hide for instruction step
                 var form = angular.element(document.querySelectorAll('irk-task.irk-slider-slide')[index]).find('form');
                 element.toggleClass('ng-hide', form.length == 0);
-            });
 
-            scope.$on("step:NextCondition", function(e, condition) {
-                element.attr("disabled", !condition); 
+                //Enable only when current form is dirtied
+                scope.$parent.isPristine = function() {
+                    return form.hasClass('ng-pristine');
+                }
             });
         }
     }
@@ -333,18 +246,10 @@ angular.module('ionicResearchKit',[])
         restrict: 'EA',
         scope: {},
         link: function(scope, element, attrs, controller) {
-            element.on('click', function() {
-                //$rootScope.$broadcast("step:Skip");
-            });
-
             //Hide when input is required
             scope.$on("slideBox.slideChanged", function(e, index, count) {
                 var form = angular.element(document.querySelectorAll('irk-task.irk-slider-slide')[index]).find('form');
                 element.toggleClass('ng-hide', form.length == 0 || form.hasClass('ng-invalid-required') || form.hasClass('ng-valid-required'));
-            });
-
-            scope.$on("step:SkipCondition", function(e, condition) {
-                //element.toggleClass('ng-hide', !condition);
             });
         }
     }
