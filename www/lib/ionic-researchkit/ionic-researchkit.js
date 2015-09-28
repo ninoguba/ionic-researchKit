@@ -149,6 +149,11 @@ angular.module('ionicResearchKit',[])
                 $scope.$on("step:Next", function() {
                     $scope.doNext();
                 });
+
+                //This is called when input changes (faster than form.$dirty)
+                $scope.dirty = function() {
+                    $scope.isPristine = false;
+                };
             }],
 
             template:
@@ -156,7 +161,7 @@ angular.module('ionicResearchKit',[])
                 '<div class="slider-slides irk-slider-slides" ng-transclude>'+
                 '</div>'+
                 '<ion-footer-bar class="bar-subfooter irk-bottom-bar">'+
-                '<button class="button button-block button-outline button-positive irk-bottom-button" ng-click="doStepNext()" ng-disabled="isPristine()" irk-step-next>Next</button>'+
+                '<button class="button button-block button-outline button-positive irk-bottom-button" ng-click="doStepNext()" ng-disabled="isPristine" irk-step-next>Next</button>'+
                 '</ion-footer-bar>'+
                 '<ion-footer-bar class="irk-bottom-bar">'+
                 '<button class="button button-block button-clear button-positive irk-bottom-button" ng-click="doSkip()" irk-step-skip>Skip this question</button>'+
@@ -233,9 +238,7 @@ angular.module('ionicResearchKit',[])
                 element.toggleClass('ng-hide', form.length == 0);
 
                 //Enable only when current form is dirtied
-                scope.$parent.isPristine = function() {
-                    return form.hasClass('ng-pristine');
-                }
+                scope.$parent.isPristine = form.hasClass('ng-pristine');
             });
         }
     }
@@ -298,7 +301,7 @@ angular.module('ionicResearchKit',[])
                 '<h4>{{'+attr.id+' || \'&nbsp;\'}}</h4>'+
                 '<div class="range">'+
                 attr.min+
-                '<input type="range" name="'+attr.id+'" min="'+attr.min+'" max="'+attr.max+'" step="'+attr.step+'" value="'+attr.value+'" ng-model="'+attr.id+'" ng-required="{{!'+attr.optional+'}}">'+
+                '<input type="range" name="'+attr.id+'" min="'+attr.min+'" max="'+attr.max+'" step="'+attr.step+'" value="'+attr.value+'" ng-model="'+attr.id+'" ng-required="{{!'+attr.optional+'}}" ng-change="$parent.dirty()">'+
                 attr.max+
                 '</div>'+
                 '</div></div>'+
@@ -323,12 +326,12 @@ angular.module('ionicResearchKit',[])
                 '<div class="irk-offcentered-container"><div class="irk-offcentered-content">'+
                 '<div class="list">'+
                 '<label class="item item-radio">'+
-                '<input type="radio" name="'+attr.id+'" value="'+(attr.trueValue?attr.trueValue:'True')+'" ng-model="'+attr.id+'">'+
+                '<input type="radio" name="'+attr.id+'" value="'+(attr.trueValue?attr.trueValue:'True')+'" ng-model="'+attr.id+'" ng-change="$parent.dirty()">'+
                 '<div class="item-content irk-item-content">'+(attr.trueValue?attr.trueValue:'True')+'</div>'+
                 '<i class="radio-icon ion-checkmark"></i>'+
                 '</label>'+
                 '<label class="item item-radio">'+
-                '<input type="radio" name="'+attr.id+'" value="'+(attr.falseValue?attr.falseValue:'False')+'" ng-model="'+attr.id+'">'+
+                '<input type="radio" name="'+attr.id+'" value="'+(attr.falseValue?attr.falseValue:'False')+'" ng-model="'+attr.id+'" ng-change="$parent.dirty()">'+
                 '<div class="item-content irk-item-content">'+(attr.falseValue?attr.falseValue:'False')+'</div>'+
                 '<i class="radio-icon ion-checkmark"></i>'+
                 '</label>'+
@@ -352,7 +355,7 @@ angular.module('ionicResearchKit',[])
                 '<div class="irk-offcentered-container"><div class="irk-offcentered-content">'+
                 '<div class="range">'+
                 attr.min+
-                '<input type="range" name="'+attr.id+'" min="'+attr.min+'" max="'+attr.max+'" step="'+attr.step+'" value="'+attr.value+'" ng-model="'+attr.id+'">'+
+                '<input type="range" name="'+attr.id+'" min="'+attr.min+'" max="'+attr.max+'" step="'+attr.step+'" value="'+attr.value+'" ng-model="'+attr.id+'" ng-change="$parent.dirty()">'+
                 attr.max+
                 '</div>'+
                 '</div></div>'+

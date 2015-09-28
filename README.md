@@ -60,7 +60,7 @@ This is a clone of Apple's [ResearchKit Framework](https://github.com/ResearchKi
 
 # Roadmap
 
-- [ ] Task View Controller equivalent 
+- [x] Task View Controller equivalent 
   - [x] Show "Step x of y" title
   - [x] Hide Back button on first step
   - [x] Cancel button shows action sheet
@@ -69,19 +69,19 @@ This is a clone of Apple's [ResearchKit Framework](https://github.com/ResearchKi
   - [x] Done button exits task view
   - [x] Relaunch should re-init steps
   - [x] Hide Skip button when input is required
-  - [ ] Enable Next button on input change (currently enabled only after two input change events)
+  - [x] Enable Next button on input change
 - [ ] Results
   - [ ] Collect results into LocalStorage
   - [ ] Output results in JSON
 - [ ] Survey directives
   - [x] Instruction Step directive
-    - [x] Show optional link
-    - [ ] Show optional image
     - [x] Show Get Started button
     - [x] Get Started button shows next step
     - [x] Hide Next and Skip buttons
-  - [ ] Scale Question Step directive
-    - [ ] Show step bars
+    - [x] Show optional link
+    - [ ] Show optional image
+  - [x] Scale Question Step directive
+    - [ ] Support step bars
     - [ ] Support vertical orientation
   - [ ] Boolean Question Step directive
     - [ ] Apply radio fix (iOS9)
