@@ -13,6 +13,36 @@ angular.module('ionicResearchKit',[])
 // This provides a counterpart of Apple's ResearchKit for Ionic apps
 // =====================================================================================
 
+
+//======================================================================================
+// Usage: 
+// =====================================================================================
+.factory('irkResults', function() {
+    var results = {};
+
+    results.results = {
+        "start": new Date(),
+        "end": new Date(),
+        "childResults": []
+    };
+
+    results.addResult = function(index) {
+        results.results.childResults.push({
+            "id": index,
+            "start": new Date(),
+            "end": new Date()
+        });
+
+        results.results.end = new Date();
+    }
+
+    results.getResults = function() {
+        return results.results;
+    }
+
+    return results;
+})
+
 //======================================================================================
 // Usage: 
 // =====================================================================================
@@ -25,7 +55,8 @@ angular.module('ionicResearchKit',[])
     '$ionicScrollDelegate',
     '$ionicNavBarDelegate',
     '$ionicActionSheet',
-    function($rootScope, $timeout, $compile, $ionicSlideBoxDelegate, $ionicHistory, $ionicScrollDelegate, $ionicNavBarDelegate, $ionicActionSheet) {
+    'irkResults',
+    function($rootScope, $timeout, $compile, $ionicSlideBoxDelegate, $ionicHistory, $ionicScrollDelegate, $ionicNavBarDelegate, $ionicActionSheet, irkResults) {
         return {
             restrict: 'E',
             replace: true,
@@ -102,24 +133,6 @@ angular.module('ionicResearchKit',[])
                     slider.load();
                 });
 
-                $scope.doCancel = function() {
-                    console.log('Clicked cancel');
-
-                    // Show the action sheet
-                    var hideSheet = $ionicActionSheet.show({
-                        destructiveText: 'End Task',
-                        cancelText: 'Cancel',
-                        cancel: function() {
-                            hideSheet();
-                        },
-                        destructiveButtonClicked: function(index) {
-                            console.log('Clicked end task');
-                            $scope.$parent.closeModal();
-                            return true;
-                        }
-                    });
-                };
-
                 $scope.doStepBack = function() {
                     console.log('Clicked back');
                     slider.prev();
@@ -136,10 +149,34 @@ angular.module('ionicResearchKit',[])
                 };
 
                 $scope.doNext = function() {
+                    $scope.doSave();
+
                     if (slider.currentIndex() < slider.slidesCount()-1)
                         slider.next();
                     else
-                        $scope.$parent.closeModal();
+                        $scope.doEnd();
+                }
+
+                $scope.doCancel = function() {
+                    console.log('Clicked cancel');
+
+                    // Show the action sheet
+                    var hideSheet = $ionicActionSheet.show({
+                        destructiveText: 'End Task',
+                        cancelText: 'Cancel',
+                        cancel: function() {
+                            hideSheet();
+                        },
+                        destructiveButtonClicked: function(index) {
+                            console.log('Clicked end task');
+                            $scope.doEnd();
+                            return true;
+                        }
+                    });
+                };
+
+                $scope.doEnd = function() {
+                    $scope.$parent.closeModal();
                 }
 
                 $scope.$on("step:Previous", function() {
@@ -154,6 +191,11 @@ angular.module('ionicResearchKit',[])
                 $scope.dirty = function() {
                     $scope.isPristine = false;
                 };
+
+                //This is called to capture the results
+                $scope.doSave = function() {
+                    irkResults.addResult(slider.currentIndex());
+                };              
             }],
 
             template:

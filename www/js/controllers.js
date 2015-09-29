@@ -36,6 +36,6 @@ angular.module('starter.controllers', [])
   });
 })
 
-.controller('ResultsCtrl', function($scope) {
-
-});
+.controller('ResultsCtrl', ['irkResults', '$scope', function(irkResults, $scope) {
+  $scope.results = irkResults.getResults();
+}]);
