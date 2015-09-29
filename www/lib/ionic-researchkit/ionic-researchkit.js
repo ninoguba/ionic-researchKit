@@ -143,7 +143,7 @@ angular.module('ionicResearchKit',[])
                 }
 
                 $scope.$on("step:Previous", function() {
-                    //$ionicSlideBoxDelegate.previous();
+                    slider.prev();
                 });
                 
                 $scope.$on("step:Next", function() {
@@ -198,7 +198,7 @@ angular.module('ionicResearchKit',[])
     };
 })
 
-.directive('irkStepTitle', ['$rootScope', '$ionicSlideBoxDelegate', function($rootScope, $ionicSlideBoxDelegate) {
+.directive('irkStepTitle', function() {
     return{
         restrict: 'EA',
         scope: {},
@@ -208,9 +208,9 @@ angular.module('ionicResearchKit',[])
             });
         }
     }
-}])
+})
 
-.directive('irkStepPrevious', ['$rootScope', function($rootScope) {
+.directive('irkStepPrevious', function() {
     return{
         restrict: 'EA',
         scope: {},
@@ -220,9 +220,9 @@ angular.module('ionicResearchKit',[])
             });
         }
     }
-}])
+})
 
-.directive('irkStepNext', ['$rootScope', function($rootScope) {
+.directive('irkStepNext', function() {
     return{
         restrict: 'EA',
         scope: {},
@@ -242,9 +242,9 @@ angular.module('ionicResearchKit',[])
             });
         }
     }
-}])
+})
 
-.directive('irkStepSkip', ['$rootScope', function($rootScope) {
+.directive('irkStepSkip', function() {
     return{
         restrict: 'EA',
         scope: {},
@@ -256,7 +256,7 @@ angular.module('ionicResearchKit',[])
             });
         }
     }
-}])
+})
 
 //======================================================================================
 // Usage: <irk-instruction-step title="Your title here." text="Additional text can go here." />
