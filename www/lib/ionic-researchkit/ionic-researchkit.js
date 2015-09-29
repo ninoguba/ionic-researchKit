@@ -1,7 +1,7 @@
 /** 
 * Author: Nino Guba
 * Date: 08-26-2015
-* Directives for ResearsetchKit in Ionic
+* Directives for ResearchKit in Ionic
 *
 * Adapted from the following:
 * ion-slide-box (https://github.com/driftyco/ionic)
