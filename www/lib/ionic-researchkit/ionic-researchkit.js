@@ -261,14 +261,14 @@ angular.module('ionicResearchKit',[])
 //======================================================================================
 // Usage: <irk-instruction-step title="Your title here." text="Additional text can go here." />
 // =====================================================================================
-.directive('irkInstructionStep', ['$rootScope', function($rootScope) {
+.directive('irkInstructionStep', function() {
     return {
         restrict: 'E',
         require: '^irkTask',
         scope: {},
-        controller: ['$scope', '$rootScope', '$element', '$attrs', function($scope, $rootScope, $element, $attrs) {
+        controller: ['$scope', function($scope) {
             $scope.doStart = function() {
-                $rootScope.$broadcast("step:Next");
+                $scope.$parent.$parent.$broadcast("step:Next");
             }
         }],
         template: function(elem, attr) {
@@ -281,7 +281,7 @@ angular.module('ionicResearchKit',[])
                 '</div></div>'
         }
     }
-}])
+})
 
 //======================================================================================
 // Usage: <irk-scale-question-step id="q1" title="Your question here." text="Additional text can go here." min="1" max="10" step="1" value="5" />
