@@ -33,22 +33,47 @@ angular.module('ionicResearchKit',[])
         return results;
     }
 
-    service.addResult = function(index, formData) {
+    service.addResult = function(index) {
         if (!results) service.initResults();
 
         if (index == results.childResults.length)
         {
             results.childResults.push({
-                "id": index,
+                "index": index,
                 "start": new Date()
             });            
         }
         else
         {
+            var step = angular.element(document.querySelectorAll('irk-task.irk-slider-slide')[index]).find(document.querySelector('.irk-step'));
+            var form = angular.element(document.querySelectorAll('irk-task.irk-slider-slide')[index]).find('form');
+            var input = form.find('input');
+            console.log(input);
+
+            if (input.length == 1)
+            {                
+                results.childResults[index].id = input.attr('name');
+                results.childResults[index].type = input.attr('type');
+                results.childResults[index].answer = input.val();
+            }
+            else if (input.length > 1)
+            {
+                results.childResults[index].childResults = [];
+                for (i=0; i<input.length; i++)
+                {
+                    var subinput = angular.element(input[i]);
+                    results.childResults[index].childResults.push({
+                        "id": subinput.attr('name'),
+                        "type": subinput.attr('type'),
+                        "answer": subinput.val()
+                    });
+                }
+            }
+
             results.childResults[index].end = new Date();
             results.end = new Date();
 
-            console.log(formData);
+            console.log(results.childResults[index]);
         }
     }
 })
@@ -209,11 +234,11 @@ angular.module('ionicResearchKit',[])
 
                 //This is called to capture the results
                 $scope.doSave = function() {
-                    irkResults.addResult(slider.currentIndex(), $scope.formData);
+                    irkResults.addResult(slider.currentIndex());
                 }; 
 
                 $scope.$on("slideBox.slideChanged", function(e, index) {
-                    irkResults.addResult(slider.currentIndex(), $scope.formData);
+                    irkResults.addResult(slider.currentIndex());
                 });
 
             }],
@@ -329,7 +354,10 @@ angular.module('ionicResearchKit',[])
                 '<br><br>'+
                 '<button class="button button-outline button-positive" ng-click="$parent.doNext()">'+(attr.buttonText ? attr.buttonText : 'Get Started')+'</button>'+
                 '</div></div>'
-        }
+        },
+        link: function(scope, element, attrs, controller) {
+            element.addClass('irk-step');
+        }        
     }
 })
 
@@ -347,14 +375,17 @@ angular.module('ionicResearchKit',[])
                 '</div>'+
                 '<div class="irk-offcentered-container"><div class="irk-offcentered-content">'+
                 ''+
-                '<h4>{{formData.'+attr.id+' || \'&nbsp;\'}}</h4>'+
+                '<h4>{{$parent.formData.'+attr.id+' || \'&nbsp;\'}}</h4>'+
                 '<div class="range">'+
                 attr.min+
-                '<input type="range" name="'+attr.id+'" min="'+attr.min+'" max="'+attr.max+'" step="'+attr.step+'" value="'+attr.value+'" ng-model="formData.'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.dirty()">'+
+                '<input type="range" name="'+attr.id+'" min="'+attr.min+'" max="'+attr.max+'" step="'+attr.step+'" value="'+attr.value+'" ng-model="$parent.formData.'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.dirty()">'+
                 attr.max+
                 '</div>'+
                 '</div></div>'+
                 '</form>'
+        },
+        link: function(scope, element, attrs, controller) {
+            element.addClass('irk-step');
         }
     }
 })
@@ -374,18 +405,21 @@ angular.module('ionicResearchKit',[])
                 '<div class="irk-offcentered-container"><div class="irk-offcentered-content">'+
                 '<div class="list">'+
                 '<label class="item item-radio">'+
-                '<input type="radio" name="'+attr.id+'" value="'+(attr.trueValue?attr.trueValue:'True')+'" ng-model="formData.'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.dirty()">'+
+                '<input type="radio" name="'+attr.id+'" value="'+(attr.trueValue?attr.trueValue:'True')+'" ng-model="$parent.formData.'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.dirty()">'+
                 '<div class="item-content irk-item-content">'+(attr.trueValue?attr.trueValue:'True')+'</div>'+
                 '<i class="radio-icon ion-checkmark"></i>'+
                 '</label>'+
                 '<label class="item item-radio">'+
-                '<input type="radio" name="'+attr.id+'" value="'+(attr.falseValue?attr.falseValue:'False')+'" ng-model="formData.'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.dirty()">'+
+                '<input type="radio" name="'+attr.id+'" value="'+(attr.falseValue?attr.falseValue:'False')+'" ng-model="$parent.formData.'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.dirty()">'+
                 '<div class="item-content irk-item-content">'+(attr.falseValue?attr.falseValue:'False')+'</div>'+
                 '<i class="radio-icon ion-checkmark"></i>'+
                 '</label>'+
                 '</div>'+
                 '</div></div>'+
                 '</form>'
+        },
+        link: function(scope, element, attrs, controller) {
+            element.addClass('irk-step');
         }
     }
 })
@@ -402,11 +436,14 @@ angular.module('ionicResearchKit',[])
                 '<div class="irk-offcentered-container"><div class="irk-offcentered-content">'+
                 '<div class="range">'+
                 attr.min+
-                '<input type="range" name="'+attr.id+'" min="'+attr.min+'" max="'+attr.max+'" step="'+attr.step+'" value="'+attr.value+'" ng-model="formData.'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.dirty()">'+
+                '<input type="range" name="'+attr.id+'" min="'+attr.min+'" max="'+attr.max+'" step="'+attr.step+'" value="'+attr.value+'" ng-model="$parent.formData.'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.dirty()">'+
                 attr.max+
                 '</div>'+
                 '</div></div>'+
                 '</form>'
+        },
+        link: function(scope, element, attrs, controller) {
+            element.addClass('irk-step');
         }
     }
 })
