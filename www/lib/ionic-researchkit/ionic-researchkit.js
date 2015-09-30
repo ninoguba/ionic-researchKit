@@ -17,30 +17,33 @@ angular.module('ionicResearchKit',[])
 //======================================================================================
 // Usage: 
 // =====================================================================================
-.factory('irkResults', function() {
-    var results = {};
+.service('irkResults', function() {
+    var service = this;
+    var results = null;
 
-    results.results = {
-        "start": new Date(),
-        "end": new Date(),
-        "childResults": []
+    service.initResults = function() {
+        results = {
+            "start": new Date(),
+            "end": new Date(),
+            "childResults": []
+        }
     };
 
-    results.addResult = function(index) {
-        results.results.childResults.push({
+    service.getResults = function() {
+        return results;
+    }
+
+    service.addResult = function(index) {
+        if (!results) service.initResults();
+
+        results.childResults.push({
             "id": index,
             "start": new Date(),
             "end": new Date()
         });
 
-        results.results.end = new Date();
+        results.end = new Date();
     }
-
-    results.getResults = function() {
-        return results.results;
-    }
-
-    return results;
 })
 
 //======================================================================================
@@ -191,6 +194,8 @@ angular.module('ionicResearchKit',[])
                 $scope.dirty = function() {
                     $scope.isPristine = false;
                 };
+
+                irkResults.initResults();
 
                 //This is called to capture the results
                 $scope.doSave = function() {
