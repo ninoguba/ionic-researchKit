@@ -33,47 +33,25 @@ angular.module('ionicResearchKit',[])
         return results;
     }
 
-    service.addResult = function(index) {
+    service.addResult = function(index, formData) {
         if (!results) service.initResults();
 
         if (index == results.childResults.length)
         {
             results.childResults.push({
                 "index": index,
-                "start": new Date()
+                "start": new Date(),
+                "end": null
             });            
         }
         else
         {
-            var step = angular.element(document.querySelectorAll('irk-task.irk-slider-slide')[index]).find(document.querySelector('.irk-step'));
-            var form = angular.element(document.querySelectorAll('irk-task.irk-slider-slide')[index]).find('form');
-            var input = form.find('input');
-            console.log(input);
-
-            if (input.length == 1)
-            {                
-                results.childResults[index].id = input.attr('name');
-                results.childResults[index].type = input.attr('type');
-                results.childResults[index].answer = input.val();
-            }
-            else if (input.length > 1)
-            {
-                results.childResults[index].childResults = [];
-                for (i=0; i<input.length; i++)
-                {
-                    var subinput = angular.element(input[i]);
-                    results.childResults[index].childResults.push({
-                        "id": subinput.attr('name'),
-                        "type": subinput.attr('type'),
-                        "answer": subinput.val()
-                    });
-                }
-            }
-
+            var step = angular.element(document.querySelectorAll('irk-task.irk-slider-slide')[index].querySelector('.irk-step'));
+            results.childResults[index].id = step.attr('id');
+            results.childResults[index].type = step.prop('tagName');
+            results.childResults[index].answer = formData[step.attr('id')];
             results.childResults[index].end = new Date();
             results.end = new Date();
-
-            console.log(results.childResults[index]);
         }
     }
 })
@@ -234,11 +212,11 @@ angular.module('ionicResearchKit',[])
 
                 //This is called to capture the results
                 $scope.doSave = function() {
-                    irkResults.addResult(slider.currentIndex());
+                    irkResults.addResult(slider.currentIndex(), $scope.formData);
                 }; 
 
                 $scope.$on("slideBox.slideChanged", function(e, index) {
-                    irkResults.addResult(slider.currentIndex());
+                    $scope.doSave();
                 });
 
             }],
