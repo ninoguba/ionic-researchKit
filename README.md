@@ -71,8 +71,9 @@ This is a clone of Apple's [ResearchKit Framework](https://github.com/ResearchKi
   - [x] Hide Skip button when input is required
   - [x] Enable Next button on input change
 - [ ] Results
+  - [x] Output results in JSON
+    - [ ] Capture all result metadata
   - [ ] Collect results into LocalStorage
-  - [ ] Output results in JSON
 - [ ] Survey directives
   - [x] Instruction Step directive
     - [x] Show Get Started button
