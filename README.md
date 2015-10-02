@@ -84,13 +84,17 @@ This is a clone of Apple's [ResearchKit Framework](https://github.com/ResearchKi
     - [x] Show optional link
     - [ ] Show optional image
   - [x] Scale Question Step directive
+    - [ ] Support min/max text description
     - [ ] Support step bars
     - [ ] Support vertical orientation
-  - [ ] Boolean Question Step directive
+  - [x] Boolean Question Step directive
     - [ ] Apply radio fix (iOS9)
   - [x] Text Question Step directive
     - [x] Multi lines
     - [x] Single line
+  - [ ] Text Choice Question Step directive
+    - [ ] Multiple choice
+    - [ ] Single choice
   - ...
 - [ ] Consent directives
 - [ ] Active Tasks directives
