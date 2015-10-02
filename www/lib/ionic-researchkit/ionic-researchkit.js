@@ -47,9 +47,12 @@ angular.module('ionicResearchKit',[])
         else
         {
             var step = angular.element(document.querySelectorAll('irk-task.irk-slider-slide')[index].querySelector('.irk-step'));
-            results.childResults[index].id = step.attr('id');
+            var stepId = step.attr('id');
+            var stepValue = formData[stepId];
+
+            results.childResults[index].id = stepId;
             results.childResults[index].type = step.prop('tagName');
-            results.childResults[index].answer = formData[step.attr('id')];
+            results.childResults[index].answer = (stepValue?stepValue:null);
             results.childResults[index].end = new Date();
             results.end = new Date();
         }
