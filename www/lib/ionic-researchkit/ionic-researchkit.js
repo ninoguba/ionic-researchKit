@@ -435,26 +435,47 @@ angular.module('ionicResearchKit',[])
     }
 })
 
-.directive('irkQuestionStep', function() {
+//======================================================================================
+// Usage: <irk-text-choice-question-step id="q1" title="Your question here." text="Additional text can go here." style="single/multiple" optional="false"></irk-text-choice-question-step>
+// =====================================================================================
+.directive('irkTextChoiceQuestionStep', function() {
     return {
         restrict: 'E',
+        transclude: true,
         template: function(elem, attr) {
-            return 	'<form name="form.'+attr.id+'" class="irk-slider">'+
+            return  '<form name="form.'+attr.id+'" class="irk-slider">'+
                 '<div class="irk-centered">'+
                 '<h3>'+attr.title+'</h3>'+
                 (attr.text ? '<p>'+attr.text+'</p>' : '')+
                 '</div>'+
                 '<div class="irk-offcentered-container"><div class="irk-offcentered-content">'+
-                '<div class="range">'+
-                attr.min+
-                '<input type="range" name="'+attr.id+'" min="'+attr.min+'" max="'+attr.max+'" step="'+attr.step+'" value="'+attr.value+'" ng-model="$parent.formData.'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.dirty()">'+
-                attr.max+
+                '<div class="list" ng-transclude>'+
                 '</div>'+
                 '</div></div>'+
                 '</form>'
         },
         link: function(scope, element, attrs, controller) {
             element.addClass('irk-step');
+        }
+    }
+})
+
+//======================================================================================
+// Usage: <irk-text-choice id="q1" value="choice" text="Your choice." detail-text="Additional text can go here."/>
+// =====================================================================================
+.directive('irkTextChoice', function() {
+    return {
+        restrict: 'E',
+        require: '^?irkTextChoiceQuestionStep',
+        template: function(elem, attr) {
+            return  '<label class="item item-radio">'+
+                '<input type="radio" name="'+elem.parent().attr("id")+'" value="'+attr.value+'" ng-model="$parent.$parent.formData.'+elem.parent().attr("id")+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.$parent.dirty()">'+
+                '<div class="item-content irk-item-content">'+
+                attr.text+
+                (attr.detailText?'<p>'+attr.detailText+'</p>':'')+
+                '</div>'+
+                '<i class="radio-icon ion-checkmark"></i>'+
+                '</label>'
         }
     }
 })

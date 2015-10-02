@@ -22,18 +22,34 @@ This is a clone of Apple's [ResearchKit Framework](https://github.com/ResearchKi
   <irk-ordered-tasks>
 	
     <irk-task>
-    	<irk-instruction-step title="Your title here." text="Additional text can go here." />
+    	<irk-instruction-step id="s1" title="Your title here." text="Additional text can go here." />
   	</irk-task>
 
 	  <irk-task>
-    	<irk-scale-question-step id="data.q2" title="Your question here." text="Additional text can go here." 
+    	<irk-scale-question-step id="q1" title="Your question here." text="Additional text can go here." 
     	    min="1" max="10" step="1" value="5" />
   	</irk-task>
 
   	<irk-task>
-    	<irk-boolean-question-step id="data.q2" title="Your question here." text="Additional text can go here." 
-    	    trueLabel="Yes" falseLabel="No"/>
+    	<irk-boolean-question-step id="q2" title="Your question here." text="Additional text can go here." 
+    	    true-text="Yes" false-text="No" />
 	  </irk-task>
+
+    <irk-task>
+      <irk-text-question-step id="q3" title="A text question." text="This is for multiple lines."/>
+    </irk-task>
+
+    <irk-task>
+      <irk-text-question-step id="q4" title="A text question." text="This is for a single line." multiple-lines="false" />
+    </irk-task>
+
+    <irk-task>
+      <irk-text-choice-question-step id="q5" title="A multiple choice question." text="Select all that apply." style="multiple">
+        <irk-text-choice text="Choice 1" value="1"></irk-text-choice>
+        <irk-text-choice text="Choice 2" value="2"></irk-text-choice>
+        <irk-text-choice text="Choice 3" value="3" detail-text="Additional text can go here."></irk-text-choice>
+      </irk-text-choice-question-step>
+    </irk-task>
 
   </irk-ordered-tasks>
 
@@ -53,6 +69,8 @@ This is a clone of Apple's [ResearchKit Framework](https://github.com/ResearchKi
 `<irk-boolean-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKBooleanAnswerFormat` classes in ResearchKit combined and includes the `id`, `title`, `text`, `trueText`, and `falseText` attributes.
 
 `<irk-text-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKTextAnswerFormat` classes in ResearchKit combined and includes the `id`, `title`, `text`, `maxLength`, and `multipleLines` attributes.
+
+`<irk-text-choice-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKTextChoiceAnswerFormat` classes in ResearchKit combined and includes the `id`, `title`, `text`, and `style` attributes. This encompass several `<irk-text-choice>` elements where each include the `value`, `text`, and `detail-text` attributes.
 
 *These are still a work in progress and I plan to have equivalent directives to all classes in ResearchKit.*
 
@@ -92,8 +110,8 @@ This is a clone of Apple's [ResearchKit Framework](https://github.com/ResearchKi
   - [x] Text Question Step directive
     - [x] Multi lines
     - [x] Single line
-  - [ ] Text Choice Question Step directive
-    - [ ] Multiple choice
+  - [x] Text Choice Question Step directive
+    - [x] Multiple choice
     - [ ] Single choice
   - ...
 - [ ] Consent directives
