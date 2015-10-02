@@ -349,7 +349,7 @@ angular.module('ionicResearchKit',[])
     return {
         restrict: 'E',
         template: function(elem, attr) {
-            return 	'<form name="form.'+attr.id+'" class="irk-slider"'+
+            return 	'<form name="form.'+attr.id+'" class="irk-slider">'+
                 '<div class="irk-centered">'+
                 '<h3>'+attr.title+'</h3>'+
                 (attr.text ? '<p>'+attr.text+'</p>' : '')+
@@ -378,7 +378,7 @@ angular.module('ionicResearchKit',[])
     return {
         restrict: 'E',
         template: function(elem, attr) {
-            return 	'<form name="form.'+attr.id+'" class="irk-slider"'+
+            return 	'<form name="form.'+attr.id+'" class="irk-slider">'+
                 '<div class="irk-centered">'+
                 '<h3>'+attr.title+'</h3>'+
                 (attr.text ? '<p>'+attr.text+'</p>' : '')+
@@ -405,11 +405,41 @@ angular.module('ionicResearchKit',[])
     }
 })
 
+//======================================================================================
+// Usage: <irk-text-question-step id="q1" title="Your question here." text="Additional text can go here." max-length="0" multiple-lines="true" placeholder="" optional="false"/>
+// =====================================================================================
+.directive('irkTextQuestionStep', function() {
+    return {
+        restrict: 'E',
+        template: function(elem, attr) {
+            return  '<form name="form.'+attr.id+'" class="irk-slider">'+
+                '<div class="irk-centered">'+
+                '<h3>'+attr.title+'</h3>'+
+                (attr.text ? '<p>'+attr.text+'</p>' : '')+
+                '</div>'+
+                '<div class="irk-offcentered-container"><div class="irk-offcentered-content">'+
+                '<div class="list">'+
+                '<label class="item item-input">'+
+                (attr.multipleLines=="false"
+                ?'<input type="text" placeholder="'+(attr.placeholder?attr.placeholder:'')+'" name="'+attr.id+'" '+(attr.maxLength && parseInt(attr.maxLength,10)>0?'maxlength="'+attr.maxLength+'"':'')+' ng-model="$parent.formData.'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.dirty()">'
+                :'<textarea rows="8" placeholder="'+(attr.placeholder?attr.placeholder:'')+'" name="'+attr.id+'" '+(attr.maxLength && parseInt(attr.maxLength,10)>0?'maxlength="'+attr.maxLength+'"':'')+' ng-model="$parent.formData.'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.dirty()"></textarea>'
+                )+
+                '</label>'+
+                '</div>'+
+                '</div></div>'+
+                '</form>'
+        },
+        link: function(scope, element, attrs, controller) {
+            element.addClass('irk-step');
+        }
+    }
+})
+
 .directive('irkQuestionStep', function() {
     return {
         restrict: 'E',
         template: function(elem, attr) {
-            return 	'<form name="form.'+attr.id+'" class="irk-slider"'+
+            return 	'<form name="form.'+attr.id+'" class="irk-slider">'+
                 '<div class="irk-centered">'+
                 '<h3>'+attr.title+'</h3>'+
                 (attr.text ? '<p>'+attr.text+'</p>' : '')+

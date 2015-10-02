@@ -46,11 +46,13 @@ This is a clone of Apple's [ResearchKit Framework](https://github.com/ResearchKi
 
 `<irk-task>` is the equivalent of the `ORKTask` class in ResearchKit and will encompass one of the available `<irk-*-step>` elements.
 
-`<irk-instruction-step>` is the equivalent of the `ORKInstructionStep` class in ResearchKit and includes the `title` and `text` attributes.
+`<irk-instruction-step>` is the equivalent of the `ORKInstructionStep` class in ResearchKit and includes the `id`, `title` and `text` attributes.
 
 `<irk-scale-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKScaleAnswerFormat` classes in ResearchKit combined and includes the `id`, `title`, `text`, `min`, `max`, `step`, and `value` attributes.
 
-`<irk-boolean-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKBooleanAnswerFormat` classes in ResearchKit combined and includes the `id`, `title`, `text`, `trueLabel`, and `falseLabel` attributes.
+`<irk-boolean-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKBooleanAnswerFormat` classes in ResearchKit combined and includes the `id`, `title`, `text`, `trueText`, and `falseText` attributes.
+
+`<irk-text-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKTextAnswerFormat` classes in ResearchKit combined and includes the `id`, `title`, `text`, `maxLength`, and `multipleLines` attributes.
 
 *These are still a work in progress and I plan to have equivalent directives to all classes in ResearchKit.*
 
@@ -70,9 +72,9 @@ This is a clone of Apple's [ResearchKit Framework](https://github.com/ResearchKi
   - [x] Relaunch should re-init steps
   - [x] Hide Skip button when input is required
   - [x] Enable Next button on input change
-- [ ] Results
+- [x] Results
   - [x] Output results in JSON
-    - [ ] Capture all result metadata
+  - [x] Capture all result metadata
   - [ ] Collect results into LocalStorage
 - [ ] Survey directives
   - [x] Instruction Step directive
@@ -86,6 +88,9 @@ This is a clone of Apple's [ResearchKit Framework](https://github.com/ResearchKi
     - [ ] Support vertical orientation
   - [ ] Boolean Question Step directive
     - [ ] Apply radio fix (iOS9)
+  - [x] Text Question Step directive
+    - [x] Multi lines
+    - [x] Single line
   - ...
 - [ ] Consent directives
 - [ ] Active Tasks directives
