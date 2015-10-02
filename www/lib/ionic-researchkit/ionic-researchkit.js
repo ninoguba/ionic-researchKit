@@ -322,7 +322,7 @@ angular.module('ionicResearchKit',[])
 })
 
 //======================================================================================
-// Usage: <irk-instruction-step title="Your title here." text="Additional text can go here." />
+// Usage: <irk-instruction-step id="s1" title="Your title here." text="Additional text can go here." />
 // =====================================================================================
 .directive('irkInstructionStep', function() {
     return {
@@ -343,7 +343,7 @@ angular.module('ionicResearchKit',[])
 })
 
 //======================================================================================
-// Usage: <irk-scale-question-step id="q1" title="Your question here." text="Additional text can go here." min="1" max="10" step="1" value="5" />
+// Usage: <irk-scale-question-step id="q1" title="Your question here." text="Additional text can go here." min="1" max="10" step="1" value="5" optional="false"/>
 // =====================================================================================
 .directive('irkScaleQuestionStep', function() {
     return {
@@ -372,7 +372,7 @@ angular.module('ionicResearchKit',[])
 })
 
 //======================================================================================
-// Usage: <irk-boolean-question-step id="data.q1" title="Your question here." text="Additional text can go here." trueValue="" falseValue=""/>
+// Usage: <irk-boolean-question-step id="q1" title="Your question here." text="Additional text can go here." true-value="true" false-value="false" true-text="Yes" false-text="No" optional="false"/>
 // =====================================================================================
 .directive('irkBooleanQuestionStep', function() {
     return {
@@ -386,13 +386,13 @@ angular.module('ionicResearchKit',[])
                 '<div class="irk-offcentered-container"><div class="irk-offcentered-content">'+
                 '<div class="list">'+
                 '<label class="item item-radio">'+
-                '<input type="radio" name="'+attr.id+'" value="'+(attr.trueValue?attr.trueValue:'True')+'" ng-model="$parent.formData.'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.dirty()">'+
-                '<div class="item-content irk-item-content">'+(attr.trueValue?attr.trueValue:'True')+'</div>'+
+                '<input type="radio" name="'+attr.id+'" value="'+(attr.trueValue?attr.trueValue:'true')+'" ng-model="$parent.formData.'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.dirty()">'+
+                '<div class="item-content irk-item-content">'+(attr.trueText?attr.trueText:(attr.trueValue?attr.trueValue:'True'))+'</div>'+
                 '<i class="radio-icon ion-checkmark"></i>'+
                 '</label>'+
                 '<label class="item item-radio">'+
-                '<input type="radio" name="'+attr.id+'" value="'+(attr.falseValue?attr.falseValue:'False')+'" ng-model="$parent.formData.'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.dirty()">'+
-                '<div class="item-content irk-item-content">'+(attr.falseValue?attr.falseValue:'False')+'</div>'+
+                '<input type="radio" name="'+attr.id+'" value="'+(attr.falseValue?attr.falseValue:'false')+'" ng-model="$parent.formData.'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.dirty()">'+
+                '<div class="item-content irk-item-content">'+(attr.falseText?attr.falseText:(attr.falseValue?attr.falseValue:'False'))+'</div>'+
                 '<i class="radio-icon ion-checkmark"></i>'+
                 '</label>'+
                 '</div>'+
