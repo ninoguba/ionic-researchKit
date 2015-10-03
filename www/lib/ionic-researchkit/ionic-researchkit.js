@@ -55,7 +55,7 @@ angular.module('ionicResearchKit',[])
             results.childResults[index].type = stepType;
             if (stepType != 'IRK-INSTRUCTION-STEP')
                 results.childResults[index].answer = (stepValue?stepValue:null);
-            
+
             results.childResults[index].end = new Date();
             results.end = new Date();
         }
@@ -472,7 +472,7 @@ angular.module('ionicResearchKit',[])
         require: '^?irkTextChoiceQuestionStep',
         template: function(elem, attr) {
             return  '<label class="item item-radio">'+
-                '<input type="radio" name="'+elem.parent().attr("id")+'" value="'+attr.value+'" ng-model="$parent.$parent.formData.'+elem.parent().attr("id")+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.$parent.dirty()">'+
+                '<input type="radio" name="'+elem.parent().attr("id")+'" value="'+attr.value+'" ng-model="$parent.$parent.formData.'+elem.parent().attr("id")+attr.value+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.$parent.dirty()">'+
                 '<div class="item-content irk-item-content">'+
                 attr.text+
                 (attr.detailText?'<p>'+attr.detailText+'</p>':'')+

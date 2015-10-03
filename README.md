@@ -111,8 +111,8 @@ This is a clone of Apple's [ResearchKit Framework](https://github.com/ResearchKi
     - [x] Multi lines
     - [x] Single line
   - [x] Text Choice Question Step directive
-    - [x] Multiple choice
-    - [ ] Single choice
+    - [x] Single choice
+    - [ ] Multiple choice
   - ...
 - [ ] Consent directives
 - [ ] Active Tasks directives
