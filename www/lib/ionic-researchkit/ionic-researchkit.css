@@ -64,3 +64,13 @@
 .irk-item-content {
   text-align: left;
 }
+
+.irk-input {
+  text-align: center;
+}
+
+.irk-input-label {
+  text-align: center;
+  display: inline-block;
+  color: #aaa;
+}

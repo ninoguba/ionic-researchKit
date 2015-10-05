@@ -523,3 +523,59 @@ angular.module('ionicResearchKit',[])
         }
     }
 })
+
+//======================================================================================
+// Usage: <irk-date-question-step id="q1" title="Your question here." text="Additional text can go here." optional="false"/>
+// =====================================================================================
+.directive('irkDateQuestionStep', function() {
+    return {
+        restrict: 'E',
+        template: function(elem, attr) {
+            return  '<form name="form.'+attr.id+'" class="irk-slider">'+
+                '<div class="irk-centered">'+
+                '<h3>'+attr.title+'</h3>'+
+                (attr.text ? '<p>'+attr.text+'</p>' : '')+
+                '</div>'+
+                '<div class="irk-offcentered-container"><div class="irk-offcentered-content">'+
+                '<div class="list">'+
+                '<label class="item item-input">'+
+                '<span class="input-label irk-input-label" ng-if="!$parent.formData.'+attr.id+'">Tap to select date.</span>'+
+                '<input class="irk-input" type="date" name="'+attr.id+'" ng-model="$parent.formData.'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.dirty()">'+
+                '</label>'+
+                '</div>'+
+                '</div></div>'+
+                '</form>'
+        },
+        link: function(scope, element, attrs, controller) {
+            element.addClass('irk-step');
+        }
+    }
+})
+
+//======================================================================================
+// Usage: <irk-time-question-step id="q1" title="Your question here." text="Additional text can go here." optional="false"/>
+// =====================================================================================
+.directive('irkTimeQuestionStep', function() {
+    return {
+        restrict: 'E',
+        template: function(elem, attr) {
+            return  '<form name="form.'+attr.id+'" class="irk-slider">'+
+                '<div class="irk-centered">'+
+                '<h3>'+attr.title+'</h3>'+
+                (attr.text ? '<p>'+attr.text+'</p>' : '')+
+                '</div>'+
+                '<div class="irk-offcentered-container"><div class="irk-offcentered-content">'+
+                '<div class="list">'+
+                '<label class="item item-input">'+
+                '<span class="input-label irk-input-label" ng-if="!$parent.formData.'+attr.id+'">Tap to select time.</span>'+
+                '<input class="irk-input" type="time" name="'+attr.id+'" ng-model="$parent.formData.'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.dirty()">'+
+                '</label>'+
+                '</div>'+
+                '</div></div>'+
+                '</form>'
+        },
+        link: function(scope, element, attrs, controller) {
+            element.addClass('irk-step');
+        }
+    }
+})

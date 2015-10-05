@@ -63,6 +63,14 @@ This is a clone of Apple's [ResearchKit Framework](https://github.com/ResearchKi
       <irk-numeric-question-step id="q6" title="Your question here." text="Additional text can go here." unit="Your unit." />
     </irk-task>
 
+    <irk-task>
+      <irk-date-question-step id="q6" title="Your question here." text="Additional text can go here." />
+    </irk-task>
+
+    <irk-task>
+      <irk-time-question-step id="q6" title="Your question here." text="Additional text can go here." />
+    </irk-task>
+
   </irk-ordered-tasks>
 
 </ion-modal-view>
@@ -85,6 +93,10 @@ This is a clone of Apple's [ResearchKit Framework](https://github.com/ResearchKi
 `<irk-text-choice-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKTextChoiceAnswerFormat` classes in ResearchKit combined and includes the `id`, `title`, `text`, and `style` attributes. This encompass several `<irk-text-choice>` elements where each include the `value`, `text`, and `detail-text` attributes.
 
 `<irk-numeric-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKNumericAnswerFormat` classes in ResearchKit combined and includes the `id`, `title`, `text`, `min`, `max`, and `unit` attributes.
+
+`<irk-date-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKDateAnswerFormat` classes in ResearchKit combined and includes the `id`, `title`, `text` attributes.
+
+`<irk-time-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKTimeOfDayAnswerFormat` classes in ResearchKit combined and includes the `id`, `title`, `text` attributes.
 
 *These are still a work in progress and I plan to have equivalent directives to all classes in ResearchKit.*
 
@@ -128,6 +140,8 @@ This is a clone of Apple's [ResearchKit Framework](https://github.com/ResearchKi
     - [x] Single choice
     - [x] Multiple choice
   - [x] Numeric Question Step directive
+  - [x] Date Question Step directive
+  - [x] Time Question Step directive
   - ...
 - [ ] Consent directives
 - [ ] Active Tasks directives
