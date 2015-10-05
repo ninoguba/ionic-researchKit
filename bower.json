@@ -1,7 +1,10 @@
 {
-  "name": "HelloIonic",
+  "name": "ionicResearchKit",
   "private": "true",
   "devDependencies": {
     "ionic": "driftyco/ionic-bower#1.1.0"
+  },
+  "dependencies": {
+    "checklist-model": "~0.6.0"
   }
 }

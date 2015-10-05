@@ -7,6 +7,8 @@
 * ion-slide-box (https://github.com/driftyco/ionic)
 * ion-wizard (https://github.com/arielfaur/ionic-wizard)
 *
+* Required dependencies:
+* checklist-model (https://github.com/vitalets/checklist-model)
 */
 angular.module('ionicResearchKit',[])
 //======================================================================================
@@ -472,7 +474,11 @@ angular.module('ionicResearchKit',[])
         require: '^?irkTextChoiceQuestionStep',
         template: function(elem, attr) {
             return  '<label class="item item-radio">'+
-                '<input type="radio" name="'+elem.parent().attr("id")+'" value="'+attr.value+'" ng-model="$parent.$parent.formData.'+elem.parent().attr("id")+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.$parent.dirty()">'+
+                (elem.parent().attr("style")=="multiple"?
+                '<input type="checkbox" name="'+elem.parent().attr("id")+'" value="'+attr.value+'" checklist-model="$parent.$parent.formData.'+elem.parent().attr("id")+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.$parent.$parent.dirty()">'
+                :
+                '<input type="radio" name="'+elem.parent().attr("id")+'" value="'+attr.value+'" ng-model="$parent.$parent.formData.'+elem.parent().attr("id")+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.$parent.dirty()">'
+                )+
                 '<div class="item-content irk-item-content">'+
                 attr.text+
                 (attr.detailText?'<p>'+attr.detailText+'</p>':'')+
