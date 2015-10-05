@@ -52,11 +52,14 @@ angular.module('ionicResearchKit',[])
             var stepId = step.attr('id');
             var stepType = step.prop('tagName');
             var stepValue = formData[stepId];
+            var stepUnit = step.attr('unit');
 
             results.childResults[index].id = stepId;
             results.childResults[index].type = stepType;
             if (stepType != 'IRK-INSTRUCTION-STEP')
                 results.childResults[index].answer = (stepValue?stepValue:null);
+            if (stepType == 'IRK-NUMERIC-QUESTION-STEP')
+                results.childResults[index].unit = (stepUnit?stepUnit:null);
 
             results.childResults[index].end = new Date();
             results.end = new Date();
@@ -489,6 +492,34 @@ angular.module('ionicResearchKit',[])
                 '</div>'+
                 '<i class="radio-icon ion-checkmark"></i>'+
                 '</label>'
+        }
+    }
+})
+
+//======================================================================================
+// Usage: <irk-numeric-question-step id="q1" title="Your question here." text="Additional text can go here." unit="Your unit." placeholder="Your placeholder." min="0" max="10" optional="false"/>
+// =====================================================================================
+.directive('irkNumericQuestionStep', function() {
+    return {
+        restrict: 'E',
+        template: function(elem, attr) {
+            return  '<form name="form.'+attr.id+'" class="irk-slider">'+
+                '<div class="irk-centered">'+
+                '<h3>'+attr.title+'</h3>'+
+                (attr.text ? '<p>'+attr.text+'</p>' : '')+
+                '</div>'+
+                '<div class="irk-offcentered-container"><div class="irk-offcentered-content">'+
+                '<div class="list">'+
+                '<label class="item item-input">'+
+                '<input type="number" placeholder="'+(attr.placeholder?attr.placeholder:'')+'" name="'+attr.id+'" '+(attr.min?'min="'+attr.min+'"':'')+' '+(attr.max?'max="'+attr.max+'"':'')+' ng-model="$parent.formData.'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.dirty()">'+
+                (attr.unit && attr.unit.length>0?'<span class="input-label">'+attr.unit+'</span>':'')+
+                '</label>'+
+                '</div>'+
+                '</div></div>'+
+                '</form>'
+        },
+        link: function(scope, element, attrs, controller) {
+            element.addClass('irk-step');
         }
     }
 })

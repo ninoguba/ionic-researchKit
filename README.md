@@ -59,6 +59,10 @@ This is a clone of Apple's [ResearchKit Framework](https://github.com/ResearchKi
       </irk-text-choice-question-step>
     </irk-task>
 
+    <irk-task>
+      <irk-numeric-question-step id="q6" title="Your question here." text="Additional text can go here." unit="Your unit." />
+    </irk-task>
+
   </irk-ordered-tasks>
 
 </ion-modal-view>
@@ -79,6 +83,8 @@ This is a clone of Apple's [ResearchKit Framework](https://github.com/ResearchKi
 `<irk-text-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKTextAnswerFormat` classes in ResearchKit combined and includes the `id`, `title`, `text`, `maxLength`, and `multipleLines` attributes.
 
 `<irk-text-choice-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKTextChoiceAnswerFormat` classes in ResearchKit combined and includes the `id`, `title`, `text`, and `style` attributes. This encompass several `<irk-text-choice>` elements where each include the `value`, `text`, and `detail-text` attributes.
+
+`<irk-numeric-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKNumericAnswerFormat` classes in ResearchKit combined and includes the `id`, `title`, `text`, `min`, `max`, and `unit` attributes.
 
 *These are still a work in progress and I plan to have equivalent directives to all classes in ResearchKit.*
 
@@ -121,6 +127,7 @@ This is a clone of Apple's [ResearchKit Framework](https://github.com/ResearchKi
   - [x] Text Choice Question Step directive
     - [x] Single choice
     - [x] Multiple choice
+  - [x] Numeric Question Step directive
   - ...
 - [ ] Consent directives
 - [ ] Active Tasks directives
