@@ -44,7 +44,7 @@ This is a clone of Apple's [ResearchKit Framework](https://github.com/ResearchKi
     </irk-task>
 
     <irk-task>
-      <irk-text-choice-question-step id="q5" title="A multiple choice question." text="Select all that apply." style="multiple">
+      <irk-text-choice-question-step id="q5" title="A multiple choice question." text="Select all that apply." style="single">
         <irk-text-choice text="Choice 1" value="1"></irk-text-choice>
         <irk-text-choice text="Choice 2" value="2"></irk-text-choice>
         <irk-text-choice text="Choice 3" value="3" detail-text="Additional text can go here."></irk-text-choice>
