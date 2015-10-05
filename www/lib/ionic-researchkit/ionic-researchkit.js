@@ -302,12 +302,14 @@ angular.module('ionicResearchKit',[])
                 else
                     element.text("Next");
 
-                //Hide for instruction step
-                var form = angular.element(document.querySelectorAll('irk-task.irk-slider-slide')[index]).find('form');
-                element.toggleClass('ng-hide', form.length == 0);
-
                 //Enable only when current form is dirtied
+                var form = angular.element(document.querySelectorAll('irk-task.irk-slider-slide')[index]).find('form');
                 scope.isPristine = form.hasClass('ng-pristine');
+
+                //Hide for instruction step
+                var step = angular.element(document.querySelectorAll('irk-task.irk-slider-slide')[index].querySelector('.irk-step'));
+                var stepType = step.prop('tagName');
+                element.toggleClass('ng-hide', stepType=='IRK-INSTRUCTION-STEP');                
             });
         }
     }
@@ -317,10 +319,12 @@ angular.module('ionicResearchKit',[])
     return{
         restrict: 'A',
         link: function(scope, element, attrs, controller) {
-            //Hide when input is required
+            //Hide for instruction step or when input is required
             scope.$on("slideBox.slideChanged", function(e, index, count) {
-                var input = angular.element(document.querySelectorAll('irk-task.irk-slider-slide')[index]).find('input');
-                element.toggleClass('ng-hide', input.length == 0 || scope.$eval(input.attr('ng-required')));
+                var step = angular.element(document.querySelectorAll('irk-task.irk-slider-slide')[index].querySelector('.irk-step'));
+                var stepType = step.prop('tagName');
+                var stepOptional = step.attr('optional') || 'true';
+                element.toggleClass('ng-hide', stepType=='IRK-INSTRUCTION-STEP' || stepOptional=='false');
             });
         }
     }
