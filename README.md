@@ -1,6 +1,6 @@
 # What is ionicResearchKit?
 
-This is a clone of Apple's [ResearchKit Framework](https://github.com/ResearchKit/ResearchKit) built on [Ionic](https://github.com/driftyco/ionic) which makes it easy to create cross-platform hybrid native apps for medical research or for other research projects.
+An open source library equivalent of Apple's [ResearchKit Framework](https://github.com/ResearchKit/ResearchKit) built on [Ionic](https://github.com/driftyco/ionic) which makes it easy to create cross-platform hybrid native apps for medical research or for other research projects.
 
 # Installation
 
@@ -142,7 +142,10 @@ This is a clone of Apple's [ResearchKit Framework](https://github.com/ResearchKi
   - [x] Numeric Question Step directive
   - [x] Date Question Step directive
   - [x] Time Question Step directive
-  - ...
+  - [ ] Time Interval Question Step directive
+  - [ ] Value Picker Question Step directive
+  - [ ] Image Choice Question Step directive
+  - [ ] Form Step directive
 - [ ] Consent directives
 - [ ] Active Tasks directives
 
