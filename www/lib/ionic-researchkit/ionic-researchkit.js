@@ -345,7 +345,7 @@ angular.module('ionicResearchKit',[])
                 (attr.text ? '<p>'+attr.text+'</p>' : '')+
                 (attr.link ? '<a class="button button-clear button-positive" href="'+attr.link+'" target="_system">'+(attr.linkText ? attr.linkText : 'Learn more')+'</a>' : '')+
                 '<br><br>'+
-                '<button class="button button-outline button-positive" ng-click="$parent.doNext()">'+(attr.buttonText ? attr.buttonText : 'Get Started')+'</button>'+
+                '<button class="button button-outline button-positive irk-instruction-button" ng-click="$parent.doNext()">'+(attr.buttonText ? attr.buttonText : 'Get Started')+'</button>'+
                 '</div></div>'
         },
         link: function(scope, element, attrs, controller) {
@@ -596,7 +596,7 @@ angular.module('ionicResearchKit',[])
                 '<div class="irk-offcentered-container"><div class="irk-offcentered-content">'+
                 '<div class="list">'+
                 '<label class="item item-input item-select irk-item-select">'+
-                '<span class="input-label irk-input-label">{{(!$parent.formData.'+attr.id+'?\'Tap to select an answer.\':\'&nbsp;\')}}</span>'+
+                '<span class="input-label irk-input-label">{{(!$parent.formData.'+attr.id+'?\'Tap to select answer.\':\'&nbsp;\')}}</span>'+
                 '<select ng-transclude name="'+attr.id+'" ng-model="$parent.formData.'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.dirty()">' +
                 '</select>'+
                 '</label>'+
@@ -606,7 +606,6 @@ angular.module('ionicResearchKit',[])
         },
         link: function(scope, element, attrs, controller) {
             element.addClass('irk-step');
-            //element.find('select').prepend('<option value="" disabled selected>Select an answer</option>');
         }
     }
 })

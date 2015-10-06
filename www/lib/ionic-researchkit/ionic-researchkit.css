@@ -61,6 +61,11 @@
   font-size: 17px !important;
 }
 
+.irk-instruction-button {
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
 .irk-item-content {
   text-align: left;
 }
@@ -70,12 +75,13 @@
 }
 
 .irk-input-label {
-  text-align: center;
-  display: inline-block;
   color: #aaa;
+  width: 100% !important;
+  z-index: 100;
 }
 
 .irk-item-select select {
   direction: ltr;
   width: 100% !important;
+  z-index: 50;
 }
