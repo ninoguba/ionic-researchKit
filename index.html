@@ -13,14 +13,14 @@
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-    <title>Ionic-researchkit by ninoguba</title>
+    <title>Ionic-ResearchKit by ninoguba</title>
   </head>
 
   <body>
     <header>
       <div class="inner">
-        <h1>Ionic-researchkit</h1>
-        <h2>This is a clone of Apple&#39;s ResearchKit Framework built on Ionic which makes it easy to create cross-platform hybrid native apps for medical research or for other research projects.</h2>
+        <h1>Ionic-ResearchKit</h1>
+        <h2>An open source library equivalent of Apple&#39;s ResearchKit Framework built on Ionic which makes it easy to create cross-platform hybrid native apps for medical research or for other research projects.</h2>
         <a href="https://github.com/ninoguba/ionic-researchKit" class="button"><small>View project on</small> GitHub</a>
       </div>
     </header>
@@ -31,7 +31,7 @@
           <h1>
 <a id="what-is-ionicresearchkit" class="anchor" href="#what-is-ionicresearchkit" aria-hidden="true"><span class="octicon octicon-link"></span></a>What is ionicResearchKit?</h1>
 
-<p>This is a clone of Apple's <a href="https://github.com/ResearchKit/ResearchKit">ResearchKit Framework</a> built on <a href="https://github.com/driftyco/ionic">Ionic</a> which makes it easy to create cross-platform hybrid native apps for medical research or for other research projects.</p>
+<p>An open source library equivalent of Apple's <a href="https://github.com/ResearchKit/ResearchKit">ResearchKit Framework</a> built on <a href="https://github.com/driftyco/ionic">Ionic</a> which makes it easy to create cross-platform hybrid native apps for medical research or for other research projects.</p>
 
 <h1>
 <a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h1>
@@ -62,18 +62,54 @@
   &lt;irk-ordered-tasks&gt;
 
     &lt;irk-task&gt;
-        &lt;irk-instruction-step title="Your title here." text="Additional text can go here." /&gt;
+        &lt;irk-instruction-step id="s1" title="Your title here." text="Additional text can go here." /&gt;
     &lt;/irk-task&gt;
 
       &lt;irk-task&gt;
-        &lt;irk-scale-question-step id="data.q2" title="Your question here." text="Additional text can go here." 
+        &lt;irk-scale-question-step id="q1" title="Your question here." text="Additional text can go here." 
             min="1" max="10" step="1" value="5" /&gt;
     &lt;/irk-task&gt;
 
     &lt;irk-task&gt;
-        &lt;irk-boolean-question-step id="data.q2" title="Your question here." text="Additional text can go here." 
-            trueLabel="Yes" falseLabel="No"/&gt;
+        &lt;irk-boolean-question-step id="q2" title="Your question here." text="Additional text can go here." 
+            true-text="Yes" false-text="No" /&gt;
       &lt;/irk-task&gt;
+
+    &lt;irk-task&gt;
+      &lt;irk-text-question-step id="q3" title="Your question here." text="Additional text can go here." /&gt;
+    &lt;/irk-task&gt;
+
+    &lt;irk-task&gt;
+      &lt;irk-text-question-step id="q4" title="Your question here." text="Additional text can go here." multiple-lines="false" /&gt;
+    &lt;/irk-task&gt;
+
+    &lt;irk-task&gt;
+      &lt;irk-text-choice-question-step id="q5" title="Your question here." text="Additional text can go here." style="single"&gt;
+        &lt;irk-text-choice text="Choice 1" value="1"&gt;&lt;/irk-text-choice&gt;
+        &lt;irk-text-choice text="Choice 2" value="2"&gt;&lt;/irk-text-choice&gt;
+        &lt;irk-text-choice text="Choice 3" value="3" detail-text="Additional text can go here."&gt;&lt;/irk-text-choice&gt;
+      &lt;/irk-text-choice-question-step&gt;
+    &lt;/irk-task&gt;
+
+    &lt;irk-task&gt;
+      &lt;irk-text-choice-question-step id="q5" title="Your question here." text="Additional text can go here." style="multiple"&gt;
+        &lt;irk-text-choice text="Choice 1" value="1"&gt;&lt;/irk-text-choice&gt;
+        &lt;irk-text-choice text="Choice 2" value="2"&gt;&lt;/irk-text-choice&gt;
+        &lt;irk-text-choice text="Choice 3" value="3" detail-text="Additional text can go here."&gt;&lt;/irk-text-choice&gt;
+      &lt;/irk-text-choice-question-step&gt;
+    &lt;/irk-task&gt;
+
+    &lt;irk-task&gt;
+      &lt;irk-numeric-question-step id="q6" title="Your question here." text="Additional text can go here." unit="Your unit." /&gt;
+    &lt;/irk-task&gt;
+
+    &lt;irk-task&gt;
+      &lt;irk-date-question-step id="q6" title="Your question here." text="Additional text can go here." /&gt;
+    &lt;/irk-task&gt;
+
+    &lt;irk-task&gt;
+      &lt;irk-time-question-step id="q6" title="Your question here." text="Additional text can go here." /&gt;
+    &lt;/irk-task&gt;
 
   &lt;/irk-ordered-tasks&gt;
 
@@ -87,11 +123,21 @@
 
 <p><code>&lt;irk-task&gt;</code> is the equivalent of the <code>ORKTask</code> class in ResearchKit and will encompass one of the available <code>&lt;irk-*-step&gt;</code> elements.</p>
 
-<p><code>&lt;irk-instruction-step&gt;</code> is the equivalent of the <code>ORKInstructionStep</code> class in ResearchKit and includes the <code>title</code> and <code>text</code> attributes.</p>
+<p><code>&lt;irk-instruction-step&gt;</code> is the equivalent of the <code>ORKInstructionStep</code> class in ResearchKit and includes the <code>id</code>, <code>title</code> and <code>text</code> attributes.</p>
 
 <p><code>&lt;irk-scale-question-step&gt;</code> is the equivalent of the <code>ORKQuestionStep</code> and <code>ORKScaleAnswerFormat</code> classes in ResearchKit combined and includes the <code>id</code>, <code>title</code>, <code>text</code>, <code>min</code>, <code>max</code>, <code>step</code>, and <code>value</code> attributes.</p>
 
-<p><code>&lt;irk-boolean-question-step&gt;</code> is the equivalent of the <code>ORKQuestionStep</code> and <code>ORKBooleanAnswerFormat</code> classes in ResearchKit combined and includes the <code>id</code>, <code>title</code>, <code>text</code>, <code>trueLabel</code>, and <code>falseLabel</code> attributes.</p>
+<p><code>&lt;irk-boolean-question-step&gt;</code> is the equivalent of the <code>ORKQuestionStep</code> and <code>ORKBooleanAnswerFormat</code> classes in ResearchKit combined and includes the <code>id</code>, <code>title</code>, <code>text</code>, <code>trueText</code>, and <code>falseText</code> attributes.</p>
+
+<p><code>&lt;irk-text-question-step&gt;</code> is the equivalent of the <code>ORKQuestionStep</code> and <code>ORKTextAnswerFormat</code> classes in ResearchKit combined and includes the <code>id</code>, <code>title</code>, <code>text</code>, <code>maxLength</code>, and <code>multipleLines</code> attributes.</p>
+
+<p><code>&lt;irk-text-choice-question-step&gt;</code> is the equivalent of the <code>ORKQuestionStep</code> and <code>ORKTextChoiceAnswerFormat</code> classes in ResearchKit combined and includes the <code>id</code>, <code>title</code>, <code>text</code>, and <code>style</code> attributes. This encompass several <code>&lt;irk-text-choice&gt;</code> elements where each include the <code>value</code>, <code>text</code>, and <code>detail-text</code> attributes.</p>
+
+<p><code>&lt;irk-numeric-question-step&gt;</code> is the equivalent of the <code>ORKQuestionStep</code> and <code>ORKNumericAnswerFormat</code> classes in ResearchKit combined and includes the <code>id</code>, <code>title</code>, <code>text</code>, <code>min</code>, <code>max</code>, and <code>unit</code> attributes.</p>
+
+<p><code>&lt;irk-date-question-step&gt;</code> is the equivalent of the <code>ORKQuestionStep</code> and <code>ORKDateAnswerFormat</code> classes in ResearchKit combined and includes the <code>id</code>, <code>title</code>, <code>text</code> attributes.</p>
+
+<p><code>&lt;irk-time-question-step&gt;</code> is the equivalent of the <code>ORKQuestionStep</code> and <code>ORKTimeOfDayAnswerFormat</code> classes in ResearchKit combined and includes the <code>id</code>, <code>title</code>, <code>text</code> attributes.</p>
 
 <p><em>These are still a work in progress and I plan to have equivalent directives to all classes in ResearchKit.</em></p>
 
@@ -118,15 +164,11 @@
 <li>[x] Enable Next button on input change</li>
 </ul>
 </li>
-<li>[ ] Results
+<li>[x] Results
 
 <ul>
-<li>[x] Output results in JSON
-
-<ul>
-<li>[ ] Capture all result metadata</li>
-</ul>
-</li>
+<li>[x] Output results in JSON</li>
+<li>[x] Capture all result metadata</li>
 <li>[ ] Collect results into LocalStorage</li>
 </ul>
 </li>
@@ -146,17 +188,38 @@
 <li>[x] Scale Question Step directive
 
 <ul>
+<li>[ ] Support min/max text description</li>
 <li>[ ] Support step bars</li>
 <li>[ ] Support vertical orientation</li>
 </ul>
 </li>
-<li>[ ] Boolean Question Step directive
+<li>[x] Boolean Question Step directive
 
 <ul>
 <li>[ ] Apply radio fix (iOS9)</li>
 </ul>
 </li>
-<li>...</li>
+<li>[x] Text Question Step directive
+
+<ul>
+<li>[x] Multi lines</li>
+<li>[x] Single line</li>
+</ul>
+</li>
+<li>[x] Text Choice Question Step directive
+
+<ul>
+<li>[x] Single choice</li>
+<li>[x] Multiple choice</li>
+</ul>
+</li>
+<li>[x] Numeric Question Step directive</li>
+<li>[x] Date Question Step directive</li>
+<li>[x] Time Question Step directive</li>
+<li>[ ] Time Interval Question Step directive</li>
+<li>[ ] Value Picker Question Step directive</li>
+<li>[ ] Image Choice Question Step directive</li>
+<li>[ ] Form Step directive</li>
 </ul>
 </li>
 <li>[ ] Consent directives</li>
