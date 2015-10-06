@@ -64,15 +64,15 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
     </irk-task>
 
     <irk-task>
-      <irk-date-question-step id="q6" title="Your question here." text="Additional text can go here." />
+      <irk-date-question-step id="q7" title="Your question here." text="Additional text can go here." />
     </irk-task>
 
     <irk-task>
-      <irk-time-question-step id="q6" title="Your question here." text="Additional text can go here." />
+      <irk-time-question-step id="q8" title="Your question here." text="Additional text can go here." />
     </irk-task>
 
     <irk-task>
-      <irk-value-picker-question-step id="q7" title="Your question here." text="Additional text can go here." >
+      <irk-value-picker-question-step id="q9" title="Your question here." text="Additional text can go here." >
         <irk-picker-choice text="Choice 1" value="1"></irk-picker-choice>
         <irk-picker-choice text="Choice 2" value="2"></irk-picker-choice>
         <irk-picker-choice text="Choice 3" value="3"></irk-picker-choice>
