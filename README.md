@@ -114,6 +114,8 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
 
 [![App demo](https://cloud.githubusercontent.com/assets/4361804/9769406/dff8d760-56de-11e5-9a08-b6d2f82ad894.gif)](https://youtu.be/-NLjgpvtHK0)
 
+*Click to watch demo.*
+
 # Roadmap
 
 - [x] Task View Controller equivalent 
