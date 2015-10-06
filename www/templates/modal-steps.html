@@ -4,7 +4,7 @@
   <irk-task>
     <irk-instruction-step id="s1" title="Hello." text="This is a sample survey."/>
   </irk-task>
-
+<!--
   <irk-task>
     <irk-scale-question-step id="q1" title="A scale question." text="This is not required so you can skip this." min="1" max="10" step="1" value="5" optional="true" />
   </irk-task>
@@ -70,6 +70,29 @@
       <irk-image-choice text="Sad" value="sad" normal-state-image="ion-sad-outline" selected-state-image="ion-sad"></irk-image-choice>
       <irk-image-choice text="Happy" value="happy" normal-state-image="ion-happy-outline" selected-state-image="ion-happy"></irk-image-choice>
     </irk-image-choice-question-step>
+  </irk-task>
+-->
+  <irk-task>
+    <irk-form-step id="q14" title="A form step." text="This has several questions." >
+      <div class="item item-divider">Basic Info</div>
+      <label class="item item-input">
+        <span class="input-label">First Name</span>
+        <input type="text" placeholder="John">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Last Name</span>
+        <input type="text" placeholder="Suhr">
+      </label>    
+      <div class="item item-divider">Contact Info</div>
+      <label class="item item-input">
+        <span class="input-label">Email</span>
+        <input type="email" placeholder="john@suhr.com">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Phone</span>
+        <input type="tel" placeholder="555-555-5555">
+      </label>
+    </irk-form-step>
   </irk-task>
 
   <irk-task>

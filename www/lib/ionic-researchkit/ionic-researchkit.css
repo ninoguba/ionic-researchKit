@@ -76,12 +76,16 @@
 
 .irk-input-label {
   color: #aaa;
-  width: 100% !important;
   z-index: 100;
+  text-align: left;
 }
 
 .irk-item-select select {
   direction: ltr;
   width: 100% !important;
   z-index: 50;
+}
+
+.irk-form-step {
+  text-align: left;
 }

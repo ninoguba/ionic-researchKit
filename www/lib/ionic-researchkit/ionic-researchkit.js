@@ -696,3 +696,34 @@ angular.module('ionicResearchKit',[])
     }
 })
 
+//======================================================================================
+// Usage: <irk-form-step id="q1" title="Your question here." text="Additional text can go here." optional="false"></irk-form-step>
+// =====================================================================================
+.directive('irkFormStep', function() {
+    return {
+        restrict: 'E',
+        transclude: true,
+        template: function(elem, attr) {
+            return  '<form name="form.'+attr.id+'" class="irk-slider">'+
+                '<div class="irk-centered">'+
+                '<h3>'+attr.title+'</h3>'+
+                (attr.text ? '<p>'+attr.text+'</p>' : '')+
+                '</div>'+
+                '<div class="irk-offcentered-container"><div class="irk-offcentered-content">'+
+                '<div class="list" ng-transclude>'+
+                '</div>'+
+                '</div></div>'+
+                '</form>'
+        },
+        link: function(scope, element, attrs, controller) {
+            element.addClass('irk-step irk-form-step');
+
+            var form = element.find('form');
+            form.on("change", function() {
+                scope.$parent.dirty();
+            });
+        }
+    }
+})
+
+
