@@ -624,3 +624,75 @@ angular.module('ionicResearchKit',[])
     }
 })
 
+//======================================================================================
+// Usage: <irk-image-choice-question-step id="q1" title="Your question here." text="Additional text can go here." optional="false"></irk-image-choice-question-step>
+// =====================================================================================
+.directive('irkImageChoiceQuestionStep', function() {
+    return {
+        restrict: 'E',
+        transclude: true,
+        controller: ['$scope', function($scope) {
+            $scope.selected = {};
+        }],
+        template: function(elem, attr) {
+            return  '<form name="form.'+attr.id+'" class="irk-slider">'+
+                '<div class="irk-centered">'+
+                '<h3>'+attr.title+'</h3>'+
+                (attr.text ? '<p>'+attr.text+'</p>' : '')+
+                '</div>'+
+                '<div class="irk-offcentered-container"><div class="irk-offcentered-content">'+
+                '<div class="row" ng-transclude>'+
+                '</div>'+
+                '<span ng-if="$parent.formData.'+attr.id+'">{{selected.text}}</span><span class="irk-input-label" ng-if="!$parent.formData.'+attr.id+'">Tap to select.</span>'+
+                '</div></div>'+
+                '</form>'
+        },
+        link: function(scope, element, attrs, controller) {
+            element.addClass('irk-step');
+        }
+    }
+})
+
+//======================================================================================
+// Usage: <irk-image-choice value="choice" text="Your choice." normal-state-image="" selected-state-image="" />
+// =====================================================================================
+.directive('irkImageChoice', function() {
+    return {
+        restrict: 'E',
+        replace: true,
+        require: '^?irkImageChoiceQuestionStep',
+        template: function(elem, attr) {
+            return  '<div class="col">'+
+                '<button class="button button-clear button-large icon '+attr.normalStateImage+'"></button>'+
+                '</div>'
+        },
+        link: function(scope, element, attrs) {
+            var button = element.find('button');
+            button.bind('click', function() {
+                //Toggle selected state of image choices
+                var buttons = element.parent().find('button');
+                for (i=0; i<buttons.length; i++)
+                {
+                    var choice = angular.element(buttons[i]);
+                    choice.removeClass('button-positive');
+                    var parent = choice.parent();
+                    choice.removeClass(parent.attr("selected-state-image"));
+                    choice.addClass(parent.attr("normal-state-image"));
+                }
+
+                //Set selected state
+                button.removeClass(attrs.normalStateImage);
+                button.addClass(attrs.selectedStateImage);
+                button.addClass('button-positive');
+
+                //Set model
+                var step = element.parent().parent().parent().parent().parent();
+                var stepId = step.attr('id');
+                scope.$parent.$parent.formData[stepId] = attrs.value;
+                scope.selected.text = attrs.text;
+                scope.$parent.$parent.dirty();
+            });
+        }
+    }
+})
+

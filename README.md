@@ -79,6 +79,13 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
       </irk-value-picker-question-step>
     </irk-task>
 
+    <irk-task>
+      <irk-image-choice-question-step id="q10" title="Your question here." text="Additional text can go here." >
+        <irk-image-choice text="Choice 1" value="1" normal-state-image="ion-sad-outline" selected-state-image="ion-sad"></irk-image-choice>
+        <irk-image-choice text="Choice 2" value="2" normal-state-image="ion-happy-outline" selected-state-image="ion-happy"></irk-image-choice>
+      </irk-image-choice-question-step>
+    </irk-task>
+
   </irk-ordered-tasks>
 
 </ion-modal-view>
@@ -108,13 +115,13 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
 
 `<irk-value-picker-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKValuePickerAnswerFormat` classes in ResearchKit combined and includes the `id`, `title`, `text` attributes. This encompass several `<irk-picker-choice>` elements where each include the `value`, `text` attributes.
 
-*These are still a work in progress and I plan to have equivalent directives to all classes in ResearchKit.*
+`<irk-image-choice-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKImageChoiceAnswerFormat` classes in ResearchKit combined and includes the `id`, `title`, `text` attributes. This encompass several `<irk-image-choice>` elements where each include the `value`, `text`, `normal-state-image`, `selected-state-image` attributes.
 
 # Demo
 
 [![App demo](https://cloud.githubusercontent.com/assets/4361804/9769406/dff8d760-56de-11e5-9a08-b6d2f82ad894.gif)](https://youtu.be/-NLjgpvtHK0)
 
-*Click to watch demo.*
+*Click image to watch demo.*
 
 # Roadmap
 
@@ -156,7 +163,9 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
   - [x] Time Question Step directive
   - [ ] Time Interval Question Step directive
   - [x] Value Picker Question Step directive
-  - [ ] Image Choice Question Step directive
+  - [x] Image Choice Question Step directive
+    - [x] Support icons
+    - [ ] Support images
   - [ ] Form Step directive
 - [ ] Consent directives
 - [ ] Active Tasks directives
