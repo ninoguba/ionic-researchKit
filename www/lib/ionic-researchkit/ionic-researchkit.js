@@ -473,7 +473,7 @@ angular.module('ionicResearchKit',[])
 })
 
 //======================================================================================
-// Usage: <irk-text-choice id="q1" value="choice" text="Your choice." detail-text="Additional text can go here."/>
+// Usage: <irk-text-choice value="choice" text="Your choice." detail-text="Additional text can go here."/>
 // =====================================================================================
 .directive('irkTextChoice', function() {
     return {
@@ -579,3 +579,49 @@ angular.module('ionicResearchKit',[])
         }
     }
 })
+
+//======================================================================================
+// Usage: <irk-value-picker-question-step id="q1" title="Your question here." text="Additional text can go here." optional="false"></irk-value-picker-question-step>
+// =====================================================================================
+.directive('irkValuePickerQuestionStep', function() {
+    return {
+        restrict: 'E',
+        transclude: true,
+        template: function(elem, attr) {
+            return  '<form name="form.'+attr.id+'" class="irk-slider">'+
+                '<div class="irk-centered">'+
+                '<h3>'+attr.title+'</h3>'+
+                (attr.text ? '<p>'+attr.text+'</p>' : '')+
+                '</div>'+
+                '<div class="irk-offcentered-container"><div class="irk-offcentered-content">'+
+                '<div class="list">'+
+                '<label class="item item-input item-select irk-item-select">'+
+                '<span class="input-label irk-input-label">{{(!$parent.formData.'+attr.id+'?\'Tap to select an answer.\':\'&nbsp;\')}}</span>'+
+                '<select ng-transclude name="'+attr.id+'" ng-model="$parent.formData.'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.dirty()">' +
+                '</select>'+
+                '</label>'+
+                '</div>'+
+                '</div></div>'+
+                '</form>'
+        },
+        link: function(scope, element, attrs, controller) {
+            element.addClass('irk-step');
+            //element.find('select').prepend('<option value="" disabled selected>Select an answer</option>');
+        }
+    }
+})
+
+//======================================================================================
+// Usage: <irk-picker-choice value="choice" text="Your choice." />
+// =====================================================================================
+.directive('irkPickerChoice', function() {
+    return {
+        restrict: 'E',
+        replace: true,
+        require: '^?irkValuePickerQuestionStep',
+        template: function(elem, attr) {
+            return '<option value="'+attr.value+'">'+attr.text+'</option>';
+        }
+    }
+})
+

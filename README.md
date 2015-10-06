@@ -71,6 +71,14 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
       <irk-time-question-step id="q6" title="Your question here." text="Additional text can go here." />
     </irk-task>
 
+    <irk-task>
+      <irk-value-picker-question-step id="q7" title="Your question here." text="Additional text can go here." >
+        <irk-picker-choice text="Choice 1" value="1"></irk-picker-choice>
+        <irk-picker-choice text="Choice 2" value="2"></irk-picker-choice>
+        <irk-picker-choice text="Choice 3" value="3"></irk-picker-choice>
+      </irk-value-picker-question-step>
+    </irk-task>
+
   </irk-ordered-tasks>
 
 </ion-modal-view>
@@ -97,6 +105,8 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
 `<irk-date-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKDateAnswerFormat` classes in ResearchKit combined and includes the `id`, `title`, `text` attributes.
 
 `<irk-time-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKTimeOfDayAnswerFormat` classes in ResearchKit combined and includes the `id`, `title`, `text` attributes.
+
+`<irk-value-picker-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKValuePickerAnswerFormat` classes in ResearchKit combined and includes the `id`, `title`, `text` attributes. This encompass several `<irk-picker-choice>` elements where each include the `value`, `text` attributes.
 
 *These are still a work in progress and I plan to have equivalent directives to all classes in ResearchKit.*
 
@@ -143,7 +153,7 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
   - [x] Date Question Step directive
   - [x] Time Question Step directive
   - [ ] Time Interval Question Step directive
-  - [ ] Value Picker Question Step directive
+  - [x] Value Picker Question Step directive
   - [ ] Image Choice Question Step directive
   - [ ] Form Step directive
 - [ ] Consent directives

@@ -74,3 +74,8 @@
   display: inline-block;
   color: #aaa;
 }
+
+.irk-item-select select {
+  direction: ltr;
+  width: 100% !important;
+}
