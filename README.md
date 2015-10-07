@@ -114,7 +114,7 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
 
 `<irk-instruction-step>` is the equivalent of the `ORKInstructionStep` class in ResearchKit and includes the `id`, `title` and `text` attributes.
 
-`<irk-scale-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKScaleAnswerFormat` classes in ResearchKit combined and includes the `id`, `title`, `text`, `min`, `max`, `step`, and `value` attributes.
+`<irk-scale-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKScaleAnswerFormat` classes in ResearchKit combined and includes the `id`, `title`, `text`, `min`, `max`, `step`, `value`, `min-text`, and `max-text` attributes.
 
 `<irk-boolean-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKBooleanAnswerFormat` classes in ResearchKit combined and includes the `id`, `title`, `text`, `trueText`, and `falseText` attributes.
 
@@ -164,7 +164,7 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
     - [x] Show optional link
     - [ ] Show optional image
   - [x] Scale Question Step directive
-    - [ ] Support min/max text description
+    - [x] Support min/max text description
     - [ ] Support step bars
     - [ ] Support vertical orientation
   - [x] Boolean Question Step directive

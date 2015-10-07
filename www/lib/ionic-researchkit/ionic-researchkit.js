@@ -355,7 +355,7 @@ angular.module('ionicResearchKit',[])
 })
 
 //======================================================================================
-// Usage: <irk-scale-question-step id="q1" title="Your question here." text="Additional text can go here." min="1" max="10" step="1" value="5" optional="false"/>
+// Usage: <irk-scale-question-step id="q1" title="Your question here." text="Additional text can go here." min="1" max="10" step="1" value="5" min-text="Low" max-text="High" optional="false"/>
 // =====================================================================================
 .directive('irkScaleQuestionStep', function() {
     return {
@@ -371,8 +371,10 @@ angular.module('ionicResearchKit',[])
                 '<h4>{{$parent.formData.'+attr.id+' || \'&nbsp;\'}}</h4>'+
                 '<div class="range">'+
                 attr.min+
+                (attr.minText?'<br>'+attr.minText:'')+
                 '<input type="range" name="'+attr.id+'" min="'+attr.min+'" max="'+attr.max+'" step="'+attr.step+'" value="'+attr.value+'" ng-model="$parent.formData.'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.dirty()">'+
                 attr.max+
+                (attr.maxText?'<br>'+attr.maxText:'')+
                 '</div>'+
                 '</div></div>'+
                 '</form>'
