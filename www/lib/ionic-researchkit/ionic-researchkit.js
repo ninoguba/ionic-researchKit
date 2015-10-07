@@ -341,7 +341,7 @@ angular.module('ionicResearchKit',[])
         restrict: 'E',
         template: function(elem, attr) {
             return 	'<div class="irk-offcentered-container"><div class="irk-offcentered-content">'+
-                '<h3>'+attr.title+'</h3>'+
+                '<h2>'+attr.title+'</h2>'+
                 (attr.text ? '<p>'+attr.text+'</p>' : '')+
                 (attr.link ? '<a class="button button-clear button-positive" href="'+attr.link+'" target="_system">'+(attr.linkText ? attr.linkText : 'Learn more')+'</a>' : '')+
                 '<br><br>'+
@@ -367,7 +367,7 @@ angular.module('ionicResearchKit',[])
                 (attr.text ? '<p>'+attr.text+'</p>' : '')+
                 '</div>'+
                 '<div class="irk-spacer"></div>'+
-                '<h4>{{$parent.formData.'+attr.id+' || \'&nbsp;\'}}</h4>'+
+                '<h3>{{$parent.formData.'+attr.id+' || \'&nbsp;\'}}</h3>'+
                 '<div class="range">'+
                 attr.min+
                 (attr.minText?'<br>'+attr.minText:'')+
@@ -400,12 +400,12 @@ angular.module('ionicResearchKit',[])
                 '<label class="item item-radio">'+
                 '<input type="radio" name="'+attr.id+'" value="'+(attr.trueValue?attr.trueValue:'true')+'" ng-model="$parent.formData.'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.dirty()">'+
                 '<div class="item-content irk-item-content">'+(attr.trueText?attr.trueText:(attr.trueValue?attr.trueValue:'True'))+'</div>'+
-                '<i class="radio-icon ion-checkmark"></i>'+
+                '<i class="radio-icon ion-checkmark positive"></i>'+
                 '</label>'+
                 '<label class="item item-radio">'+
                 '<input type="radio" name="'+attr.id+'" value="'+(attr.falseValue?attr.falseValue:'false')+'" ng-model="$parent.formData.'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.dirty()">'+
                 '<div class="item-content irk-item-content">'+(attr.falseText?attr.falseText:(attr.falseValue?attr.falseValue:'False'))+'</div>'+
-                '<i class="radio-icon ion-checkmark"></i>'+
+                '<i class="radio-icon ion-checkmark positive"></i>'+
                 '</label>'+
                 '</div>'+
                 '</form>'
@@ -487,7 +487,7 @@ angular.module('ionicResearchKit',[])
                 attr.text+
                 (attr.detailText?'<p>'+attr.detailText+'</p>':'')+
                 '</div>'+
-                '<i class="radio-icon ion-checkmark"></i>'+
+                '<i class="radio-icon ion-checkmark positive"></i>'+
                 '</label>'
         }
     }

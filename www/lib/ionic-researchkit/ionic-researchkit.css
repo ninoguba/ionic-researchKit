@@ -72,6 +72,11 @@
 
 .irk-item-content {
   text-align: left;
+  font-weight: bold;
+}
+
+.irk-item-content p {
+  font-weight: normal;
 }
 
 .irk-input {
