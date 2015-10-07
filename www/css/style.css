@@ -1,3 +1,11 @@
-.center{
-     text-align:center;
+.center {
+	text-align:center;
+}
+
+button.choice-food-burger {
+	background-image: url(../img/food-burger.png) !important;
+}
+
+button.choice-food-pizza {
+	background-image: url(../img/food-pizza.png) !important;
 }

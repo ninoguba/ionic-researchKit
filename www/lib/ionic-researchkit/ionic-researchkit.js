@@ -646,7 +646,7 @@ angular.module('ionicResearchKit',[])
 })
 
 //======================================================================================
-// Usage: <irk-image-choice value="choice" text="Your choice." normal-state-image="" selected-state-image="" />
+// Usage: <irk-image-choice value="choice" text="Your choice." normal-state-image="" selected-state-image="" type="image" />
 // =====================================================================================
 .directive('irkImageChoice', function() {
     return {
@@ -655,8 +655,8 @@ angular.module('ionicResearchKit',[])
         require: '^?irkImageChoiceQuestionStep',
         template: function(elem, attr) {
             return  '<div class="col">'+
-                '<button class="button button-clear irk-icon-large icon '+attr.normalStateImage+'"></button>'+
-                '</div>'
+                '<button class="button button-clear '+(attr.type=='image'?'irk-image':'irk-icon-large icon')+' '+attr.normalStateImage+'"></button>'+
+                '</div>';
         },
         link: function(scope, element, attrs) {
             var button = element.find('button');

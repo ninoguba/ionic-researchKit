@@ -130,7 +130,7 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
 
 `<irk-value-picker-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKValuePickerAnswerFormat` classes in ResearchKit combined and includes the `id`, `title`, `text` attributes. This encompass several `<irk-picker-choice>` elements where each include the `value`, `text` attributes.
 
-`<irk-image-choice-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKImageChoiceAnswerFormat` classes in ResearchKit combined and includes the `id`, `title`, `text` attributes. This encompass several `<irk-image-choice>` elements where each include the `value`, `text`, `normal-state-image`, `selected-state-image` attributes.
+`<irk-image-choice-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKImageChoiceAnswerFormat` classes in ResearchKit combined and includes the `id`, `title`, `text` attributes. This encompass several `<irk-image-choice>` elements where each include the `value`, `text`, `type`, `normal-state-image`, `selected-state-image` attributes.
 
 `<irk-form-step>` is the equivalent of the `ORKFormStep` class in ResearchKit and includes the `id`, `title`, `text` attributes. This encompass several `<irk-form-item>` elements which are the equivalent of the `ORKFormItem` class in ResearchKit and each include the `title`, `id`, `type`, `text` attributes.
 
@@ -182,7 +182,7 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
   - [x] Value Picker Question Step directive
   - [x] Image Choice Question Step directive
     - [x] Support icons
-    - [ ] Support images
+    - [x] Support images
   - [x] Form Step directive
     - [ ] Support more answer formats
 - [ ] Consent directives
