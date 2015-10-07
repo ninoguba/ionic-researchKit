@@ -636,7 +636,7 @@ angular.module('ionicResearchKit',[])
                 '<div class="irk-spacer"></div>'+
                 '<div class="row" ng-transclude>'+
                 '</div>'+
-                '<span ng-if="$parent.formData.'+attr.id+'">{{selected.text}}</span><span class="irk-input-label" ng-if="!$parent.formData.'+attr.id+'">Tap to select.</span>'+
+                '<h5 ng-if="$parent.formData.'+attr.id+'">{{selected.text}}</h5><span class="irk-input-label" ng-if="!$parent.formData.'+attr.id+'">Tap to select.</span>'+
                 '</form>'
         },
         link: function(scope, element, attrs, controller) {
@@ -678,7 +678,7 @@ angular.module('ionicResearchKit',[])
                 button.addClass('button-positive');
 
                 //Set model
-                var step = element.parent().parent().parent().parent().parent();
+                var step = element.parent().parent().parent();
                 var stepId = step.attr('id');
                 scope.$parent.$parent.formData[stepId] = attrs.value;
                 scope.selected.text = attrs.text;
