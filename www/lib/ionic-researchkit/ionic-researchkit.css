@@ -98,3 +98,7 @@
 .irk-form-step {
   text-align: left;
 }
+
+button.irk-icon-large:before {
+    font-size: 50px !important;
+}
