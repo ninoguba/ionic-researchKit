@@ -86,6 +86,21 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
       </irk-image-choice-question-step>
     </irk-task>
 
+    <irk-task>
+      <irk-form-step id="q11" title="Your question here." text="Additional text can go here." >
+        <irk-form-item title="Your section title."></irk-form-item>
+        <irk-form-item type="text" id="firstName" text="First Name" placeholder="John"></irk-form-item>
+        <irk-form-item type="text" id="lastName" text="Last Name" placeholder="Suhr"></irk-form-item>
+        <irk-form-item title="Your section title."></irk-form-item>
+        <irk-form-item type="email" id="email" text="Email" placeholder="john@suhr.com"></irk-form-item>
+        <irk-form-item type="tel" id="phone" text="Phone" placeholder="555-555-5555"></irk-form-item>
+      </irk-form-step>
+    </irk-task>
+
+    <irk-task>
+      <irk-instruction-step id="s2" title="Your title here." text="Additional text can go here." button-text="Done" />
+    </irk-task>
+
   </irk-ordered-tasks>
 
 </ion-modal-view>
@@ -116,6 +131,8 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
 `<irk-value-picker-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKValuePickerAnswerFormat` classes in ResearchKit combined and includes the `id`, `title`, `text` attributes. This encompass several `<irk-picker-choice>` elements where each include the `value`, `text` attributes.
 
 `<irk-image-choice-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKImageChoiceAnswerFormat` classes in ResearchKit combined and includes the `id`, `title`, `text` attributes. This encompass several `<irk-image-choice>` elements where each include the `value`, `text`, `normal-state-image`, `selected-state-image` attributes.
+
+`<irk-form-step>` is the equivalent of the `ORKFormStep` class in ResearchKit and includes the `id`, `title`, `text` attributes. This encompass several `<irk-form-item>` elements which are the equivalent of the `ORKFormItem` class in ResearchKit and each include the `title`, `id`, `type`, `text` attributes.
 
 # Demo
 
@@ -166,7 +183,8 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
   - [x] Image Choice Question Step directive
     - [x] Support icons
     - [ ] Support images
-  - [ ] Form Step directive
+  - [x] Form Step directive
+    - [ ] Support more answer formats
 - [ ] Consent directives
 - [ ] Active Tasks directives
 

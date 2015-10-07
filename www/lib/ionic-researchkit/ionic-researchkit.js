@@ -717,13 +717,34 @@ angular.module('ionicResearchKit',[])
         },
         link: function(scope, element, attrs, controller) {
             element.addClass('irk-step irk-form-step');
-
-            var form = element.find('form');
-            form.on("change", function() {
-                scope.$parent.dirty();
-            });
         }
     }
 })
 
-
+//======================================================================================
+// Usage: <irk-form-item title="Your section title." id="q1" text="Your choice." type="text/number/tel/email/..." placeholder="Your placeholder." optional="false"></irk-form-item>
+// =====================================================================================
+.directive('irkFormItem', function() {
+    return {
+        restrict: 'E',
+        replace: true,
+        require: '^?irkFormStep',
+        template: function(elem, attr) {
+            if (attr.title)
+            {
+                //Section divider will only have the title attribute
+                return '<div class="item item-divider">'+attr.title+'</div>';
+            }
+            else
+            {
+                //Form input types (currently only supports HTML input types)
+                return '<label class="item item-input">'+
+                    '<span class="input-label">'+attr.text+'</span>'+
+                    '<input type="'+attr.type+'" placeholder="'+attr.placeholder+'" ng-model="$parent.$parent.formData.'+elem.parent().attr("id")+'.'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.$parent.dirty()">'+
+                    '</label>';
+            }
+        },
+        link: function(scope, element, attrs) {
+        }
+    }
+})
