@@ -366,8 +366,7 @@ angular.module('ionicResearchKit',[])
                 '<h3>'+attr.title+'</h3>'+
                 (attr.text ? '<p>'+attr.text+'</p>' : '')+
                 '</div>'+
-                '<div class="irk-offcentered-container"><div class="irk-offcentered-content">'+
-                ''+
+                '<div class="irk-spacer"></div>'+
                 '<h4>{{$parent.formData.'+attr.id+' || \'&nbsp;\'}}</h4>'+
                 '<div class="range">'+
                 attr.min+
@@ -376,7 +375,6 @@ angular.module('ionicResearchKit',[])
                 attr.max+
                 (attr.maxText?'<br>'+attr.maxText:'')+
                 '</div>'+
-                '</div></div>'+
                 '</form>'
         },
         link: function(scope, element, attrs, controller) {
@@ -397,7 +395,7 @@ angular.module('ionicResearchKit',[])
                 '<h3>'+attr.title+'</h3>'+
                 (attr.text ? '<p>'+attr.text+'</p>' : '')+
                 '</div>'+
-                '<div class="irk-offcentered-container"><div class="irk-offcentered-content">'+
+                '<div class="irk-spacer"></div>'+
                 '<div class="list">'+
                 '<label class="item item-radio">'+
                 '<input type="radio" name="'+attr.id+'" value="'+(attr.trueValue?attr.trueValue:'true')+'" ng-model="$parent.formData.'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.dirty()">'+
@@ -410,7 +408,6 @@ angular.module('ionicResearchKit',[])
                 '<i class="radio-icon ion-checkmark"></i>'+
                 '</label>'+
                 '</div>'+
-                '</div></div>'+
                 '</form>'
         },
         link: function(scope, element, attrs, controller) {
@@ -431,7 +428,7 @@ angular.module('ionicResearchKit',[])
                 '<h3>'+attr.title+'</h3>'+
                 (attr.text ? '<p>'+attr.text+'</p>' : '')+
                 '</div>'+
-                '<div class="irk-offcentered-container"><div class="irk-offcentered-content">'+
+                '<div class="irk-spacer"></div>'+
                 '<div class="list">'+
                 '<label class="item item-input">'+
                 (attr.multipleLines=="false"
@@ -440,7 +437,6 @@ angular.module('ionicResearchKit',[])
                 )+
                 '</label>'+
                 '</div>'+
-                '</div></div>'+
                 '</form>'
         },
         link: function(scope, element, attrs, controller) {
@@ -462,10 +458,9 @@ angular.module('ionicResearchKit',[])
                 '<h3>'+attr.title+'</h3>'+
                 (attr.text ? '<p>'+attr.text+'</p>' : '')+
                 '</div>'+
-                '<div class="irk-offcentered-container"><div class="irk-offcentered-content">'+
+                '<div class="irk-spacer"></div>'+
                 '<div class="list" ng-transclude>'+
                 '</div>'+
-                '</div></div>'+
                 '</form>'
         },
         link: function(scope, element, attrs, controller) {
@@ -510,14 +505,13 @@ angular.module('ionicResearchKit',[])
                 '<h3>'+attr.title+'</h3>'+
                 (attr.text ? '<p>'+attr.text+'</p>' : '')+
                 '</div>'+
-                '<div class="irk-offcentered-container"><div class="irk-offcentered-content">'+
+                '<div class="irk-spacer"></div>'+
                 '<div class="list">'+
                 '<label class="item item-input">'+
                 '<input type="number" placeholder="'+(attr.placeholder?attr.placeholder:'')+'" name="'+attr.id+'" '+(attr.min?'min="'+attr.min+'"':'')+' '+(attr.max?'max="'+attr.max+'"':'')+' ng-model="$parent.formData.'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.dirty()">'+
                 (attr.unit && attr.unit.length>0?'<span class="input-label">'+attr.unit+'</span>':'')+
                 '</label>'+
                 '</div>'+
-                '</div></div>'+
                 '</form>'
         },
         link: function(scope, element, attrs, controller) {
@@ -538,14 +532,13 @@ angular.module('ionicResearchKit',[])
                 '<h3>'+attr.title+'</h3>'+
                 (attr.text ? '<p>'+attr.text+'</p>' : '')+
                 '</div>'+
-                '<div class="irk-offcentered-container"><div class="irk-offcentered-content">'+
+                '<div class="irk-spacer"></div>'+
                 '<div class="list">'+
                 '<label class="item item-input">'+
                 '<span class="input-label irk-input-label" ng-if="!$parent.formData.'+attr.id+'">Tap to select date.</span>'+
                 '<input class="irk-input" type="date" name="'+attr.id+'" ng-model="$parent.formData.'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.dirty()">'+
                 '</label>'+
                 '</div>'+
-                '</div></div>'+
                 '</form>'
         },
         link: function(scope, element, attrs, controller) {
@@ -566,14 +559,13 @@ angular.module('ionicResearchKit',[])
                 '<h3>'+attr.title+'</h3>'+
                 (attr.text ? '<p>'+attr.text+'</p>' : '')+
                 '</div>'+
-                '<div class="irk-offcentered-container"><div class="irk-offcentered-content">'+
+                '<div class="irk-spacer"></div>'+
                 '<div class="list">'+
                 '<label class="item item-input">'+
                 '<span class="input-label irk-input-label" ng-if="!$parent.formData.'+attr.id+'">Tap to select time.</span>'+
                 '<input class="irk-input" type="time" name="'+attr.id+'" ng-model="$parent.formData.'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.dirty()">'+
                 '</label>'+
                 '</div>'+
-                '</div></div>'+
                 '</form>'
         },
         link: function(scope, element, attrs, controller) {
@@ -595,7 +587,7 @@ angular.module('ionicResearchKit',[])
                 '<h3>'+attr.title+'</h3>'+
                 (attr.text ? '<p>'+attr.text+'</p>' : '')+
                 '</div>'+
-                '<div class="irk-offcentered-container"><div class="irk-offcentered-content">'+
+                '<div class="irk-spacer"></div>'+
                 '<div class="list">'+
                 '<label class="item item-input item-select irk-item-select">'+
                 '<span class="input-label irk-input-label">{{(!$parent.formData.'+attr.id+'?\'Tap to select answer.\':\'&nbsp;\')}}</span>'+
@@ -603,7 +595,6 @@ angular.module('ionicResearchKit',[])
                 '</select>'+
                 '</label>'+
                 '</div>'+
-                '</div></div>'+
                 '</form>'
         },
         link: function(scope, element, attrs, controller) {
@@ -642,11 +633,10 @@ angular.module('ionicResearchKit',[])
                 '<h3>'+attr.title+'</h3>'+
                 (attr.text ? '<p>'+attr.text+'</p>' : '')+
                 '</div>'+
-                '<div class="irk-offcentered-container"><div class="irk-offcentered-content">'+
+                '<div class="irk-spacer"></div>'+
                 '<div class="row" ng-transclude>'+
                 '</div>'+
                 '<span ng-if="$parent.formData.'+attr.id+'">{{selected.text}}</span><span class="irk-input-label" ng-if="!$parent.formData.'+attr.id+'">Tap to select.</span>'+
-                '</div></div>'+
                 '</form>'
         },
         link: function(scope, element, attrs, controller) {
@@ -711,10 +701,9 @@ angular.module('ionicResearchKit',[])
                 '<h3>'+attr.title+'</h3>'+
                 (attr.text ? '<p>'+attr.text+'</p>' : '')+
                 '</div>'+
-                '<div class="irk-offcentered-container"><div class="irk-offcentered-content">'+
+                '<div class="irk-spacer"></div>'+
                 '<div class="list" ng-transclude>'+
                 '</div>'+
-                '</div></div>'+
                 '</form>'
         },
         link: function(scope, element, attrs, controller) {

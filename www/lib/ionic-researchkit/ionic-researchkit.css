@@ -29,6 +29,10 @@
   text-align: center;
 }
 
+.irk-spacer {
+  height: 15px;
+}
+
 .irk-modal {
   width: 100% !important;
   height: 100%;
