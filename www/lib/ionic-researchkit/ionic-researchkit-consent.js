@@ -118,6 +118,11 @@ angular.module('ionicResearchKitConsent',[])
                     $scope.doNext();
                 };
 
+                $scope.doShare = function(id,choice) {
+                    $scope.formData[id] = choice;
+                    $scope.doNext();
+                }
+
                 $scope.doNext = function() {
                     $scope.doSave();
 
@@ -169,7 +174,7 @@ angular.module('ionicResearchKitConsent',[])
 
                 //This is called to capture the results
                 $scope.doSave = function() {
-                    //irkResults.addResult(slider.currentIndex(), $scope.formData);
+                    irkResults.addResult(slider.currentIndex(), $scope.formData);
                 }; 
 
                 $scope.$on("slideBox.slideChanged", function(e, index) {
@@ -253,6 +258,7 @@ angular.module('ionicResearchKitConsent',[])
 .directive('irkVisualConsentStep', function() {
     return {
         restrict: 'E',
+        transclude: true,
         template: function(elem, attr) {
             var consentType = attr.type;
             var consentTitle = '';
@@ -329,6 +335,7 @@ angular.module('ionicResearchKitConsent',[])
 .directive('irkConsentSharingStep', function() {
     return {
         restrict: 'E',
+        transclude: true,
         template: function(elem, attr) {
             return  '<div class="irk-centered">'+
                 '<h2>Sharing Options</h2>'+
@@ -337,11 +344,11 @@ angular.module('ionicResearchKitConsent',[])
                 '<a class="button button-clear button-positive irk-learn-more">Learn more about data sharing</a>'+
                 '<div class="irk-spacer"></div>'+
                 '<div class="list">'+
-                '<a class="item item-text-wrap item-icon-right irk-item-content" ng-click="$parent.doNext()">'+
+                '<a class="item item-text-wrap item-icon-right irk-item-content" ng-click="$parent.doShare(\''+attr.id+'\',\''+attr.investigatorLongValue+'\')">'+
                 'Share my data with '+attr.investigatorLongDescription+
                 '<i class="icon ion-ios-arrow-right positive"></i>'+
                 '</a>'+
-                '<a class="item item-text-wrap item-icon-right irk-item-content" ng-click="$parent.doNext()">'+
+                '<a class="item item-text-wrap item-icon-right irk-item-content" ng-click="$parent.doShare(\''+attr.id+'\',\''+attr.investigatorShortValue+'\')">'+
                 'Share my data with '+attr.investigatorShortDescription+
                 '<i class="icon ion-ios-arrow-right positive"></i>'+
                 '</a>'+

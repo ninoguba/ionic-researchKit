@@ -48,7 +48,7 @@ angular.module('ionicResearchKit',[])
         }
         else
         {
-            var step = angular.element(document.querySelectorAll('irk-task.irk-slider-slide')[index].querySelector('.irk-step'));
+            var step = angular.element(document.querySelectorAll('.irk-slider-slide')[index].querySelector('.irk-step'));
             var stepId = step.attr('id');
             var stepType = step.prop('tagName');
             var stepValue = formData[stepId];
@@ -56,7 +56,7 @@ angular.module('ionicResearchKit',[])
 
             results.childResults[index].id = stepId;
             results.childResults[index].type = stepType;
-            if (stepType != 'IRK-INSTRUCTION-STEP')
+            if (stepType != 'IRK-INSTRUCTION-STEP' && stepType != 'IRK-VISUAL-CONSENT-STEP')
                 results.childResults[index].answer = (stepValue?stepValue:null);
             if (stepType == 'IRK-NUMERIC-QUESTION-STEP')
                 results.childResults[index].unit = (stepUnit?stepUnit:null);
