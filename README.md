@@ -186,6 +186,9 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
   - [x] Form Step directive
     - [ ] Support more answer formats
 - [ ] Consent directives
+  - [ ] Visual Consent
+  - [ ] Consent Review
+  - [ ] Consent Sharing
 - [ ] Active Tasks directives
 
 License

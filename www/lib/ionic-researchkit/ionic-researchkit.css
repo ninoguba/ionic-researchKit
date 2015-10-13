@@ -56,6 +56,11 @@
   background-image: none !important;
 }
 
+.irk-bottom-bar-consent {
+  height: 60px !important;
+  padding-bottom: 18px !important;
+}
+
 .irk-bottom-button {
   margin-top: 0px !important;
   margin-bottom: 0px !important;
@@ -63,6 +68,12 @@
   margin-right: auto;
   width: 90% !important;
   font-size: 17px !important;
+}
+
+.irk-learn-more {
+  font-size: 12px;
+  line-height: 12px;
+  width: 75%;
 }
 
 .irk-instruction-button {
@@ -104,5 +115,5 @@ button.irk-icon-large:before {
 }
 
 button.irk-image:before {
-  background-size: cover !important;
+  background-size: contain !important;
 }
