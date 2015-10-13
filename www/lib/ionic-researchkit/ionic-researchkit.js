@@ -344,7 +344,7 @@ angular.module('ionicResearchKit',[])
                 '<h2>'+attr.title+'</h2>'+
                 (attr.text ? '<p>'+attr.text+'</p>' : '')+
                 (attr.link ? '<a class="button button-clear button-positive irk-learn-more" href="'+attr.link+'" target="_system">'+(attr.linkText ? attr.linkText : 'Learn more')+'</a>' : '')+
-                '<br><br>'+
+                '<div class="irk-spacer"></div>'+
                 '<button class="button button-outline button-positive irk-instruction-button" ng-click="$parent.doNext()">'+(attr.buttonText ? attr.buttonText : 'Get Started')+'</button>'+
                 '</div></div>'
         },

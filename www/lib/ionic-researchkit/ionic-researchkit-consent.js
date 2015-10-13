@@ -308,11 +308,12 @@ angular.module('ionicResearchKitConsent',[])
             }
 
             return 	'<div class="irk-offcentered-container"><div class="irk-offcentered-content">'+
+                '<div class="irk-spacer"></div>'+
                 '<div class="item irk-consent-image '+consentImageClass+' positive"></div>'+
                 '<h2>'+consentTitle+'</h2>'+
                 '<p>'+attr.summary+'</p>'+
                 '<a class="button button-clear button-positive irk-learn-more">'+consentText+'</a>'+
-                '<br><br>'+
+                '<div class="irk-spacer"></div>'+
                 (consentType=='overview'?'<button class="button button-outline button-positive irk-instruction-button" ng-click="$parent.doNext()">Get Started</button>':'')+
                 '</div></div>'
         },
