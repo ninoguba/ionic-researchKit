@@ -399,13 +399,17 @@ angular.module('ionicResearchKit',[])
                 '<div class="list">'+
                 '<label class="item item-radio">'+
                 '<input type="radio" name="'+attr.id+'" value="'+(attr.trueValue?attr.trueValue:'true')+'" ng-model="$parent.formData.'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.dirty()">'+
-                '<div class="item-content irk-item-content">'+(attr.trueText?attr.trueText:(attr.trueValue?attr.trueValue:'True'))+'</div>'+
-                '<i class="radio-icon ion-checkmark positive"></i>'+
+                '<div class="radio-content">' +
+                '<div class="item-content disable-pointer-events irk-item-content">'+(attr.trueText?attr.trueText:(attr.trueValue?attr.trueValue:'True'))+'</div>'+
+                '<i class="radio-icon disable-pointer-events icon ion-checkmark positive"></i>'+
+                '</div>' +
                 '</label>'+
                 '<label class="item item-radio">'+
                 '<input type="radio" name="'+attr.id+'" value="'+(attr.falseValue?attr.falseValue:'false')+'" ng-model="$parent.formData.'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.dirty()">'+
-                '<div class="item-content irk-item-content">'+(attr.falseText?attr.falseText:(attr.falseValue?attr.falseValue:'False'))+'</div>'+
-                '<i class="radio-icon ion-checkmark positive"></i>'+
+                '<div class="radio-content">' +
+                '<div class="item-content disable-pointer-events irk-item-content">'+(attr.falseText?attr.falseText:(attr.falseValue?attr.falseValue:'False'))+'</div>'+
+                '<i class="radio-icon disable-pointer-events icon ion-checkmark positive"></i>'+
+                '</div>' +
                 '</label>'+
                 '</div>'+
                 '</form>'
@@ -483,11 +487,13 @@ angular.module('ionicResearchKit',[])
                 :
                 '<input type="radio" name="'+elem.parent().attr("id")+'" value="'+attr.value+'" ng-model="$parent.$parent.formData.'+elem.parent().attr("id")+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.$parent.dirty()">'
                 )+
-                '<div class="item-content irk-item-content">'+
+                '<div class="radio-content">' +
+                '<div class="item-content disable-pointer-events irk-item-content">'+
                 attr.text+
                 (attr.detailText?'<p>'+attr.detailText+'</p>':'')+
                 '</div>'+
-                '<i class="radio-icon ion-checkmark positive"></i>'+
+                '<i class="radio-icon disable-pointer-events icon ion-checkmark positive"></i>'+
+                '</div>' +
                 '</label>'
         }
     }

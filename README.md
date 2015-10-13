@@ -168,7 +168,7 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
     - [ ] Support step bars
     - [ ] Support vertical orientation
   - [x] Boolean Question Step directive
-    - [ ] Apply radio fix (iOS9)
+    - [x] Apply radio fix (iOS9)
   - [x] Text Question Step directive
     - [x] Multi lines
     - [x] Single line
