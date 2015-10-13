@@ -241,7 +241,7 @@ angular.module('ionicResearchKitConsent',[])
                 var step = angular.element(document.querySelectorAll('irk-consent-task.irk-slider-slide')[index].querySelector('.irk-step'));
                 var stepType = step.prop('tagName');
                 var consentType = step.attr('type');
-                element.toggleClass('ng-hide', stepType=='IRK-VISUAL-CONSENT-STEP' && consentType=='overview');
+                element.toggleClass('ng-hide', (stepType=='IRK-VISUAL-CONSENT-STEP' && consentType=='overview') || stepType=='IRK-CONSENT-SHARING-STEP') ;
             });
         }
     }
@@ -319,6 +319,37 @@ angular.module('ionicResearchKitConsent',[])
         link: function(scope, element, attrs, controller) {
             element.addClass('irk-step');
         }        
+    }
+})
+
+//======================================================================================
+// Usage: 
+// =====================================================================================
+.directive('irkConsentSharingStep', function() {
+    return {
+        restrict: 'E',
+        template: function(elem, attr) {
+            return  '<div class="irk-centered">'+
+                '<h2>Sharing Options</h2>'+
+                '<p>'+attr.summary+'</p>'+
+                '<p>Sharing your coded study data more broadly (without information such as your name) may benefit this and future research.</p>'+
+                '<a class="button button-clear button-positive irk-learn-more">Learn more about data sharing</a>'+
+                '<div class="irk-spacer"></div>'+
+                '<div class="list">'+
+                '<a class="item item-text-wrap item-icon-right irk-item-content" ng-click="$parent.doNext()">'+
+                'Share my data with '+attr.investigatorLongDescription+
+                '<i class="icon ion-ios-arrow-right positive"></i>'+
+                '</a>'+
+                '<a class="item item-text-wrap item-icon-right irk-item-content" ng-click="$parent.doNext()">'+
+                'Share my data with '+attr.investigatorShortDescription+
+                '<i class="icon ion-ios-arrow-right positive"></i>'+
+                '</a>'+
+                '</div>'+
+                '</div>'
+        },
+        link: function(scope, element, attrs, controller) {
+            element.addClass('irk-step');
+        }
     }
 })
 
