@@ -25,7 +25,7 @@ angular.module('starter.controllers', [])
 
   //Start modal on launch
   //$scope.openModal();
-  $scope.openModalConsent();
+  //$scope.openModalConsent();
 
   $scope.closeModal = function() {
     $scope.modal.remove();

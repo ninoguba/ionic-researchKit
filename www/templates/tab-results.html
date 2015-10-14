@@ -1,7 +1,10 @@
 <ion-view cache-view="false" view-title="Results">
   <ion-content>
   	<div class="card">
-  		<div class="item item-text-wrap">
+  		<div class="item item-text-wrap" ng-if="!results">
+  			Launch the sample Survey and Consent to see the results.
+  		</div>
+  		<div class="item item-text-wrap" ng-if="results">
   			<pre>
     			{{results | json}}
     		</pre>
