@@ -42,3 +42,7 @@
 .irk-consent-07 {
 	background-image: url(resources/consent_07.gif);
 }
+
+.irk-learn-more-content {
+	display: none;
+}

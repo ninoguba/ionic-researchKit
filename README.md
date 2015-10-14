@@ -194,7 +194,7 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
     - [ ] Fix: push up Next/Skip buttons when keyboard is displayed on iOS
 - [ ] Consent directives
   - [x] Visual Consent
-    - [ ] Learn More popup
+    - [x] Learn More popup
   - [x] Consent Sharing
   - [ ] Consent Review
 - [ ] Active Tasks directives

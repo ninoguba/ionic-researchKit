@@ -25,8 +25,9 @@ angular.module('ionicResearchKitConsent',[])
     '$ionicScrollDelegate',
     '$ionicNavBarDelegate',
     '$ionicActionSheet',
+    '$ionicModal',
     'irkResults',
-    function($rootScope, $timeout, $compile, $ionicSlideBoxDelegate, $ionicHistory, $ionicScrollDelegate, $ionicNavBarDelegate, $ionicActionSheet, irkResults) {
+    function($rootScope, $timeout, $compile, $ionicSlideBoxDelegate, $ionicHistory, $ionicScrollDelegate, $ionicNavBarDelegate, $ionicActionSheet, $ionicModal, irkResults) {
         return {
             restrict: 'E',
             replace: true,
@@ -113,9 +114,32 @@ angular.module('ionicResearchKitConsent',[])
                     $scope.doNext();
                 };
 
-                $scope.doSkip = function() {
-                    console.log('Clicked skip');
-                    $scope.doNext();
+                $scope.showLearnMore = function() {
+                    var index = $scope.currentSlide;
+                    var step = angular.element(document.querySelectorAll('.irk-slider-slide')[index].querySelector('.irk-learn-more-content'));
+                    var stepContent = step.html();
+
+                    $scope.learnmore = $ionicModal.fromTemplate(
+                        '<ion-modal-view class="irk-modal">'+
+                        '<ion-header-bar>'+
+                        '<h1 class="title">Learn More</h1>'+
+                        '<div class="buttons">'+
+                        '<button class="button button-clear button-positive" ng-click="hideLearnMore()">Done</button>'+
+                        '</div>'+
+                        '</ion-header-bar>'+
+                        '<ion-content class="padding">'+
+                        stepContent+
+                        '</ion-content>'+
+                        '</ion-modal-view>'
+                    ,{
+                        scope: $scope,
+                        animation: 'slide-in-up'
+                    });
+                    $scope.learnmore.show();
+                };
+
+                $scope.hideLearnMore = function() {
+                    $scope.learnmore.remove();
                 };
 
                 $scope.doShare = function(id,choice) {
@@ -318,7 +342,9 @@ angular.module('ionicResearchKitConsent',[])
                 '<div class="item irk-consent-image '+consentImageClass+' positive"></div>'+
                 '<h2>'+consentTitle+'</h2>'+
                 '<p>'+attr.summary+'</p>'+
-                '<a class="button button-clear button-positive irk-learn-more">'+consentText+'</a>'+
+                '<a class="button button-clear button-positive irk-learn-more" ng-click="$parent.showLearnMore()">'+consentText+'</a>'+
+                '<div class="irk-learn-more-content" ng-transclude>'+
+                '</div>'+
                 '<div class="irk-spacer"></div>'+
                 (consentType=='overview'?'<button class="button button-outline button-positive irk-instruction-button" ng-click="$parent.doNext()">Get Started</button>':'')+
                 '</div></div>'
@@ -341,7 +367,9 @@ angular.module('ionicResearchKitConsent',[])
                 '<h2>Sharing Options</h2>'+
                 '<p>'+attr.summary+'</p>'+
                 '<p>Sharing your coded study data more broadly (without information such as your name) may benefit this and future research.</p>'+
-                '<a class="button button-clear button-positive irk-learn-more">Learn more about data sharing</a>'+
+                '<a class="button button-clear button-positive irk-learn-more" ng-click="$parent.showLearnMore()">Learn more about data sharing</a>'+
+                '<div class="irk-learn-more-content" ng-transclude>'+
+                '</div>'+
                 '<div class="irk-spacer"></div>'+
                 '<div class="list">'+
                 '<a class="item item-text-wrap item-icon-right irk-item-content" ng-click="$parent.doShare(\''+attr.id+'\',\''+attr.investigatorLongValue+'\')">'+
