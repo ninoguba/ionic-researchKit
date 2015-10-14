@@ -160,7 +160,7 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
   - [x] Output results in JSON
   - [x] Capture all result metadata
   - [ ] Collect results into LocalStorage
-- [ ] Survey directives
+- [x] Survey directives
   - [x] Instruction Step directive
     - [x] Show Get Started button
     - [x] Get Started button shows next step
@@ -197,7 +197,13 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
     - [x] Learn More popup
   - [x] Consent Sharing
   - [ ] Consent Review
+    - [ ] Signature Capture
+    - [ ] PDF Generation
 - [ ] Active Tasks directives
+- [ ] Integrations
+  - [ ] HealthKit
+  - [ ] Google Fit
+  - [ ] Samsung S Health
 
 License
 =======
