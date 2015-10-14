@@ -104,11 +104,41 @@
     &lt;/irk-task&gt;
 
     &lt;irk-task&gt;
-      &lt;irk-date-question-step id="q6" title="Your question here." text="Additional text can go here." /&gt;
+      &lt;irk-date-question-step id="q7" title="Your question here." text="Additional text can go here." /&gt;
     &lt;/irk-task&gt;
 
     &lt;irk-task&gt;
-      &lt;irk-time-question-step id="q6" title="Your question here." text="Additional text can go here." /&gt;
+      &lt;irk-time-question-step id="q8" title="Your question here." text="Additional text can go here." /&gt;
+    &lt;/irk-task&gt;
+
+    &lt;irk-task&gt;
+      &lt;irk-value-picker-question-step id="q9" title="Your question here." text="Additional text can go here." &gt;
+        &lt;irk-picker-choice text="Choice 1" value="1"&gt;&lt;/irk-picker-choice&gt;
+        &lt;irk-picker-choice text="Choice 2" value="2"&gt;&lt;/irk-picker-choice&gt;
+        &lt;irk-picker-choice text="Choice 3" value="3"&gt;&lt;/irk-picker-choice&gt;
+      &lt;/irk-value-picker-question-step&gt;
+    &lt;/irk-task&gt;
+
+    &lt;irk-task&gt;
+      &lt;irk-image-choice-question-step id="q10" title="Your question here." text="Additional text can go here." &gt;
+        &lt;irk-image-choice text="Choice 1" value="1" normal-state-image="ion-sad-outline" selected-state-image="ion-sad"&gt;&lt;/irk-image-choice&gt;
+        &lt;irk-image-choice text="Choice 2" value="2" normal-state-image="ion-happy-outline" selected-state-image="ion-happy"&gt;&lt;/irk-image-choice&gt;
+      &lt;/irk-image-choice-question-step&gt;
+    &lt;/irk-task&gt;
+
+    &lt;irk-task&gt;
+      &lt;irk-form-step id="q11" title="Your question here." text="Additional text can go here." &gt;
+        &lt;irk-form-item title="Your section title."&gt;&lt;/irk-form-item&gt;
+        &lt;irk-form-item type="text" id="firstName" text="First Name" placeholder="John"&gt;&lt;/irk-form-item&gt;
+        &lt;irk-form-item type="text" id="lastName" text="Last Name" placeholder="Suhr"&gt;&lt;/irk-form-item&gt;
+        &lt;irk-form-item title="Your section title."&gt;&lt;/irk-form-item&gt;
+        &lt;irk-form-item type="email" id="email" text="Email" placeholder="john@suhr.com"&gt;&lt;/irk-form-item&gt;
+        &lt;irk-form-item type="tel" id="phone" text="Phone" placeholder="555-555-5555"&gt;&lt;/irk-form-item&gt;
+      &lt;/irk-form-step&gt;
+    &lt;/irk-task&gt;
+
+    &lt;irk-task&gt;
+      &lt;irk-instruction-step id="s2" title="Your title here." text="Additional text can go here." button-text="Done" /&gt;
     &lt;/irk-task&gt;
 
   &lt;/irk-ordered-tasks&gt;
@@ -125,7 +155,7 @@
 
 <p><code>&lt;irk-instruction-step&gt;</code> is the equivalent of the <code>ORKInstructionStep</code> class in ResearchKit and includes the <code>id</code>, <code>title</code> and <code>text</code> attributes.</p>
 
-<p><code>&lt;irk-scale-question-step&gt;</code> is the equivalent of the <code>ORKQuestionStep</code> and <code>ORKScaleAnswerFormat</code> classes in ResearchKit combined and includes the <code>id</code>, <code>title</code>, <code>text</code>, <code>min</code>, <code>max</code>, <code>step</code>, and <code>value</code> attributes.</p>
+<p><code>&lt;irk-scale-question-step&gt;</code> is the equivalent of the <code>ORKQuestionStep</code> and <code>ORKScaleAnswerFormat</code> classes in ResearchKit combined and includes the <code>id</code>, <code>title</code>, <code>text</code>, <code>min</code>, <code>max</code>, <code>step</code>, <code>value</code>, <code>min-text</code>, and <code>max-text</code> attributes.</p>
 
 <p><code>&lt;irk-boolean-question-step&gt;</code> is the equivalent of the <code>ORKQuestionStep</code> and <code>ORKBooleanAnswerFormat</code> classes in ResearchKit combined and includes the <code>id</code>, <code>title</code>, <code>text</code>, <code>trueText</code>, and <code>falseText</code> attributes.</p>
 
@@ -139,12 +169,26 @@
 
 <p><code>&lt;irk-time-question-step&gt;</code> is the equivalent of the <code>ORKQuestionStep</code> and <code>ORKTimeOfDayAnswerFormat</code> classes in ResearchKit combined and includes the <code>id</code>, <code>title</code>, <code>text</code> attributes.</p>
 
-<p><em>These are still a work in progress and I plan to have equivalent directives to all classes in ResearchKit.</em></p>
+<p><code>&lt;irk-value-picker-question-step&gt;</code> is the equivalent of the <code>ORKQuestionStep</code> and <code>ORKValuePickerAnswerFormat</code> classes in ResearchKit combined and includes the <code>id</code>, <code>title</code>, <code>text</code> attributes. This encompass several <code>&lt;irk-picker-choice&gt;</code> elements where each include the <code>value</code>, <code>text</code> attributes.</p>
+
+<p><code>&lt;irk-image-choice-question-step&gt;</code> is the equivalent of the <code>ORKQuestionStep</code> and <code>ORKImageChoiceAnswerFormat</code> classes in ResearchKit combined and includes the <code>id</code>, <code>title</code>, <code>text</code> attributes. This encompass several <code>&lt;irk-image-choice&gt;</code> elements where each include the <code>value</code>, <code>text</code>, <code>type</code>, <code>normal-state-image</code>, <code>selected-state-image</code> attributes.</p>
+
+<p><code>&lt;irk-form-step&gt;</code> is the equivalent of the <code>ORKFormStep</code> class in ResearchKit and includes the <code>id</code>, <code>title</code>, <code>text</code> attributes. This encompass several <code>&lt;irk-form-item&gt;</code> elements which are the equivalent of the <code>ORKFormItem</code> class in ResearchKit and each include the <code>title</code>, <code>id</code>, <code>type</code>, <code>text</code> attributes.</p>
 
 <h1>
 <a id="demo" class="anchor" href="#demo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Demo</h1>
 
-<p><a href="https://youtu.be/-NLjgpvtHK0"><img src="https://cloud.githubusercontent.com/assets/4361804/9769406/dff8d760-56de-11e5-9a08-b6d2f82ad894.gif" alt="App demo"></a></p>
+<h2>
+<a id="survey" class="anchor" href="#survey" aria-hidden="true"><span class="octicon octicon-link"></span></a>Survey</h2>
+
+<p><img src="https://cloud.githubusercontent.com/assets/4361804/10489873/9c77f440-7253-11e5-951c-5826a767d0f6.gif" alt="Survey demo"></p>
+
+<h2>
+<a id="consent" class="anchor" href="#consent" aria-hidden="true"><span class="octicon octicon-link"></span></a>Consent</h2>
+
+<p><img src="https://cloud.githubusercontent.com/assets/4361804/10489872/9c75d2fa-7253-11e5-91fb-1a57fae1b704.gif" alt="Consent demo"></p>
+
+<p><em>Click <a href="https://youtu.be/-NLjgpvtHK0">here</a> to watch app demo on YouTube.</em></p>
 
 <h1>
 <a id="roadmap" class="anchor" href="#roadmap" aria-hidden="true"><span class="octicon octicon-link"></span></a>Roadmap</h1>
@@ -188,7 +232,7 @@
 <li>[x] Scale Question Step directive
 
 <ul>
-<li>[ ] Support min/max text description</li>
+<li>[x] Support min/max text description</li>
 <li>[ ] Support step bars</li>
 <li>[ ] Support vertical orientation</li>
 </ul>
@@ -196,7 +240,7 @@
 <li>[x] Boolean Question Step directive
 
 <ul>
-<li>[ ] Apply radio fix (iOS9)</li>
+<li>[x] Apply radio fix (iOS9)</li>
 </ul>
 </li>
 <li>[x] Text Question Step directive
@@ -217,14 +261,49 @@
 <li>[x] Date Question Step directive</li>
 <li>[x] Time Question Step directive</li>
 <li>[ ] Time Interval Question Step directive</li>
-<li>[ ] Value Picker Question Step directive</li>
-<li>[ ] Image Choice Question Step directive</li>
-<li>[ ] Form Step directive</li>
+<li>[x] Value Picker Question Step directive</li>
+<li>[x] Image Choice Question Step directive
+
+<ul>
+<li>[x] Support icons</li>
+<li>[x] Support images</li>
 </ul>
 </li>
-<li>[ ] Consent directives</li>
+<li>[x] Form Step directive
+
+<ul>
+<li>[ ] Support more answer formats</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>[ ] Consent directives
+
+<ul>
+<li>[ ] Visual Consent</li>
+<li>[ ] Consent Review</li>
+<li>[ ] Consent Sharing</li>
+</ul>
+</li>
 <li>[ ] Active Tasks directives</li>
 </ul>
+
+<h1>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h1>
+
+<p>The source in the Ionic-ResearchKit repository is made available under the
+following license unless another license is explicitly identified:</p>
+
+<pre><code>The MIT License (MIT)
+
+Copyright (c) 2015 Nino Guba
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+</code></pre>
         </section>
 
         <aside id="sidebar">
