@@ -351,6 +351,44 @@ angular.module('ionicResearchKitConsent',[])
         },
         link: function(scope, element, attrs, controller) {
             element.addClass('irk-step');
+
+            scope.$on("slideBox.slideChanged", function(e, index, count) {
+
+                //Reanimate GIF image
+                var consent = angular.element(document.querySelectorAll('.irk-slider-slide')[index].querySelector('.irk-step'));
+                var consentType = consent.attr('type');
+                var consentImageClass = '';
+
+                switch (consentType) {
+                    case 'data-gathering':
+                        consentImageClass = 'consent_01.gif';
+                        break;
+                    case 'privacy':
+                        consentImageClass = 'consent_02.gif';
+                        break;
+                    case 'data-use':
+                        consentImageClass = 'consent_03.gif';
+                        break;
+                    case 'time-commitment':
+                        consentImageClass = 'consent_04.gif';
+                        break;
+                    case 'study-survey':
+                        consentImageClass = 'consent_05.gif';
+                        break;
+                    case 'study-tasks':
+                        consentImageClass = 'consent_06.gif';
+                        break;
+                    case 'withdrawing':
+                        consentImageClass = 'consent_07.gif';
+                        break;
+                }
+
+                if (consentImageClass != '')
+                {
+                    var image = angular.element(document.querySelectorAll('.irk-slider-slide')[index].querySelector('.irk-consent-image'));
+                    image.css('background-image', 'url(lib/ionic-researchkit/resources/'+consentImageClass+'?x='+Math.random()+')');
+                }
+            });            
         }        
     }
 })
