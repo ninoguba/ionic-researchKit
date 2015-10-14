@@ -176,6 +176,7 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
   - [x] Text Question Step directive
     - [x] Multi lines
     - [x] Single line
+    - [ ] Fix: push up Next/Skip buttons when keyboard is displayed on iOS
   - [x] Text Choice Question Step directive
     - [x] Single choice
     - [x] Multiple choice
@@ -189,10 +190,13 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
     - [x] Support images
   - [x] Form Step directive
     - [ ] Support more answer formats
+    - [ ] Fix: keep inputs in view when keyboard is displayed on iOS
+    - [ ] Fix: push up Next/Skip buttons when keyboard is displayed on iOS
 - [ ] Consent directives
-  - [ ] Visual Consent
+  - [x] Visual Consent
+    - [ ] Learn More popup
+  - [x] Consent Sharing
   - [ ] Consent Review
-  - [ ] Consent Sharing
 - [ ] Active Tasks directives
 
 License
