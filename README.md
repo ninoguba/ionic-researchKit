@@ -140,7 +140,7 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
 ![Survey demo](https://cloud.githubusercontent.com/assets/4361804/10489873/9c77f440-7253-11e5-951c-5826a767d0f6.gif)
 
 ## Consent
-![Consent demo](https://cloud.githubusercontent.com/assets/4361804/10491985/4c1619f4-725e-11e5-9a6c-8cb0cc60cfb5.gif)
+![Consent demo](https://cloud.githubusercontent.com/assets/4361804/10498955/693a729a-7282-11e5-938c-b03714ce836d.gif)
 
 *Click [here](https://youtu.be/-NLjgpvtHK0) to watch app demo on YouTube.*
 
