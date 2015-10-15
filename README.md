@@ -196,7 +196,8 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
   - [x] Visual Consent
     - [x] Learn More popup
   - [x] Consent Sharing
-  - [ ] Consent Review
+  - [x] Consent Review
+    - [ ] Name Capture
     - [ ] Signature Capture
     - [ ] PDF Generation
 - [ ] Active Tasks directives
