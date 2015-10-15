@@ -51,7 +51,7 @@
   </irk-consent-task>
 
   <irk-consent-task>
-    <irk-visual-consent-step id="c9" type="custom" title="Your Title." text="Learn more" summary="Your summary goes here.">
+    <irk-visual-consent-step id="c9" type="custom" title="Your Title" text="Learn more" summary="Your summary goes here.">
     	9. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam adhuc, meo fortasse vitio, quid ego quaeram non perspicis. Plane idem, inquit, et maxima quidem, qua fieri nulla maior potest. Quonam, inquit, modo?
 	</irk-visual-consent-step>
   </irk-consent-task>
@@ -62,14 +62,21 @@
 	</irk-consent-sharing-step>
   </irk-consent-task>    
   
-  <!--
   <irk-consent-task>
-    <irk-consent-review-step id="" title="" requiresName="true" requiresSignatureImage="true" signaturePageTitle="" signaturePageContent="">
-    	<irk-consent-signature id="" title="" given-name="" family-name="" signatureImage="" signatureDate="" signature-date-format=""/>
-    	<irk-consent-signature id="" title="" given-name="" family-name="" signatureImage="" signatureDate="" signature-date-format=""/>
+    <irk-consent-review-step id="c11" type="review" title="Your Title" reason-for-consent="Lorem ipsum dolor sit amet..."></irk-consent-review-step>
+  </irk-consent-task>
+
+  <irk-consent-task>
+    <irk-consent-review-step id="c12" type="signature" signature-page-title="" signature-page-content="">
+    	<irk-consent-signature id="s1" title="" given-name="" family-name="" signatureImage="" signatureDate="" signature-date-format="" requires-name="true" requires-signature-image="true"/>
+    	<irk-consent-signature id="s2" title="" given-name="" family-name="" signatureImage="" signatureDate="" signature-date-format="" requires-name="true" requires-signature-image="true"/>
 	</irk-consent-review-step>
   </irk-consent-task>
-  -->
+
+  <irk-consent-task>
+    <irk-consent-review-step id="c13" type="pdf">
+	</irk-consent-review-step>
+  </irk-consent-task>
 
 </irk-consent-tasks>
 

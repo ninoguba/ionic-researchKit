@@ -33,6 +33,14 @@
   height: 15px;
 }
 
+.irk-text-centered {
+  text-align: center;
+}
+
+.irk-text-left {
+  text-align: left;
+}
+
 .irk-modal {
   width: 100% !important;
   height: 100%;

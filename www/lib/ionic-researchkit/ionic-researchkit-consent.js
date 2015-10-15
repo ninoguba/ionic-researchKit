@@ -26,8 +26,9 @@ angular.module('ionicResearchKitConsent',[])
     '$ionicNavBarDelegate',
     '$ionicActionSheet',
     '$ionicModal',
+    '$ionicPopup',
     'irkResults',
-    function($rootScope, $timeout, $compile, $ionicSlideBoxDelegate, $ionicHistory, $ionicScrollDelegate, $ionicNavBarDelegate, $ionicActionSheet, $ionicModal, irkResults) {
+    function($rootScope, $timeout, $compile, $ionicSlideBoxDelegate, $ionicHistory, $ionicScrollDelegate, $ionicNavBarDelegate, $ionicActionSheet, $ionicModal, $ionicPopup, irkResults) {
         return {
             restrict: 'E',
             replace: true,
@@ -145,7 +146,39 @@ angular.module('ionicResearchKitConsent',[])
                 $scope.doShare = function(id,choice) {
                     $scope.formData[id] = choice;
                     $scope.doNext();
-                }
+                };
+
+                $scope.doAgree = function() {
+                    var index = $scope.currentSlide;
+                    var step = angular.element(document.querySelectorAll('.irk-slider-slide')[index].querySelector('.irk-step'));
+                    var stepReason = step.attr('reason-for-consent');
+
+                    var confirmPopup = $ionicPopup.confirm({
+                        title: 'Review',
+                        template: stepReason,
+                        cssClass: 'irk-text-centered',
+                        cancelText: 'Cancel',
+                        cancelType: 'button-outline button-positive',
+                        okText: 'Agree',
+                        okType: 'button-outline button-positive'
+                    });
+                    confirmPopup.then(function(res) {
+                        if (res) {
+                            console.log('Clicked agree');
+                            $scope.formData.consent = true;
+                            $scope.doNext();
+                        } else {
+                            console.log('Click cancel');
+                        }
+                    });
+                };
+
+                $scope.doDisagree = function() {
+                    console.log('Clicked disagree');
+                    $scope.formData.consent = false;
+                    $scope.doSave();
+                    $scope.doEnd();                    
+                };
 
                 $scope.doNext = function() {
                     $scope.doSave();
@@ -154,7 +187,7 @@ angular.module('ionicResearchKitConsent',[])
                         slider.next();
                     else
                         $scope.doEnd();
-                }
+                };
 
                 $scope.doCancel = function() {
                     console.log('Clicked cancel');
@@ -177,7 +210,7 @@ angular.module('ionicResearchKitConsent',[])
 
                 $scope.doEnd = function() {
                     $scope.$parent.closeModal();
-                }
+                };
 
                 $scope.$on("step:Previous", function() {
                     slider.prev();
@@ -250,14 +283,25 @@ angular.module('ionicResearchKitConsent',[])
                     $scope.doReanimateConsentImage();
                 });
 
+                //Flags if the Consent Review is in view
+                $scope.inConsentReview = false;
             }],
 
             template:
                 '<div class="slider irk-slider">'+
                 '<div class="slider-slides irk-slider-slides" ng-transclude>'+
                 '</div>'+
-                '<ion-footer-bar class="irk-bottom-bar irk-bottom-bar-consent">'+
+                '<ion-footer-bar class="irk-bottom-bar irk-bottom-bar-consent" ng-if="!inConsentReview">'+
                 '<button class="button button-block button-outline button-positive irk-bottom-button" ng-click="doStepNext()" irk-consent-next>Next</button>'+
+                '</ion-footer-bar>'+
+                '<ion-footer-bar class="irk-bottom-bar bar-stable" ng-if="inConsentReview">'+
+                '<div class="buttons">'+
+                '<button class="button button-clear button-positive" ng-click="doDisagree()">Disagree</button>'+
+                '</div>'+
+                '<h1 class="title"></h1>'+
+                '<div class="buttons">'+
+                '<button class="button button-clear button-positive" ng-click="doAgree()">Agree</button>'+
+                '</div>'+
                 '</ion-footer-bar>'+
                 '</div>',
 
@@ -311,11 +355,14 @@ angular.module('ionicResearchKitConsent',[])
                 else
                     element.text("Next");
 
-                //Hide for instruction step
+                //Hide for Visual Content Overview, Consent Sharing, and Consent Review
                 var step = angular.element(document.querySelectorAll('irk-consent-task.irk-slider-slide')[index].querySelector('.irk-step'));
                 var stepType = step.prop('tagName');
                 var consentType = step.attr('type');
-                element.toggleClass('ng-hide', (stepType=='IRK-VISUAL-CONSENT-STEP' && consentType=='overview') || stepType=='IRK-CONSENT-SHARING-STEP') ;
+                element.toggleClass('ng-hide', (stepType=='IRK-VISUAL-CONSENT-STEP' && consentType=='overview') || stepType=='IRK-CONSENT-SHARING-STEP' || (stepType=='IRK-CONSENT-REVIEW-STEP' && consentType=='review'));
+
+                //Toggle Consent Review footer
+                scope.$parent.inConsentReview = (stepType=='IRK-CONSENT-REVIEW-STEP' && consentType=='review');
             });
         }
     }
@@ -395,7 +442,41 @@ angular.module('ionicResearchKitConsent',[])
                 '</div></div>'
         },
         link: function(scope, element, attrs, controller) {
-            element.addClass('irk-step');
+            element.addClass('irk-step irk-visual-consent-step');
+
+            if (!angular.isDefined(element.attr('title'))) {
+                var consentType = attrs.type;
+                var consentTitle = '';
+
+                switch (consentType) {
+                    case 'overview':
+                        consentTitle = 'Welcome';
+                        break;
+                    case 'data-gathering':
+                        consentTitle = 'Data Gathering';
+                        break;
+                    case 'privacy':
+                        consentTitle = 'Privacy';
+                        break;
+                    case 'data-use':
+                        consentTitle = 'Data Use';
+                        break;
+                    case 'time-commitment':
+                        consentTitle = 'Time Commitment';
+                        break;
+                    case 'study-survey':
+                        consentTitle = 'Study Survey';
+                        break;
+                    case 'study-tasks':
+                        consentTitle = 'Study Tasks';
+                        break;
+                    case 'withdrawing':
+                        consentTitle = 'Withdrawing';
+                        break;
+                }
+
+                element.attr('title', consentTitle);
+            }
         }        
     }
 })
@@ -434,3 +515,57 @@ angular.module('ionicResearchKitConsent',[])
     }
 })
 
+//======================================================================================
+// Usage: 
+// =====================================================================================
+.directive('irkConsentReviewStep', function() {
+    return {
+        restrict: 'E',
+        transclude: true,
+        template: function(elem, attr) {
+            var reviewType = attr.type;
+
+            if (reviewType == 'review') {
+                return  '<ion-content class="padding has-header has-footer">'+
+                    '<div class="irk-text-centered">'+
+                    '<h2>Review</h2>'+
+                    '<p>Review the form below, and tap Agree if you\'re ready to continue.</p>'+
+                    '</div>'+
+                    '<div class="irk-text-left">'+
+                    '<div class="irk-spacer"></div>'+
+                    '<h4>'+attr.title+'</h4>'+
+                    (attr.hasHtmlContent=='true'?'<div class="irk-consent-review-content" ng-transclude>':'<div class="irk-consent-review-derived-content">')+
+                    '</div>'+
+                    '</div>'+
+                    '</ion-content>'
+            }
+            else if (reviewType == 'signature') {
+
+            }
+        },
+        link: function(scope, element, attrs, controller) {
+            element.addClass('irk-step');
+
+            scope.$on("slideBox.slideChanged", function(e, index, count) {
+                if (!scope.reviewContent) {
+                    var reviewType = attrs.type;
+                    if (reviewType == 'review' && (!attrs.hasHtmlContent || attrs.hasHtmlContent == 'false')) {
+                        scope.reviewContent = '';
+                        var steps = angular.element(document.querySelectorAll('.irk-visual-consent-step'));
+                        for (var i=0; i<steps.length; i++) {
+                            var step = angular.element(steps[i]);
+                            var stepTitle = step.attr('title');
+                            scope.reviewContent += '<div class="irk-spacer"></div>';
+                            scope.reviewContent += '<h5>'+stepTitle+'</h4>';
+                            var stepContent = angular.element(steps[i].querySelector('.irk-learn-more-content'));
+                            scope.reviewContent += '<div>'+stepContent.html()+'</div>';
+                        };
+                        
+                        var container = angular.element(document.querySelector('.irk-consent-review-derived-content'));
+                        container.append(scope.reviewContent);
+                    }
+                }
+            });
+        }
+    }
+})
