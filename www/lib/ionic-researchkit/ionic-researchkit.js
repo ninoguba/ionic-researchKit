@@ -53,11 +53,12 @@ angular.module('ionicResearchKit',[])
             var stepType = step.prop('tagName');
             var stepValue = formData[stepId];
             var stepUnit = step.attr('unit');
+            var consentType = step.attr('type');
 
             results.childResults[index].id = stepId;
             results.childResults[index].type = stepType;
 
-            if (stepType == 'IRK-CONSENT-REVIEW-STEP')
+            if (stepType == 'IRK-CONSENT-REVIEW-STEP' && consentType == 'review')
                 results.childResults[index].answer = (angular.isDefined(formData.consent)?formData.consent:null);
             else if (stepType != 'IRK-INSTRUCTION-STEP' && stepType != 'IRK-VISUAL-CONSENT-STEP')
                 results.childResults[index].answer = (stepValue?stepValue:null);
