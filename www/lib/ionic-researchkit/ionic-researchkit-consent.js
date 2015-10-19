@@ -429,17 +429,25 @@ angular.module('ionicResearchKitConsent',[])
                     break;
             }
 
-            return 	'<div class="irk-offcentered-container"><div class="irk-offcentered-content">'+
-                '<div class="irk-spacer"></div>'+
-                '<div class="item irk-consent-image '+consentImageClass+' positive"></div>'+
-                '<h2>'+consentTitle+'</h2>'+
-                '<p>'+attr.summary+'</p>'+
-                '<a class="button button-clear button-positive irk-learn-more" ng-click="$parent.showLearnMore()">'+consentText+'</a>'+
-                '<div class="irk-learn-more-content" ng-transclude>'+
-                '</div>'+
-                '<div class="irk-spacer"></div>'+
-                (consentType=='overview'?'<button class="button button-outline button-positive irk-instruction-button" ng-click="$parent.doNext()">Get Started</button>':'')+
-                '</div></div>'
+            if (consentType == 'only-in-document') 
+            {
+                return  '<div class="irk-learn-more-content" ng-transclude>'+
+                        '</div>';
+            }
+            else 
+            {
+                return  '<div class="irk-offcentered-container"><div class="irk-offcentered-content">'+
+                        '<div class="irk-spacer"></div>'+
+                        '<div class="item irk-consent-image '+consentImageClass+' positive"></div>'+
+                        '<h2>'+consentTitle+'</h2>'+
+                        '<p>'+attr.summary+'</p>'+
+                        '<a class="button button-clear button-positive irk-learn-more" ng-click="$parent.showLearnMore()">'+consentText+'</a>'+
+                        '<div class="irk-learn-more-content" ng-transclude>'+
+                        '</div>'+
+                        '<div class="irk-spacer"></div>'+
+                        (consentType=='overview'?'<button class="button button-outline button-positive irk-instruction-button" ng-click="$parent.doNext()">Get Started</button>':'')+
+                        '</div></div>';
+            }
         },
         link: function(scope, element, attrs, controller) {
             element.addClass('irk-step irk-visual-consent-step');
@@ -490,24 +498,24 @@ angular.module('ionicResearchKitConsent',[])
         transclude: true,
         template: function(elem, attr) {
             return  '<div class="irk-centered">'+
-                '<h2>Sharing Options</h2>'+
-                '<p>'+attr.summary+'</p>'+
-                '<p>Sharing your coded study data more broadly (without information such as your name) may benefit this and future research.</p>'+
-                '<a class="button button-clear button-positive irk-learn-more" ng-click="$parent.showLearnMore()">Learn more about data sharing</a>'+
-                '<div class="irk-learn-more-content" ng-transclude>'+
-                '</div>'+
-                '<div class="irk-spacer"></div>'+
-                '<div class="list">'+
-                '<a class="item item-text-wrap item-icon-right irk-item-content" ng-click="$parent.doShare(\''+attr.id+'\',\''+attr.investigatorLongValue+'\')">'+
-                'Share my data with '+attr.investigatorLongDescription+
-                '<i class="icon ion-ios-arrow-right positive"></i>'+
-                '</a>'+
-                '<a class="item item-text-wrap item-icon-right irk-item-content" ng-click="$parent.doShare(\''+attr.id+'\',\''+attr.investigatorShortValue+'\')">'+
-                'Share my data with '+attr.investigatorShortDescription+
-                '<i class="icon ion-ios-arrow-right positive"></i>'+
-                '</a>'+
-                '</div>'+
-                '</div>'
+                    '<h2>Sharing Options</h2>'+
+                    '<p>'+attr.summary+'</p>'+
+                    '<p>Sharing your coded study data more broadly (without information such as your name) may benefit this and future research.</p>'+
+                    '<a class="button button-clear button-positive irk-learn-more" ng-click="$parent.showLearnMore()">Learn more about data sharing</a>'+
+                    '<div class="irk-learn-more-content" ng-transclude>'+
+                    '</div>'+
+                    '<div class="irk-spacer"></div>'+
+                    '<div class="list">'+
+                    '<a class="item item-text-wrap item-icon-right irk-item-content" ng-click="$parent.doShare(\''+attr.id+'\',\''+attr.investigatorLongValue+'\')">'+
+                    'Share my data with '+attr.investigatorLongDescription+
+                    '<i class="icon ion-ios-arrow-right positive"></i>'+
+                    '</a>'+
+                    '<a class="item item-text-wrap item-icon-right irk-item-content" ng-click="$parent.doShare(\''+attr.id+'\',\''+attr.investigatorShortValue+'\')">'+
+                    'Share my data with '+attr.investigatorShortDescription+
+                    '<i class="icon ion-ios-arrow-right positive"></i>'+
+                    '</a>'+
+                    '</div>'+
+                    '</div>'
         },
         link: function(scope, element, attrs, controller) {
             element.addClass('irk-step');
@@ -527,17 +535,17 @@ angular.module('ionicResearchKitConsent',[])
 
             if (reviewType == 'review') {
                 return  '<ion-content class="padding has-header has-footer">'+
-                    '<div class="irk-text-centered">'+
-                    '<h2>Review</h2>'+
-                    '<p>Review the form below, and tap Agree if you\'re ready to continue.</p>'+
-                    '</div>'+
-                    '<div class="irk-text-left">'+
-                    '<div class="irk-spacer"></div>'+
-                    '<h4>'+attr.title+'</h4>'+
-                    (attr.hasHtmlContent=='true'?'<div class="irk-consent-review-content" ng-transclude>':'<div class="irk-consent-review-derived-content">')+
-                    '</div>'+
-                    '</div>'+
-                    '</ion-content>'
+                        '<div class="irk-text-centered">'+
+                        '<h2>Review</h2>'+
+                        '<p>Review the form below, and tap Agree if you\'re ready to continue.</p>'+
+                        '</div>'+
+                        '<div class="irk-text-left">'+
+                        '<div class="irk-spacer"></div>'+
+                        '<h4>'+attr.title+'</h4>'+
+                        (attr.hasHtmlContent=='true'?'<div class="irk-consent-review-content" ng-transclude>':'<div class="irk-consent-review-derived-content">')+
+                        '</div>'+
+                        '</div>'+
+                        '</ion-content>'
             }
             else if (reviewType == 'signature') {
 
