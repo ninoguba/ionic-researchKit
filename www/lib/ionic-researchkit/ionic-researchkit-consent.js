@@ -608,17 +608,22 @@ angular.module('ionicResearchKitConsent',[])
         replace: true,
         require: '^?irkConsentReviewStep',
         template: function(elem, attr) {
-                return  '<div class="list">'+
-                        '<label class="item item-input">'+
-                        '<span class="input-label">First Name</span>'+
-                        '<input type="text" placeholder="Required" ng-model="$parent.$parent.formData.'+elem.parent().attr("id")+'.'+attr.id+'.givenName" ng-required="true" ng-change="$parent.$parent.dirty()">'+
-                        '</label>'+
-                        '<label class="item item-input">'+
-                        '<span class="input-label">Last Name</span>'+
-                        '<input type="text" placeholder="Required" ng-model="$parent.$parent.formData.'+elem.parent().attr("id")+'.'+attr.id+'.familyName" ng-required="true" ng-change="$parent.$parent.dirty()">'+
-                        '</label>'+
-                        '<input type="hidden" ng-model="$parent.$parent.formData.'+elem.parent().attr("id")+'.'+attr.id+'.title" value="'+attr.title+'">'
-                        '</div>'
+            return  '<div class="list">'+
+                    '<label class="item item-input">'+
+                    '<span class="input-label">First Name</span>'+
+                    '<input type="text" placeholder="Required" ng-model="$parent.$parent.formData.'+elem.parent().attr("id")+'.'+attr.id+'.givenName" ng-required="true" ng-change="$parent.$parent.dirty()">'+
+                    '</label>'+
+                    '<label class="item item-input">'+
+                    '<span class="input-label">Last Name</span>'+
+                    '<input type="text" placeholder="Required" ng-model="$parent.$parent.formData.'+elem.parent().attr("id")+'.'+attr.id+'.familyName" ng-required="true" ng-change="$parent.$parent.dirty()">'+
+                    '</label>'+
+                    '</div>'
+        },
+        link: function(scope, element, attrs, controller) {
+            var stepId = element.parent().parent().parent().attr("id");
+            var sigId = attrs.id;
+            scope.$parent.$parent.formData[stepId] = {};
+            scope.$parent.$parent.formData[stepId][sigId] = { "title": attrs.title };
         }
     }
 })
