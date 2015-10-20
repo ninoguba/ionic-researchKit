@@ -190,7 +190,7 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
     - [x] Support images
   - [x] Form Step directive
     - [ ] Support more answer formats
-    - [ ] Fix: keep inputs in view when keyboard is displayed on iOS
+    - [x] Fix: keep inputs in view when keyboard is displayed on iOS
     - [ ] Fix: push up Next/Skip buttons when keyboard is displayed on iOS
 - [ ] Consent directives
   - [x] Visual Consent
@@ -198,7 +198,7 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
     - [x] In Document Only Type
   - [x] Consent Sharing
   - [x] Consent Review
-    - [ ] Name Capture
+    - [x] Name Capture
     - [ ] Signature Capture
     - [ ] PDF Generation
 - [ ] Active Tasks directives

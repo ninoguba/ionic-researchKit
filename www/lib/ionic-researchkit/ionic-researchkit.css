@@ -118,6 +118,19 @@
   text-align: left;
 }
 
+.irk-form-divider {
+  font-weight: 400;
+  font-size: 14px;
+  text-transform: uppercase;
+  border: 0;
+  background: none;
+  margin-top: 15px;
+}
+
+.irk-form-input-label {
+  font-weight: 500;
+}
+
 button.irk-icon-large:before {
   font-size: 50px !important;
 }

@@ -156,7 +156,7 @@ angular.module('ionicResearchKitConsent',[])
                     var confirmPopup = $ionicPopup.confirm({
                         title: 'Review',
                         template: stepReason,
-                        cssClass: 'irk-text-centered',
+                        cssClass: 'irk-text-centered irk-popup',
                         cancelText: 'Cancel',
                         cancelType: 'button-outline button-positive',
                         okText: 'Agree',
@@ -183,7 +183,7 @@ angular.module('ionicResearchKitConsent',[])
                 $scope.doNext = function() {
                     $scope.doSave();
 
-                    if (slider.currentIndex() < slider.slidesCount())
+                    if (slider.currentIndex() < slider.slidesCount()-1)
                         slider.next();
                     else
                         $scope.doEnd();
@@ -360,7 +360,7 @@ angular.module('ionicResearchKitConsent',[])
 
                 //Enable only when current form is dirtied
                 var form = angular.element(document.querySelectorAll('.irk-slider-slide')[index]).find('form');
-                scope.isPristine = form.hasClass('ng-pristine');                
+                scope.isPristine = form.hasClass('ng-pristine') || form.hasClass('ng-invalid');                
             });
         }
     }
@@ -561,7 +561,7 @@ angular.module('ionicResearchKitConsent',[])
                         '</ion-content>'
             }
             else if (reviewType == 'signature') {
-                return  '<form name="form.'+attr.id+'" class="irk-slider">'+
+                return  '<form name="form'+attr.id+'" class="irk-slider">'+
                         '<div class="irk-centered">'+
                         '<h2>Consent</h2>'+
                         '<p>'+attr.summary+'</p>'+
@@ -573,7 +573,7 @@ angular.module('ionicResearchKitConsent',[])
             }
         },
         link: function(scope, element, attrs, controller) {
-            element.addClass('irk-step');
+            element.addClass('irk-step irk-form-step');
 
             scope.$on("slideBox.slideChanged", function(e, index, count) {
                 if (!scope.reviewContent) {
@@ -610,12 +610,12 @@ angular.module('ionicResearchKitConsent',[])
         template: function(elem, attr) {
             return  '<div class="list">'+
                     '<label class="item item-input">'+
-                    '<span class="input-label">First Name</span>'+
-                    '<input type="text" placeholder="Required" ng-model="$parent.$parent.formData.'+elem.parent().attr("id")+'.'+attr.id+'.givenName" ng-required="true" ng-change="$parent.$parent.dirty()">'+
+                    '<span class="input-label irk-form-input-label">First Name</span>'+
+                    '<input type="text" placeholder="Required" ng-model="$parent.$parent.formData.'+elem.parent().attr("id")+'.'+attr.id+'.givenName" ng-model-options="{ updateOn: \'default blur\' }" ng-required="true" ng-change="$parent.$parent.dirty()">'+
                     '</label>'+
                     '<label class="item item-input">'+
-                    '<span class="input-label">Last Name</span>'+
-                    '<input type="text" placeholder="Required" ng-model="$parent.$parent.formData.'+elem.parent().attr("id")+'.'+attr.id+'.familyName" ng-required="true" ng-change="$parent.$parent.dirty()">'+
+                    '<span class="input-label irk-form-input-label">Last Name</span>'+
+                    '<input type="text" placeholder="Required" ng-model="$parent.$parent.formData.'+elem.parent().attr("id")+'.'+attr.id+'.familyName" ng-model-options="{ updateOn: \'default blur\' }" ng-required="true" ng-change="$parent.$parent.dirty()">'+
                     '</label>'+
                     '</div>'
         },

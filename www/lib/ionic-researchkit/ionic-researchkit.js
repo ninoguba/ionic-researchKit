@@ -312,7 +312,7 @@ angular.module('ionicResearchKit',[])
 
                 //Enable only when current form is dirtied
                 var form = angular.element(document.querySelectorAll('irk-task.irk-slider-slide')[index]).find('form');
-                scope.isPristine = form.hasClass('ng-pristine');
+                scope.isPristine = form.hasClass('ng-pristine') || form.hasClass('ng-invalid');                
 
                 //Hide for instruction step
                 var step = angular.element(document.querySelectorAll('irk-task.irk-slider-slide')[index].querySelector('.irk-step'));
@@ -708,6 +708,7 @@ angular.module('ionicResearchKit',[])
         transclude: true,
         template: function(elem, attr) {
             return  '<form name="form.'+attr.id+'" class="irk-slider">'+
+                '<ion-content class="has-header" style="top:80px;">'+
                 '<div class="irk-centered">'+
                 '<h3>'+attr.title+'</h3>'+
                 (attr.text ? '<p>'+attr.text+'</p>' : '')+
@@ -715,6 +716,7 @@ angular.module('ionicResearchKit',[])
                 '<div class="irk-spacer"></div>'+
                 '<div class="list" ng-transclude>'+
                 '</div>'+
+                '</ion-content>'+
                 '</form>'
         },
         link: function(scope, element, attrs, controller) {
@@ -735,14 +737,14 @@ angular.module('ionicResearchKit',[])
             if (attr.title)
             {
                 //Section divider will only have the title attribute
-                return '<div class="item item-divider">'+attr.title+'</div>';
+                return '<div class="item item-divider irk-form-divider">'+attr.title+'</div>';
             }
             else
             {
                 //Form input types (currently only supports HTML input types)
                 return '<label class="item item-input">'+
-                    '<span class="input-label">'+attr.text+'</span>'+
-                    '<input type="'+attr.type+'" placeholder="'+attr.placeholder+'" ng-model="$parent.$parent.formData.'+elem.parent().attr("id")+'.'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.$parent.dirty()">'+
+                    '<span class="input-label irk-form-input-label">'+attr.text+'</span>'+
+                    '<input type="'+attr.type+'" placeholder="'+attr.placeholder+'" ng-model="$parent.$parent.$parent.formData.'+elem.parent().attr("id")+'.'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.$parent.$parent.dirty()">'+
                     '</label>';
             }
         },
