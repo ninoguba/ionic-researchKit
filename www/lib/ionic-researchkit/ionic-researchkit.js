@@ -219,7 +219,16 @@ angular.module('ionicResearchKit',[])
 
                 //This is called when input changes (faster than form.$dirty)
                 $scope.dirty = function() {
-                    $scope.isPristine = false;
+                    //Enable only when current form is dirtied and valid
+                    $timeout(function() {
+                        var index = slider.currentIndex();
+                        var form = angular.element(document.querySelectorAll('.irk-slider-slide')[index]).find('form');
+                        var next = angular.element(document.querySelector('.irk-next-button'));
+                        if (form.length > 0  && form.hasClass('ng-invalid'))
+                            next.attr("disabled", "disabled");
+                        else
+                            next.removeAttr("disabled");
+                    }, 100);
                 };
 
                 //This is to initialize what will hold the results
@@ -242,7 +251,7 @@ angular.module('ionicResearchKit',[])
                 '<div class="slider-slides irk-slider-slides" ng-transclude>'+
                 '</div>'+
                 '<ion-footer-bar class="bar-subfooter irk-bottom-bar">'+
-                '<button class="button button-block button-outline button-positive irk-bottom-button" ng-click="doStepNext()" ng-disabled="isPristine" irk-step-next>Next</button>'+
+                '<button class="button button-block button-outline button-positive irk-bottom-button" ng-click="doStepNext()" irk-step-next>Next</button>'+
                 '</ion-footer-bar>'+
                 '<ion-footer-bar class="irk-bottom-bar">'+
                 '<button class="button button-block button-clear button-positive irk-bottom-button" ng-click="doSkip()" irk-step-skip>Skip this question</button>'+
@@ -305,19 +314,24 @@ angular.module('ionicResearchKit',[])
         restrict: 'A',
         link: function(scope, element, attrs, controller) {
             scope.$on("slideBox.slideChanged", function(e, index, count) {
+                element.addClass('irk-next-button');
+                
                 if (index == count - 1)
                     element.text("Done");
                 else
                     element.text("Next");
 
-                //Enable only when current form is dirtied
-                var form = angular.element(document.querySelectorAll('irk-task.irk-slider-slide')[index]).find('form');
-                scope.isPristine = form.hasClass('ng-pristine') || form.hasClass('ng-invalid');                
-
                 //Hide for instruction step
                 var step = angular.element(document.querySelectorAll('irk-task.irk-slider-slide')[index].querySelector('.irk-step'));
                 var stepType = step.prop('tagName');
                 element.toggleClass('ng-hide', stepType=='IRK-INSTRUCTION-STEP');                
+
+                //Enable only when current form is dirtied and valid
+                var form = angular.element(document.querySelectorAll('.irk-slider-slide')[index]).find('form');
+                if (form.length > 0  && (form.hasClass('ng-pristine') || form.hasClass('ng-invalid')))
+                    element.attr("disabled", "disabled");
+                else
+                    element.removeAttr("disabled");
             });
         }
     }
@@ -366,7 +380,7 @@ angular.module('ionicResearchKit',[])
     return {
         restrict: 'E',
         template: function(elem, attr) {
-            return 	'<form name="form.'+attr.id+'" class="irk-slider">'+
+            return 	'<form name="form.'+attr.id+'" class="irk-slider" novalidate>'+
                 '<div class="irk-centered">'+
                 '<h3>'+attr.title+'</h3>'+
                 (attr.text ? '<p>'+attr.text+'</p>' : '')+
@@ -395,7 +409,7 @@ angular.module('ionicResearchKit',[])
     return {
         restrict: 'E',
         template: function(elem, attr) {
-            return 	'<form name="form.'+attr.id+'" class="irk-slider">'+
+            return 	'<form name="form.'+attr.id+'" class="irk-slider" novalidate>'+
                 '<div class="irk-centered">'+
                 '<h3>'+attr.title+'</h3>'+
                 (attr.text ? '<p>'+attr.text+'</p>' : '')+
@@ -432,7 +446,7 @@ angular.module('ionicResearchKit',[])
     return {
         restrict: 'E',
         template: function(elem, attr) {
-            return  '<form name="form.'+attr.id+'" class="irk-slider">'+
+            return  '<form name="form.'+attr.id+'" class="irk-slider" novalidate>'+
                 '<div class="irk-centered">'+
                 '<h3>'+attr.title+'</h3>'+
                 (attr.text ? '<p>'+attr.text+'</p>' : '')+
@@ -462,7 +476,7 @@ angular.module('ionicResearchKit',[])
         restrict: 'E',
         transclude: true,
         template: function(elem, attr) {
-            return  '<form name="form.'+attr.id+'" class="irk-slider">'+
+            return  '<form name="form.'+attr.id+'" class="irk-slider" novalidate>'+
                 '<div class="irk-centered">'+
                 '<h3>'+attr.title+'</h3>'+
                 (attr.text ? '<p>'+attr.text+'</p>' : '')+
@@ -511,7 +525,7 @@ angular.module('ionicResearchKit',[])
     return {
         restrict: 'E',
         template: function(elem, attr) {
-            return  '<form name="form.'+attr.id+'" class="irk-slider">'+
+            return  '<form name="form.'+attr.id+'" class="irk-slider" novalidate>'+
                 '<div class="irk-centered">'+
                 '<h3>'+attr.title+'</h3>'+
                 (attr.text ? '<p>'+attr.text+'</p>' : '')+
@@ -538,7 +552,7 @@ angular.module('ionicResearchKit',[])
     return {
         restrict: 'E',
         template: function(elem, attr) {
-            return  '<form name="form.'+attr.id+'" class="irk-slider">'+
+            return  '<form name="form.'+attr.id+'" class="irk-slider" novalidate>'+
                 '<div class="irk-centered">'+
                 '<h3>'+attr.title+'</h3>'+
                 (attr.text ? '<p>'+attr.text+'</p>' : '')+
@@ -565,7 +579,7 @@ angular.module('ionicResearchKit',[])
     return {
         restrict: 'E',
         template: function(elem, attr) {
-            return  '<form name="form.'+attr.id+'" class="irk-slider">'+
+            return  '<form name="form.'+attr.id+'" class="irk-slider" novalidate>'+
                 '<div class="irk-centered">'+
                 '<h3>'+attr.title+'</h3>'+
                 (attr.text ? '<p>'+attr.text+'</p>' : '')+
@@ -593,7 +607,7 @@ angular.module('ionicResearchKit',[])
         restrict: 'E',
         transclude: true,
         template: function(elem, attr) {
-            return  '<form name="form.'+attr.id+'" class="irk-slider">'+
+            return  '<form name="form.'+attr.id+'" class="irk-slider" novalidate>'+
                 '<div class="irk-centered">'+
                 '<h3>'+attr.title+'</h3>'+
                 (attr.text ? '<p>'+attr.text+'</p>' : '')+
@@ -639,7 +653,7 @@ angular.module('ionicResearchKit',[])
             $scope.selected = {};
         }],
         template: function(elem, attr) {
-            return  '<form name="form.'+attr.id+'" class="irk-slider">'+
+            return  '<form name="form.'+attr.id+'" class="irk-slider" novalidate>'+
                 '<div class="irk-centered">'+
                 '<h3>'+attr.title+'</h3>'+
                 (attr.text ? '<p>'+attr.text+'</p>' : '')+
@@ -707,7 +721,7 @@ angular.module('ionicResearchKit',[])
         restrict: 'E',
         transclude: true,
         template: function(elem, attr) {
-            return  '<form name="form.'+attr.id+'" class="irk-slider">'+
+            return  '<form name="form.'+attr.id+'" class="irk-slider" novalidate>'+
                 '<ion-content class="has-header" style="top:80px;">'+
                 '<div class="irk-centered">'+
                 '<h3>'+attr.title+'</h3>'+
