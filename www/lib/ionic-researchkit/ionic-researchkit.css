@@ -1,3 +1,7 @@
+.platform-android .bar .title {
+  padding-left: 15px;  
+}
+
 .irk-centered-container {
   display: table !important;
   width: 100% !important;
