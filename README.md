@@ -16,6 +16,8 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
 1. Add a modal view to your app using [$ionicModal](http://ionicframework.com/docs/api/service/$ionicModal/)
 2. Add the following to your modal view template:
 
+### Survey
+
 ```
 <ion-modal-view class="irk-modal">
 
@@ -106,40 +108,135 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
 </ion-modal-view>
 ```
 
+### Consent
+
+```
+<ion-modal-view class="irk-modal">
+
+  <irk-ordered-tasks>
+
+  <irk-task>
+    <irk-visual-consent-step id="c1" type="overview" summary="Your summary goes here.">
+      1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam adhuc, meo fortasse vitio, quid ego quaeram non perspicis. Plane idem, inquit, et maxima quidem, qua fieri nulla maior potest. Quonam, inquit, modo?
+    </irk-visual-consent-step>
+  </irk-task>
+
+  <irk-task>
+    <irk-visual-consent-step id="c2" type="data-gathering" summary="Your summary goes here.">
+      2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam adhuc, meo fortasse vitio, quid ego quaeram non perspicis. Plane idem, inquit, et maxima quidem, qua fieri nulla maior potest. Quonam, inquit, modo?
+    </irk-visual-consent-step>
+  </irk-task>
+
+  <irk-task>
+    <irk-visual-consent-step id="c3" type="privacy" summary="Your summary goes here.">
+      3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam adhuc, meo fortasse vitio, quid ego quaeram non perspicis. Plane idem, inquit, et maxima quidem, qua fieri nulla maior potest. Quonam, inquit, modo?
+    </irk-visual-consent-step>
+  </irk-task>
+
+  <irk-task>
+    <irk-visual-consent-step id="c4" type="data-use" summary="Your summary goes here.">
+      4. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam adhuc, meo fortasse vitio, quid ego quaeram non perspicis. Plane idem, inquit, et maxima quidem, qua fieri nulla maior potest. Quonam, inquit, modo?
+    </irk-visual-consent-step>
+  </irk-task>
+
+  <irk-task>
+    <irk-visual-consent-step id="c5" type="time-commitment" summary="Your summary goes here.">
+      5. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam adhuc, meo fortasse vitio, quid ego quaeram non perspicis. Plane idem, inquit, et maxima quidem, qua fieri nulla maior potest. Quonam, inquit, modo?
+    </irk-visual-consent-step>
+  </irk-task>
+
+  <irk-task>
+    <irk-visual-consent-step id="c6" type="study-survey" summary="Your summary goes here.">
+      6. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam adhuc, meo fortasse vitio, quid ego quaeram non perspicis. Plane idem, inquit, et maxima quidem, qua fieri nulla maior potest. Quonam, inquit, modo?
+    </irk-visual-consent-step>
+  </irk-task>
+
+  <irk-task>
+    <irk-visual-consent-step id="c7" type="study-tasks" summary="Your summary goes here.">
+      7. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam adhuc, meo fortasse vitio, quid ego quaeram non perspicis. Plane idem, inquit, et maxima quidem, qua fieri nulla maior potest. Quonam, inquit, modo?
+    </irk-visual-consent-step>
+  </irk-task>
+
+  <irk-task>
+    <irk-visual-consent-step id="c8" type="withdrawing" summary="Your summary goes here.">
+      8. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam adhuc, meo fortasse vitio, quid ego quaeram non perspicis. Plane idem, inquit, et maxima quidem, qua fieri nulla maior potest. Quonam, inquit, modo?
+    </irk-visual-consent-step>
+  </irk-task>
+
+  <irk-task>
+    <irk-visual-consent-step id="c9" type="custom" title="Your Title" text="Learn more" summary="Your summary goes here.">
+      9. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam adhuc, meo fortasse vitio, quid ego quaeram non perspicis. Plane idem, inquit, et maxima quidem, qua fieri nulla maior potest. Quonam, inquit, modo?
+    </irk-visual-consent-step>
+    <irk-visual-consent-step id="c9.1" type="only-in-document" title="Your Title (In Document Only)">
+      9.1 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam adhuc, meo fortasse vitio, quid ego quaeram non perspicis. Plane idem, inquit, et maxima quidem, qua fieri nulla maior potest. Quonam, inquit, modo?
+    </irk-visual-consent-step>
+  </irk-task>
+
+  <irk-task>
+    <irk-consent-sharing-step id="c10" summary="Your summary goes here." investigator-short-description="YourInstitution" investigator-long-description="YourInstitution and its partners" investigator-short-value="0" investigator-long-value="1" >
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam adhuc, meo fortasse vitio, quid ego quaeram non perspicis. Plane idem, inquit, et maxima quidem, qua fieri nulla maior potest. Quonam, inquit, modo?
+    </irk-consent-sharing-step>
+  </irk-task>    
+  
+  <irk-task>
+    <irk-consent-review-step id="c11" type="review" title="Your Title" reason-for-consent="Lorem ipsum dolor sit amet..."></irk-consent-review-step>
+  </irk-task>
+
+  <irk-task>
+    <irk-consent-review-step id="c12" type="signature" summary="Lorem ipsum dolor sit amet..." signature-page-title="Consent" signature-page-content="I agree to participate in this research study.">
+      <irk-consent-signature id="s1" title="Participant" given-name="" family-name="" signatureImage="" signatureDate="" signature-date-format="" requires-name="true" requires-signature-image="true"/>
+    </irk-consent-review-step>
+  </irk-task>
+
+  </irk-ordered-tasks>
+
+</ion-modal-view>
+```
+
 # Directives
 
-`<irk-ordered-tasks>` is the equivalent of the `ORKOrderedTask` class in ResearchKit and will encompass one or more `<irk-task>` elements.
+### Survey
 
-`<irk-task>` is the equivalent of the `ORKTask` class in ResearchKit and will encompass one of the available `<irk-*-step>` elements.
+`<irk-ordered-tasks>` is the equivalent of the `ORKOrderedTask` class and will encompass one or more `<irk-task>` elements.
 
-`<irk-instruction-step>` is the equivalent of the `ORKInstructionStep` class in ResearchKit and includes the `id`, `title` and `text` attributes.
+`<irk-task>` is the equivalent of the `ORKTask` class and will encompass one of the available `<irk-*-step>` elements.
 
-`<irk-scale-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKScaleAnswerFormat` classes in ResearchKit combined and includes the `id`, `title`, `text`, `min`, `max`, `step`, `value`, `min-text`, and `max-text` attributes.
+`<irk-instruction-step>` is the equivalent of the `ORKInstructionStep` class and includes the `id`, `title` and `text` attributes.
 
-`<irk-boolean-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKBooleanAnswerFormat` classes in ResearchKit combined and includes the `id`, `title`, `text`, `trueText`, and `falseText` attributes.
+`<irk-scale-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKScaleAnswerFormat` classes combined and includes the `id`, `title`, `text`, `min`, `max`, `step`, `value`, `min-text`, and `max-text` attributes.
 
-`<irk-text-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKTextAnswerFormat` classes in ResearchKit combined and includes the `id`, `title`, `text`, `maxLength`, and `multipleLines` attributes.
+`<irk-boolean-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKBooleanAnswerFormat` classes combined and includes the `id`, `title`, `text`, `trueText`, and `falseText` attributes.
 
-`<irk-text-choice-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKTextChoiceAnswerFormat` classes in ResearchKit combined and includes the `id`, `title`, `text`, and `style` attributes. This encompass several `<irk-text-choice>` elements where each include the `value`, `text`, and `detail-text` attributes.
+`<irk-text-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKTextAnswerFormat` classes combined and includes the `id`, `title`, `text`, `maxLength`, and `multipleLines` attributes.
 
-`<irk-numeric-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKNumericAnswerFormat` classes in ResearchKit combined and includes the `id`, `title`, `text`, `min`, `max`, and `unit` attributes.
+`<irk-text-choice-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKTextChoiceAnswerFormat` classes  combined and includes the `id`, `title`, `text`, and `style` attributes. This encompass several `<irk-text-choice>` elements where each include the `value`, `text`, and `detail-text` attributes.
 
-`<irk-date-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKDateAnswerFormat` classes in ResearchKit combined and includes the `id`, `title`, `text` attributes.
+`<irk-numeric-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKNumericAnswerFormat` classes combined and includes the `id`, `title`, `text`, `min`, `max`, and `unit` attributes.
 
-`<irk-time-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKTimeOfDayAnswerFormat` classes in ResearchKit combined and includes the `id`, `title`, `text` attributes.
+`<irk-date-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKDateAnswerFormat` classes combined and includes the `id`, `title`, `text` attributes.
 
-`<irk-value-picker-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKValuePickerAnswerFormat` classes in ResearchKit combined and includes the `id`, `title`, `text` attributes. This encompass several `<irk-picker-choice>` elements where each include the `value`, `text` attributes.
+`<irk-time-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKTimeOfDayAnswerFormat` classes combined and includes the `id`, `title`, `text` attributes.
 
-`<irk-image-choice-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKImageChoiceAnswerFormat` classes in ResearchKit combined and includes the `id`, `title`, `text` attributes. This encompass several `<irk-image-choice>` elements where each include the `value`, `text`, `type`, `normal-state-image`, `selected-state-image` attributes.
+`<irk-value-picker-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKValuePickerAnswerFormat` classes combined and includes the `id`, `title`, `text` attributes. This encompass several `<irk-picker-choice>` elements where each include the `value`, `text` attributes.
 
-`<irk-form-step>` is the equivalent of the `ORKFormStep` class in ResearchKit and includes the `id`, `title`, `text` attributes. This encompass several `<irk-form-item>` elements which are the equivalent of the `ORKFormItem` class in ResearchKit and each include the `title`, `id`, `type`, `text` attributes.
+`<irk-image-choice-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKImageChoiceAnswerFormat` classes combined and includes the `id`, `title`, `text` attributes. This encompass several `<irk-image-choice>` elements where each include the `value`, `text`, `type`, `normal-state-image`, `selected-state-image` attributes.
+
+`<irk-form-step>` is the equivalent of the `ORKFormStep` class and includes the `id`, `title`, `text` attributes. This encompass several `<irk-form-item>` elements which are the equivalent of the `ORKFormItem` class and each include the `title`, `id`, `type`, `text` attributes.
+
+### Consent
+
+`<irk-visual-consent-step>` is the equivalent of the `ORKVisualConsentStep` class.
+
+`<irk-consent-sharing-step>` is the equivalent of the `ORKConsentSharingStep` class.
+
+`<irk-consent-review-step>` is the equivalent of the `ORKConsentReviewStep` class.  Depending on it's `type` attribute, it could encompass one or more `<irk-consent-signature>` elements which are the equivalent of the `ORKConsentSignature` class.
 
 # Demo
 
-## Survey
+### Survey
 ![Survey demo](https://cloud.githubusercontent.com/assets/4361804/10489873/9c77f440-7253-11e5-951c-5826a767d0f6.gif)
 
-## Consent
+### Consent
 ![Consent demo](https://cloud.githubusercontent.com/assets/4361804/10498955/693a729a-7282-11e5-938c-b03714ce836d.gif)
 
 *Click [here](https://youtu.be/-NLjgpvtHK0) to watch app demo on YouTube.*
@@ -196,6 +293,7 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
   - [x] Visual Consent
     - [x] Learn More popup
     - [x] In Document Only Type
+    - [ ] Support custom image
   - [x] Consent Sharing
   - [x] Consent Review
     - [x] Name Capture

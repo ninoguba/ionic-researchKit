@@ -138,3 +138,56 @@ button.irk-icon-large:before {
 button.irk-image:before {
   background-size: contain !important;
 }
+
+.irk-consent-image {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 180px;
+  width: auto;
+  border: 0;
+}
+
+.irk-consent-none {
+  display: none;
+}
+
+.irk-consent-custom {
+  background-image: none;
+}
+
+.irk-consent-01 {
+  background-image: url(resources/consent_01.gif);
+}
+
+.irk-consent-02 {
+  background-image: url(resources/consent_02.gif);
+}
+
+.irk-consent-03 {
+  background-image: url(resources/consent_03.gif);
+}
+
+.irk-consent-04 {
+  background-image: url(resources/consent_04.gif);
+}
+
+.irk-consent-05 {
+  background-image: url(resources/consent_05.gif);
+}
+
+.irk-consent-06 {
+  background-image: url(resources/consent_06.gif);
+}
+
+.irk-consent-07 {
+  background-image: url(resources/consent_07.gif);
+}
+
+.irk-learn-more-content {
+  display: none;
+}
+
+.irk-popup .popup {
+  background-color: rgba(255, 255, 255, 1);
+}
