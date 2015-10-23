@@ -86,8 +86,9 @@ angular.module('ionicResearchKit',[])
     '$ionicActionSheet',
     '$ionicModal',
     '$ionicPopup',
+    '$ionicPlatform',
     'irkResults',
-    function($rootScope, $timeout, $compile, $ionicSlideBoxDelegate, $ionicHistory, $ionicScrollDelegate, $ionicNavBarDelegate, $ionicActionSheet, $ionicModal, $ionicPopup, irkResults) {
+    function($rootScope, $timeout, $compile, $ionicSlideBoxDelegate, $ionicHistory, $ionicScrollDelegate, $ionicNavBarDelegate, $ionicActionSheet, $ionicModal, $ionicPopup, $ionicPlatform, irkResults) {
         return {
             restrict: 'E',
             replace: true,
@@ -209,6 +210,9 @@ angular.module('ionicResearchKit',[])
 
                 $scope.doEnd = function() {
                     $scope.$parent.closeModal();
+
+                    //This is needed to set the Android back button to map back to the step back action
+                    $scope.deregisterStepBack();
                 };
 
                 $scope.$on("step:Previous", function() {
@@ -218,6 +222,9 @@ angular.module('ionicResearchKit',[])
                 $scope.$on("step:Next", function() {
                     $scope.doNext();
                 });
+
+                //This is needed to set the Android back button to not close the modal
+                $scope.deregisterStepBack = $ionicPlatform.registerBackButtonAction($scope.doStepBack, 250);
 
                 $scope.showLearnMore = function() {
                     var index = $scope.currentSlide;
@@ -241,10 +248,16 @@ angular.module('ionicResearchKit',[])
                         animation: 'slide-in-up'
                     });
                     $scope.learnmore.show();
+
+                    //This is needed to set the Android back button to override the step back action
+                    $scope.deregisterHideLearnMore = $ionicPlatform.registerBackButtonAction($scope.hideLearnMore, 250);
                 };
 
                 $scope.hideLearnMore = function() {
                     $scope.learnmore.remove();
+
+                    //This is needed to set the Android back button to map back to the step back action
+                    $scope.deregisterHideLearnMore();
                 };
 
                 $scope.doShare = function(id,choice) {
