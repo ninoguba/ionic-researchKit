@@ -60,6 +60,10 @@ angular.module('ionicResearchKit',[])
 
             if (stepType == 'IRK-CONSENT-REVIEW-STEP' && consentType == 'review')
                 results.childResults[index].answer = (angular.isDefined(formData.consent)?formData.consent:null);
+            else if (stepType == 'IRK-DATE-QUESTION-STEP')
+                results.childResults[index].answer = (stepValue?stepValue.toDateString():null);
+            else if (stepType == 'IRK-TIME-QUESTION-STEP')
+                results.childResults[index].answer = (stepValue?stepValue.toTimeString():null);
             else if (stepType != 'IRK-INSTRUCTION-STEP' && stepType != 'IRK-VISUAL-CONSENT-STEP')
                 results.childResults[index].answer = (stepValue?stepValue:null);
 
