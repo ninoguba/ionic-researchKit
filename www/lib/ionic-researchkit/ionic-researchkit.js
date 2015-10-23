@@ -194,7 +194,7 @@ angular.module('ionicResearchKit',[])
 
                     // Show the action sheet
                     var hideSheet = $ionicActionSheet.show({
-                        destructiveText: 'End Task',
+                        destructiveText: (ionic.Platform.isAndroid()?'<i class="icon ion-android-exit assertive"></i> ':'')+'End Task',
                         cancelText: 'Cancel',
                         cancel: function() {
                             hideSheet();
