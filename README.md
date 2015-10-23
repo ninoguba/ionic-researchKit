@@ -243,55 +243,32 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
 
 # Roadmap
 
-- [x] Task View Controller equivalent 
-  - [x] Show "Step x of y" title
-  - [x] Hide Back button on first step
-  - [x] Cancel button shows action sheet
-  - [x] End Task button (on action sheet) exits task view
-  - [x] Change Next button label to Done when on last step
-  - [x] Done button exits task view
-  - [x] Relaunch should re-init steps
-  - [x] Hide Skip button when input is required
-  - [x] Enable Next button on input change
-- [x] Results
-  - [x] Output results in JSON
-  - [x] Capture all result metadata
-  - [ ] Collect results into LocalStorage
+- [x] Task View equivalent 
 - [x] Survey directives
   - [x] Instruction Step directive
-    - [x] Show Get Started button
-    - [x] Get Started button shows next step
-    - [x] Hide Next and Skip buttons
-    - [x] Show optional link
-    - [ ] Show optional image
+    - [ ] Support optional image
   - [x] Scale Question Step directive
-    - [x] Support min/max text description
     - [ ] Support step bars
     - [ ] Support vertical orientation
   - [x] Boolean Question Step directive
-    - [x] Apply radio fix (iOS9)
   - [x] Text Question Step directive
     - [x] Multi lines
     - [x] Single line
-    - [ ] Fix: push up Next/Skip buttons when keyboard is displayed on iOS
   - [x] Text Choice Question Step directive
     - [x] Single choice
     - [x] Multiple choice
   - [x] Numeric Question Step directive
   - [x] Date Question Step directive
   - [x] Time Question Step directive
-  - [ ] Time Interval Question Step directive
+    - [ ] Time Interval Question Step directive
   - [x] Value Picker Question Step directive
   - [x] Image Choice Question Step directive
     - [x] Support icons
     - [x] Support images
   - [x] Form Step directive
     - [ ] Support more answer formats
-    - [x] Fix: keep inputs in view when keyboard is displayed on iOS
-    - [ ] Fix: push up Next/Skip buttons when keyboard is displayed on iOS
 - [ ] Consent directives
   - [x] Visual Consent
-    - [x] Learn More popup
     - [x] In Document Only Type
     - [ ] Support custom image
   - [x] Consent Sharing
@@ -300,6 +277,9 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
     - [ ] Signature Capture
     - [ ] PDF Generation
 - [ ] Active Tasks directives
+- [x] Results
+  - [x] Output results in JSON
+  - [ ] Collect results into LocalStorage
 - [ ] Integrations
   - [ ] HealthKit
   - [ ] Google Fit

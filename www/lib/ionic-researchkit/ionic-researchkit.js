@@ -391,18 +391,18 @@ angular.module('ionicResearchKit',[])
                 '<div class="slider-slides irk-slider-slides" ng-transclude>'+
                 '</div>'+
                 //FOOTER BAR FOR SURVEY STEPS
-                '<ion-footer-bar class="bar-subfooter irk-bottom-bar"  irk-survey-bar>'+
-                '<button class="button button-block button-outline button-positive irk-bottom-button" ng-click="doStepNext()" irk-step-next>Next</button>'+
-                '</ion-footer-bar>'+
-                '<ion-footer-bar class="irk-bottom-bar" irk-survey-bar>'+
-                '<button class="button button-block button-clear button-positive irk-bottom-button" ng-click="doSkip()" irk-step-skip>Skip this question</button>'+
+                '<ion-footer-bar class="irk-bottom-bar" keyboard-attach irk-survey-bar>'+
+                '<div>'+
+                '<a class="button button-block button-outline button-positive irk-bottom-button" ng-click="doStepNext()" irk-step-next>Next</a>'+
+                '<a class="button button-block button-clear button-positive irk-bottom-button" ng-click="doSkip()" irk-step-skip>Skip this question</a>'+
+                '</div>'+
                 '</ion-footer-bar>'+
                 //FOOTER BAR FOR CONSENT STEPS
-                '<ion-footer-bar class="irk-bottom-bar irk-bottom-bar-consent" irk-consent-bar>'+
+                '<ion-footer-bar class="irk-bottom-bar irk-bottom-bar-consent" keyboard-attach irk-consent-bar>'+
                 '<button class="button button-block button-outline button-positive irk-bottom-button" ng-click="doStepNext()" irk-step-next>Next</button>'+
                 '</ion-footer-bar>'+
                 //FOOTER BAR FOR CONSENT REVIEW
-                '<ion-footer-bar class="irk-bottom-bar bar-stable" irk-consent-bar-agree>'+
+                '<ion-footer-bar class="irk-bottom-bar irk-bottom-bar-consent-agree bar-stable" irk-consent-bar-agree>'+
                 '<div class="buttons">'+
                 '<button class="button button-clear button-positive" ng-click="doDisagree()">Disagree</button>'+
                 '</div>'+

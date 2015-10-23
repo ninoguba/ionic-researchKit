@@ -66,6 +66,12 @@
 
 .irk-bottom-bar {
   background-image: none !important;
+  display: block;
+  height: 85px;
+}
+
+.irk-bottom-bar-consent-agree {
+  height: 44px !important;
 }
 
 .irk-bottom-bar-consent {
@@ -75,7 +81,7 @@
 
 .irk-bottom-button {
   margin-top: 0px !important;
-  margin-bottom: 0px !important;
+  margin-bottom: 5px !important;
   margin-left: auto;
   margin-right: auto;
   width: 90% !important;
