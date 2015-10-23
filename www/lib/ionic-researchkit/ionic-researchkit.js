@@ -346,12 +346,20 @@ angular.module('ionicResearchKit',[])
                     //Enable only when current form is dirtied and valid
                     $timeout(function() {
                         var index = slider.currentIndex();
-                        var form = angular.element(document.querySelectorAll('.irk-slider-slide')[index]).find('form');
+                        var step = angular.element(document.querySelectorAll('.irk-slider-slide')[index].querySelector('.irk-step'));
+                        var stepType = step.prop('tagName');
+                        var form = step.find('form');
+                        var input = form.find('input');
                         var next = angular.element(document.querySelectorAll('.irk-next-button'));
-                        if (form.length > 0  && form.hasClass('ng-invalid')) {
+                        if (form.length > 0  
+                            && ((stepType!='IRK-DATE-QUESTION-STEP' && stepType!='IRK-TIME-QUESTION-STEP' && form.hasClass('ng-invalid'))
+                                || ((stepType=='IRK-DATE-QUESTION-STEP' || stepType=='IRK-TIME-QUESTION-STEP') && input.hasClass('ng-invalid')))) 
+                        {
                             angular.element(next[0]).attr("disabled", "disabled");
                             angular.element(next[1]).attr("disabled", "disabled");
-                        } else {
+                        } 
+                        else 
+                        {
                             angular.element(next[0]).removeAttr("disabled");
                             angular.element(next[1]).removeAttr("disabled");
                         }
@@ -476,8 +484,11 @@ angular.module('ionicResearchKit',[])
                 element.toggleClass('ng-hide', stepType=='IRK-INSTRUCTION-STEP' || (stepType=='IRK-VISUAL-CONSENT-STEP' && consentType=='overview') || stepType=='IRK-CONSENT-SHARING-STEP' || (stepType=='IRK-CONSENT-REVIEW-STEP' && consentType=='review'));                
 
                 //Enable only when current form is dirtied and valid
-                var form = angular.element(document.querySelectorAll('.irk-slider-slide')[index]).find('form');
-                if (form.length > 0  && (form.hasClass('ng-pristine') || form.hasClass('ng-invalid')))
+                var form = step.find('form');
+                var input = form.find('input');
+                if (form.length > 0  
+                    && ((stepType!='IRK-DATE-QUESTION-STEP' && stepType!='IRK-TIME-QUESTION-STEP' && (form.hasClass('ng-pristine') || form.hasClass('ng-invalid')))
+                        || ((stepType=='IRK-DATE-QUESTION-STEP' || stepType=='IRK-TIME-QUESTION-STEP') && (input.hasClass('ng-pristine') || input.hasClass('ng-invalid')))))                     
                     element.attr("disabled", "disabled");
                 else
                     element.removeAttr("disabled");
