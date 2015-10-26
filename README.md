@@ -13,8 +13,8 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
 
 # Dependencies
 
-- checklist-model [checklist-model](https://github.com/vitalets/checklist-model)
-- signature_pad [signature_pad](https://github.com/szimek/signature_pad)
+- checklist-model [https://github.com/vitalets/checklist-model](https://github.com/vitalets/checklist-model)
+- signature_pad [https://github.com/szimek/signature_pad](https://github.com/szimek/signature_pad)
 
 # Usage
 
