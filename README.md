@@ -11,6 +11,11 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
 3. Add `ionicResearchKit` to your angular app module dependencies list.<br />
 `angular.module('myApp', ['ionicResearchKit']);`
 
+# Dependencies
+
+- checklist-model [checklist-model](https://github.com/vitalets/checklist-model)
+- signature_pad [signature_pad](https://github.com/szimek/signature_pad)
+
 # Usage
 
 1. Add a modal view to your app using [$ionicModal](http://ionicframework.com/docs/api/service/$ionicModal/)
