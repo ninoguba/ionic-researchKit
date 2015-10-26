@@ -201,3 +201,9 @@ button.irk-image:before {
 .irk-popup .popup {
   background-color: rgba(255, 255, 255, 1);
 }
+
+.irk-signature-canvas {
+  width: 95%;
+  height: 180px;
+  border-bottom: 1px solid #ccc;
+}

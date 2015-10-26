@@ -183,8 +183,14 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
   </irk-task>
 
   <irk-task>
-    <irk-consent-review-step id="c12" type="signature" summary="Lorem ipsum dolor sit amet..." signature-page-title="Consent" signature-page-content="I agree to participate in this research study.">
-      <irk-consent-signature id="s1" title="Participant" given-name="" family-name="" signatureImage="" signatureDate="" signature-date-format="" requires-name="true" requires-signature-image="true"/>
+    <irk-consent-review-step id="c12" type="name" text="Lorem ipsum dolor sit amet..." signature-page-title="Consent" signature-page-content="I agree to participate in this research study.">
+      <irk-consent-name id="s1" title="Participant" given-name="" family-name="" requires-name="true"/>
+    </irk-consent-review-step>
+  </irk-task>
+
+  <irk-task>
+    <irk-consent-review-step id="c13" type="signature">
+      <irk-consent-signature id="s1" signatureImage="" signatureDate="" signature-date-format="" requires-signature-image="true"/>
     </irk-consent-review-step>
   </irk-task>
 
@@ -274,8 +280,8 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
   - [x] Consent Sharing
   - [x] Consent Review
     - [x] Name Capture
-    - [ ] Signature Capture
-    - [ ] PDF Generation
+    - [x] Signature Capture
+  - [ ] PDF Generation
 - [ ] Active Tasks directives
 - [x] Results
   - [x] Output results in JSON

@@ -9,6 +9,7 @@
 *
 * Required dependencies:
 * checklist-model (https://github.com/vitalets/checklist-model)
+* signature_pad (https://github.com/szimek/signature_pad)
 */
 angular.module('ionicResearchKit',[])
 //======================================================================================
@@ -64,11 +65,16 @@ angular.module('ionicResearchKit',[])
                 results.childResults[index].answer = (stepValue?stepValue.toDateString():null);
             else if (stepType == 'IRK-TIME-QUESTION-STEP')
                 results.childResults[index].answer = (stepValue?stepValue.toTimeString():null);
-            else if (stepType != 'IRK-INSTRUCTION-STEP' && stepType != 'IRK-VISUAL-CONSENT-STEP')
+            else if (stepType != 'IRK-INSTRUCTION-STEP' && stepType != 'IRK-VISUAL-CONSENT-STEP' && !(stepType=='IRK-CONSENT-REVIEW-STEP' && consentType=='signature'))
                 results.childResults[index].answer = (stepValue?stepValue:null);
 
             if (stepType == 'IRK-NUMERIC-QUESTION-STEP')
                 results.childResults[index].unit = (stepUnit?stepUnit:null);
+
+            if (stepType == 'IRK-CONSENT-REVIEW-STEP' && consentType == 'signature') {
+                results.childResults[index].signature = (angular.isDefined(formData.signature)?formData.signature:null);
+                results.childResults[index].date = (angular.isDefined(formData.signature)?(new Date()).toDateString():null);
+            }
 
             results.childResults[index].end = new Date();
             results.end = new Date();
@@ -357,7 +363,7 @@ angular.module('ionicResearchKit',[])
                         var next = angular.element(document.querySelectorAll('.irk-next-button'));
                         if (form.length > 0  
                             && ((stepType!='IRK-DATE-QUESTION-STEP' && stepType!='IRK-TIME-QUESTION-STEP' && form.hasClass('ng-invalid'))
-                                || ((stepType=='IRK-DATE-QUESTION-STEP' || stepType=='IRK-TIME-QUESTION-STEP') && input.hasClass('ng-invalid')))) 
+                                || ((stepType=='IRK-DATE-QUESTION-STEP' || stepType=='IRK-TIME-QUESTION-STEP') && input.hasClass('ng-invalid'))))
                         {
                             angular.element(next[0]).attr("disabled", "disabled");
                             angular.element(next[1]).attr("disabled", "disabled");
@@ -492,7 +498,7 @@ angular.module('ionicResearchKit',[])
                 var input = form.find('input');
                 if (form.length > 0  
                     && ((stepType!='IRK-DATE-QUESTION-STEP' && stepType!='IRK-TIME-QUESTION-STEP' && (form.hasClass('ng-pristine') || form.hasClass('ng-invalid')))
-                        || ((stepType=='IRK-DATE-QUESTION-STEP' || stepType=='IRK-TIME-QUESTION-STEP') && (input.hasClass('ng-pristine') || input.hasClass('ng-invalid')))))                     
+                        || ((stepType=='IRK-DATE-QUESTION-STEP' || stepType=='IRK-TIME-QUESTION-STEP') && (input.hasClass('ng-pristine') || input.hasClass('ng-invalid')))))
                     element.attr("disabled", "disabled");
                 else
                     element.removeAttr("disabled");
@@ -1155,16 +1161,25 @@ angular.module('ionicResearchKit',[])
                         '</div>'+
                         '</ion-content>'
             }
-            else if (reviewType == 'signature') {
+            else if (reviewType == 'name') {
                 return  '<form name="form'+attr.id+'" class="irk-slider" novalidate>'+
                         '<div class="irk-centered">'+
                         '<h2>Consent</h2>'+
-                        '<p>'+attr.summary+'</p>'+
+                        '<p>'+attr.text+'</p>'+
                         '</div>'+
                         '<div class="irk-spacer"></div>'+
                         '<div ng-transclude>'+
                         '</div>'+
                         '</form>'
+            }
+            else if (reviewType == 'signature') {
+                return  '<div class="irk-centered">'+
+                        '<h2>Signature</h2>'+
+                        '<p>Please sign using your finger on the line below.</p>'+
+                        '<div class="irk-spacer"></div>'+
+                        '<div ng-transclude>'+
+                        '</div>'+
+                        '</div>'
             }
         },
         link: function(scope, element, attrs, controller) {
@@ -1197,7 +1212,7 @@ angular.module('ionicResearchKit',[])
 //======================================================================================
 // Usage: 
 // =====================================================================================
-.directive('irkConsentSignature', function() {
+.directive('irkConsentName', function() {
     return {
         restrict: 'E',
         replace: true,
@@ -1219,6 +1234,86 @@ angular.module('ionicResearchKit',[])
             var sigId = attrs.id;
             scope.$parent.$parent.formData[stepId] = {};
             scope.$parent.$parent.formData[stepId][sigId] = { "title": attrs.title };
+        }
+    }
+})
+
+//======================================================================================
+// Usage: 
+// =====================================================================================
+.directive('irkConsentSignature', function() {
+    return {
+        restrict: 'E',
+        replace: true,
+        require: '^?irkConsentReviewStep',
+        controller: ['$scope', function($scope) {
+            $scope.signaturePad = null;
+
+            $scope.dirtySignature = function(isDirty) {
+                var buttonClear = angular.element(document.querySelector('.irk-button-signature-clear'));
+                var buttonSign = angular.element(document.querySelector('.irk-button-signature-sign'));
+                buttonClear.toggleClass('ng-hide', !isDirty);
+                buttonSign.toggleClass('ng-hide', isDirty);
+
+                var next = angular.element(document.querySelectorAll('.irk-next-button'));
+                if (!isDirty)
+                {
+                    angular.element(next[0]).attr("disabled", "disabled");
+                    angular.element(next[1]).attr("disabled", "disabled");
+                } 
+                else 
+                {
+                    angular.element(next[0]).removeAttr("disabled");
+                    angular.element(next[1]).removeAttr("disabled");
+                }
+            };
+
+            $scope.clearSignature = function() {
+                $scope.signaturePad.clear();
+                $scope.$parent.$parent.formData.signature = null;
+                $scope.dirtySignature(false);
+            };
+
+            $scope.saveSignature = function() {
+                $scope.$parent.$parent.formData.signature = $scope.signaturePad.toDataURL();
+            }   
+        }],
+        template: function(elem, attr) {
+            return  '<div>'+
+                    '<canvas id="signatureCanvas" class="irk-signature-canvas"></canvas>'+
+                    '<a class="button button-clear button-positive irk-button-signature-clear" ng-click="clearSignature()" ng-hide="true">Clear</a>'+
+                    '<a class="button button-clear button-dark irk-button-signature-sign" ng-disabled="true">Sign Here</a>'+
+                    '</div>'
+        },
+        link: function(scope, element, attrs, controller) {            
+            scope.$on("slideBox.slideChanged", function(e, index, count) {
+                //Show only for Consent Review Signature
+                var step = angular.element(document.querySelectorAll('.irk-slider-slide')[index].querySelector('.irk-step'));
+                var stepType = step.prop('tagName');
+                var consentType = step.attr('type');
+
+                if (stepType=='IRK-CONSENT-REVIEW-STEP' && consentType=='signature') {
+                    //Initially set the signature canvas
+                    if (!scope.signaturePad) {
+                        var canvas = document.getElementById('signatureCanvas');
+                        scope.signaturePad = new SignaturePad(canvas);
+
+                        var canvasEl = angular.element(canvas);
+                        canvasEl.on('touchstart', function (e) {
+                            scope.dirtySignature(true);
+                        });
+
+                        canvasEl.on('touchend', function (e) {
+                            scope.saveSignature();
+                        });                        
+                    }
+
+                    //Set the Next/Done state
+                    if (!scope.signaturePad || scope.signaturePad.isEmpty()) {
+                        scope.dirtySignature(false);
+                    }
+                }
+            });
         }
     }
 })

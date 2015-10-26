@@ -5,6 +5,7 @@
     "ionic": "driftyco/ionic-bower#1.1.0"
   },
   "dependencies": {
-    "checklist-model": "~0.6.0"
+    "checklist-model": "~0.6.0",
+    "signature_pad": "~1.5.1"
   }
 }
