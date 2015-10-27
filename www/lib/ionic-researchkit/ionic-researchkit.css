@@ -217,22 +217,20 @@ button.irk-image:before {
 }
 
 .irk-countdown {
-  width: 120px; 
-  height: 120px; 
+  width: 150px; 
+  height: 150px; 
   margin-left: auto; 
   margin-right: auto;
 }
 
 .irk-countdown .dialgauge-value {
-  font-size: 30px;
+  font-size: 50px;
   font-weight: 200;
   fill: white;
   stroke: white;
 }
 
 .irk-countdown-started .dialgauge-value {
-  font-size: 30px;
-  font-weight: 200;
   fill: black;
   stroke: black;
 }

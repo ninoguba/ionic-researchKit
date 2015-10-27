@@ -495,8 +495,11 @@ angular.module('ionicResearchKit',[])
     return{
         restrict: 'A',
         link: function(scope, element, attrs, controller) {
-            scope.$on("slideBox.slideChanged", function(e, index) {
-                element.toggleClass('ng-hide', index == 0);
+            scope.$on("slideBox.slideChanged", function(e, index, count) {
+                var step = angular.element(document.querySelectorAll('.irk-slider-slide')[index].querySelector('.irk-step'));
+                var stepType = step.prop('tagName');
+
+                element.toggleClass('ng-hide', index == 0 || (stepType=='IRK-COMPLETION-STEP' && (index == count - 1)));
             });
         }
     }
@@ -1427,11 +1430,11 @@ angular.module('ionicResearchKit',[])
                     '   ng-model="countdown"'+
                     '   scale-min="0"'+
                     '   scale-max="{{duration}}"'+
-                    '   border-width="0"'+
+                    '   border-width="1"'+
                     '   track-color="#ffffff"'+
                     '   bar-color="#387ef5"'+
                     '   bar-color-end="#387ef5"'+
-                    '   bar-width="1"'+
+                    '   bar-width="2"'+
                     '   angle="360"'+
                     '   rotate="360"'+
                     '   scale-minor-length="0"'+
