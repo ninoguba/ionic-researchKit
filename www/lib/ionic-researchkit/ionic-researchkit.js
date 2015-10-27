@@ -201,22 +201,33 @@ angular.module('ionicResearchKit',[])
                 };
 
                 $scope.doCancel = function() {
-                    console.log('Clicked cancel');
+                    var index = $scope.currentSlide;
+                    var step = angular.element(document.querySelectorAll('.irk-slider-slide')[index].querySelector('.irk-step'));
+                    var stepType = step.prop('tagName');
 
-                    // Show the action sheet
-                    var hideSheet = $ionicActionSheet.show({
-                        destructiveText: (ionic.Platform.isAndroid()?'<i class="icon ion-android-exit assertive"></i> ':'')+'End Task',
-                        cancelText: 'Cancel',
-                        cancel: function() {
-                            hideSheet();
-                        },
-                        destructiveButtonClicked: function(index) {
-                            console.log('Clicked end task');
-                            $scope.doSave();
-                            $scope.doEnd();
-                            return true;
-                        }
-                    });
+                    if (stepType=='IRK-COMPLETION-STEP' && index==slider.slidesCount()-1)
+                    {                    
+                        console.log('Clicked done');
+                        $scope.doNext();
+                    }
+                    else
+                    {
+                        console.log('Clicked cancel');
+                        // Show the action sheet
+                        var hideSheet = $ionicActionSheet.show({
+                            destructiveText: (ionic.Platform.isAndroid()?'<i class="icon ion-android-exit assertive"></i> ':'')+'End Task',
+                            cancelText: 'Cancel',
+                            cancel: function() {
+                                hideSheet();
+                            },
+                            destructiveButtonClicked: function(index) {
+                                console.log('Clicked end task');
+                                $scope.doSave();
+                                $scope.doEnd();
+                                return true;
+                            }
+                        });
+                    }
                 };
 
                 $scope.doEnd = function() {
@@ -429,7 +440,7 @@ angular.module('ionicResearchKit',[])
                     '</div>'+
                     '<h1 class="title" irk-step-title></h1>'+
                     '<div class="buttons">'+
-                    '<button class="button button-clear button-positive" ng-click="doCancel()">Cancel</button>'+
+                    '<button class="button button-clear button-positive" ng-click="doCancel()" irk-step-cancel>Cancel</button>'+
                     '</div>'+
                     '</ion-header-bar>'
                     );
@@ -471,6 +482,23 @@ angular.module('ionicResearchKit',[])
         link: function(scope, element, attrs, controller) {
             scope.$on("slideBox.slideChanged", function(e, index) {
                 element.toggleClass('ng-hide', index == 0);
+            });
+        }
+    }
+})
+
+.directive('irkStepCancel', function() {
+    return{
+        restrict: 'A',
+        link: function(scope, element, attrs, controller) {
+            scope.$on("slideBox.slideChanged", function(e, index, count) {
+                var step = angular.element(document.querySelectorAll('.irk-slider-slide')[index].querySelector('.irk-step'));
+                var stepType = step.prop('tagName');
+
+                if (stepType=='IRK-COMPLETION-STEP' && (index == count - 1))
+                    element.text("Done");
+                else
+                    element.text("Cancel");
             });
         }
     }
