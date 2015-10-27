@@ -18,7 +18,7 @@
   display: table !important;
   width: 100% !important;
   height: 100% !important;
-  margin-top: -100px !important;
+  margin-top: -50px !important;
 }
 
 .irk-offcentered-content {
@@ -35,6 +35,10 @@
 
 .irk-spacer {
   height: 15px;
+}
+
+.irk-image-spacer {
+  height: 25px;
 }
 
 .irk-text-centered {
@@ -149,6 +153,11 @@ button.irk-image:before {
   background-size: contain !important;
 }
 
+button.irk-completion-icon:before {
+  font-size: 150px !important;
+  margin-top: 50px;
+}
+
 .irk-step-image {
   background-size: contain;
   background-repeat: no-repeat;
@@ -159,7 +168,8 @@ button.irk-image:before {
 }
 
 .irk-consent-none {
-  display: none;
+  background-image: none;
+  height: 100px;
 }
 
 .irk-consent-custom {
@@ -206,4 +216,16 @@ button.irk-image:before {
   width: 95%;
   height: 180px;
   border-bottom: 1px solid #ccc;
+}
+
+.irk-countdown {
+  width: 120px; 
+  height: 120px; 
+  margin-left: auto; 
+  margin-right: auto;
+}
+
+.irk-countdown .dialgauge-value {
+  font-size: 30px;
+  font-weight: 200;
 }

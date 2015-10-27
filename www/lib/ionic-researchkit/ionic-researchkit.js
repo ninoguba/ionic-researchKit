@@ -10,6 +10,7 @@
 * Required dependencies:
 * checklist-model (https://github.com/vitalets/checklist-model)
 * signature_pad (https://github.com/szimek/signature_pad)
+* angular-dialgauge (https://github.com/cdjackson/angular-dialgauge)
 */
 angular.module('ionicResearchKit',[])
 //======================================================================================
@@ -65,7 +66,7 @@ angular.module('ionicResearchKit',[])
                 results.childResults[index].answer = (stepValue?stepValue.toDateString():null);
             else if (stepType == 'IRK-TIME-QUESTION-STEP')
                 results.childResults[index].answer = (stepValue?stepValue.toTimeString():null);
-            else if (stepType != 'IRK-INSTRUCTION-STEP' && stepType != 'IRK-VISUAL-CONSENT-STEP' && !(stepType=='IRK-CONSENT-REVIEW-STEP' && consentType=='signature'))
+            else if (stepType != 'IRK-INSTRUCTION-STEP' && stepType != 'IRK-COUNTDOWN-STEP' && stepType != 'IRK-COMPLETION-STEP' && stepType != 'IRK-VISUAL-CONSENT-STEP' && !(stepType=='IRK-CONSENT-REVIEW-STEP' && consentType=='signature'))
                 results.childResults[index].answer = (stepValue?stepValue:null);
 
             if (stepType == 'IRK-NUMERIC-QUESTION-STEP')
@@ -531,7 +532,7 @@ angular.module('ionicResearchKit',[])
                 var step = angular.element(document.querySelectorAll('.irk-slider-slide')[index].querySelector('.irk-step'));
                 var stepType = step.prop('tagName');
                 var consentType = step.attr('type');
-                element.toggleClass('ng-hide', (stepType=='IRK-VISUAL-CONSENT-STEP' || stepType=='IRK-CONSENT-SHARING-STEP' || stepType=='IRK-CONSENT-REVIEW-STEP'));
+                element.toggleClass('ng-hide', (stepType=='IRK-VISUAL-CONSENT-STEP' || stepType=='IRK-CONSENT-SHARING-STEP' || stepType=='IRK-CONSENT-REVIEW-STEP' || stepType=='IRK-COUNTDOWN-STEP' || stepType=='IRK-COMPLETION-STEP'));
             });
         }
     }
@@ -575,11 +576,11 @@ angular.module('ionicResearchKit',[])
         restrict: 'E',
         template: function(elem, attr) {
             return 	'<div class="irk-offcentered-container"><div class="irk-offcentered-content">'+
-                (attr.image ? '<div class="item irk-step-image '+attr.image+'"></div>' : '')+
                 '<h2>'+attr.title+'</h2>'+
                 (attr.text ? '<p>'+attr.text+'</p>' : '')+
                 (attr.link ? '<a class="button button-clear button-positive irk-learn-more" href="'+attr.link+'" target="_system">'+(attr.linkText ? attr.linkText : 'Learn more')+'</a>' : '')+
                 '<div class="irk-spacer"></div>'+
+                (attr.image ? '<div class="irk-spacer"></div><div class="item irk-step-image '+attr.image+'"></div><div class="irk-image-spacer"></div>' : '')+
                 '<button class="button button-outline button-positive irk-instruction-button" ng-click="$parent.doNext()">'+(attr.buttonText ? attr.buttonText : 'Get Started')+'</button>'+
                 '</div></div>'
         },
@@ -1051,8 +1052,7 @@ angular.module('ionicResearchKit',[])
             }
             else 
             {
-                return  '<div class="irk-offcentered-container"><div class="irk-offcentered-content">'+
-                        '<div class="irk-spacer"></div>'+
+                return  '<div class="irk-centered">'+
                         '<div class="item irk-step-image '+consentImageClass+' positive"></div>'+
                         '<h2>'+consentTitle+'</h2>'+
                         '<p>'+attr.summary+'</p>'+
@@ -1061,7 +1061,7 @@ angular.module('ionicResearchKit',[])
                         '</div>'+
                         '<div class="irk-spacer"></div>'+
                         (consentType=='overview'?'<button class="button button-outline button-positive irk-instruction-button" ng-click="$parent.doNext()">Get Started</button>':'')+
-                        '</div></div>';
+                        '</div>';
             }
         },
         link: function(scope, element, attrs, controller) {
@@ -1315,6 +1315,90 @@ angular.module('ionicResearchKit',[])
                     }
                 }
             });
+        }
+    }
+})
+
+//======================================================================================
+// Usage: 
+// =====================================================================================
+.directive('irkCountdownStep', function() {
+    return {
+        restrict: 'E',
+        controller: ['$scope', '$attrs', '$interval', function($scope, $attrs, $interval) {
+            $scope.duration = ($attrs.duration?$attrs.duration:5);
+
+            $scope.startCountdown = function() {
+                $scope.countdown = 0;
+                $interval(function() {
+                    $scope.countdown++;
+
+                    //Step next at the end of countdown
+                    if ($scope.countdown == $scope.duration+1) {
+                        $scope.$parent.doStepNext();
+                    }
+                }, 1000, $scope.duration+1);
+            }   
+        }],
+        template: function(elem, attr) {
+            return  '<div class="irk-offcentered-container"><div class="irk-offcentered-content">'+
+                    '<p>Starting activity in</p>'+
+                    '<div class="irk-countdown">'+
+                    '<ng-dial-gauge id="'+attr.id+'"'+
+                    '   ng-model="countdown"'+
+                    '   scale-min="0"'+
+                    '   scale-max="{{duration}}"'+
+                    '   border-width="0"'+
+                    '   track-color="#ffffff"'+
+                    '   bar-color="#387ef5"'+
+                    '   bar-color-end="#387ef5"'+
+                    '   bar-width="1"'+
+                    '   angle="360"'+
+                    '   rotate="0"'+
+                    '   scale-minor-length="0"'+
+                    '   scale-major-length="0"'+
+                    '   line-cap="butt"'+
+                    '/>'+
+                    '</div>'+
+                    '</div></div>'
+        },
+        link: function(scope, element, attrs, controller) {
+            element.addClass('irk-step');
+
+            scope.$on("slideBox.slideChanged", function(e, index, count) {
+                //Start the countdown
+                var step = angular.element(document.querySelectorAll('.irk-slider-slide')[index].querySelector('.irk-step'));
+                var stepType = step.prop('tagName');
+
+                if (stepType=='IRK-COUNTDOWN-STEP') {
+                    scope.startCountdown();
+                }
+            });            
+        }
+    }
+})
+
+//======================================================================================
+// Usage: 
+// =====================================================================================
+.directive('irkCompletionStep', function() {
+    return {
+        restrict: 'E',
+        template: function(elem, attr) {
+            return  '<div class="irk-offcentered-container"><div class="irk-offcentered-content">'+
+                '<h2>Activity Complete</h2>'+
+                '<p>Your data will be analyzed and you will be notified when your results are ready.</p>'+
+                (attr.link ? '<a class="button button-clear button-positive irk-learn-more" href="'+attr.link+'" target="_system">'+(attr.linkText ? attr.linkText : 'Learn more')+'</a>' : '')+
+                '<div class="irk-spacer"></div>'+
+                '<div class="irk-spacer"></div>'+
+                '<div class="item irk-step-image">'+
+                '<button class="button button-clear button-positive irk-completion-icon icon ion-ios-checkmark" ng-click="$parent.doNext()"></button>'+
+                '</div>'+
+                '<div class="irk-image-spacer"></div>'+
+                '</div></div>'
+        },
+        link: function(scope, element, attrs, controller) {
+            element.addClass('irk-step');
         }
     }
 })

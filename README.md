@@ -15,6 +15,7 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
 
 - checklist-model [https://github.com/vitalets/checklist-model](https://github.com/vitalets/checklist-model)
 - signature_pad [https://github.com/szimek/signature_pad](https://github.com/szimek/signature_pad)
+- angular-dialgauge [https://github.com/cdjackson/angular-dialgauge](https://github.com/cdjackson/angular-dialgauge)
 
 # Usage
 
@@ -242,6 +243,12 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
 
 `<irk-consent-review-step>` is the equivalent of the `ORKConsentReviewStep` class.  Depending on it's `type` attribute, it could encompass one or more `<irk-consent-name>` or `<irk-consent-signature>` elements which are the broken up equivalent of the `ORKConsentSignature` class.
 
+### Active Tasks
+
+`<irk-countdown-step>` is the equivalent of the `ORKCountdownStep` class.
+
+`<irk-completion-step>` is the equivalent of the `ORKCompletionStep` class.
+
 # Demo
 
 [Survey demo](https://youtu.be/U96anI8PA08)
@@ -274,7 +281,7 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
     - [x] Support images
   - [x] Form Step directive
     - [ ] Support more answer formats
-- [ ] Consent directives
+- [x] Consent directives
   - [x] Visual Consent
     - [x] In Document Only Type
     - [x] Support custom image
@@ -284,6 +291,13 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
     - [x] Signature Capture
   - [ ] PDF Generation
 - [ ] Active Tasks directives
+  - [x] Countdown Step
+  - [x] Completion Step
+  - [ ] Fitness Task
+  - [ ] Voice Task
+  - [ ] Gait and Balance Task
+  - [ ] Tapping Speed Task
+  - [ ] Spacial Memory Task
 - [x] Results
   - [x] Output results in JSON
   - [ ] Collect results into LocalStorage (save/resume)
