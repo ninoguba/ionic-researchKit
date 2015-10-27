@@ -1453,7 +1453,7 @@ angular.module('ionicResearchKit',[])
                     '<div class="irk-spacer"></div>'+
                     '<div class="irk-spacer"></div>'+
                     '<div class="item irk-step-image">'+
-                    '<button class="button button-clear button-positive irk-completion-icon icon ion-ios-checkmark" ng-click="$parent.doNext()"></button>'+
+                    '<i class="irk-completion-icon icon ion-ios-checkmark positive" ng-click="$parent.doNext()"></i>'+
                     '</div>'+
                     '<div class="irk-image-spacer"></div>'+
                     '</div></div>'

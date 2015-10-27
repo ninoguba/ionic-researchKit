@@ -156,11 +156,6 @@ button.irk-image:before {
   background-size: contain !important;
 }
 
-button.irk-completion-icon:before {
-  font-size: 150px !important;
-  margin-top: 50px;
-}
-
 .irk-step-image {
   background-size: contain;
   background-repeat: no-repeat;
@@ -231,4 +226,8 @@ button.irk-completion-icon:before {
 .irk-countdown .dialgauge-value {
   font-size: 30px;
   font-weight: 200;
+}
+
+.irk-completion-icon {
+  font-size: 150px;
 }
