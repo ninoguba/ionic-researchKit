@@ -703,7 +703,7 @@ angular.module('ionicResearchKit',[])
                     '<h3>'+attr.title+'</h3>'+
                     (attr.text ? '<p>'+attr.text+'</p>' : '')+
                     '</div>'+
-                    '</div>'
+                    '</div>'+
                     '<div class="irk-spacer"></div>'+
                     '<div class="list">'+
                     '<label class="item item-input">'+
