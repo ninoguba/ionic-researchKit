@@ -49,6 +49,16 @@
 </ol>
 
 <h1>
+<a id="dependencies" class="anchor" href="#dependencies" aria-hidden="true"><span class="octicon octicon-link"></span></a>Dependencies</h1>
+
+<ul>
+<li>checklist-model <a href="https://github.com/vitalets/checklist-model">https://github.com/vitalets/checklist-model</a>
+</li>
+<li>signature_pad <a href="https://github.com/szimek/signature_pad">https://github.com/szimek/signature_pad</a>
+</li>
+</ul>
+
+<h1>
 <a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h1>
 
 <ol>
@@ -224,8 +234,14 @@
   &lt;/irk-task&gt;
 
   &lt;irk-task&gt;
-    &lt;irk-consent-review-step id="c12" type="signature" summary="Lorem ipsum dolor sit amet..." signature-page-title="Consent" signature-page-content="I agree to participate in this research study."&gt;
-      &lt;irk-consent-signature id="s1" title="Participant" given-name="" family-name="" signatureImage="" signatureDate="" signature-date-format="" requires-name="true" requires-signature-image="true"/&gt;
+    &lt;irk-consent-review-step id="c12" type="name" text="Lorem ipsum dolor sit amet..." signature-page-title="Consent" signature-page-content="I agree to participate in this research study."&gt;
+      &lt;irk-consent-name id="s1" title="Participant" given-name="" family-name="" requires-name="true"/&gt;
+    &lt;/irk-consent-review-step&gt;
+  &lt;/irk-task&gt;
+
+  &lt;irk-task&gt;
+    &lt;irk-consent-review-step id="c13" type="signature"&gt;
+      &lt;irk-consent-signature id="s1" signatureImage="" signatureDate="" signature-date-format="" requires-signature-image="true"/&gt;
     &lt;/irk-consent-review-step&gt;
   &lt;/irk-task&gt;
 
@@ -278,77 +294,37 @@
 <h1>
 <a id="demo" class="anchor" href="#demo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Demo</h1>
 
-<h3>
-<a id="survey-2" class="anchor" href="#survey-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Survey</h3>
+<p><a href="https://youtu.be/U96anI8PA08">Survey demo</a></p>
 
-<p><img src="https://cloud.githubusercontent.com/assets/4361804/10489873/9c77f440-7253-11e5-951c-5826a767d0f6.gif" alt="Survey demo"></p>
-
-<h3>
-<a id="consent-2" class="anchor" href="#consent-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Consent</h3>
-
-<p><img src="https://cloud.githubusercontent.com/assets/4361804/10498955/693a729a-7282-11e5-938c-b03714ce836d.gif" alt="Consent demo"></p>
-
-<p><em>Click <a href="https://youtu.be/-NLjgpvtHK0">here</a> to watch app demo on YouTube.</em></p>
+<p><a href="https://youtu.be/lb0yK52kZXs">Consent demo</a></p>
 
 <h1>
 <a id="roadmap" class="anchor" href="#roadmap" aria-hidden="true"><span class="octicon octicon-link"></span></a>Roadmap</h1>
 
 <ul>
-<li>[x] Task View Controller equivalent 
-
-<ul>
-<li>[x] Show "Step x of y" title</li>
-<li>[x] Hide Back button on first step</li>
-<li>[x] Cancel button shows action sheet</li>
-<li>[x] End Task button (on action sheet) exits task view</li>
-<li>[x] Change Next button label to Done when on last step</li>
-<li>[x] Done button exits task view</li>
-<li>[x] Relaunch should re-init steps</li>
-<li>[x] Hide Skip button when input is required</li>
-<li>[x] Enable Next button on input change</li>
-</ul>
-</li>
-<li>[x] Results
-
-<ul>
-<li>[x] Output results in JSON</li>
-<li>[x] Capture all result metadata</li>
-<li>[ ] Collect results into LocalStorage</li>
-</ul>
-</li>
+<li>[x] Task View equivalent </li>
 <li>[x] Survey directives
 
 <ul>
 <li>[x] Instruction Step directive
 
 <ul>
-<li>[x] Show Get Started button</li>
-<li>[x] Get Started button shows next step</li>
-<li>[x] Hide Next and Skip buttons</li>
-<li>[x] Show optional link</li>
-<li>[ ] Show optional image</li>
+<li>[ ] Support optional image</li>
 </ul>
 </li>
 <li>[x] Scale Question Step directive
 
 <ul>
-<li>[x] Support min/max text description</li>
 <li>[ ] Support step bars</li>
 <li>[ ] Support vertical orientation</li>
 </ul>
 </li>
-<li>[x] Boolean Question Step directive
-
-<ul>
-<li>[x] Apply radio fix (iOS9)</li>
-</ul>
-</li>
+<li>[x] Boolean Question Step directive</li>
 <li>[x] Text Question Step directive
 
 <ul>
 <li>[x] Multi lines</li>
 <li>[x] Single line</li>
-<li>[ ] Fix: push up Next/Skip buttons when keyboard is displayed on iOS</li>
 </ul>
 </li>
 <li>[x] Text Choice Question Step directive
@@ -360,8 +336,12 @@
 </li>
 <li>[x] Numeric Question Step directive</li>
 <li>[x] Date Question Step directive</li>
-<li>[x] Time Question Step directive</li>
+<li>[x] Time Question Step directive
+
+<ul>
 <li>[ ] Time Interval Question Step directive</li>
+</ul>
+</li>
 <li>[x] Value Picker Question Step directive</li>
 <li>[x] Image Choice Question Step directive
 
@@ -374,8 +354,6 @@
 
 <ul>
 <li>[ ] Support more answer formats</li>
-<li>[x] Fix: keep inputs in view when keyboard is displayed on iOS</li>
-<li>[ ] Fix: push up Next/Skip buttons when keyboard is displayed on iOS</li>
 </ul>
 </li>
 </ul>
@@ -386,7 +364,6 @@
 <li>[x] Visual Consent
 
 <ul>
-<li>[x] Learn More popup</li>
 <li>[x] In Document Only Type</li>
 <li>[ ] Support custom image</li>
 </ul>
@@ -396,13 +373,20 @@
 
 <ul>
 <li>[x] Name Capture</li>
-<li>[ ] Signature Capture</li>
+<li>[x] Signature Capture</li>
+</ul>
+</li>
 <li>[ ] PDF Generation</li>
 </ul>
 </li>
+<li>[ ] Active Tasks directives</li>
+<li>[x] Results
+
+<ul>
+<li>[x] Output results in JSON</li>
+<li>[ ] Collect results into LocalStorage</li>
 </ul>
 </li>
-<li>[ ] Active Tasks directives</li>
 <li>[ ] Integrations
 
 <ul>
