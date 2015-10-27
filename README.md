@@ -240,7 +240,7 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
 
 `<irk-consent-sharing-step>` is the equivalent of the `ORKConsentSharingStep` class.
 
-`<irk-consent-review-step>` is the equivalent of the `ORKConsentReviewStep` class.  Depending on it's `type` attribute, it could encompass one or more `<irk-consent-signature>` elements which are the equivalent of the `ORKConsentSignature` class.
+`<irk-consent-review-step>` is the equivalent of the `ORKConsentReviewStep` class.  Depending on it's `type` attribute, it could encompass one or more `<irk-consent-name>` or `<irk-consent-signature>` elements which are the broken up equivalent of the `ORKConsentSignature` class.
 
 # Demo
 
@@ -250,26 +250,26 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
 
 # Roadmap
 
-- [x] Task View equivalent 
+- [x] Task View 
 - [x] Survey directives
-  - [x] Instruction Step directive
+  - [x] Instruction Step
     - [ ] Support optional image
-  - [x] Scale Question Step directive
+  - [x] Scale Question Step
     - [ ] Support step bars
     - [ ] Support vertical orientation
-  - [x] Boolean Question Step directive
-  - [x] Text Question Step directive
+  - [x] Boolean Question Step
+  - [x] Text Question Step
     - [x] Multi lines
     - [x] Single line
-  - [x] Text Choice Question Step directive
+  - [x] Text Choice Question Step
     - [x] Single choice
     - [x] Multiple choice
-  - [x] Numeric Question Step directive
-  - [x] Date Question Step directive
-  - [x] Time Question Step directive
-    - [ ] Time Interval Question Step directive
-  - [x] Value Picker Question Step directive
-  - [x] Image Choice Question Step directive
+  - [x] Numeric Question Step
+  - [x] Date Question Step
+  - [x] Time Question Step
+    - [ ] Time Interval Question Step
+  - [x] Value Picker Question Step
+  - [x] Image Choice Question Step
     - [x] Support icons
     - [x] Support images
   - [x] Form Step directive
@@ -286,7 +286,7 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
 - [ ] Active Tasks directives
 - [x] Results
   - [x] Output results in JSON
-  - [ ] Collect results into LocalStorage
+  - [ ] Collect results into LocalStorage (save/resume)
 - [ ] Integrations
   - [ ] HealthKit
   - [ ] Google Fit
