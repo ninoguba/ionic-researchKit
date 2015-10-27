@@ -576,13 +576,15 @@ angular.module('ionicResearchKit',[])
         restrict: 'E',
         template: function(elem, attr) {
             return 	'<div class="irk-offcentered-container"><div class="irk-offcentered-content">'+
-                '<h2>'+attr.title+'</h2>'+
-                (attr.text ? '<p>'+attr.text+'</p>' : '')+
-                (attr.link ? '<a class="button button-clear button-positive irk-learn-more" href="'+attr.link+'" target="_system">'+(attr.linkText ? attr.linkText : 'Learn more')+'</a>' : '')+
-                '<div class="irk-spacer"></div>'+
-                (attr.image ? '<div class="irk-spacer"></div><div class="item irk-step-image '+attr.image+'"></div><div class="irk-image-spacer"></div>' : '')+
-                '<button class="button button-outline button-positive irk-instruction-button" ng-click="$parent.doNext()">'+(attr.buttonText ? attr.buttonText : 'Get Started')+'</button>'+
-                '</div></div>'
+                    '<div class="irk-text-centered">'+
+                    '<h2>'+attr.title+'</h2>'+
+                    (attr.text ? '<p>'+attr.text+'</p>' : '')+
+                    (attr.link ? '<a class="button button-clear button-positive irk-learn-more" href="'+attr.link+'" target="_system">'+(attr.linkText ? attr.linkText : 'Learn more')+'</a>' : '')+
+                    '</div>'+
+                    '<div class="irk-spacer"></div>'+
+                    (attr.image ? '<div class="irk-spacer"></div><div class="item irk-step-image '+attr.image+'"></div><div class="irk-image-spacer"></div>' : '')+
+                    '<button class="button button-outline button-positive irk-instruction-button" ng-click="$parent.doNext()">'+(attr.buttonText ? attr.buttonText : 'Get Started')+'</button>'+
+                    '</div></div>'
         },
         link: function(scope, element, attrs, controller) {
             element.addClass('irk-step');
@@ -598,20 +600,22 @@ angular.module('ionicResearchKit',[])
         restrict: 'E',
         template: function(elem, attr) {
             return 	'<form name="form.'+attr.id+'" class="irk-slider" novalidate>'+
-                '<div class="irk-centered">'+
-                '<h3>'+attr.title+'</h3>'+
-                (attr.text ? '<p>'+attr.text+'</p>' : '')+
-                '</div>'+
-                '<div class="irk-spacer"></div>'+
-                '<h3>{{$parent.formData.'+attr.id+' || \'&nbsp;\'}}</h3>'+
-                '<div class="range">'+
-                attr.min+
-                (attr.minText?'<br>'+attr.minText:'')+
-                '<input type="range" name="'+attr.id+'" min="'+attr.min+'" max="'+attr.max+'" step="'+attr.step+'" value="'+attr.value+'" ng-model="$parent.formData.'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.dirty()">'+
-                attr.max+
-                (attr.maxText?'<br>'+attr.maxText:'')+
-                '</div>'+
-                '</form>'
+                    '<div class="irk-centered">'+
+                    '<div class="irk-text-centered">'+
+                    '<h3>'+attr.title+'</h3>'+
+                    (attr.text ? '<p>'+attr.text+'</p>' : '')+
+                    '</div>'+
+                    '</div>'+
+                    '<div class="irk-spacer"></div>'+
+                    '<h3>{{$parent.formData.'+attr.id+' || \'&nbsp;\'}}</h3>'+
+                    '<div class="range">'+
+                    attr.min+
+                    (attr.minText?'<br>'+attr.minText:'')+
+                    '<input type="range" name="'+attr.id+'" min="'+attr.min+'" max="'+attr.max+'" step="'+attr.step+'" value="'+attr.value+'" ng-model="$parent.formData.'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.dirty()">'+
+                    attr.max+
+                    (attr.maxText?'<br>'+attr.maxText:'')+
+                    '</div>'+
+                    '</form>'
         },
         link: function(scope, element, attrs, controller) {
             element.addClass('irk-step');
@@ -627,28 +631,30 @@ angular.module('ionicResearchKit',[])
         restrict: 'E',
         template: function(elem, attr) {
             return 	'<form name="form.'+attr.id+'" class="irk-slider" novalidate>'+
-                '<div class="irk-centered">'+
-                '<h3>'+attr.title+'</h3>'+
-                (attr.text ? '<p>'+attr.text+'</p>' : '')+
-                '</div>'+
-                '<div class="irk-spacer"></div>'+
-                '<div class="list">'+
-                '<label class="item item-radio">'+
-                '<input type="radio" name="'+attr.id+'" value="'+(attr.trueValue?attr.trueValue:'true')+'" ng-model="$parent.formData.'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.dirty()">'+
-                '<div class="radio-content">' +
-                '<div class="item-content disable-pointer-events irk-item-content">'+(attr.trueText?attr.trueText:(attr.trueValue?attr.trueValue:'True'))+'</div>'+
-                '<i class="radio-icon disable-pointer-events icon ion-checkmark positive"></i>'+
-                '</div>' +
-                '</label>'+
-                '<label class="item item-radio">'+
-                '<input type="radio" name="'+attr.id+'" value="'+(attr.falseValue?attr.falseValue:'false')+'" ng-model="$parent.formData.'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.dirty()">'+
-                '<div class="radio-content">' +
-                '<div class="item-content disable-pointer-events irk-item-content">'+(attr.falseText?attr.falseText:(attr.falseValue?attr.falseValue:'False'))+'</div>'+
-                '<i class="radio-icon disable-pointer-events icon ion-checkmark positive"></i>'+
-                '</div>' +
-                '</label>'+
-                '</div>'+
-                '</form>'
+                    '<div class="irk-centered">'+
+                    '<div class="irk-text-centered">'+
+                    '<h3>'+attr.title+'</h3>'+
+                    (attr.text ? '<p>'+attr.text+'</p>' : '')+
+                    '</div>'+
+                    '</div>'+
+                    '<div class="irk-spacer"></div>'+
+                    '<div class="list">'+
+                    '<label class="item item-radio">'+
+                    '<input type="radio" name="'+attr.id+'" value="'+(attr.trueValue?attr.trueValue:'true')+'" ng-model="$parent.formData.'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.dirty()">'+
+                    '<div class="radio-content">' +
+                    '<div class="item-content disable-pointer-events irk-item-content">'+(attr.trueText?attr.trueText:(attr.trueValue?attr.trueValue:'True'))+'</div>'+
+                    '<i class="radio-icon disable-pointer-events icon ion-checkmark positive"></i>'+
+                    '</div>' +
+                    '</label>'+
+                    '<label class="item item-radio">'+
+                    '<input type="radio" name="'+attr.id+'" value="'+(attr.falseValue?attr.falseValue:'false')+'" ng-model="$parent.formData.'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.dirty()">'+
+                    '<div class="radio-content">' +
+                    '<div class="item-content disable-pointer-events irk-item-content">'+(attr.falseText?attr.falseText:(attr.falseValue?attr.falseValue:'False'))+'</div>'+
+                    '<i class="radio-icon disable-pointer-events icon ion-checkmark positive"></i>'+
+                    '</div>' +
+                    '</label>'+
+                    '</div>'+
+                    '</form>'
         },
         link: function(scope, element, attrs, controller) {
             element.addClass('irk-step');
@@ -664,20 +670,22 @@ angular.module('ionicResearchKit',[])
         restrict: 'E',
         template: function(elem, attr) {
             return  '<form name="form.'+attr.id+'" class="irk-slider" novalidate>'+
-                '<div class="irk-centered">'+
-                '<h3>'+attr.title+'</h3>'+
-                (attr.text ? '<p>'+attr.text+'</p>' : '')+
-                '</div>'+
-                '<div class="irk-spacer"></div>'+
-                '<div class="list">'+
-                '<label class="item item-input">'+
-                (attr.multipleLines=="false"
-                ?'<input type="text" placeholder="'+(attr.placeholder?attr.placeholder:'')+'" name="'+attr.id+'" '+(attr.maxLength && parseInt(attr.maxLength,10)>0?'maxlength="'+attr.maxLength+'"':'')+' ng-model="$parent.formData.'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.dirty()">'
-                :'<textarea rows="8" placeholder="'+(attr.placeholder?attr.placeholder:'')+'" name="'+attr.id+'" '+(attr.maxLength && parseInt(attr.maxLength,10)>0?'maxlength="'+attr.maxLength+'"':'')+' ng-model="$parent.formData.'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.dirty()"></textarea>'
-                )+
-                '</label>'+
-                '</div>'+
-                '</form>'
+                    '<div class="irk-centered">'+
+                    '<div class="irk-text-centered">'+
+                    '<h3>'+attr.title+'</h3>'+
+                    (attr.text ? '<p>'+attr.text+'</p>' : '')+
+                    '</div>'+
+                    '</div>'
+                    '<div class="irk-spacer"></div>'+
+                    '<div class="list">'+
+                    '<label class="item item-input">'+
+                    (attr.multipleLines=="false"
+                    ?'<input type="text" placeholder="'+(attr.placeholder?attr.placeholder:'')+'" name="'+attr.id+'" '+(attr.maxLength && parseInt(attr.maxLength,10)>0?'maxlength="'+attr.maxLength+'"':'')+' ng-model="$parent.formData.'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.dirty()">'
+                    :'<textarea rows="8" placeholder="'+(attr.placeholder?attr.placeholder:'')+'" name="'+attr.id+'" '+(attr.maxLength && parseInt(attr.maxLength,10)>0?'maxlength="'+attr.maxLength+'"':'')+' ng-model="$parent.formData.'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.dirty()"></textarea>'
+                    )+
+                    '</label>'+
+                    '</div>'+
+                    '</form>'
         },
         link: function(scope, element, attrs, controller) {
             element.addClass('irk-step');
@@ -694,14 +702,16 @@ angular.module('ionicResearchKit',[])
         transclude: true,
         template: function(elem, attr) {
             return  '<form name="form.'+attr.id+'" class="irk-slider" novalidate>'+
-                '<div class="irk-centered">'+
-                '<h3>'+attr.title+'</h3>'+
-                (attr.text ? '<p>'+attr.text+'</p>' : '')+
-                '</div>'+
-                '<div class="irk-spacer"></div>'+
-                '<div class="list" ng-transclude>'+
-                '</div>'+
-                '</form>'
+                    '<div class="irk-centered">'+
+                    '<div class="irk-text-centered">'+
+                    '<h3>'+attr.title+'</h3>'+
+                    (attr.text ? '<p>'+attr.text+'</p>' : '')+
+                    '</div>'+
+                    '</div>'+
+                    '<div class="irk-spacer"></div>'+
+                    '<div class="list" ng-transclude>'+
+                    '</div>'+
+                    '</form>'
         },
         link: function(scope, element, attrs, controller) {
             element.addClass('irk-step');
@@ -718,19 +728,19 @@ angular.module('ionicResearchKit',[])
         require: '^?irkTextChoiceQuestionStep',
         template: function(elem, attr) {
             return  '<label class="item item-radio">'+
-                (elem.parent().attr("style")=="multiple"?
-                '<input type="checkbox" name="'+elem.parent().attr("id")+'" value="'+attr.value+'" checklist-model="$parent.$parent.formData.'+elem.parent().attr("id")+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.$parent.$parent.dirty()">'
-                :
-                '<input type="radio" name="'+elem.parent().attr("id")+'" value="'+attr.value+'" ng-model="$parent.$parent.formData.'+elem.parent().attr("id")+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.$parent.dirty()">'
-                )+
-                '<div class="radio-content">' +
-                '<div class="item-content disable-pointer-events irk-item-content">'+
-                attr.text+
-                (attr.detailText?'<p>'+attr.detailText+'</p>':'')+
-                '</div>'+
-                '<i class="radio-icon disable-pointer-events icon ion-checkmark positive"></i>'+
-                '</div>' +
-                '</label>'
+                    (elem.parent().attr("style")=="multiple"?
+                    '<input type="checkbox" name="'+elem.parent().attr("id")+'" value="'+attr.value+'" checklist-model="$parent.$parent.formData.'+elem.parent().attr("id")+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.$parent.$parent.dirty()">'
+                    :
+                    '<input type="radio" name="'+elem.parent().attr("id")+'" value="'+attr.value+'" ng-model="$parent.$parent.formData.'+elem.parent().attr("id")+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.$parent.dirty()">'
+                    )+
+                    '<div class="radio-content">' +
+                    '<div class="item-content disable-pointer-events irk-item-content">'+
+                    attr.text+
+                    (attr.detailText?'<p>'+attr.detailText+'</p>':'')+
+                    '</div>'+
+                    '<i class="radio-icon disable-pointer-events icon ion-checkmark positive"></i>'+
+                    '</div>' +
+                    '</label>'
         }
     }
 })
@@ -743,18 +753,20 @@ angular.module('ionicResearchKit',[])
         restrict: 'E',
         template: function(elem, attr) {
             return  '<form name="form.'+attr.id+'" class="irk-slider" novalidate>'+
-                '<div class="irk-centered">'+
-                '<h3>'+attr.title+'</h3>'+
-                (attr.text ? '<p>'+attr.text+'</p>' : '')+
-                '</div>'+
-                '<div class="irk-spacer"></div>'+
-                '<div class="list">'+
-                '<label class="item item-input">'+
-                '<input type="number" placeholder="'+(attr.placeholder?attr.placeholder:'')+'" name="'+attr.id+'" '+(attr.min?'min="'+attr.min+'"':'')+' '+(attr.max?'max="'+attr.max+'"':'')+' ng-model="$parent.formData.'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.dirty()">'+
-                (attr.unit && attr.unit.length>0?'<span class="input-label">'+attr.unit+'</span>':'')+
-                '</label>'+
-                '</div>'+
-                '</form>'
+                    '<div class="irk-centered">'+
+                    '<div class="irk-text-centered">'+
+                    '<h3>'+attr.title+'</h3>'+
+                    (attr.text ? '<p>'+attr.text+'</p>' : '')+
+                    '</div>'+
+                    '</div>'+
+                    '<div class="irk-spacer"></div>'+
+                    '<div class="list">'+
+                    '<label class="item item-input">'+
+                    '<input type="number" placeholder="'+(attr.placeholder?attr.placeholder:'')+'" name="'+attr.id+'" '+(attr.min?'min="'+attr.min+'"':'')+' '+(attr.max?'max="'+attr.max+'"':'')+' ng-model="$parent.formData.'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.dirty()">'+
+                    (attr.unit && attr.unit.length>0?'<span class="input-label">'+attr.unit+'</span>':'')+
+                    '</label>'+
+                    '</div>'+
+                    '</form>'
         },
         link: function(scope, element, attrs, controller) {
             element.addClass('irk-step');
@@ -770,18 +782,20 @@ angular.module('ionicResearchKit',[])
         restrict: 'E',
         template: function(elem, attr) {
             return  '<form name="form.'+attr.id+'" class="irk-slider" novalidate>'+
-                '<div class="irk-centered">'+
-                '<h3>'+attr.title+'</h3>'+
-                (attr.text ? '<p>'+attr.text+'</p>' : '')+
-                '</div>'+
-                '<div class="irk-spacer"></div>'+
-                '<div class="list">'+
-                '<label class="item item-input">'+
-                '<span class="input-label irk-input-label" ng-if="!$parent.formData.'+attr.id+'">Tap to select date.</span>'+
-                '<input class="irk-input" type="date" name="'+attr.id+'" ng-model="$parent.formData.'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.dirty()">'+
-                '</label>'+
-                '</div>'+
-                '</form>'
+                    '<div class="irk-centered">'+
+                    '<div class="irk-text-centered">'+
+                    '<h3>'+attr.title+'</h3>'+
+                    (attr.text ? '<p>'+attr.text+'</p>' : '')+
+                    '</div>'+
+                    '</div>'+
+                    '<div class="irk-spacer"></div>'+
+                    '<div class="list">'+
+                    '<label class="item item-input">'+
+                    '<span class="input-label irk-input-label" ng-if="!$parent.formData.'+attr.id+'">Tap to select date.</span>'+
+                    '<input class="irk-input" type="date" name="'+attr.id+'" ng-model="$parent.formData.'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.dirty()">'+
+                    '</label>'+
+                    '</div>'+
+                    '</form>'
         },
         link: function(scope, element, attrs, controller) {
             element.addClass('irk-step');
@@ -797,18 +811,20 @@ angular.module('ionicResearchKit',[])
         restrict: 'E',
         template: function(elem, attr) {
             return  '<form name="form.'+attr.id+'" class="irk-slider" novalidate>'+
-                '<div class="irk-centered">'+
-                '<h3>'+attr.title+'</h3>'+
-                (attr.text ? '<p>'+attr.text+'</p>' : '')+
-                '</div>'+
-                '<div class="irk-spacer"></div>'+
-                '<div class="list">'+
-                '<label class="item item-input">'+
-                '<span class="input-label irk-input-label" ng-if="!$parent.formData.'+attr.id+'">Tap to select time.</span>'+
-                '<input class="irk-input" type="time" name="'+attr.id+'" ng-model="$parent.formData.'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.dirty()">'+
-                '</label>'+
-                '</div>'+
-                '</form>'
+                    '<div class="irk-centered">'+
+                    '<div class="irk-text-centered">'+
+                    '<h3>'+attr.title+'</h3>'+
+                    (attr.text ? '<p>'+attr.text+'</p>' : '')+
+                    '</div>'+
+                    '</div>'+
+                    '<div class="irk-spacer"></div>'+
+                    '<div class="list">'+
+                    '<label class="item item-input">'+
+                    '<span class="input-label irk-input-label" ng-if="!$parent.formData.'+attr.id+'">Tap to select time.</span>'+
+                    '<input class="irk-input" type="time" name="'+attr.id+'" ng-model="$parent.formData.'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.dirty()">'+
+                    '</label>'+
+                    '</div>'+
+                    '</form>'
         },
         link: function(scope, element, attrs, controller) {
             element.addClass('irk-step');
@@ -825,19 +841,21 @@ angular.module('ionicResearchKit',[])
         transclude: true,
         template: function(elem, attr) {
             return  '<form name="form.'+attr.id+'" class="irk-slider" novalidate>'+
-                '<div class="irk-centered">'+
-                '<h3>'+attr.title+'</h3>'+
-                (attr.text ? '<p>'+attr.text+'</p>' : '')+
-                '</div>'+
-                '<div class="irk-spacer"></div>'+
-                '<div class="list">'+
-                '<label class="item item-input item-select irk-item-select">'+
-                '<span class="input-label irk-input-label">{{(!$parent.formData.'+attr.id+'?\'Tap to select answer.\':\'&nbsp;\')}}</span>'+
-                '<select ng-transclude name="'+attr.id+'" ng-model="$parent.formData.'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.dirty()">' +
-                '</select>'+
-                '</label>'+
-                '</div>'+
-                '</form>'
+                    '<div class="irk-centered">'+
+                    '<div class="irk-text-centered">'+
+                    '<h3>'+attr.title+'</h3>'+
+                    (attr.text ? '<p>'+attr.text+'</p>' : '')+
+                    '</div>'+
+                    '</div>'+
+                    '<div class="irk-spacer"></div>'+
+                    '<div class="list">'+
+                    '<label class="item item-input item-select irk-item-select">'+
+                    '<span class="input-label irk-input-label">{{(!$parent.formData.'+attr.id+'?\'Tap to select answer.\':\'&nbsp;\')}}</span>'+
+                    '<select ng-transclude name="'+attr.id+'" ng-model="$parent.formData.'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.dirty()">' +
+                    '</select>'+
+                    '</label>'+
+                    '</div>'+
+                    '</form>'
         },
         link: function(scope, element, attrs, controller) {
             element.addClass('irk-step');
@@ -871,15 +889,17 @@ angular.module('ionicResearchKit',[])
         }],
         template: function(elem, attr) {
             return  '<form name="form.'+attr.id+'" class="irk-slider" novalidate>'+
-                '<div class="irk-centered">'+
-                '<h3>'+attr.title+'</h3>'+
-                (attr.text ? '<p>'+attr.text+'</p>' : '')+
-                '</div>'+
-                '<div class="irk-spacer"></div>'+
-                '<div class="row" ng-transclude>'+
-                '</div>'+
-                '<h5 ng-if="$parent.formData.'+attr.id+'">{{selected.text}}</h5><span class="irk-input-label" ng-if="!$parent.formData.'+attr.id+'">Tap to select.</span>'+
-                '</form>'
+                    '<div class="irk-centered">'+
+                    '<div class="irk-text-centered">'+
+                    '<h3>'+attr.title+'</h3>'+
+                    (attr.text ? '<p>'+attr.text+'</p>' : '')+
+                    '</div>'+
+                    '</div>'+
+                    '<div class="irk-spacer"></div>'+
+                    '<div class="row" ng-transclude>'+
+                    '</div>'+
+                    '<h5 ng-if="$parent.formData.'+attr.id+'">{{selected.text}}</h5><span class="irk-input-label" ng-if="!$parent.formData.'+attr.id+'">Tap to select.</span>'+
+                    '</form>'
         },
         link: function(scope, element, attrs, controller) {
             element.addClass('irk-step');
@@ -897,8 +917,8 @@ angular.module('ionicResearchKit',[])
         require: '^?irkImageChoiceQuestionStep',
         template: function(elem, attr) {
             return  '<div class="col">'+
-                '<button class="button button-clear '+(attr.type=='image'?'irk-image':'irk-icon-large icon')+' '+attr.normalStateImage+'"></button>'+
-                '</div>';
+                    '<button class="button button-clear '+(attr.type=='image'?'irk-image':'irk-icon-large icon')+' '+attr.normalStateImage+'"></button>'+
+                    '</div>';
         },
         link: function(scope, element, attrs) {
             var button = element.find('button');
@@ -939,16 +959,18 @@ angular.module('ionicResearchKit',[])
         transclude: true,
         template: function(elem, attr) {
             return  '<form name="form.'+attr.id+'" class="irk-slider" novalidate>'+
-                '<ion-content class="has-header" style="top:80px;">'+
-                '<div class="irk-centered">'+
-                '<h3>'+attr.title+'</h3>'+
-                (attr.text ? '<p>'+attr.text+'</p>' : '')+
-                '</div>'+
-                '<div class="irk-spacer"></div>'+
-                '<div class="list" ng-transclude>'+
-                '</div>'+
-                '</ion-content>'+
-                '</form>'
+                    '<ion-content class="has-header" style="top:80px;">'+
+                    '<div class="irk-centered">'+
+                    '<div class="irk-text-centered">'+
+                    '<h3>'+attr.title+'</h3>'+
+                    (attr.text ? '<p>'+attr.text+'</p>' : '')+
+                    '</div>'+
+                    '</div>'+
+                    '<div class="irk-spacer"></div>'+
+                    '<div class="list" ng-transclude>'+
+                    '</div>'+
+                    '</ion-content>'+
+                    '</form>'
         },
         link: function(scope, element, attrs, controller) {
             element.addClass('irk-step irk-form-step');
@@ -968,15 +990,15 @@ angular.module('ionicResearchKit',[])
             if (attr.title)
             {
                 //Section divider will only have the title attribute
-                return '<div class="item item-divider irk-form-divider">'+attr.title+'</div>';
+                return  '<div class="item item-divider irk-form-divider">'+attr.title+'</div>';
             }
             else
             {
                 //Form input types (currently only supports HTML input types)
-                return '<label class="item item-input">'+
-                    '<span class="input-label irk-form-input-label">'+attr.text+'</span>'+
-                    '<input type="'+attr.type+'" placeholder="'+attr.placeholder+'" ng-model="$parent.$parent.$parent.formData.'+elem.parent().attr("id")+'.'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.$parent.$parent.dirty()">'+
-                    '</label>';
+                return  '<label class="item item-input">'+
+                        '<span class="input-label irk-form-input-label">'+attr.text+'</span>'+
+                        '<input type="'+attr.type+'" placeholder="'+attr.placeholder+'" ng-model="$parent.$parent.$parent.formData.'+elem.parent().attr("id")+'.'+attr.id+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.$parent.$parent.dirty()">'+
+                        '</label>';
             }
         },
         link: function(scope, element, attrs) {
@@ -1054,8 +1076,11 @@ angular.module('ionicResearchKit',[])
             {
                 return  '<div class="irk-centered">'+
                         '<div class="item irk-step-image '+consentImageClass+' positive"></div>'+
+                        '<div class="irk-spacer"></div>'+
+                        '<div class="irk-text-centered">'+
                         '<h2>'+consentTitle+'</h2>'+
                         '<p>'+attr.summary+'</p>'+
+                        '</div>'+
                         '<a class="button button-clear button-positive irk-learn-more" ng-click="$parent.showLearnMore()">'+consentText+'</a>'+
                         '<div class="irk-learn-more-content" ng-transclude>'+
                         '</div>'+
@@ -1113,9 +1138,11 @@ angular.module('ionicResearchKit',[])
         transclude: true,
         template: function(elem, attr) {
             return  '<div class="irk-centered">'+
+                    '<div class="irk-text-centered">'+
                     '<h2>Sharing Options</h2>'+
                     '<p>'+attr.summary+'</p>'+
                     '<p>Sharing your coded study data more broadly (without information such as your name) may benefit this and future research.</p>'+
+                    '</div>'+
                     '<a class="button button-clear button-positive irk-learn-more" ng-click="$parent.showLearnMore()">Learn more about data sharing</a>'+
                     '<div class="irk-learn-more-content" ng-transclude>'+
                     '</div>'+
@@ -1165,8 +1192,10 @@ angular.module('ionicResearchKit',[])
             else if (reviewType == 'name') {
                 return  '<form name="form'+attr.id+'" class="irk-slider" novalidate>'+
                         '<div class="irk-centered">'+
+                        '<div class="irk-text-centered">'+
                         '<h2>Consent</h2>'+
                         '<p>'+attr.text+'</p>'+
+                        '</div>'+
                         '</div>'+
                         '<div class="irk-spacer"></div>'+
                         '<div ng-transclude>'+
@@ -1175,8 +1204,10 @@ angular.module('ionicResearchKit',[])
             }
             else if (reviewType == 'signature') {
                 return  '<div class="irk-centered">'+
+                        '<div class="irk-text-centered">'+
                         '<h2>Signature</h2>'+
                         '<p>Please sign using your finger on the line below.</p>'+
+                        '</div>'+
                         '<div class="irk-spacer"></div>'+
                         '<div ng-transclude>'+
                         '</div>'+
@@ -1386,16 +1417,18 @@ angular.module('ionicResearchKit',[])
         restrict: 'E',
         template: function(elem, attr) {
             return  '<div class="irk-offcentered-container"><div class="irk-offcentered-content">'+
-                '<h2>Activity Complete</h2>'+
-                '<p>Your data will be analyzed and you will be notified when your results are ready.</p>'+
-                (attr.link ? '<a class="button button-clear button-positive irk-learn-more" href="'+attr.link+'" target="_system">'+(attr.linkText ? attr.linkText : 'Learn more')+'</a>' : '')+
-                '<div class="irk-spacer"></div>'+
-                '<div class="irk-spacer"></div>'+
-                '<div class="item irk-step-image">'+
-                '<button class="button button-clear button-positive irk-completion-icon icon ion-ios-checkmark" ng-click="$parent.doNext()"></button>'+
-                '</div>'+
-                '<div class="irk-image-spacer"></div>'+
-                '</div></div>'
+                    '<div class="irk-text-centered">'+
+                    '<h2>Activity Complete</h2>'+
+                    '<p>Your data will be analyzed and you will be notified when your results are ready.</p>'+
+                    (attr.link ? '<a class="button button-clear button-positive irk-learn-more" href="'+attr.link+'" target="_system">'+(attr.linkText ? attr.linkText : 'Learn more')+'</a>' : '')+
+                    '</div>'+
+                    '<div class="irk-spacer"></div>'+
+                    '<div class="irk-spacer"></div>'+
+                    '<div class="item irk-step-image">'+
+                    '<button class="button button-clear button-positive irk-completion-icon icon ion-ios-checkmark" ng-click="$parent.doNext()"></button>'+
+                    '</div>'+
+                    '<div class="irk-image-spacer"></div>'+
+                    '</div></div>'
         },
         link: function(scope, element, attrs, controller) {
             element.addClass('irk-step');
