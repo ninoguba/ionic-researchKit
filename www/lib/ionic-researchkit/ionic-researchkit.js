@@ -1384,12 +1384,21 @@ angular.module('ionicResearchKit',[])
 .directive('irkCountdownStep', function() {
     return {
         restrict: 'E',
-        controller: ['$scope', '$attrs', '$interval', function($scope, $attrs, $interval) {
+        controller: ['$scope', '$element', '$attrs', '$interval', function($scope, $element, $attrs, $interval) {
             $scope.duration = ($attrs.duration?$attrs.duration:5);
 
             $scope.startCountdown = function() {
                 $scope.countdown = 0;
+
+                var index = $scope.$parent.currentSlide;
+                var countdownEl = angular.element(document.querySelectorAll('.irk-slider-slide')[index].querySelector('.irk-countdown'));
+                countdownEl.toggleClass('irk-countdown-started', false);
+
                 $interval(function() {
+                    if ($scope.countdown == 1) {
+                        countdownEl.toggleClass('irk-countdown-started', true);
+                    }
+
                     $scope.countdown++;
 
                     //Step next at the end of countdown

@@ -226,6 +226,13 @@ button.irk-image:before {
 .irk-countdown .dialgauge-value {
   font-size: 30px;
   font-weight: 200;
+  fill: white;
+  stroke: white;
+}
+
+.irk-countdown-started .dialgauge-value {
+  fill: black;
+  stroke: black;
 }
 
 .irk-completion-icon {
