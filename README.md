@@ -244,11 +244,9 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
 
 # Demo
 
-### Survey
-![Survey demo](https://cloud.githubusercontent.com/assets/4361804/10741932/a2c4347e-7be7-11e5-80bc-844c9a25b018.gif)
+[Survey demo](https://youtu.be/U96anI8PA08)
 
-### Consent
-![Consent demo](https://cloud.githubusercontent.com/assets/4361804/10741837/058430ce-7be7-11e5-86e7-81090a791a6b.gif)
+[Consent demo](https://youtu.be/lb0yK52kZXs)
 
 # Roadmap
 
