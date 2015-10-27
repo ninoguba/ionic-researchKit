@@ -169,7 +169,7 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
   </irk-task>
 
   <irk-task>
-    <irk-visual-consent-step id="c9" type="custom" title="Your Title" text="Learn more" summary="Your summary goes here.">
+    <irk-visual-consent-step id="c9" type="custom" title="Your Title" text="Learn more" summary="Your summary goes here." image="custom-image-class">
       9. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam adhuc, meo fortasse vitio, quid ego quaeram non perspicis. Plane idem, inquit, et maxima quidem, qua fieri nulla maior potest. Quonam, inquit, modo?
     </irk-visual-consent-step>
     <irk-visual-consent-step id="c9.1" type="only-in-document" title="Your Title (In Document Only)">
@@ -253,7 +253,7 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
 - [x] Task View 
 - [x] Survey directives
   - [x] Instruction Step
-    - [ ] Support optional image
+    - [x] Support optional image
   - [x] Scale Question Step
     - [ ] Support step bars
     - [ ] Support vertical orientation
@@ -277,7 +277,7 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
 - [ ] Consent directives
   - [x] Visual Consent
     - [x] In Document Only Type
-    - [ ] Support custom image
+    - [x] Support custom image
   - [x] Consent Sharing
   - [x] Consent Review
     - [x] Name Capture

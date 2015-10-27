@@ -149,7 +149,7 @@ button.irk-image:before {
   background-size: contain !important;
 }
 
-.irk-consent-image {
+.irk-step-image {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;

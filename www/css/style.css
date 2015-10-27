@@ -9,3 +9,7 @@ button.choice-food-burger {
 button.choice-food-pizza {
 	background-image: url(../img/food-pizza.png) !important;
 }
+
+.custom-ionic {
+  background-image: url(../img/ionic.png);
+}

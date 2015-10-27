@@ -343,7 +343,7 @@ angular.module('ionicResearchKit',[])
                         }
 
                         if (consentImageClass != '') {
-                            var image = angular.element(document.querySelectorAll('.irk-slider-slide')[index].querySelector('.irk-consent-image'));
+                            var image = angular.element(document.querySelectorAll('.irk-slider-slide')[index].querySelector('.irk-step-image'));
                             image.css('background-image', 'url(lib/ionic-researchkit/resources/'+consentImageClass+'?x='+Math.random()+')');
                         }
                     }
@@ -575,6 +575,7 @@ angular.module('ionicResearchKit',[])
         restrict: 'E',
         template: function(elem, attr) {
             return 	'<div class="irk-offcentered-container"><div class="irk-offcentered-content">'+
+                (attr.image ? '<div class="item irk-step-image '+attr.image+'"></div>' : '')+
                 '<h2>'+attr.title+'</h2>'+
                 (attr.text ? '<p>'+attr.text+'</p>' : '')+
                 (attr.link ? '<a class="button button-clear button-positive irk-learn-more" href="'+attr.link+'" target="_system">'+(attr.linkText ? attr.linkText : 'Learn more')+'</a>' : '')+
@@ -1039,7 +1040,7 @@ angular.module('ionicResearchKit',[])
                 case 'custom':
                     consentTitle = attr.title;
                     consentText = attr.text;
-                    consentImageClass = 'irk-consent-custom';
+                    consentImageClass = (attr.image?attr.image:'irk-consent-custom');
                     break;
             }
 
@@ -1052,7 +1053,7 @@ angular.module('ionicResearchKit',[])
             {
                 return  '<div class="irk-offcentered-container"><div class="irk-offcentered-content">'+
                         '<div class="irk-spacer"></div>'+
-                        '<div class="item irk-consent-image '+consentImageClass+' positive"></div>'+
+                        '<div class="item irk-step-image '+consentImageClass+' positive"></div>'+
                         '<h2>'+consentTitle+'</h2>'+
                         '<p>'+attr.summary+'</p>'+
                         '<a class="button button-clear button-positive irk-learn-more" ng-click="$parent.showLearnMore()">'+consentText+'</a>'+
