@@ -89,6 +89,7 @@ angular.module('ionicResearchKit',[])
 .directive('irkOrderedTasks', [
     '$rootScope',
     '$timeout',
+    '$interval',
     '$compile',
     '$ionicSlideBoxDelegate',
     '$ionicHistory',
@@ -99,7 +100,7 @@ angular.module('ionicResearchKit',[])
     '$ionicPopup',
     '$ionicPlatform',
     'irkResults',
-    function($rootScope, $timeout, $compile, $ionicSlideBoxDelegate, $ionicHistory, $ionicScrollDelegate, $ionicNavBarDelegate, $ionicActionSheet, $ionicModal, $ionicPopup, $ionicPlatform, irkResults) {
+    function($rootScope, $timeout, $interval, $compile, $ionicSlideBoxDelegate, $ionicHistory, $ionicScrollDelegate, $ionicNavBarDelegate, $ionicActionSheet, $ionicModal, $ionicPopup, $ionicPlatform, irkResults) {
         return {
             restrict: 'E',
             replace: true,
@@ -166,6 +167,7 @@ angular.module('ionicResearchKit',[])
                 $scope.$on('$destroy', function() {
                     deregisterInstance();
                     slider.kill();
+                    $scope.stopCountdown();
                 });
 
                 this.slidesCount = function() {
@@ -235,6 +237,9 @@ angular.module('ionicResearchKit',[])
 
                     //This is needed to set the Android back button to map back to the step back action
                     $scope.deregisterStepBack();
+                    
+                    //Just in case we're coming from a countdown step
+                    $scope.stopCountdown();                    
                 };
 
                 $scope.$on("step:Previous", function() {
@@ -400,8 +405,18 @@ angular.module('ionicResearchKit',[])
                 $scope.$on("slideBox.slideChanged", function(e, index) {
                     $scope.doSave();
                     $scope.doReanimateConsentImage();
+                    $scope.stopCountdown();
                 });
 
+                $scope.stopCountdown = function() {
+                    var index = slider.currentIndex();
+                    var step = angular.element(document.querySelectorAll('.irk-slider-slide')[index].querySelector('.irk-step'));
+
+                    if (step!='IRK-COUNTDOWN-STEP' && angular.isDefined($scope.currentCountdown)) {
+                        $interval.cancel($scope.currentCountdown);
+                        $scope.currentCountdown = undefined;
+                    }
+                };
             }],
 
             template:
@@ -1385,26 +1400,22 @@ angular.module('ionicResearchKit',[])
     return {
         restrict: 'E',
         controller: ['$scope', '$element', '$attrs', '$interval', function($scope, $element, $attrs, $interval) {
-            $scope.duration = ($attrs.duration?$attrs.duration:5);
+            $scope.duration = ($attrs.duration?$attrs.duration:5)+1;
 
             $scope.startCountdown = function() {
-                $scope.countdown = 0;
+                $scope.countdown = $scope.duration;
 
                 var index = $scope.$parent.currentSlide;
                 var countdownEl = angular.element(document.querySelectorAll('.irk-slider-slide')[index].querySelector('.irk-countdown'));
                 countdownEl.toggleClass('irk-countdown-started', false);
 
-                $interval(function() {
-                    if ($scope.countdown == 1) {
-                        countdownEl.toggleClass('irk-countdown-started', true);
-                    }
+                $scope.$parent.currentCountdown = $interval(function() {
+                    countdownEl.toggleClass('irk-countdown-started', true);
 
-                    $scope.countdown++;
-
-                    //Step next at the end of countdown
-                    if ($scope.countdown == $scope.duration+1) {
+                    if ($scope.countdown == 0)
                         $scope.$parent.doStepNext();
-                    }
+                    else
+                        $scope.countdown--;
                 }, 1000, $scope.duration+1);
             }   
         }],
@@ -1422,7 +1433,7 @@ angular.module('ionicResearchKit',[])
                     '   bar-color-end="#387ef5"'+
                     '   bar-width="1"'+
                     '   angle="360"'+
-                    '   rotate="0"'+
+                    '   rotate="360"'+
                     '   scale-minor-length="0"'+
                     '   scale-major-length="0"'+
                     '   line-cap="butt"'+
