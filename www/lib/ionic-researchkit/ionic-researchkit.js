@@ -540,6 +540,13 @@ angular.module('ionicResearchKit',[])
                 var consentType = step.attr('type');
                 element.toggleClass('ng-hide', stepType=='IRK-INSTRUCTION-STEP' || (stepType=='IRK-VISUAL-CONSENT-STEP' && consentType=='overview') || stepType=='IRK-CONSENT-SHARING-STEP' || (stepType=='IRK-CONSENT-REVIEW-STEP' && consentType=='review'));                
 
+                //Show for Instruction Step only if footerAttach is set to true
+                var footerAttach = step.attr('footer-attach')=='true';
+                if (stepType=='IRK-INSTRUCTION-STEP' && footerAttach) {
+                    element.toggleClass('ng-hide', false);
+                    element.text(step.attr('button-text') ? step.attr('button-text') : 'Get Started');
+                }
+
                 //Enable only when current form is dirtied and valid
                 var form = step.find('form');
                 var input = form.find('input');
@@ -574,11 +581,10 @@ angular.module('ionicResearchKit',[])
         restrict: 'A',
         link: function(scope, element, attrs, controller) {
             scope.$on("slideBox.slideChanged", function(e, index, count) {
-                //Show only for Consent Review
                 var step = angular.element(document.querySelectorAll('.irk-slider-slide')[index].querySelector('.irk-step'));
                 var stepType = step.prop('tagName');
                 var consentType = step.attr('type');
-                element.toggleClass('ng-hide', (stepType=='IRK-VISUAL-CONSENT-STEP' || stepType=='IRK-CONSENT-SHARING-STEP' || stepType=='IRK-CONSENT-REVIEW-STEP' || stepType=='IRK-COUNTDOWN-STEP' || stepType=='IRK-COMPLETION-STEP'));
+                element.toggleClass('ng-hide', (stepType=='IRK-INSTRUCTION-STEP' || stepType=='IRK-VISUAL-CONSENT-STEP' || stepType=='IRK-CONSENT-SHARING-STEP' || stepType=='IRK-CONSENT-REVIEW-STEP' || stepType=='IRK-COUNTDOWN-STEP' || stepType=='IRK-COMPLETION-STEP'));
             });
         }
     }
@@ -589,11 +595,10 @@ angular.module('ionicResearchKit',[])
         restrict: 'A',
         link: function(scope, element, attrs, controller) {
             scope.$on("slideBox.slideChanged", function(e, index, count) {
-                //Show only for Consent Review
                 var step = angular.element(document.querySelectorAll('.irk-slider-slide')[index].querySelector('.irk-step'));
                 var stepType = step.prop('tagName');
                 var consentType = step.attr('type');
-                element.toggleClass('ng-hide', (stepType!='IRK-VISUAL-CONSENT-STEP' && stepType!='IRK-CONSENT-SHARING-STEP' && stepType!='IRK-CONSENT-REVIEW-STEP'));
+                element.toggleClass('ng-hide', (stepType!='IRK-INSTRUCTION-STEP' && stepType!='IRK-VISUAL-CONSENT-STEP' && stepType!='IRK-CONSENT-SHARING-STEP' && stepType!='IRK-CONSENT-REVIEW-STEP'));
             });
         }
     }
@@ -604,7 +609,6 @@ angular.module('ionicResearchKit',[])
         restrict: 'A',
         link: function(scope, element, attrs, controller) {
             scope.$on("slideBox.slideChanged", function(e, index, count) {
-                //Show only for Consent Review
                 var step = angular.element(document.querySelectorAll('.irk-slider-slide')[index].querySelector('.irk-step'));
                 var stepType = step.prop('tagName');
                 var consentType = step.attr('type');
@@ -628,8 +632,8 @@ angular.module('ionicResearchKit',[])
                     (attr.link ? '<a class="button button-clear button-positive irk-learn-more" href="'+attr.link+'" target="_system">'+(attr.linkText ? attr.linkText : 'Learn more')+'</a>' : '')+
                     '</div>'+
                     '<div class="irk-spacer"></div>'+
-                    (attr.image ? '<div class="irk-spacer"></div><div class="item irk-step-image '+attr.image+'"></div><div class="irk-image-spacer"></div>' : '')+
-                    '<button class="button button-outline button-positive irk-instruction-button" ng-click="$parent.doNext()">'+(attr.buttonText ? attr.buttonText : 'Get Started')+'</button>'+
+                    (attr.image ? '<div class="irk-image-spacer"></div><div class="item irk-step-image '+attr.image+'"></div><div class="irk-image-spacer"></div>' : '')+
+                    (attr.footerAttach && attr.footerAttach=='true'?'':'<button class="button button-outline button-positive irk-instruction-button" ng-click="$parent.doNext()">'+(attr.buttonText ? attr.buttonText : 'Get Started')+'</button>')+
                     '</div></div>'
         },
         link: function(scope, element, attrs, controller) {
