@@ -205,6 +205,35 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
 </ion-modal-view>
 ```
 
+### Active Task
+
+```
+<ion-modal-view class="irk-modal">
+
+<irk-ordered-tasks>
+
+  <irk-task>
+    <irk-instruction-step id="a1" title="Tapping Speed" text="This activity measures your tapping speed." button-text="Next" image="irk-phone-tapping" footer-attach="true"/>
+  </irk-task>
+
+  <irk-task>
+    <irk-instruction-step id="a2" title="Tapping Speed" text="Rest your phone on a flat surface. Two buttons will appear on your screen for 20 seconds. Using two fingers on the same hand, take turns tapping the buttons as quickly as you can." button-text="Get Started" image="irk-hand-tapping" footer-attach="true"/>
+  </irk-task>
+
+  <irk-task>
+    <irk-two-finger-tapping-interval-task id="a4" duration="10"/>
+  </irk-task>
+
+  <irk-task>
+    <irk-completion-step id="a5"/>
+  </irk-task>
+
+</irk-ordered-tasks>
+
+</ion-modal-view>
+```
+
+
 # Directives
 
 ### Survey
@@ -256,6 +285,8 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
 [Survey demo](https://youtu.be/U96anI8PA08?rel=0)
 
 [Consent demo](https://youtu.be/lb0yK52kZXs?rel=0)
+
+[Active Task demo](https://youtu.be/pANOG-KW2PM?rel=0)
 
 # Roadmap
 
