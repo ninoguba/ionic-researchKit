@@ -249,6 +249,8 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
 
 `<irk-completion-step>` is the equivalent of the `ORKCompletionStep` class.
 
+`<irk-two-finger-tapping-interval-task>` is the equivalent of the `ORKPredefinedActiveTask` class that is for two finger tapping.
+
 # Demo
 
 [Survey demo](https://youtu.be/U96anI8PA08?rel=0)
@@ -296,7 +298,7 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
   - [ ] Fitness Task
   - [ ] Voice Task
   - [ ] Gait and Balance Task
-  - [ ] Tapping Speed Task
+  - [x] Tapping Speed Task
   - [ ] Spacial Memory Task
 - [x] Results
   - [x] Output results in JSON

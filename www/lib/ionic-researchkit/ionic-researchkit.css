@@ -238,3 +238,39 @@ button.irk-image:before {
 .irk-completion-icon {
   font-size: 150px;
 }
+
+.irk-hand-tapping {
+  background-image: url(resources/handtapping.gif);
+}
+
+.irk-phone-tapping {
+  background-image: url(resources/phonetapping.png);
+}
+
+.irk-progress {
+  visibility: hidden;
+}
+
+.irk-progress-started {
+  visibility: visible;
+}
+
+.irk-tap-container {
+  position: absolute; 
+  bottom: 0px; 
+  width: 100%;
+  height: 100%;
+}
+
+.irk-tap-button-container {
+  position: absolute; 
+  bottom: 30px; 
+  width: 100%;
+}
+
+.irk-tap-button {
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
+  margin: 10px;
+}

@@ -66,8 +66,10 @@ angular.module('ionicResearchKit',[])
                 results.childResults[index].answer = (stepValue?stepValue.toDateString():null);
             else if (stepType == 'IRK-TIME-QUESTION-STEP')
                 results.childResults[index].answer = (stepValue?stepValue.toTimeString():null);
-            else if (stepType != 'IRK-INSTRUCTION-STEP' && stepType != 'IRK-COUNTDOWN-STEP' && stepType != 'IRK-COMPLETION-STEP' && stepType != 'IRK-VISUAL-CONSENT-STEP' && !(stepType=='IRK-CONSENT-REVIEW-STEP' && consentType=='signature'))
+            else if (stepType != 'IRK-INSTRUCTION-STEP' && stepType != 'IRK-COUNTDOWN-STEP' && stepType != 'IRK-COMPLETION-STEP' && stepType != 'IRK-VISUAL-CONSENT-STEP' && !(stepType=='IRK-CONSENT-REVIEW-STEP' && consentType=='signature') && stepType != 'IRK-TWO-FINGER-TAPPING-INTERVAL-TASK')
                 results.childResults[index].answer = (stepValue?stepValue:null);
+            else if (stepType == 'IRK-TWO-FINGER-TAPPING-INTERVAL-TASK')
+                results.childResults[index].samples = (stepValue.samples?stepValue.samples:null);
 
             if (stepType == 'IRK-NUMERIC-QUESTION-STEP')
                 results.childResults[index].unit = (stepUnit?stepUnit:null);
@@ -584,7 +586,7 @@ angular.module('ionicResearchKit',[])
                 var step = angular.element(document.querySelectorAll('.irk-slider-slide')[index].querySelector('.irk-step'));
                 var stepType = step.prop('tagName');
                 var consentType = step.attr('type');
-                element.toggleClass('ng-hide', (stepType=='IRK-INSTRUCTION-STEP' || stepType=='IRK-VISUAL-CONSENT-STEP' || stepType=='IRK-CONSENT-SHARING-STEP' || stepType=='IRK-CONSENT-REVIEW-STEP' || stepType=='IRK-COUNTDOWN-STEP' || stepType=='IRK-COMPLETION-STEP'));
+                element.toggleClass('ng-hide', (stepType=='IRK-INSTRUCTION-STEP' || stepType=='IRK-VISUAL-CONSENT-STEP' || stepType=='IRK-CONSENT-SHARING-STEP' || stepType=='IRK-CONSENT-REVIEW-STEP' || stepType=='IRK-COUNTDOWN-STEP' || stepType=='IRK-COMPLETION-STEP' || stepType=='IRK-TWO-FINGER-TAPPING-INTERVAL-TASK'));
             });
         }
     }
@@ -1407,9 +1409,8 @@ angular.module('ionicResearchKit',[])
     return {
         restrict: 'E',
         controller: ['$scope', '$element', '$attrs', '$interval', function($scope, $element, $attrs, $interval) {
-            $scope.duration = ($attrs.duration?$attrs.duration:5)+1;
-
             $scope.startCountdown = function() {
+                $scope.duration = ($attrs.duration?$attrs.duration:5)+1;
                 $scope.countdown = $scope.duration;
 
                 var index = $scope.$parent.currentSlide;
@@ -1433,7 +1434,7 @@ angular.module('ionicResearchKit',[])
                     '<ng-dial-gauge id="'+attr.id+'"'+
                     '   ng-model="countdown"'+
                     '   scale-min="0"'+
-                    '   scale-max="{{duration}}"'+
+                    '   scale-max="{{duration || 5}}"'+
                     '   border-width="1"'+
                     '   track-color="#ffffff"'+
                     '   bar-color="#387ef5"'+
@@ -1487,6 +1488,90 @@ angular.module('ionicResearchKit',[])
         },
         link: function(scope, element, attrs, controller) {
             element.addClass('irk-step');
+        }
+    }
+})
+
+//======================================================================================
+// Usage: 
+// =====================================================================================
+.directive('irkTwoFingerTappingIntervalTask', function() {
+    return {
+        restrict: 'E',
+        controller: ['$scope', '$element', '$attrs', '$interval', function($scope, $element, $attrs, $interval) {
+
+            $scope.toggleProgressBar = function(isVisible) {
+                var index = $scope.$parent.currentSlide;
+                var progressEl = angular.element(document.querySelectorAll('.irk-slider-slide')[index].querySelector('.irk-progress'));
+                progressEl.toggleClass('irk-progress-started', isVisible);
+            }
+
+            $scope.startProgress = function() {
+                $scope.duration = ($attrs.duration?$attrs.duration:20);
+                $scope.progress = 0;
+                $scope.toggleProgressBar(true);
+
+                $scope.$parent.currentCountdown = $interval(function() {
+                    if ($scope.progress == $scope.duration-1)
+                        $scope.$parent.doStepNext();
+                    else
+                        $scope.progress++;
+                }, 1000, $scope.duration);
+            } 
+
+            $scope.initActiveTask = function() {
+                $scope.taskStarted = false;
+                $scope.toggleProgressBar(false);
+            }
+
+            $scope.startActiveTask = function() {
+                $scope.tapsCount = 0;  
+                $scope.tapsStartTime = (new Date()).getTime();  
+                $scope.$parent.formData[$attrs.id] = {};
+                $scope.$parent.formData[$attrs.id].samples = {};
+
+                $scope.taskStarted = true;
+                $scope.startProgress();
+            }
+
+            $scope.tap = function(buttonId) {
+                if (!$scope.taskStarted) {
+                    $scope.startActiveTask();
+                }
+
+                var tapsCurrentTime = ((new Date()).getTime() - $scope.tapsStartTime) / 1000;  
+                $scope.$parent.formData[$attrs.id].samples[tapsCurrentTime] = (buttonId?buttonId:'none');
+                if (buttonId) $scope.tapsCount++;
+            }
+        }],
+        template: function(elem, attr) {
+            return  '<div class="irk-centered">'+
+                    '<div class="irk-text-centered">'+
+                    '<h2>Tap the buttons as quickly as you can using two fingers.</h2>'+
+                    '<progress class="irk-progress" max="{{duration}}" value="{{progress}}"></progress>'+
+                    '<div class="irk-spacer"></div>'+
+                    '<h4>Total Taps</h4>'+
+                    '<h1>{{tapsCount || 0}}</h1>'+
+                    '</div>'+
+                    '</div>'+
+                    '<div class="irk-tap-container" ng-click="tap()">'+
+                    '<div class="irk-tap-button-container">'+
+                    '<button class="button button-outline button-positive irk-tap-button" ng-click="tap(\'button 1\');$event.stopPropagation()">Tap</button>'+
+                    '<button class="button button-outline button-positive irk-tap-button" ng-click="tap(\'button 2\');$event.stopPropagation()">Tap</button>'+
+                    '</div>'+
+                    '</div>'
+        },
+        link: function(scope, element, attrs, controller) {
+            element.addClass('irk-step');
+
+            scope.$on("slideBox.slideChanged", function(e, index, count) {
+                var step = angular.element(document.querySelectorAll('.irk-slider-slide')[index].querySelector('.irk-step'));
+                var stepType = step.prop('tagName');
+
+                if (stepType=='IRK-TWO-FINGER-TAPPING-INTERVAL-TASK') {
+                    scope.initActiveTask();
+                }
+            });            
         }
     }
 })
