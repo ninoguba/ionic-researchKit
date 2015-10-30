@@ -249,6 +249,17 @@ button.irk-image:before {
 
 .irk-progress {
   visibility: hidden;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 2px;
+}
+
+.irk-progress::-webkit-progress-bar {
+  background-color: #eeeeee;
+}
+
+.irk-progress::-webkit-progress-value {
+  background-color: #387ef5;
 }
 
 .irk-progress-started {
