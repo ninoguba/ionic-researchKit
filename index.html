@@ -56,6 +56,8 @@
 </li>
 <li>signature_pad <a href="https://github.com/szimek/signature_pad">https://github.com/szimek/signature_pad</a>
 </li>
+<li>angular-dialgauge <a href="https://github.com/cdjackson/angular-dialgauge">https://github.com/cdjackson/angular-dialgauge</a>
+</li>
 </ul>
 
 <h1>
@@ -215,7 +217,7 @@
   &lt;/irk-task&gt;
 
   &lt;irk-task&gt;
-    &lt;irk-visual-consent-step id="c9" type="custom" title="Your Title" text="Learn more" summary="Your summary goes here."&gt;
+    &lt;irk-visual-consent-step id="c9" type="custom" title="Your Title" text="Learn more" summary="Your summary goes here." image="custom-image-class"&gt;
       9. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam adhuc, meo fortasse vitio, quid ego quaeram non perspicis. Plane idem, inquit, et maxima quidem, qua fieri nulla maior potest. Quonam, inquit, modo?
     &lt;/irk-visual-consent-step&gt;
     &lt;irk-visual-consent-step id="c9.1" type="only-in-document" title="Your Title (In Document Only)"&gt;
@@ -246,6 +248,34 @@
   &lt;/irk-task&gt;
 
   &lt;/irk-ordered-tasks&gt;
+
+&lt;/ion-modal-view&gt;
+</code></pre>
+
+<h3>
+<a id="active-task" class="anchor" href="#active-task" aria-hidden="true"><span class="octicon octicon-link"></span></a>Active Task</h3>
+
+<pre><code>&lt;ion-modal-view class="irk-modal"&gt;
+
+&lt;irk-ordered-tasks&gt;
+
+  &lt;irk-task&gt;
+    &lt;irk-instruction-step id="a1" title="Tapping Speed" text="This activity measures your tapping speed." button-text="Next" image="irk-phone-tapping" footer-attach="true"/&gt;
+  &lt;/irk-task&gt;
+
+  &lt;irk-task&gt;
+    &lt;irk-instruction-step id="a2" title="Tapping Speed" text="Rest your phone on a flat surface. Two buttons will appear on your screen for 20 seconds. Using two fingers on the same hand, take turns tapping the buttons as quickly as you can." button-text="Get Started" image="irk-hand-tapping" footer-attach="true"/&gt;
+  &lt;/irk-task&gt;
+
+  &lt;irk-task&gt;
+    &lt;irk-two-finger-tapping-interval-task id="a4" duration="10"/&gt;
+  &lt;/irk-task&gt;
+
+  &lt;irk-task&gt;
+    &lt;irk-completion-step id="a5"/&gt;
+  &lt;/irk-task&gt;
+
+&lt;/irk-ordered-tasks&gt;
 
 &lt;/ion-modal-view&gt;
 </code></pre>
@@ -289,61 +319,72 @@
 
 <p><code>&lt;irk-consent-sharing-step&gt;</code> is the equivalent of the <code>ORKConsentSharingStep</code> class.</p>
 
-<p><code>&lt;irk-consent-review-step&gt;</code> is the equivalent of the <code>ORKConsentReviewStep</code> class.  Depending on it's <code>type</code> attribute, it could encompass one or more <code>&lt;irk-consent-signature&gt;</code> elements which are the equivalent of the <code>ORKConsentSignature</code> class.</p>
+<p><code>&lt;irk-consent-review-step&gt;</code> is the equivalent of the <code>ORKConsentReviewStep</code> class.  Depending on it's <code>type</code> attribute, it could encompass one or more <code>&lt;irk-consent-name&gt;</code> or <code>&lt;irk-consent-signature&gt;</code> elements which are the broken up equivalent of the <code>ORKConsentSignature</code> class.</p>
+
+<h3>
+<a id="active-tasks" class="anchor" href="#active-tasks" aria-hidden="true"><span class="octicon octicon-link"></span></a>Active Tasks</h3>
+
+<p><code>&lt;irk-countdown-step&gt;</code> is the equivalent of the <code>ORKCountdownStep</code> class.</p>
+
+<p><code>&lt;irk-completion-step&gt;</code> is the equivalent of the <code>ORKCompletionStep</code> class.</p>
+
+<p><code>&lt;irk-two-finger-tapping-interval-task&gt;</code> is the equivalent of the <code>ORKPredefinedActiveTask</code> class that is for two finger tapping.</p>
 
 <h1>
 <a id="demo" class="anchor" href="#demo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Demo</h1>
 
-<p><a href="https://youtu.be/U96anI8PA08">Survey demo</a></p>
+<p><a href="https://youtu.be/U96anI8PA08?rel=0">Survey demo</a></p>
 
-<p><a href="https://youtu.be/lb0yK52kZXs">Consent demo</a></p>
+<p><a href="https://youtu.be/lb0yK52kZXs?rel=0">Consent demo</a></p>
+
+<p><a href="https://youtu.be/pANOG-KW2PM?rel=0">Active Task demo</a></p>
 
 <h1>
 <a id="roadmap" class="anchor" href="#roadmap" aria-hidden="true"><span class="octicon octicon-link"></span></a>Roadmap</h1>
 
 <ul>
-<li>[x] Task View equivalent </li>
+<li>[x] Task View </li>
 <li>[x] Survey directives
 
 <ul>
-<li>[x] Instruction Step directive
+<li>[x] Instruction Step
 
 <ul>
-<li>[ ] Support optional image</li>
+<li>[x] Support optional image</li>
 </ul>
 </li>
-<li>[x] Scale Question Step directive
+<li>[x] Scale Question Step
 
 <ul>
 <li>[ ] Support step bars</li>
 <li>[ ] Support vertical orientation</li>
 </ul>
 </li>
-<li>[x] Boolean Question Step directive</li>
-<li>[x] Text Question Step directive
+<li>[x] Boolean Question Step</li>
+<li>[x] Text Question Step
 
 <ul>
 <li>[x] Multi lines</li>
 <li>[x] Single line</li>
 </ul>
 </li>
-<li>[x] Text Choice Question Step directive
+<li>[x] Text Choice Question Step
 
 <ul>
 <li>[x] Single choice</li>
 <li>[x] Multiple choice</li>
 </ul>
 </li>
-<li>[x] Numeric Question Step directive</li>
-<li>[x] Date Question Step directive</li>
-<li>[x] Time Question Step directive
+<li>[x] Numeric Question Step</li>
+<li>[x] Date Question Step</li>
+<li>[x] Time Question Step
 
 <ul>
-<li>[ ] Time Interval Question Step directive</li>
+<li>[ ] Time Interval Question Step</li>
 </ul>
 </li>
-<li>[x] Value Picker Question Step directive</li>
-<li>[x] Image Choice Question Step directive
+<li>[x] Value Picker Question Step</li>
+<li>[x] Image Choice Question Step
 
 <ul>
 <li>[x] Support icons</li>
@@ -358,14 +399,14 @@
 </li>
 </ul>
 </li>
-<li>[ ] Consent directives
+<li>[x] Consent directives
 
 <ul>
 <li>[x] Visual Consent
 
 <ul>
 <li>[x] In Document Only Type</li>
-<li>[ ] Support custom image</li>
+<li>[x] Support custom image</li>
 </ul>
 </li>
 <li>[x] Consent Sharing</li>
@@ -379,12 +420,23 @@
 <li>[ ] PDF Generation</li>
 </ul>
 </li>
-<li>[ ] Active Tasks directives</li>
+<li>[ ] Active Tasks directives
+
+<ul>
+<li>[x] Countdown Step</li>
+<li>[x] Completion Step</li>
+<li>[ ] Fitness Task</li>
+<li>[ ] Voice Task</li>
+<li>[ ] Gait and Balance Task</li>
+<li>[x] Tapping Speed Task</li>
+<li>[ ] Spacial Memory Task</li>
+</ul>
+</li>
 <li>[x] Results
 
 <ul>
 <li>[x] Output results in JSON</li>
-<li>[ ] Collect results into LocalStorage</li>
+<li>[ ] Collect results into LocalStorage (save/resume)</li>
 </ul>
 </li>
 <li>[ ] Integrations
