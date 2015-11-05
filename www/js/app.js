@@ -50,6 +50,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
   })
 
+  .state('tab.activetasks', {
+    url: '/activetasks',
+    views: {
+      'tab-activetasks': {
+        templateUrl: 'templates/tab-activetasks.html',
+        controller: 'ActiveTasksCtrl'
+      }
+    }
+  })
+
   .state('tab.results', {
     url: '/results',
     views: {

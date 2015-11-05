@@ -69,7 +69,7 @@ angular.module('ionicResearchKit',[])
             else if (stepType != 'IRK-INSTRUCTION-STEP' && stepType != 'IRK-COUNTDOWN-STEP' && stepType != 'IRK-COMPLETION-STEP' && stepType != 'IRK-VISUAL-CONSENT-STEP' && !(stepType=='IRK-CONSENT-REVIEW-STEP' && consentType=='signature') && stepType != 'IRK-TWO-FINGER-TAPPING-INTERVAL-TASK')
                 results.childResults[index].answer = (stepValue?stepValue:null);
             else if (stepType == 'IRK-TWO-FINGER-TAPPING-INTERVAL-TASK')
-                results.childResults[index].samples = (stepValue.samples?stepValue.samples:null);
+                results.childResults[index].samples = (stepValue && stepValue.samples?stepValue.samples:null);
 
             if (stepType == 'IRK-NUMERIC-QUESTION-STEP')
                 results.childResults[index].unit = (stepUnit?stepUnit:null);
