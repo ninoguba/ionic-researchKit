@@ -7,6 +7,7 @@
   "dependencies": {
     "checklist-model": "~0.6.0",
     "signature_pad": "~1.5.1",
-    "angular-dialgauge": "~0.1.5"
+    "angular-dialgauge": "~0.1.5",
+    "ngCordova": "^0.1.24-alpha"
   }
 }

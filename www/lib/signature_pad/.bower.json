@@ -1,0 +1,34 @@
+{
+  "name": "signature_pad",
+  "main": "signature_pad.js",
+  "homepage": "https://github.com/szimek/signature_pad",
+  "authors": [
+    "Szymon Nowak <szimek@gmail.com>"
+  ],
+  "description": "Library for drawing smooth signatures.",
+  "keywords": [
+    "html5",
+    "canvas",
+    "signature"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src",
+    "Gruntfile.js",
+    "package.json"
+  ],
+  "version": "1.5.1",
+  "_release": "1.5.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.5.1",
+    "commit": "4dae7f4c7cfb6a2fb26cd484b7e1ee10da763d53"
+  },
+  "_source": "git://github.com/szimek/signature_pad.git",
+  "_target": "~1.5.1",
+  "_originalSource": "signature_pad",
+  "_direct": true
+}

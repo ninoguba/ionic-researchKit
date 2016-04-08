@@ -66,10 +66,14 @@ angular.module('ionicResearchKit',[])
                 results.childResults[index].answer = (stepValue?stepValue.toDateString():null);
             else if (stepType == 'IRK-TIME-QUESTION-STEP')
                 results.childResults[index].answer = (stepValue?stepValue.toTimeString():null);
-            else if (stepType != 'IRK-INSTRUCTION-STEP' && stepType != 'IRK-COUNTDOWN-STEP' && stepType != 'IRK-COMPLETION-STEP' && stepType != 'IRK-VISUAL-CONSENT-STEP' && !(stepType=='IRK-CONSENT-REVIEW-STEP' && consentType=='signature') && stepType != 'IRK-TWO-FINGER-TAPPING-INTERVAL-TASK')
+            else if (stepType != 'IRK-INSTRUCTION-STEP' && stepType != 'IRK-COUNTDOWN-STEP' && stepType != 'IRK-COMPLETION-STEP' && stepType != 'IRK-VISUAL-CONSENT-STEP' && !(stepType=='IRK-CONSENT-REVIEW-STEP' && consentType=='signature') && stepType != 'IRK-TWO-FINGER-TAPPING-INTERVAL-TASK' && stepType != 'IRK-AUDIO-TASK')
                 results.childResults[index].answer = (stepValue?stepValue:null);
             else if (stepType == 'IRK-TWO-FINGER-TAPPING-INTERVAL-TASK')
                 results.childResults[index].samples = (stepValue && stepValue.samples?stepValue.samples:null);
+            else if (stepType == 'IRK-AUDIO-TASK') {
+                results.childResults[index].fileURL = (stepValue && stepValue.fileURL?stepValue.fileURL:null);
+                results.childResults[index].contentType = (stepValue && stepValue.contentType?stepValue.contentType:null);
+            }
 
             if (stepType == 'IRK-NUMERIC-QUESTION-STEP')
                 results.childResults[index].unit = (stepUnit?stepUnit:null);
@@ -586,7 +590,7 @@ angular.module('ionicResearchKit',[])
                 var step = angular.element(document.querySelectorAll('.irk-slider-slide')[index].querySelector('.irk-step'));
                 var stepType = step.prop('tagName');
                 var consentType = step.attr('type');
-                element.toggleClass('ng-hide', (stepType=='IRK-INSTRUCTION-STEP' || stepType=='IRK-VISUAL-CONSENT-STEP' || stepType=='IRK-CONSENT-SHARING-STEP' || stepType=='IRK-CONSENT-REVIEW-STEP' || stepType=='IRK-COUNTDOWN-STEP' || stepType=='IRK-COMPLETION-STEP' || stepType=='IRK-TWO-FINGER-TAPPING-INTERVAL-TASK'));
+                element.toggleClass('ng-hide', (stepType=='IRK-INSTRUCTION-STEP' || stepType=='IRK-VISUAL-CONSENT-STEP' || stepType=='IRK-CONSENT-SHARING-STEP' || stepType=='IRK-CONSENT-REVIEW-STEP' || stepType=='IRK-COUNTDOWN-STEP' || stepType=='IRK-COMPLETION-STEP' || stepType=='IRK-TWO-FINGER-TAPPING-INTERVAL-TASK' || stepType=='IRK-AUDIO-TASK'));
             });
         }
     }
@@ -1547,7 +1551,7 @@ angular.module('ionicResearchKit',[])
         template: function(elem, attr) {
             return  '<div class="irk-centered">'+
                     '<div class="irk-text-centered">'+
-                    '<h2>Tap the buttons as quickly as you can using two fingers.</h2>'+
+                    '<h2>' + (attr.text ? attr.text : 'Tap the buttons as quickly as you can using two fingers.') + '</h2>'+
                     '<progress class="irk-progress" max="{{duration}}" value="{{progress}}"></progress>'+
                     '<div class="irk-spacer"></div>'+
                     '<h4>Total Taps</h4>'+
@@ -1569,6 +1573,90 @@ angular.module('ionicResearchKit',[])
                 var stepType = step.prop('tagName');
 
                 if (stepType=='IRK-TWO-FINGER-TAPPING-INTERVAL-TASK') {
+                    scope.initActiveTask();
+                }
+            });            
+        }
+    }
+})
+
+//======================================================================================
+// Usage: 
+// =====================================================================================
+.directive('irkAudioTask', function() {
+    return {
+        restrict: 'E',
+        controller: ['$scope', '$element', '$attrs', '$interval', '$cordovaMedia', function($scope, $element, $attrs, $interval, $cordovaMedia) {
+
+            $scope.initActiveTask = function() {
+                $scope.duration = ($attrs.duration?$attrs.duration:10);
+                $scope.progress = $scope.duration;
+                $scope.$parent.formData[$attrs.id] = {};
+                $scope.recordAudio();
+            }
+
+            $scope.recordAudio = function() {
+                //var audioFileName = "sample" + (new Date().getTime()) + (ionic.Platform.isAndroid() ? ".amr" : ".wav");
+                //$scope.$parent.formData[$attrs.id].fileURL = "documents://" + audioFileName;
+                //$scope.$parent.formData[$attrs.id].contentType = "audio/" + (ionic.Platform.isAndroid() ? "amr" : "wav");
+                var audioFileName = "sample" + (new Date().getTime()) + ".m4a";
+                $scope.$parent.formData[$attrs.id].fileURL = "documents://" + audioFileName;
+                $scope.$parent.formData[$attrs.id].contentType = "audio/m4a";
+
+                var audioSample = $cordovaMedia.newMedia(audioFileName);
+
+                /*
+                // Get amplitude every 250 ms
+                mediaTimer = $interval(function() {
+                    audioSample.getRecordLevels(function(amp) {
+                        console.log(JSON.stringify(amp));
+                    },
+                    function (e) {
+                        console.log("Error getting amp=" + e);
+                    });
+                }, 250);
+                */
+
+                // Show timer
+                $scope.$parent.currentCountdown = $interval(function() {
+                    $scope.progress--;
+                }, 1000, $scope.duration);
+
+                // Record audio
+                audioSample.startRecord();
+
+                // Stop recording after 10 seconds by default
+                setTimeout(function() {
+                    audioSample.stopRecord();
+                    //audioSample.play();
+                    //audioSample.stop();
+                    //audioSample.release();
+                    $scope.$parent.doStepNext();
+                }, $scope.duration*1000);
+            }
+
+        }],
+        template: function(elem, attr) {
+            return  '<div class="irk-centered">'+
+                    '<div class="irk-text-centered">'+
+                    '<h2>' + (attr.text ? attr.text : 'Your more specific voice instruction goes here. For example, say \'Aaaah\'.') + '</h2>'+
+                    '<div class="irk-spacer"></div>'+
+                    '</div>'+
+                    '</div>'+
+                    '<div class="irk-tap-button-container">'+
+                    '<h2 class="positive">. . . recording . . .</h2>'+
+                    '<h4 class="dark">{{progress}}</h4>'+
+                    '</div>'
+
+        },
+        link: function(scope, element, attrs, controller) {
+            element.addClass('irk-step');
+
+            scope.$on("slideBox.slideChanged", function(e, index, count) {
+                var step = angular.element(document.querySelectorAll('.irk-slider-slide')[index].querySelector('.irk-step'));
+                var stepType = step.prop('tagName');
+
+                if (stepType=='IRK-AUDIO-TASK') {
                     scope.initActiveTask();
                 }
             });            

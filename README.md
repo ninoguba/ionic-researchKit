@@ -274,11 +274,13 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
 
 ### Active Tasks
 
-`<irk-countdown-step>` is the equivalent of the `ORKCountdownStep` class.
+`<irk-countdown-step>` is the equivalent of the `ORKCountdownStep` class and supports the `duration` attribute.
 
 `<irk-completion-step>` is the equivalent of the `ORKCompletionStep` class.
 
-`<irk-two-finger-tapping-interval-task>` is the equivalent of the `ORKPredefinedActiveTask` class that is for two finger tapping.
+`<irk-two-finger-tapping-interval-task>` is the equivalent of the `ORKPredefinedActiveTask` class that is for two finger tapping and supports the `text` and `duration` attributes.
+
+`<irk-audio-task>` is the equivalent of the `ORKPredefinedActiveTask` class that is for audio capture and supports the `text` and `duration` attributes.
 
 # Demo
 
@@ -286,7 +288,9 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
 
 [Consent demo](https://youtu.be/lb0yK52kZXs?rel=0)
 
-[Active Task demo](https://youtu.be/pANOG-KW2PM?rel=0)
+[Finger Tapping Task demo](https://youtu.be/pANOG-KW2PM?rel=0)
+
+[Audio Task demo](https://youtu.be/V_O9v6lK9Xo?rel=0)
 
 # Roadmap
 
@@ -327,7 +331,7 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
   - [x] Countdown Step
   - [x] Completion Step
   - [ ] Fitness Task
-  - [ ] Voice Task
+  - [x] Audio Task
   - [ ] Gait and Balance Task
   - [x] Tapping Speed Task
   - [ ] Spacial Memory Task

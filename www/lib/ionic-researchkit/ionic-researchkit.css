@@ -285,3 +285,11 @@ button.irk-image:before {
   width: 100px;
   margin: 10px;
 }
+
+.irk-voice {
+  background-image: url(resources/phonewaves.png);
+}
+
+.irk-voice-recording {
+  background-image: url(resources/phonesoundwaves.png);
+}

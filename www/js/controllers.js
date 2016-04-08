@@ -24,7 +24,7 @@ angular.module('starter.controllers', [])
   };
 
   $scope.openModalActiveTask = function() {
-    $ionicModal.fromTemplateUrl('templates/modal-activetasks.html', {
+    $ionicModal.fromTemplateUrl('templates/modal-activetasks-fingertap.html', {
       scope: $scope,
       animation: 'slide-in-up'
     }).then(function(modal) {
@@ -58,8 +58,18 @@ angular.module('starter.controllers', [])
 }])
 
 .controller('ActiveTasksCtrl', function($scope, $ionicModal) {
-  $scope.openModalActiveTask = function() {
-    $ionicModal.fromTemplateUrl('templates/modal-activetasks.html', {
+  $scope.openModalFingerTapActiveTask = function() {
+    $ionicModal.fromTemplateUrl('templates/modal-activetasks-fingertap.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modal = modal;
+      $scope.modal.show();
+    });
+  };
+
+  $scope.openModalVoiceActiveTask = function() {
+    $ionicModal.fromTemplateUrl('templates/modal-activetasks-voice.html', {
       scope: $scope,
       animation: 'slide-in-up'
     }).then(function(modal) {

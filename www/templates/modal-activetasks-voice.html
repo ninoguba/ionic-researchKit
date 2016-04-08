@@ -1,0 +1,26 @@
+<ion-modal-view class="irk-modal">
+
+<irk-ordered-tasks>
+
+  <irk-task>
+    <irk-instruction-step id="a1" title="Voice" text="This activity evaluates your voice by recording it with the microphone at the bottom of your phone." button-text="Next" image="irk-voice" footer-attach="true"/>
+  </irk-task>
+
+  <irk-task>
+    <irk-instruction-step id="a2" title="Voice" text="Take a deep breath and say ''Aaaaah'' into the microphone for as long as you can.  Keep a steady vocal volume so the audio bars remain blue.<br><br>Tap Get Started to begin." button-text="Get Started" image="irk-voice-recording" footer-attach="true"/>
+  </irk-task>
+  <!--
+  <irk-task>
+    <irk-countdown-step id="a3"/>
+  </irk-task>
+  -->
+  <irk-task>
+    <irk-audio-task id="a4"/>
+  </irk-task>
+  <irk-task>
+    <irk-completion-step id="a5"/>
+  </irk-task>
+
+</irk-ordered-tasks>
+
+</ion-modal-view>
