@@ -29,12 +29,23 @@
       <div class="inner clearfix">
         <section id="main-content">
           <h1>
-<a id="what-is-ionicresearchkit" class="anchor" href="#what-is-ionicresearchkit" aria-hidden="true"><span class="octicon octicon-link"></span></a>What is ionicResearchKit?</h1>
+<a id="what-is-ionicresearchkit" class="anchor" href="#what-is-ionicresearchkit" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What is ionicResearchKit?</h1>
 
 <p>An open source library equivalent of Apple's <a href="https://github.com/ResearchKit/ResearchKit">ResearchKit Framework</a> built on <a href="https://github.com/driftyco/ionic">Ionic</a> which makes it easy to create cross-platform hybrid native apps for medical research or for other research projects.</p>
 
 <h1>
-<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h1>
+<a id="demo" class="anchor" href="#demo" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Demo</h1>
+
+<p><a href="https://youtu.be/U96anI8PA08?rel=0">Survey demo</a></p>
+
+<p><a href="https://youtu.be/lb0yK52kZXs?rel=0">Consent demo</a></p>
+
+<p><a href="https://youtu.be/pANOG-KW2PM?rel=0">Finger Tapping Task demo</a></p>
+
+<p><a href="https://youtu.be/V_O9v6lK9Xo?rel=0">Audio Task demo</a></p>
+
+<h1>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h1>
 
 <ol>
 <li>Download and import the plugin script.<br>
@@ -49,7 +60,7 @@
 </ol>
 
 <h1>
-<a id="dependencies" class="anchor" href="#dependencies" aria-hidden="true"><span class="octicon octicon-link"></span></a>Dependencies</h1>
+<a id="dependencies" class="anchor" href="#dependencies" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Dependencies</h1>
 
 <ul>
 <li>checklist-model <a href="https://github.com/vitalets/checklist-model">https://github.com/vitalets/checklist-model</a>
@@ -61,7 +72,7 @@
 </ul>
 
 <h1>
-<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h1>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h1>
 
 <ol>
 <li>Add a modal view to your app using <a href="http://ionicframework.com/docs/api/service/%24ionicModal/">$ionicModal</a>
@@ -70,7 +81,7 @@
 </ol>
 
 <h3>
-<a id="survey" class="anchor" href="#survey" aria-hidden="true"><span class="octicon octicon-link"></span></a>Survey</h3>
+<a id="survey" class="anchor" href="#survey" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Survey</h3>
 
 <pre><code>&lt;ion-modal-view class="irk-modal"&gt;
 
@@ -162,7 +173,7 @@
 </code></pre>
 
 <h3>
-<a id="consent" class="anchor" href="#consent" aria-hidden="true"><span class="octicon octicon-link"></span></a>Consent</h3>
+<a id="consent" class="anchor" href="#consent" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Consent</h3>
 
 <pre><code>&lt;ion-modal-view class="irk-modal"&gt;
 
@@ -253,7 +264,7 @@
 </code></pre>
 
 <h3>
-<a id="active-task" class="anchor" href="#active-task" aria-hidden="true"><span class="octicon octicon-link"></span></a>Active Task</h3>
+<a id="active-task" class="anchor" href="#active-task" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Active Task</h3>
 
 <pre><code>&lt;ion-modal-view class="irk-modal"&gt;
 
@@ -281,10 +292,10 @@
 </code></pre>
 
 <h1>
-<a id="directives" class="anchor" href="#directives" aria-hidden="true"><span class="octicon octicon-link"></span></a>Directives</h1>
+<a id="directives" class="anchor" href="#directives" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Directives</h1>
 
 <h3>
-<a id="survey-1" class="anchor" href="#survey-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Survey</h3>
+<a id="survey-1" class="anchor" href="#survey-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Survey</h3>
 
 <p><code>&lt;irk-ordered-tasks&gt;</code> is the equivalent of the <code>ORKOrderedTask</code> class and will encompass one or more <code>&lt;irk-task&gt;</code> elements.</p>
 
@@ -313,7 +324,7 @@
 <p><code>&lt;irk-form-step&gt;</code> is the equivalent of the <code>ORKFormStep</code> class and includes the <code>id</code>, <code>title</code>, <code>text</code> attributes. This encompass several <code>&lt;irk-form-item&gt;</code> elements which are the equivalent of the <code>ORKFormItem</code> class and each include the <code>title</code>, <code>id</code>, <code>type</code>, <code>text</code> attributes.</p>
 
 <h3>
-<a id="consent-1" class="anchor" href="#consent-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Consent</h3>
+<a id="consent-1" class="anchor" href="#consent-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Consent</h3>
 
 <p><code>&lt;irk-visual-consent-step&gt;</code> is the equivalent of the <code>ORKVisualConsentStep</code> class.</p>
 
@@ -322,25 +333,18 @@
 <p><code>&lt;irk-consent-review-step&gt;</code> is the equivalent of the <code>ORKConsentReviewStep</code> class.  Depending on it's <code>type</code> attribute, it could encompass one or more <code>&lt;irk-consent-name&gt;</code> or <code>&lt;irk-consent-signature&gt;</code> elements which are the broken up equivalent of the <code>ORKConsentSignature</code> class.</p>
 
 <h3>
-<a id="active-tasks" class="anchor" href="#active-tasks" aria-hidden="true"><span class="octicon octicon-link"></span></a>Active Tasks</h3>
+<a id="active-tasks" class="anchor" href="#active-tasks" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Active Tasks</h3>
 
-<p><code>&lt;irk-countdown-step&gt;</code> is the equivalent of the <code>ORKCountdownStep</code> class.</p>
+<p><code>&lt;irk-countdown-step&gt;</code> is the equivalent of the <code>ORKCountdownStep</code> class and supports the <code>duration</code> attribute.</p>
 
 <p><code>&lt;irk-completion-step&gt;</code> is the equivalent of the <code>ORKCompletionStep</code> class.</p>
 
-<p><code>&lt;irk-two-finger-tapping-interval-task&gt;</code> is the equivalent of the <code>ORKPredefinedActiveTask</code> class that is for two finger tapping.</p>
+<p><code>&lt;irk-two-finger-tapping-interval-task&gt;</code> is the equivalent of the <code>ORKPredefinedActiveTask</code> class that is for two finger tapping and supports the <code>text</code> and <code>duration</code> attributes.</p>
+
+<p><code>&lt;irk-audio-task&gt;</code> is the equivalent of the <code>ORKPredefinedActiveTask</code> class that is for audio capture and supports the <code>text</code> and <code>duration</code> attributes.</p>
 
 <h1>
-<a id="demo" class="anchor" href="#demo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Demo</h1>
-
-<p><a href="https://youtu.be/U96anI8PA08?rel=0">Survey demo</a></p>
-
-<p><a href="https://youtu.be/lb0yK52kZXs?rel=0">Consent demo</a></p>
-
-<p><a href="https://youtu.be/pANOG-KW2PM?rel=0">Active Task demo</a></p>
-
-<h1>
-<a id="roadmap" class="anchor" href="#roadmap" aria-hidden="true"><span class="octicon octicon-link"></span></a>Roadmap</h1>
+<a id="roadmap" class="anchor" href="#roadmap" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Roadmap</h1>
 
 <ul>
 <li>[x] Task View </li>
@@ -426,7 +430,7 @@
 <li>[x] Countdown Step</li>
 <li>[x] Completion Step</li>
 <li>[ ] Fitness Task</li>
-<li>[ ] Voice Task</li>
+<li>[x] Audio Task</li>
 <li>[ ] Gait and Balance Task</li>
 <li>[x] Tapping Speed Task</li>
 <li>[ ] Spacial Memory Task</li>
@@ -450,7 +454,7 @@
 </ul>
 
 <h1>
-<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h1>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h1>
 
 <p>The source in the Ionic-ResearchKit repository is made available under the
 following license unless another license is explicitly identified:</p>
