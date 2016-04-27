@@ -2,6 +2,16 @@
 
 An open source library equivalent of Apple's [ResearchKit Framework](https://github.com/ResearchKit/ResearchKit) built on [Ionic](https://github.com/driftyco/ionic) which makes it easy to create cross-platform hybrid native apps for medical research or for other research projects.
 
+# Demo
+
+[Survey demo](https://youtu.be/U96anI8PA08?rel=0)
+
+[Consent demo](https://youtu.be/lb0yK52kZXs?rel=0)
+
+[Finger Tapping Task demo](https://youtu.be/pANOG-KW2PM?rel=0)
+
+[Audio Task demo](https://youtu.be/V_O9v6lK9Xo?rel=0)
+
 # Installation
 
 1. Download and import the plugin script.<br />
@@ -281,16 +291,6 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
 `<irk-two-finger-tapping-interval-task>` is the equivalent of the `ORKPredefinedActiveTask` class that is for two finger tapping and supports the `text` and `duration` attributes.
 
 `<irk-audio-task>` is the equivalent of the `ORKPredefinedActiveTask` class that is for audio capture and supports the `text` and `duration` attributes.
-
-# Demo
-
-[Survey demo](https://youtu.be/U96anI8PA08?rel=0)
-
-[Consent demo](https://youtu.be/lb0yK52kZXs?rel=0)
-
-[Finger Tapping Task demo](https://youtu.be/pANOG-KW2PM?rel=0)
-
-[Audio Task demo](https://youtu.be/V_O9v6lK9Xo?rel=0)
 
 # Roadmap
 
