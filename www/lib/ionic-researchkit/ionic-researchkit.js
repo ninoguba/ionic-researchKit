@@ -92,6 +92,110 @@ angular.module('ionicResearchKit',[])
 //======================================================================================
 // Usage: 
 // =====================================================================================
+.service('irkConsentDocument', function($filter) {
+    var service = this;
+    var consentDocument = null;
+    var pdfDefinition = null;
+    var pdfContent = null;
+
+    service.initDocument = function() {
+        pdfDefinition = { 
+            pageSize: 'LEGAL',
+            pageMargins: [ 50, 50, 50, 50 ],
+            styles: {
+                title: { fontSize: 18, bold: true },
+                header: { fontSize: 15, bold: true },
+                paragraph: { fontSize: 12, alignment: 'justify' },
+                footer: { fontSize: 10, alignment: 'center', margin: [ 0,10,0,0 ] }
+            },
+            footer: function(currentPage, pageCount) { return { text: 'Page ' + currentPage.toString() + ' of ' + pageCount, style: 'footer' }; },
+        };
+
+        pdfContent = [{ text: 'Consent', style: 'title' }, ' '];
+    };
+
+    service.addContent = function(text, style) {
+        if (!pdfDefinition) service.initDocument();
+        pdfContent.push({ text: text, style: style });
+    };
+
+    service.addConsentSection = function(title, content) {
+        if (!pdfDefinition) service.initDocument();
+        pdfContent.push({ text: title, style: 'header' });
+        pdfContent.push({ text: content, style: 'paragraph' });
+    };
+
+    service.addParticipant = function(label, name) {
+        if (pdfDefinition) {
+            pdfContent.push({
+                columns: [
+                    {
+                        width: '*',
+                        text: name
+                    },
+                    {
+                        width: '*',
+                        text: ''
+                    },
+                    {
+                        width: '*',
+                        text: $filter('date')(new Date(), "MM/dd/yyyy")
+                    }
+                ],
+                columnGap: 10
+            });            
+            pdfContent.push({
+                columns: [
+                    {
+                        width: '*',
+                        text: '______________________________'
+                    },
+                    {
+                        width: '*',
+                        text: '______________________________'
+                    },
+                    {
+                        width: '*',
+                        text: '______________________________'
+                    }
+                ],
+                columnGap: 10
+            });
+            pdfContent.push({
+                columns: [
+                    {
+                        width: '*',
+                        text: label + ' Name'
+                    },
+                    {
+                        width: '*',
+                        text: 'Signature'
+                    },
+                    {
+                        width: '*',
+                        text: 'Date'
+                    }
+                ],
+                columnGap: 10
+            });
+        }
+    };
+
+    service.addSignature = function() {
+    };
+
+    service.getDocument = function() {
+        if (pdfDefinition) {
+            pdfDefinition.content = pdfContent;
+            consentDocument = pdfMake.createPdf(pdfDefinition);
+        }
+        return consentDocument;
+    };   
+})
+
+//======================================================================================
+// Usage: 
+// =====================================================================================
 .directive('irkOrderedTasks', [
     '$rootScope',
     '$timeout',
@@ -1224,7 +1328,7 @@ angular.module('ionicResearchKit',[])
 //======================================================================================
 // Usage: 
 // =====================================================================================
-.directive('irkConsentReviewStep', function() {
+.directive('irkConsentReviewStep', ['irkConsentDocument', function(irkConsentDocument) {
     return {
         restrict: 'E',
         transclude: true,
@@ -1286,6 +1390,9 @@ angular.module('ionicResearchKit',[])
                             scope.reviewContent += '<h5>'+stepTitle+'</h4>';
                             var stepContent = angular.element(steps[i].querySelector('.irk-learn-more-content'));
                             scope.reviewContent += '<div>'+stepContent.html()+'</div>';
+
+                            //Add the content section to the consent document (PDF)
+                            irkConsentDocument.addConsentSection(stepTitle, stepContent.text());
                         };
                         
                         var container = angular.element(document.querySelector('.irk-consent-review-derived-content'));
@@ -1295,12 +1402,12 @@ angular.module('ionicResearchKit',[])
             });
         }
     }
-})
+}])
 
 //======================================================================================
 // Usage: 
 // =====================================================================================
-.directive('irkConsentName', function() {
+.directive('irkConsentName', ['irkConsentDocument', function(irkConsentDocument) {
     return {
         restrict: 'E',
         replace: true,
@@ -1322,14 +1429,25 @@ angular.module('ionicResearchKit',[])
             var sigId = attrs.id;
             scope.$parent.$parent.formData[stepId] = {};
             scope.$parent.$parent.formData[stepId][sigId] = { "title": attrs.title };
+
+            scope.$on("slideBox.slideChanged", function(e, index, count) {
+                var step = angular.element(document.querySelectorAll('.irk-slider-slide')[index].querySelector('.irk-step'));
+                var stepType = step.prop('tagName');
+                var consentType = step.attr('type');
+
+                if (stepType=='IRK-CONSENT-REVIEW-STEP' && consentType=='name') {
+                    //Add the participant to the consent document (PDF)
+                    irkConsentDocument.addParticipant(attrs.title, 'John Doe');
+                }
+            });
         }
     }
-})
+}])
 
 //======================================================================================
 // Usage: 
 // =====================================================================================
-.directive('irkConsentSignature', function() {
+.directive('irkConsentSignature', ['irkConsentDocument', function(irkConsentDocument) {
     return {
         restrict: 'E',
         replace: true,
@@ -1404,7 +1522,7 @@ angular.module('ionicResearchKit',[])
             });
         }
     }
-})
+}])
 
 //======================================================================================
 // Usage: 

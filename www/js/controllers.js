@@ -53,10 +53,6 @@ angular.module('starter.controllers', [])
   });
 })
 
-.controller('ResultsCtrl', ['irkResults', '$scope', function(irkResults, $scope) {
-  $scope.results = irkResults.getResults();
-}])
-
 .controller('ActiveTasksCtrl', function($scope, $ionicModal) {
   $scope.openModalFingerTapActiveTask = function() {
     $ionicModal.fromTemplateUrl('templates/modal-activetasks-fingertap.html', {
@@ -97,3 +93,33 @@ angular.module('starter.controllers', [])
     // Execute action
   });
 })
+
+.controller('ResultsCtrl', ['irkResults', '$scope', function(irkResults, $scope) {
+  $scope.results = irkResults.getResults();
+}])
+
+.controller('DocumentCtrl', ['irkConsentDocument', '$scope', function(irkConsentDocument, $scope) {
+  $scope.consentDocument = irkConsentDocument.getDocument();
+
+  /*
+  //Open PDF (only works in browser)
+  if ($scope.consentDocument) $scope.consentDocument.open();
+  */
+
+  /*
+  //Get Base64 Encoded String
+  if ($scope.consentDocument) {
+    $scope.consentDocument.getBase64(function(encodedString) {
+      console.log(encodedString)
+    });
+  }
+  */
+
+  //Get DataURL 
+  if ($scope.consentDocument) {
+    $scope.consentDocument.getDataUrl(function(dataURL) {
+      //console.log(dataURL);
+      window.open(dataURL, '_blank', 'location=yes,closebuttoncaption=Close,enableViewportScale=yes');
+    });
+  }
+}])

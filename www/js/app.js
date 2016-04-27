@@ -68,6 +68,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         controller: 'ResultsCtrl'
       }
     }
+  })
+
+  .state('tab.document', {
+    url: '/document',
+    views: {
+      'tab-document': {
+        templateUrl: 'templates/tab-document.html',
+        controller: 'DocumentCtrl'
+      }
+    }
   });
 
   // if none of the above states are matched, use this as the fallback
