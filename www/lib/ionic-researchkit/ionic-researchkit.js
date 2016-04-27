@@ -29,9 +29,14 @@ angular.module('ionicResearchKit',[])
         results = {
             "start": new Date(),
             "end": null,
-            "childResults": []
+            "childResults": [],
+            "canceled": false
         }
     };
+
+    service.cancel = function() {
+        results.canceled = true;
+    }
 
     service.getResults = function() {
         return results;
@@ -230,6 +235,7 @@ angular.module('ionicResearchKit',[])
                             },
                             destructiveButtonClicked: function(index) {
                                 console.log('Clicked end task');
+                                irkResults.cancel();
                                 $scope.doSave();
                                 $scope.doEnd();
                                 return true;
