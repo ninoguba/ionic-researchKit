@@ -98,7 +98,7 @@ angular.module('starter.controllers', [])
   $scope.results = irkResults.getResults();
 }])
 
-.controller('DocumentCtrl', ['irkConsentDocument', '$scope', function(irkConsentDocument, $scope) {
+.controller('DocumentCtrl', ['irkConsentDocument', '$scope', '$cordovaInAppBrowser', function(irkConsentDocument, $scope, $cordovaInAppBrowser) {
   $scope.consentDocument = irkConsentDocument.getDocument();
 
   /*
@@ -119,7 +119,12 @@ angular.module('starter.controllers', [])
   if ($scope.consentDocument) {
     $scope.consentDocument.getDataUrl(function(dataURL) {
       //console.log(dataURL);
-      window.open(dataURL, '_blank', 'location=yes,closebuttoncaption=Close,enableViewportScale=yes');
+      $scope.dataURL = dataURL;
+      $scope.viewPDF();
     });
+  }
+
+  $scope.viewPDF = function($cordovaInAppBrowser) {
+    window.open($scope.dataURL, '_blank', 'location=no');
   }
 }])

@@ -18,23 +18,23 @@
     "cordova-plugin-device",
     "cordova-plugin-console",
     "cordova-plugin-whitelist",
-    "cordova-plugin-splashscreen",
-    "com.ionic.keyboard",
     "cordova-plugin-file",
-    "cordova-media-with-compression"
+    "cordova-plugin-inappbrowser",
+    "ionic-plugin-keyboard",
+    "cordova-plugin-media",
+    "cordova-plugin-compat",
+    {
+      "locator": "https://github.com/apache/cordova-plugin-splashscreen.git",
+      "id": "cordova-plugin-splashscreen"
+    }
   ],
   "cordovaPlatforms": [
     "android",
-    "ios",
     {
       "platform": "android",
       "version": "",
       "locator": "android"
     },
-    {
-      "platform": "ios",
-      "version": "",
-      "locator": "ios"
-    }
+    "ios"
   ]
 }

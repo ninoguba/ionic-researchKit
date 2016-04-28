@@ -1720,12 +1720,12 @@ angular.module('ionicResearchKit',[])
             }
 
             $scope.recordAudio = function() {
-                //var audioFileName = "sample" + (new Date().getTime()) + (ionic.Platform.isAndroid() ? ".amr" : ".wav");
-                //$scope.$parent.formData[$attrs.id].fileURL = "documents://" + audioFileName;
-                //$scope.$parent.formData[$attrs.id].contentType = "audio/" + (ionic.Platform.isAndroid() ? "amr" : "wav");
-                var audioFileName = "sample" + (new Date().getTime()) + ".m4a";
+                var audioFileName = "sample" + (new Date().getTime()) + (ionic.Platform.isAndroid() ? ".amr" : ".wav");
                 $scope.$parent.formData[$attrs.id].fileURL = "documents://" + audioFileName;
-                $scope.$parent.formData[$attrs.id].contentType = "audio/m4a";
+                $scope.$parent.formData[$attrs.id].contentType = "audio/" + (ionic.Platform.isAndroid() ? "amr" : "wav");
+                //var audioFileName = "sample" + (new Date().getTime()) + ".m4a";
+                //$scope.$parent.formData[$attrs.id].fileURL = "documents://" + audioFileName;
+                //$scope.$parent.formData[$attrs.id].contentType = "audio/m4a";
 
                 var audioSample = $cordovaMedia.newMedia(audioFileName);
 
