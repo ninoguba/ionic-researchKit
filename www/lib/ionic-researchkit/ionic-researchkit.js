@@ -294,17 +294,14 @@ angular.module('ionicResearchKit',[])
                 });
 
                 $scope.doStepBack = function() {
-                    console.log('Clicked back');
                     slider.prev();
                 };
 
                 $scope.doStepNext = function() {
-                    console.log('Clicked next');
                     $scope.doNext();
                 };
 
                 $scope.doSkip = function() {
-                    console.log('Clicked skip');
                     $scope.doNext();
                 };
 
@@ -324,12 +321,10 @@ angular.module('ionicResearchKit',[])
 
                     if (stepType=='IRK-COMPLETION-STEP' && index==slider.slidesCount()-1)
                     {                    
-                        console.log('Clicked done');
                         $scope.doNext();
                     }
                     else
                     {
-                        console.log('Clicked cancel');
                         // Show the action sheet
                         var hideSheet = $ionicActionSheet.show({
                             destructiveText: (ionic.Platform.isAndroid()?'<i class="icon ion-android-exit assertive"></i> ':'')+'End Task',
@@ -338,7 +333,6 @@ angular.module('ionicResearchKit',[])
                                 hideSheet();
                             },
                             destructiveButtonClicked: function(index) {
-                                console.log('Clicked end task');
                                 irkResults.cancel();
                                 $scope.doSave();
                                 $scope.doEnd();
@@ -424,17 +418,15 @@ angular.module('ionicResearchKit',[])
                     });
                     confirmPopup.then(function(res) {
                         if (res) {
-                            console.log('Clicked agree');
                             $scope.formData.consent = true;
                             $scope.doNext();
                         } else {
-                            console.log('Click cancel');
+                            //Clicked cancel
                         }
                     });
                 };
 
                 $scope.doDisagree = function() {
-                    console.log('Clicked disagree');
                     $scope.formData.consent = false;
                     $scope.doSave();
                     $scope.doEnd();                    
