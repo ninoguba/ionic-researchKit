@@ -252,27 +252,27 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
 
 `<irk-task>` is the equivalent of the `ORKTask` class and will encompass one of the available `<irk-*-step>` elements.
 
-`<irk-instruction-step>` is the equivalent of the `ORKInstructionStep` class and includes the `id`, `title` and `text` attributes.
+`<irk-instruction-step>` is the equivalent of the `ORKInstructionStep` class and includes the `id`, `title`, `text`, `link`, `link-text` and `image` attributes.
 
-`<irk-scale-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKScaleAnswerFormat` classes combined and includes the `id`, `title`, `text`, `min`, `max`, `step`, `value`, `min-text`, and `max-text` attributes.
+`<irk-scale-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKScaleAnswerFormat` classes combined and includes the `id`, `title`, `text`, `min`, `max`, `step`, `value`, `min-text`, `max-text`, and `optional` attributes.
 
-`<irk-boolean-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKBooleanAnswerFormat` classes combined and includes the `id`, `title`, `text`, `trueText`, and `falseText` attributes.
+`<irk-boolean-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKBooleanAnswerFormat` classes combined and includes the `id`, `title`, `text`, `true-value`, `true-text`, `false-value`, `false-text`, and `optional` attributes.
 
-`<irk-text-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKTextAnswerFormat` classes combined and includes the `id`, `title`, `text`, `maxLength`, and `multipleLines` attributes.
+`<irk-text-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKTextAnswerFormat` classes combined and includes the `id`, `title`, `text`, `placeholder`, `max-length`, `multiple-lines`, and `optional` attributes.
 
-`<irk-text-choice-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKTextChoiceAnswerFormat` classes  combined and includes the `id`, `title`, `text`, and `style` attributes. This encompass several `<irk-text-choice>` elements where each include the `value`, `text`, and `detail-text` attributes.
+`<irk-text-choice-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKTextChoiceAnswerFormat` classes  combined and includes the `id`, `title`, `text`, and `optional` attributes. This encompass several `<irk-text-choice>` elements where each include the `value`, `text`, and `detail-text` attributes.
 
-`<irk-numeric-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKNumericAnswerFormat` classes combined and includes the `id`, `title`, `text`, `min`, `max`, and `unit` attributes.
+`<irk-numeric-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKNumericAnswerFormat` classes combined and includes the `id`, `title`, `text`, `min`, `max`, `unit`, `placeholder`, and `optional` attributes.
 
-`<irk-date-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKDateAnswerFormat` classes combined and includes the `id`, `title`, `text` attributes.
+`<irk-date-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKDateAnswerFormat` classes combined and includes the `id`, `title`, `text`, and `optional` attributes.
 
-`<irk-time-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKTimeOfDayAnswerFormat` classes combined and includes the `id`, `title`, `text` attributes.
+`<irk-time-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKTimeOfDayAnswerFormat` classes combined and includes the `id`, `title`, `text`, and `optional` attributes.
 
-`<irk-value-picker-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKValuePickerAnswerFormat` classes combined and includes the `id`, `title`, `text` attributes. This encompass several `<irk-picker-choice>` elements where each include the `value`, `text` attributes.
+`<irk-value-picker-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKValuePickerAnswerFormat` classes combined and includes the `id`, `title`, `text`, and `optional` attributes. This encompass several `<irk-picker-choice>` elements where each include the `value`, `text` attributes.
 
-`<irk-image-choice-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKImageChoiceAnswerFormat` classes combined and includes the `id`, `title`, `text` attributes. This encompass several `<irk-image-choice>` elements where each include the `value`, `text`, `type`, `normal-state-image`, `selected-state-image` attributes.
+`<irk-image-choice-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKImageChoiceAnswerFormat` classes combined and includes the `id`, `title`, `text`, and `optional` attributes. This encompass several `<irk-image-choice>` elements where each include the `value`, `text`, `type`, `normal-state-image`, `selected-state-image` attributes.
 
-`<irk-form-step>` is the equivalent of the `ORKFormStep` class and includes the `id`, `title`, `text` attributes. This encompass several `<irk-form-item>` elements which are the equivalent of the `ORKFormItem` class and each include the `title`, `id`, `type`, `text` attributes.
+`<irk-form-step>` is the equivalent of the `ORKFormStep` class and includes the `id`, `title`, `text` attributes. This encompass several `<irk-form-item>` elements which are the equivalent of the `ORKFormItem` class and each include the `title`, `id`, `type`, `text` and `placeholder` , and `optional` attributes.
 
 ### Consent
 
