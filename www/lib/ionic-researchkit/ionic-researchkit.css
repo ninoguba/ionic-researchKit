@@ -95,13 +95,13 @@
   font-size: 17px !important;
 }
 
-.irk-learn-more {
+.irk-button-learn-more {
   font-size: 12px;
   line-height: 12px;
   width: 75%;
 }
 
-.irk-instruction-button {
+.irk-button-instruction {
   padding-left: 25px;
   padding-right: 25px;
 }
