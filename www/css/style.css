@@ -13,3 +13,65 @@ button.choice-food-pizza {
 .custom-ionic {
   background-image: url(../img/ionic.png);
 }
+
+/***************************
+Override Button Styles Here
+***************************/
+
+/***************************
+.button.irk-button-step-previous, 
+.button.irk-button-step-cancel,
+.button.irk-button-step-next,
+.button.irk-button-step-skip {
+	border-color: #cccccc;
+	background-color: #cccccc;
+	color: #fff; 
+}
+.button.irk-button-step-previous:hover, 
+.button.irk-button-step-cancel:hover,
+.button.irk-button-step-next:hover, 
+.button.irk-button-step-skip:hover {
+	color: #fff;
+	text-decoration: none; 
+}
+.button.irk-button-step-previous.active, .button.irk-button-step-previous.activated,
+.button.irk-button-step-cancel.active, .button.irk-button-step-cancel.activated,
+.button.irk-button-step-next.active, .button.irk-button-step-next.activated,
+.button.irk-button-step-skip.active, .button.irk-button-step-skip.activated {
+	border-color: #cccccc;
+	background-color: #cccccc;
+	box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.1); 
+}
+.button.irk-button-step-previous.button-clear,
+.button.irk-button-step-cancel.button-clear,
+.button.irk-button-step-next.button-clear,
+.button.irk-button-step-skip.button-clear {
+	border-color: transparent;
+	background: none;
+	box-shadow: none;
+	color: #cccccc; 
+}
+.button.irk-button-step-previous.button-icon,
+.button.irk-button-step-cancel.button-icon,
+.button.irk-button-step-next.button-icon,
+.button.irk-button-step-skip.button-icon {
+	border-color: transparent;
+	background: none; 
+}
+.button.irk-button-step-previous.button-outline,
+.button.irk-button-step-cancel.button-outline,
+.button.irk-button-step-next.button-outline,
+.button.irk-button-step-skip.button-outline {
+	border-color: #cccccc;
+	background: transparent;
+	color: #cccccc; 
+}
+.button.irk-button-step-previous.button-outline.active, .button.irk-button-step-previous.button-outline.activated,
+.button.irk-button-step-cancel.button-outline.active, .button.irk-button-step-cancel.button-outline.activated,
+.button.irk-button-step-next.button-outline.active, .button.irk-button-step-next.button-outline.activated,
+.button.irk-button-step-skip.button-outline.active, .button.irk-button-step-skip.button-outline.activated {
+	background-color: #cccccc;
+	box-shadow: none;
+	color: #fff; 
+}
+***************************/

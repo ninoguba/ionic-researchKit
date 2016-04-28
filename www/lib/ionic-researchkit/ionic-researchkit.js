@@ -373,7 +373,7 @@ angular.module('ionicResearchKit',[])
                         '<ion-header-bar>'+
                         '<h1 class="title">Learn More</h1>'+
                         '<div class="buttons">'+
-                        '<button class="button button-clear button-positive" ng-click="hideLearnMore()">Done</button>'+
+                        '<button class="button button-clear button-positive irk-button-learn-more-done" ng-click="hideLearnMore()">Done</button>'+
                         '</div>'+
                         '</ion-header-bar>'+
                         '<ion-content class="padding">'+
@@ -534,22 +534,22 @@ angular.module('ionicResearchKit',[])
                 //FOOTER BAR FOR SURVEY STEPS
                 '<ion-footer-bar class="irk-bottom-bar" keyboard-attach irk-survey-bar>'+
                 '<div>'+
-                '<a class="button button-block button-outline button-positive irk-bottom-button" ng-click="doStepNext()" irk-step-next>Next</a>'+
-                '<a class="button button-block button-clear button-positive irk-bottom-button" ng-click="doSkip()" irk-step-skip>Skip this question</a>'+
+                '<a class="button button-block button-outline button-positive irk-bottom-button irk-button-step-next" ng-click="doStepNext()" irk-step-next>Next</a>'+
+                '<a class="button button-block button-clear button-positive irk-bottom-button irk-button-step-skip" ng-click="doSkip()" irk-step-skip>Skip this question</a>'+
                 '</div>'+
                 '</ion-footer-bar>'+
                 //FOOTER BAR FOR CONSENT STEPS
                 '<ion-footer-bar class="irk-bottom-bar irk-bottom-bar-consent" keyboard-attach irk-consent-bar>'+
-                '<button class="button button-block button-outline button-positive irk-bottom-button" ng-click="doStepNext()" irk-step-next>Next</button>'+
+                '<button class="button button-block button-outline button-positive irk-bottom-button irk-button-step-next" ng-click="doStepNext()" irk-step-next>Next</button>'+
                 '</ion-footer-bar>'+
                 //FOOTER BAR FOR CONSENT REVIEW
                 '<ion-footer-bar class="irk-bottom-bar irk-bottom-bar-consent-agree bar-stable" irk-consent-bar-agree>'+
                 '<div class="buttons">'+
-                '<button class="button button-clear button-positive" ng-click="doDisagree()">Disagree</button>'+
+                '<button class="button button-clear button-positive irk-button-consent-disagree" ng-click="doDisagree()">Disagree</button>'+
                 '</div>'+
                 '<h1 class="title"></h1>'+
                 '<div class="buttons">'+
-                '<button class="button button-clear button-positive" ng-click="doAgree()">Agree</button>'+
+                '<button class="button button-clear button-positive irk-button-consent-agree" ng-click="doAgree()">Agree</button>'+
                 '</div>'+
                 '</ion-footer-bar>'+
                 '</div>',
@@ -559,11 +559,11 @@ angular.module('ionicResearchKit',[])
                 var stepHeader = angular.element(
                     '<ion-header-bar>'+
                     '<div class="buttons">'+
-                    '<button class="button button-clear button-positive icon ion-ios-arrow-left" ng-click="doStepBack()" irk-step-previous></button>'+
+                    '<button class="button button-clear button-positive icon ion-ios-arrow-left irk-button-step-previous" ng-click="doStepBack()" irk-step-previous></button>'+
                     '</div>'+
                     '<h1 class="title" irk-step-title></h1>'+
                     '<div class="buttons">'+
-                    '<button class="button button-clear button-positive" ng-click="doCancel()" irk-step-cancel>Cancel</button>'+
+                    '<button class="button button-clear button-positive irk-button-step-cancel" ng-click="doCancel()" irk-step-cancel>Cancel</button>'+
                     '</div>'+
                     '</ion-header-bar>'
                     );
@@ -737,11 +737,11 @@ angular.module('ionicResearchKit',[])
                     '<div class="irk-text-centered">'+
                     '<h2>'+attr.title+'</h2>'+
                     (attr.text ? '<p>'+attr.text+'</p>' : '')+
-                    (attr.link ? '<a class="button button-clear button-positive irk-learn-more" href="'+attr.link+'" target="_system">'+(attr.linkText ? attr.linkText : 'Learn more')+'</a>' : '')+
+                    (attr.link ? '<a class="button button-clear button-positive irk-button-learn-more" href="'+attr.link+'" target="_system">'+(attr.linkText ? attr.linkText : 'Learn more')+'</a>' : '')+
                     '</div>'+
                     '<div class="irk-spacer"></div>'+
                     (attr.image ? '<div class="irk-image-spacer"></div><div class="item irk-step-image '+attr.image+'"></div><div class="irk-image-spacer"></div>' : '')+
-                    (attr.footerAttach && attr.footerAttach=='true'?'':'<button class="button button-outline button-positive irk-instruction-button" ng-click="$parent.doNext()">'+(attr.buttonText ? attr.buttonText : 'Get Started')+'</button>')+
+                    (attr.footerAttach && attr.footerAttach=='true'?'':'<button class="button button-outline button-positive irk-button-instruction" ng-click="$parent.doNext()">'+(attr.buttonText ? attr.buttonText : 'Get Started')+'</button>')+
                     '</div></div>'
         },
         link: function(scope, element, attrs, controller) {
@@ -1239,11 +1239,11 @@ angular.module('ionicResearchKit',[])
                         '<h2>'+consentTitle+'</h2>'+
                         '<p>'+attr.summary+'</p>'+
                         '</div>'+
-                        '<a class="button button-clear button-positive irk-learn-more" ng-click="$parent.showLearnMore()">'+consentText+'</a>'+
+                        '<a class="button button-clear button-positive irk-button-learn-more" ng-click="$parent.showLearnMore()">'+consentText+'</a>'+
                         '<div class="irk-learn-more-content" ng-transclude>'+
                         '</div>'+
                         '<div class="irk-spacer"></div>'+
-                        (consentType=='overview'?'<button class="button button-outline button-positive irk-instruction-button" ng-click="$parent.doNext()">Get Started</button>':'')+
+                        (consentType=='overview'?'<button class="button button-outline button-positive irk-button-instruction" ng-click="$parent.doNext()">Get Started</button>':'')+
                         '</div>';
             }
         },
@@ -1301,7 +1301,7 @@ angular.module('ionicResearchKit',[])
                     '<p>'+attr.summary+'</p>'+
                     '<p>Sharing your coded study data more broadly (without information such as your name) may benefit this and future research.</p>'+
                     '</div>'+
-                    '<a class="button button-clear button-positive irk-learn-more" ng-click="$parent.showLearnMore()">Learn more about data sharing</a>'+
+                    '<a class="button button-clear button-positive irk-button-learn-more" ng-click="$parent.showLearnMore()">Learn more about data sharing</a>'+
                     '<div class="irk-learn-more-content" ng-transclude>'+
                     '</div>'+
                     '<div class="irk-spacer"></div>'+
@@ -1376,7 +1376,11 @@ angular.module('ionicResearchKit',[])
             element.addClass('irk-step irk-form-step');
 
             scope.$on("slideBox.slideChanged", function(e, index, count) {
-                if (!scope.reviewContent) {
+                var step = angular.element(document.querySelectorAll('.irk-slider-slide')[index].querySelector('.irk-step'));
+                var stepType = step.prop('tagName');
+                var consentType = step.attr('type');
+
+                if (stepType=='IRK-CONSENT-REVIEW-STEP' && consentType=='review' && !scope.reviewContent) {
                     var reviewType = attrs.type;
                     if (reviewType == 'review' && (!attrs.hasHtmlContent || attrs.hasHtmlContent == 'false')) {
                         scope.reviewContent = '';
@@ -1596,7 +1600,7 @@ angular.module('ionicResearchKit',[])
                     '<div class="irk-text-centered">'+
                     '<h2>Activity Complete</h2>'+
                     '<p>Your data will be analyzed and you will be notified when your results are ready.</p>'+
-                    (attr.link ? '<a class="button button-clear button-positive irk-learn-more" href="'+attr.link+'" target="_system">'+(attr.linkText ? attr.linkText : 'Learn more')+'</a>' : '')+
+                    (attr.link ? '<a class="button button-clear button-positive irk-button-learn-more" href="'+attr.link+'" target="_system">'+(attr.linkText ? attr.linkText : 'Learn more')+'</a>' : '')+
                     '</div>'+
                     '<div class="irk-spacer"></div>'+
                     '<div class="irk-spacer"></div>'+
