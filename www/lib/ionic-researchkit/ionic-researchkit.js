@@ -412,9 +412,9 @@ angular.module('ionicResearchKit',[])
                         template: stepReason,
                         cssClass: 'irk-text-centered irk-popup',
                         cancelText: 'Cancel',
-                        cancelType: 'button-outline button-positive',
+                        cancelType: 'button-outline button-positive irk-button-consent-popup-disagree',
                         okText: 'Agree',
-                        okType: 'button-outline button-positive'
+                        okType: 'button-outline button-positive irk-button-consent-popup-agree'
                     });
                     confirmPopup.then(function(res) {
                         if (res) {
