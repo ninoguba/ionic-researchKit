@@ -26,6 +26,7 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
 - checklist-model [https://github.com/vitalets/checklist-model](https://github.com/vitalets/checklist-model)
 - signature_pad [https://github.com/szimek/signature_pad](https://github.com/szimek/signature_pad)
 - angular-dialgauge [https://github.com/cdjackson/angular-dialgauge](https://github.com/cdjackson/angular-dialgauge)
+- pdfmake [https://github.com/bpampuch/pdfmake](https://github.com/bpampuch/pdfmake)
 
 # Usage
 
