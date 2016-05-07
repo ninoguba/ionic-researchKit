@@ -1773,7 +1773,8 @@ angular.module('ionicResearchKit',[])
                     '</div>'+
                     '</div>'+
                     '<div class="irk-tap-button-container">'+
-                    '<h2 class="positive">. . . recording . . .</h2>'+
+                    //'<h2 class="positive">. . . recording . . .</h2>'+
+                    '<ion-spinner icon="lines" class="spinner-positive irk-spinner-audio-task"></ion-spinner>' + 
                     '<h4 class="dark">{{progress}}</h4>'+
                     '</div>'
 

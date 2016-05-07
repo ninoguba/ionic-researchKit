@@ -293,3 +293,8 @@ button.irk-image:before {
 .irk-voice-recording {
   background-image: url(resources/phonesoundwaves.png);
 }
+
+.irk-spinner-audio-task svg {
+  width: 100px;
+  height: 100px;
+}
