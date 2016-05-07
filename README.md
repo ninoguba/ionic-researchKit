@@ -25,7 +25,7 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
 
 - checklist-model [https://github.com/vitalets/checklist-model](https://github.com/vitalets/checklist-model)
 - signature_pad [https://github.com/szimek/signature_pad](https://github.com/szimek/signature_pad)
-- angular-dialgauge [https://github.com/cdjackson/angular-dialgauge](https://github.com/cdjackson/angular-dialgauge)
+- angular-svg-round-progressbar [https://github.com/crisbeto/angular-svg-round-progressbar](https://github.com/crisbeto/angular-svg-round-progressbar)
 - pdfmake [https://github.com/bpampuch/pdfmake](https://github.com/bpampuch/pdfmake)
 
 # Usage

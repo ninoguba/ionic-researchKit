@@ -10,7 +10,7 @@
 * Required dependencies:
 * checklist-model (https://github.com/vitalets/checklist-model)
 * signature_pad (https://github.com/szimek/signature_pad)
-* angular-dialgauge (https://github.com/cdjackson/angular-dialgauge)
+* angular-svg-round-progressbar (https://github.com/crisbeto/angular-svg-round-progressbar)
 * pdfmake (https://github.com/bpampuch/pdfmake)
 */
 angular.module('ionicResearchKit',[])
@@ -1535,16 +1535,10 @@ angular.module('ionicResearchKit',[])
         restrict: 'E',
         controller: ['$scope', '$element', '$attrs', '$interval', function($scope, $element, $attrs, $interval) {
             $scope.startCountdown = function() {
-                $scope.duration = ($attrs.duration?$attrs.duration:5)+1;
+                $scope.duration = ($attrs.duration?$attrs.duration:5);
                 $scope.countdown = $scope.duration;
 
-                var index = $scope.$parent.currentSlide;
-                var countdownEl = angular.element(document.querySelectorAll('.irk-slider-slide')[index].querySelector('.irk-countdown'));
-                countdownEl.toggleClass('irk-countdown-started', false);
-
                 $scope.$parent.currentCountdown = $interval(function() {
-                    countdownEl.toggleClass('irk-countdown-started', true);
-
                     if ($scope.countdown == 0)
                         $scope.$parent.doStepNext();
                     else
@@ -1556,22 +1550,13 @@ angular.module('ionicResearchKit',[])
             return  '<div class="irk-offcentered-container"><div class="irk-offcentered-content">'+
                     '<p>Starting activity in</p>'+
                     '<div class="irk-countdown">'+
-                    '<ng-dial-gauge id="'+attr.id+'"'+
-                    '   ng-model="countdown"'+
-                    '   scale-min="0"'+
-                    '   scale-max="{{duration || 5}}"'+
-                    '   border-width="1"'+
-                    '   track-color="#ffffff"'+
-                    '   bar-color="#387ef5"'+
-                    '   bar-color-end="#387ef5"'+
-                    '   bar-width="2"'+
-                    '   angle="360"'+
-                    '   rotate="360"'+
-                    '   scale-minor-length="0"'+
-                    '   scale-major-length="0"'+
-                    '   line-cap="butt"'+
-                    '/>'+
-                    '</div>'+
+                    '<div class="irk-timer-progress-wrapper">' +
+                    '   <div class="irk-timer-progress">' +
+                    '       {{countdown}}' +
+                    '   </div>' +
+                    '   <div round-progress max="duration" current="countdown" clockwise="false" color="#387ef5" rounded="true" class="text-center" style="left:-25px"></div>' +
+                    '</div>' +
+                    '</div>' +
                     '</div></div>'
         },
         link: function(scope, element, attrs, controller) {
