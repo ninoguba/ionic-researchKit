@@ -1581,8 +1581,9 @@ angular.module('ionicResearchKit',[])
                 //Start the countdown
                 var step = angular.element(document.querySelectorAll('.irk-slider-slide')[index].querySelector('.irk-step'));
                 var stepType = step.prop('tagName');
+                var stepID = step.attr('id');
 
-                if (stepType=='IRK-COUNTDOWN-STEP') {
+                if (stepType=='IRK-COUNTDOWN-STEP' && stepID==attrs.id) {
                     scope.startCountdown();
                 }
             });            
