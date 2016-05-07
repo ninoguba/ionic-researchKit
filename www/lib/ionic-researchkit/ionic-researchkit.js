@@ -11,6 +11,7 @@
 * checklist-model (https://github.com/vitalets/checklist-model)
 * signature_pad (https://github.com/szimek/signature_pad)
 * angular-dialgauge (https://github.com/cdjackson/angular-dialgauge)
+* pdfmake (https://github.com/bpampuch/pdfmake)
 */
 angular.module('ionicResearchKit',[])
 //======================================================================================
@@ -1624,6 +1625,8 @@ angular.module('ionicResearchKit',[])
         restrict: 'E',
         controller: ['$scope', '$element', '$attrs', '$interval', function($scope, $element, $attrs, $interval) {
 
+            $scope.activeStepID;
+
             $scope.toggleProgressBar = function(isVisible) {
                 var index = $scope.$parent.currentSlide;
                 var progressEl = angular.element(document.querySelectorAll('.irk-slider-slide')[index].querySelector('.irk-progress'));
@@ -1643,17 +1646,18 @@ angular.module('ionicResearchKit',[])
                 }, 1000, $scope.duration);
             } 
 
-            $scope.initActiveTask = function() {
+            $scope.initActiveTask = function(stepID) {
                 $scope.taskStarted = false;
                 $scope.toggleProgressBar(false);
+                $scope.activeStepID = stepID;
+
+                $scope.tapsCount = 0;  
+                $scope.$parent.formData[$scope.activeStepID] = {};
+                $scope.$parent.formData[$scope.activeStepID].samples = {};
             }
 
             $scope.startActiveTask = function() {
-                $scope.tapsCount = 0;  
                 $scope.tapsStartTime = (new Date()).getTime();  
-                $scope.$parent.formData[$attrs.id] = {};
-                $scope.$parent.formData[$attrs.id].samples = {};
-
                 $scope.taskStarted = true;
                 $scope.startProgress();
             }
@@ -1664,7 +1668,7 @@ angular.module('ionicResearchKit',[])
                 }
 
                 var tapsCurrentTime = ((new Date()).getTime() - $scope.tapsStartTime) / 1000;  
-                $scope.$parent.formData[$attrs.id].samples[tapsCurrentTime] = (buttonId?buttonId:'none');
+                $scope.$parent.formData[$scope.activeStepID].samples[tapsCurrentTime] = (buttonId?buttonId:'none');
                 if (buttonId) $scope.tapsCount++;
             }
         }],
@@ -1691,9 +1695,10 @@ angular.module('ionicResearchKit',[])
             scope.$on("slideBox.slideChanged", function(e, index, count) {
                 var step = angular.element(document.querySelectorAll('.irk-slider-slide')[index].querySelector('.irk-step'));
                 var stepType = step.prop('tagName');
+                var stepID = step.attr('id');
 
-                if (stepType=='IRK-TWO-FINGER-TAPPING-INTERVAL-TASK') {
-                    scope.initActiveTask();
+                if (stepType=='IRK-TWO-FINGER-TAPPING-INTERVAL-TASK' && stepID==attrs.id) {
+                    scope.initActiveTask(stepID);
                 }
             });            
         }
@@ -1708,20 +1713,24 @@ angular.module('ionicResearchKit',[])
         restrict: 'E',
         controller: ['$scope', '$element', '$attrs', '$interval', '$cordovaMedia', function($scope, $element, $attrs, $interval, $cordovaMedia) {
 
-            $scope.initActiveTask = function() {
+            $scope.activeStepID;
+
+            $scope.initActiveTask = function(stepID) {
+                $scope.activeStepID = stepID;
+
                 $scope.duration = ($attrs.duration?$attrs.duration:10);
                 $scope.progress = $scope.duration;
-                $scope.$parent.formData[$attrs.id] = {};
+                $scope.$parent.formData[$scope.activeStepID] = {};
                 $scope.recordAudio();
             }
 
             $scope.recordAudio = function() {
                 var audioFileName = "sample" + (new Date().getTime()) + (ionic.Platform.isAndroid() ? ".amr" : ".wav");
-                $scope.$parent.formData[$attrs.id].fileURL = "documents://" + audioFileName;
-                $scope.$parent.formData[$attrs.id].contentType = "audio/" + (ionic.Platform.isAndroid() ? "amr" : "wav");
+                $scope.$parent.formData[$scope.activeStepID].fileURL = "documents://" + audioFileName;
+                $scope.$parent.formData[$scope.activeStepID].contentType = "audio/" + (ionic.Platform.isAndroid() ? "amr" : "wav");
                 //var audioFileName = "sample" + (new Date().getTime()) + ".m4a";
-                //$scope.$parent.formData[$attrs.id].fileURL = "documents://" + audioFileName;
-                //$scope.$parent.formData[$attrs.id].contentType = "audio/m4a";
+                //$scope.$parent.formData[$scope.activeStepID].fileURL = "documents://" + audioFileName;
+                //$scope.$parent.formData[$scope.activeStepID].contentType = "audio/m4a";
 
                 var audioSample = $cordovaMedia.newMedia(audioFileName);
 
@@ -1775,9 +1784,10 @@ angular.module('ionicResearchKit',[])
             scope.$on("slideBox.slideChanged", function(e, index, count) {
                 var step = angular.element(document.querySelectorAll('.irk-slider-slide')[index].querySelector('.irk-step'));
                 var stepType = step.prop('tagName');
+                var stepID = step.attr('id');
 
-                if (stepType=='IRK-AUDIO-TASK') {
-                    scope.initActiveTask();
+                if (stepType=='IRK-AUDIO-TASK' && stepID==attrs.id) {
+                    scope.initActiveTask(stepID);
                 }
             });            
         }
