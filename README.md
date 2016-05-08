@@ -281,7 +281,9 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
 
 `<irk-consent-sharing-step>` is the equivalent of the `ORKConsentSharingStep` class.
 
-`<irk-consent-review-step>` is the equivalent of the `ORKConsentReviewStep` class.  Depending on it's `type` attribute, it could encompass one or more `<irk-consent-name>` or `<irk-consent-signature>` elements which are the broken up equivalent of the `ORKConsentSignature` class.
+`<irk-consent-review-step>` is the equivalent of the `ORKConsentReviewStep` class.  Depending on it's `type` attribute, it could encompass either `<irk-consent-name>` or `<irk-consent-signature>` elements which are the broken up equivalent of the `ORKConsentSignature` class.
+
+The consent document PDF is automatically generated as a base64-encoded string and can be retrieved by using `irkConsentDocument.getDocument().getDataUrl()`.
 
 ### Active Tasks
 
@@ -327,7 +329,7 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
   - [x] Consent Review
     - [x] Name Capture
     - [x] Signature Capture
-  - [ ] PDF Generation
+  - [x] PDF Generation
 - [ ] Active Tasks directives
   - [x] Countdown Step
   - [x] Completion Step

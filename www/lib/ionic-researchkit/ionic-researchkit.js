@@ -72,7 +72,7 @@ angular.module('ionicResearchKit',[])
                 results.childResults[index].answer = (stepValue?stepValue.toDateString():null);
             else if (stepType == 'IRK-TIME-QUESTION-STEP')
                 results.childResults[index].answer = (stepValue?stepValue.toTimeString():null);
-            else if (stepType != 'IRK-INSTRUCTION-STEP' && stepType != 'IRK-COUNTDOWN-STEP' && stepType != 'IRK-COMPLETION-STEP' && stepType != 'IRK-VISUAL-CONSENT-STEP' && !(stepType=='IRK-CONSENT-REVIEW-STEP' && consentType=='signature') && stepType != 'IRK-TWO-FINGER-TAPPING-INTERVAL-TASK' && stepType != 'IRK-AUDIO-TASK')
+            else if (stepType != 'IRK-INSTRUCTION-STEP' && stepType != 'IRK-COUNTDOWN-STEP' && stepType != 'IRK-COMPLETION-STEP' && stepType != 'IRK-VISUAL-CONSENT-STEP' && !(stepType=='IRK-CONSENT-REVIEW-STEP' && consentType=='signature') && !(stepType=='IRK-CONSENT-REVIEW-STEP' && consentType=='name') && stepType != 'IRK-TWO-FINGER-TAPPING-INTERVAL-TASK' && stepType != 'IRK-AUDIO-TASK')
                 results.childResults[index].answer = (stepValue?stepValue:null);
             else if (stepType == 'IRK-TWO-FINGER-TAPPING-INTERVAL-TASK')
                 results.childResults[index].samples = (stepValue && stepValue.samples?stepValue.samples:null);
@@ -83,6 +83,12 @@ angular.module('ionicResearchKit',[])
 
             if (stepType == 'IRK-NUMERIC-QUESTION-STEP')
                 results.childResults[index].unit = (stepUnit?stepUnit:null);
+
+            if (stepType == 'IRK-CONSENT-REVIEW-STEP' && consentType == 'name') {
+                results.childResults[index].participantTitle = (angular.isDefined(formData.participantTitle)?formData.participantTitle:null);
+                results.childResults[index].participantGivenName = (angular.isDefined(formData.participantGivenName)?formData.participantGivenName:null);
+                results.childResults[index].participantFamilyName = (angular.isDefined(formData.participantFamilyName)?formData.participantFamilyName:null);
+            }
 
             if (stepType == 'IRK-CONSENT-REVIEW-STEP' && consentType == 'signature') {
                 results.childResults[index].signature = (angular.isDefined(formData.signature)?formData.signature:null);
@@ -103,6 +109,9 @@ angular.module('ionicResearchKit',[])
     var consentDocument = null;
     var pdfDefinition = null;
     var pdfContent = null;
+    var pdfTitle = null;
+    var pdfName = null;
+    var pdfSignature = null;
 
     service.initDocument = function() {
         pdfDefinition = { 
@@ -116,32 +125,38 @@ angular.module('ionicResearchKit',[])
             },
             footer: function(currentPage, pageCount) { return { text: 'Page ' + currentPage.toString() + ' of ' + pageCount, style: 'footer' }; },
         };
-
-        pdfContent = [{ text: 'Consent', style: 'title' }, ' '];
     };
 
-    service.addContent = function(text, style) {
+    service.addConsentTitle = function(title) {
         if (!pdfDefinition) service.initDocument();
-        pdfContent.push({ text: text, style: style });
+        pdfContent = [{ text: title, style: 'title' }, ' '];
     };
 
     service.addConsentSection = function(title, content) {
-        if (!pdfDefinition) service.initDocument();
-        pdfContent.push({ text: title, style: 'header' });
-        pdfContent.push({ text: content, style: 'paragraph' });
+        if (pdfDefinition) {
+            pdfContent.push({ text: title, style: 'header' });
+            pdfContent.push({ text: content, style: 'paragraph' });
+        }
     };
 
-    service.addParticipant = function(label, name) {
+    service.addParticipantName = function(formdata) {
+        pdfName = formdata.participantGivenName + ' ' + formdata.participantFamilyName;
+        pdfTitle = formdata.participantTitle;
+    }
+
+    service.addParticipantSignature = function(signature) {
+        pdfSignature = signature;
+    };
+
+    service.addConsentParticipant = function() {
         if (pdfDefinition) {
+            pdfContent.push({ text: '\n\n\n', style: 'paragraph' });
+            pdfContent.push({ image: pdfSignature, fit: [150, 150] });
             pdfContent.push({
                 columns: [
                     {
                         width: '*',
-                        text: name
-                    },
-                    {
-                        width: '*',
-                        text: ''
+                        text: pdfName.toUpperCase()
                     },
                     {
                         width: '*',
@@ -159,10 +174,6 @@ angular.module('ionicResearchKit',[])
                     {
                         width: '*',
                         text: '______________________________'
-                    },
-                    {
-                        width: '*',
-                        text: '______________________________'
                     }
                 ],
                 columnGap: 10
@@ -171,11 +182,7 @@ angular.module('ionicResearchKit',[])
                 columns: [
                     {
                         width: '*',
-                        text: label + ' Name'
-                    },
-                    {
-                        width: '*',
-                        text: 'Signature'
+                        text: pdfTitle + ' Name & Signature' 
                     },
                     {
                         width: '*',
@@ -187,11 +194,9 @@ angular.module('ionicResearchKit',[])
         }
     };
 
-    service.addSignature = function() {
-    };
-
     service.getDocument = function() {
         if (pdfDefinition) {
+            service.addConsentParticipant();
             pdfDefinition.content = pdfContent;
             consentDocument = pdfMake.createPdf(pdfDefinition);
         }
@@ -1385,6 +1390,10 @@ angular.module('ionicResearchKit',[])
                     var reviewType = attrs.type;
                     if (reviewType == 'review' && (!attrs.hasHtmlContent || attrs.hasHtmlContent == 'false')) {
                         scope.reviewContent = '';
+
+                        //Add the consent title to the consent document (PDF)
+                        irkConsentDocument.addConsentTitle(attrs.title);
+
                         var steps = angular.element(document.querySelectorAll('.irk-visual-consent-step'));
                         for (var i=0; i<steps.length; i++) {
                             var step = angular.element(steps[i]);
@@ -1394,7 +1403,7 @@ angular.module('ionicResearchKit',[])
                             var stepContent = angular.element(steps[i].querySelector('.irk-learn-more-content'));
                             scope.reviewContent += '<div>'+stepContent.html()+'</div>';
 
-                            //Add the content section to the consent document (PDF)
+                            //Add the consent section to the consent document (PDF)
                             irkConsentDocument.addConsentSection(stepTitle, stepContent.text());
                         };
                         
@@ -1415,34 +1424,25 @@ angular.module('ionicResearchKit',[])
         restrict: 'E',
         replace: true,
         require: '^?irkConsentReviewStep',
+        controller: ['$scope', '$attrs', function($scope, $attrs) {
+            $scope.$parent.$parent.formData.participantTitle = $attrs.title;
+
+            $scope.consented = function() {
+                //Add the participant name to the consent document (PDF)
+                irkConsentDocument.addParticipantName($scope.$parent.$parent.formData);
+            }
+        }],
         template: function(elem, attr) {
             return  '<div class="list">'+
                     '<label class="item item-input">'+
                     '<span class="input-label irk-form-input-label">First Name</span>'+
-                    '<input type="text" placeholder="Required" ng-model="$parent.$parent.formData.'+elem.parent().attr("id")+'.'+attr.id+'.givenName" ng-required="true" ng-change="$parent.$parent.dirty()">'+
+                    '<input type="text" placeholder="Required" ng-model="$parent.$parent.formData.participantGivenName" ng-required="true" ng-change="$parent.$parent.dirty()" ng-blur="consented()">'+
                     '</label>'+
                     '<label class="item item-input">'+
                     '<span class="input-label irk-form-input-label">Last Name</span>'+
-                    '<input type="text" placeholder="Required" ng-model="$parent.$parent.formData.'+elem.parent().attr("id")+'.'+attr.id+'.familyName" ng-required="true" ng-change="$parent.$parent.dirty()">'+
+                    '<input type="text" placeholder="Required" ng-model="$parent.$parent.formData.participantFamilyName" ng-required="true" ng-change="$parent.$parent.dirty()" ng-blur="consented()">'+
                     '</label>'+
                     '</div>'
-        },
-        link: function(scope, element, attrs, controller) {
-            var stepId = element.parent().parent().parent().attr("id");
-            var sigId = attrs.id;
-            scope.$parent.$parent.formData[stepId] = {};
-            scope.$parent.$parent.formData[stepId][sigId] = { "title": attrs.title };
-
-            scope.$on("slideBox.slideChanged", function(e, index, count) {
-                var step = angular.element(document.querySelectorAll('.irk-slider-slide')[index].querySelector('.irk-step'));
-                var stepType = step.prop('tagName');
-                var consentType = step.attr('type');
-
-                if (stepType=='IRK-CONSENT-REVIEW-STEP' && consentType=='name') {
-                    //Add the participant to the consent document (PDF)
-                    irkConsentDocument.addParticipant(attrs.title, 'John Doe');
-                }
-            });
         }
     }
 }])
@@ -1485,6 +1485,9 @@ angular.module('ionicResearchKit',[])
 
             $scope.saveSignature = function() {
                 $scope.$parent.$parent.formData.signature = $scope.signaturePad.toDataURL();
+
+                //Add the participant signature to the consent document (PDF)
+                irkConsentDocument.addParticipantSignature($scope.$parent.$parent.formData.signature);
             }   
         }],
         template: function(elem, attr) {
