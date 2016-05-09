@@ -1703,6 +1703,7 @@ angular.module('ionicResearchKit',[])
         controller: ['$scope', '$element', '$attrs', '$interval', '$cordovaMedia', function($scope, $element, $attrs, $interval, $cordovaMedia) {
 
             $scope.activeStepID;
+            $scope.audioSample;
 
             $scope.initActiveTask = function(stepID) {
                 $scope.activeStepID = stepID;
@@ -1721,7 +1722,7 @@ angular.module('ionicResearchKit',[])
                 //$scope.$parent.formData[$scope.activeStepID].fileURL = "documents://" + audioFileName;
                 //$scope.$parent.formData[$scope.activeStepID].contentType = "audio/m4a";
 
-                var audioSample = $cordovaMedia.newMedia(audioFileName);
+                $scope.audioSample = $cordovaMedia.newMedia(audioFileName);
 
                 /*
                 // Get amplitude every 250 ms
@@ -1735,22 +1736,19 @@ angular.module('ionicResearchKit',[])
                 }, 250);
                 */
 
+                // Record audio
+                $scope.audioSample.startRecord();
+                console.log('Audio recording started');
+
                 // Show timer
                 $scope.$parent.currentCountdown = $interval(function() {
                     $scope.progress--;
+                    if ($scope.progress==0) {
+                        $scope.audioSample.stopRecord();
+                        console.log('Audio recording stopped');
+                        $scope.$parent.doStepNext();
+                    }
                 }, 1000, $scope.duration);
-
-                // Record audio
-                audioSample.startRecord();
-
-                // Stop recording after 10 seconds by default
-                setTimeout(function() {
-                    audioSample.stopRecord();
-                    //audioSample.play();
-                    //audioSample.stop();
-                    //audioSample.release();
-                    $scope.$parent.doStepNext();
-                }, $scope.duration*1000);
             }
 
         }],
@@ -1762,7 +1760,6 @@ angular.module('ionicResearchKit',[])
                     '</div>'+
                     '</div>'+
                     '<div class="irk-tap-button-container">'+
-                    //'<h2 class="positive">. . . recording . . .</h2>'+
                     '<ion-spinner icon="lines" class="spinner-positive irk-spinner-audio-task"></ion-spinner>' + 
                     '<h4 class="dark">{{progress}}</h4>'+
                     '</div>'
@@ -1778,6 +1775,14 @@ angular.module('ionicResearchKit',[])
 
                 if (stepType=='IRK-AUDIO-TASK' && stepID==attrs.id) {
                     scope.initActiveTask(stepID);
+                }
+
+                // Stop and release any audio resources on slide change
+                if (stepType!='IRK-AUDIO-TASK' && scope.audioSample) {
+                    scope.audioSample.stopRecord();
+                    scope.audioSample.release();
+                    scope.audioSample = null;
+                    console.log('Audio recording aborted');
                 }
             });            
         }
