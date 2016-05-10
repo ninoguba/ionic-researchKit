@@ -898,7 +898,7 @@ angular.module('ionicResearchKit',[])
                     '<input type="radio" name="'+elem.parent().attr("id")+'" value="'+attr.value+'" ng-model="$parent.$parent.formData.'+elem.parent().attr("id")+'" ng-required="'+(attr.optional=='false'?'true':'false')+'" ng-change="$parent.$parent.dirty()">'
                     )+
                     '<div class="radio-content">' +
-                    '<div class="item-content disable-pointer-events irk-item-content">'+
+                    '<div class="item-content item-text-wrap disable-pointer-events irk-item-content">'+
                     attr.text+
                     (attr.detailText?'<p>'+attr.detailText+'</p>':'')+
                     '</div>'+
