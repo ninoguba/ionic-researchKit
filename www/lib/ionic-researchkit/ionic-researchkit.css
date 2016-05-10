@@ -298,6 +298,19 @@ button.irk-image:before {
   background-image: url(resources/phonesoundwaves.png);
 }
 
+.irk-audio-button-container {
+  position: absolute; 
+  bottom: 150px; 
+  width: 100%;
+}
+
+.irk-audio-button {
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
+  margin: 10px;
+}
+
 .irk-spinner-audio-task svg {
   width: 100px;
   height: 100px;

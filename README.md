@@ -10,7 +10,7 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
 
 [Finger Tapping Task demo](https://youtu.be/pANOG-KW2PM?rel=0)
 
-[Audio Task demo](https://youtu.be/V_O9v6lK9Xo?rel=0)
+[Audio Task demo](https://youtu.be/f560Pvetbm0?rel=0)
 
 # Installation
 
@@ -293,7 +293,7 @@ The consent document PDF is automatically generated as a base64-encoded string a
 
 `<irk-two-finger-tapping-interval-task>` is the equivalent of the `ORKPredefinedActiveTask` class that is for two finger tapping and supports the `text` and `duration` attributes.
 
-`<irk-audio-task>` is the equivalent of the `ORKPredefinedActiveTask` class that is for audio capture and supports the `text` and `duration` attributes.
+`<irk-audio-task>` is the equivalent of the `ORKPredefinedActiveTask` class that is for audio capture and supports the `text`, `duration`, `auto-record`, `auto-complete`, and `optional` attributes.
 
 # Roadmap
 

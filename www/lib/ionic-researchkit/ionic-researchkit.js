@@ -1538,7 +1538,7 @@ angular.module('ionicResearchKit',[])
         restrict: 'E',
         controller: ['$scope', '$element', '$attrs', '$interval', function($scope, $element, $attrs, $interval) {
             $scope.startCountdown = function() {
-                $scope.duration = ($attrs.duration?$attrs.duration:5);
+                $scope.duration = ($attrs.duration?$parseInt($attrs.duration,10):5);
                 $scope.countdown = $scope.duration;
 
                 $scope.$parent.currentCountdown = $interval(function() {
@@ -1623,7 +1623,7 @@ angular.module('ionicResearchKit',[])
             }
 
             $scope.startProgress = function() {
-                $scope.duration = ($attrs.duration?$attrs.duration:20);
+                $scope.duration = ($attrs.duration?$parseInt($attrs.duration,10):20);
                 $scope.progress = 0;
                 $scope.toggleProgressBar(true);
 
@@ -1704,21 +1704,29 @@ angular.module('ionicResearchKit',[])
 
             $scope.activeStepID;
             $scope.audioSample;
+            $scope.audioActive;
+            $scope.audioActivity;
+            $scope.audioTimer = ' ';
 
             $scope.initActiveTask = function(stepID) {
                 $scope.activeStepID = stepID;
+                $scope.audioActive = false;
+                $scope.duration = ($attrs.duration?parseInt($attrs.duration,10):10);
 
-                $scope.duration = ($attrs.duration?$attrs.duration:10);
-                $scope.progress = $scope.duration;
-                $scope.$parent.formData[$scope.activeStepID] = {};
-                $scope.recordAudio();
+                if (!$scope.$parent.formData[$scope.activeStepID] || !$scope.$parent.formData[$scope.activeStepID].fileURL) {
+                    $scope.$parent.formData[$scope.activeStepID] = {};
+                    $scope.audioSample = null;
+                    if (!$attrs.autoRecord || $attrs.autoRecord=="true") $scope.recordAudio();
+                } else {
+                    $scope.audioSample = $cordovaMedia.newMedia($scope.$parent.formData[$scope.activeStepID].fileURL);
+                }
             }
 
             $scope.recordAudio = function() {
-                var audioFileName = "sample" + (new Date().getTime()) + (ionic.Platform.isAndroid() ? ".amr" : ".wav");
-                $scope.$parent.formData[$scope.activeStepID].fileURL = "documents://" + audioFileName;
+                var audioFileName = "irk-sample" + (new Date().getTime()) + (ionic.Platform.isAndroid() ? ".amr" : ".wav");
+                $scope.$parent.formData[$scope.activeStepID].fileURL = audioFileName;
                 $scope.$parent.formData[$scope.activeStepID].contentType = "audio/" + (ionic.Platform.isAndroid() ? "amr" : "wav");
-                //var audioFileName = "sample" + (new Date().getTime()) + ".m4a";
+                //var audioFileName = "irk-sample" + (new Date().getTime()) + ".m4a";
                 //$scope.$parent.formData[$scope.activeStepID].fileURL = "documents://" + audioFileName;
                 //$scope.$parent.formData[$scope.activeStepID].contentType = "audio/m4a";
 
@@ -1737,32 +1745,76 @@ angular.module('ionicResearchKit',[])
                 */
 
                 // Record audio
+                $scope.progress = $scope.duration;
+                $scope.updateTimer();
                 $scope.audioSample.startRecord();
+                $scope.audioActive = true;
+                $scope.audioActivity = "Recording";
                 console.log('Audio recording started');
 
                 // Show timer
                 $scope.$parent.currentCountdown = $interval(function() {
                     $scope.progress--;
+                    $scope.updateTimer();
                     if ($scope.progress==0) {
                         $scope.audioSample.stopRecord();
+                        $scope.audioActive = false;
                         console.log('Audio recording stopped');
-                        $scope.$parent.doStepNext();
+                        if (!$attrs.autoComplete || $attrs.autoComplete=="true") $scope.$parent.doStepNext();
                     }
                 }, 1000, $scope.duration);
             }
 
+            $scope.playAudio = function() {
+                if ($scope.audioSample) {
+                    // Play audio
+                    $scope.progress = 0;
+                    $scope.updateTimer();
+                    $scope.audioSample.play();
+                    $scope.audioActive = true;
+                    $scope.audioActivity = "Playing";
+                    console.log('Audio playback started');
+
+                    // Show timer
+                    $scope.$parent.currentCountdown = $interval(function() {
+                        if ($scope.progress==$scope.duration) {
+                            $scope.audioSample.stop();
+                            $scope.audioActive = false;
+                            console.log('Audio playback stopped');
+                        }
+                        $scope.progress++;
+                        $scope.updateTimer();
+                    }, 1000, $scope.duration+1);
+                }
+            }
+
+            $scope.updateTimer = function() {
+                var minutes = Math.floor($scope.progress / 60);
+                var seconds = $scope.progress - minutes * 60;
+                $scope.audioTimer = minutes + ':' + (seconds<10?'0':'') + seconds;
+            }
         }],
         template: function(elem, attr) {
             return  '<div class="irk-centered">'+
                     '<div class="irk-text-centered">'+
                     '<h2>' + (attr.text ? attr.text : 'Your more specific voice instruction goes here. For example, say \'Aaaah\'.') + '</h2>'+
-                    '<div class="irk-spacer"></div>'+
                     '</div>'+
-                    '</div>'+
-                    '<div class="irk-tap-button-container">'+
+                    '<div class="irk-audio-button-container" ng-show="audioActive">'+
                     '<ion-spinner icon="lines" class="spinner-positive irk-spinner-audio-task"></ion-spinner>' + 
-                    '<h4 class="dark">{{progress}}</h4>'+
-                    '</div>'
+                    '<h4 class="dark">{{audioActivity}} Audio</h4>'+
+                    '<h4 class="dark">{{audioTimer}}</h4>'+
+                    '</div>'+
+                    '<div class="irk-audio-button-container" ng-hide="audioActive">'+
+                    '<button class="button button-outline button-positive irk-audio-button irk-button-audio-record icon ion-android-microphone" ng-click="recordAudio()"></button>'+
+                    '<button class="button button-outline button-positive irk-audio-button irk-button-audio-play icon ion-play" ng-click="playAudio()" ng-disabled="!audioSample"></button>'+
+                    '</div>'+
+                    '</div>'+
+                    '<ion-footer-bar class="irk-bottom-bar" keyboard-attach irk-audio-bar>'+
+                    '<div>'+
+                    ((attr.autoComplete && attr.autoComplete=="false")?'<a class="button button-block button-outline button-positive irk-bottom-button irk-button-step-next" ng-click="$parent.doNext()" ng-disabled="!audioSample || audioActive">Next</a>':'')+
+                    ((attr.optional && attr.optional=="true")?'<a class="button button-block button-clear button-positive irk-bottom-button irk-button-step-skip" ng-click="$parent.doSkip()" ng-disabled="audioSample || audioActive">Skip this task</a>':'')+
+                    '</div>'+
+                    '</ion-footer-bar>'
 
         },
         link: function(scope, element, attrs, controller) {
@@ -1780,9 +1832,10 @@ angular.module('ionicResearchKit',[])
                 // Stop and release any audio resources on slide change
                 if (stepType!='IRK-AUDIO-TASK' && scope.audioSample) {
                     scope.audioSample.stopRecord();
+                    scope.audioSample.stop();
                     scope.audioSample.release();
                     scope.audioSample = null;
-                    console.log('Audio recording aborted');
+                    console.log('Audio task aborted');
                 }
             });            
         }
