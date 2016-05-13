@@ -1718,7 +1718,13 @@ angular.module('ionicResearchKit',[])
                     $scope.audioSample = null;
                     if (!$attrs.autoRecord || $attrs.autoRecord=="true") $scope.recordAudio();
                 } else {
-                    $scope.audioSample = $cordovaMedia.newMedia($scope.$parent.formData[$scope.activeStepID].fileURL);
+                    $scope.queueAudio();
+                }
+            }
+
+            $scope.queueAudio = function() {
+                if ($scope.$parent.formData[$scope.activeStepID].fileURL) {
+                    $scope.audioSample = $cordovaMedia.newMedia($scope.$parent.formData[$scope.activeStepID].fileURL);    
                 }
             }
 
@@ -1793,6 +1799,25 @@ angular.module('ionicResearchKit',[])
                 var seconds = $scope.progress - minutes * 60;
                 $scope.audioTimer = minutes + ':' + (seconds<10?'0':'') + seconds;
             }
+
+            $scope.killAudio = function() {
+                if ($scope.audioSample) {
+                    $scope.audioSample.stopRecord();
+                    $scope.audioSample.stop();
+                    $scope.audioSample.release();
+                    $scope.audioActive = false;
+                    $scope.audioSample = null;
+                    console.log('Audio task aborted');
+                }
+            }
+
+            document.addEventListener("pause", $scope.killAudio, false);
+            document.addEventListener("resume", $scope.queueAudio, false);
+            $scope.$on('$destroy', function () {
+                document.removeEventListener("pause", $scope.killAudio);
+                document.removeEventListener("resume", $scope.queueAudio);
+            });                  
+
         }],
         template: function(elem, attr) {
             return  '<div class="irk-centered">'+
@@ -1831,13 +1856,9 @@ angular.module('ionicResearchKit',[])
 
                 // Stop and release any audio resources on slide change
                 if (stepType!='IRK-AUDIO-TASK' && scope.audioSample) {
-                    scope.audioSample.stopRecord();
-                    scope.audioSample.stop();
-                    scope.audioSample.release();
-                    scope.audioSample = null;
-                    console.log('Audio task aborted');
+                    scope.killAudio()
                 }
-            });            
+            });      
         }
     }
 })
