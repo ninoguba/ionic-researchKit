@@ -1776,6 +1776,7 @@ angular.module('ionicResearchKit',[])
                     // Play audio
                     $scope.progress = 0;
                     $scope.updateTimer();
+                    $scope.audioSample.setVolume(1.0);
                     $scope.audioSample.play();
                     $scope.audioActive = true;
                     $scope.audioActivity = "Playing";
