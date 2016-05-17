@@ -1251,7 +1251,7 @@ angular.module('ionicResearchKit',[])
                         '<h2>'+consentTitle+'</h2>'+
                         '<p>'+attr.summary+'</p>'+
                         '</div>'+
-                        '<a class="button button-clear button-positive irk-button-learn-more" ng-click="$parent.showLearnMore()">'+consentText+'</a>'+
+                        (attr.showLearnMore && attr.showLearnMore=='false'?'':'<a class="button button-clear button-positive irk-button-learn-more" ng-click="$parent.showLearnMore()">'+consentText+'</a>')+
                         '<div class="irk-learn-more-content" ng-transclude>'+
                         '</div>'+
                         '<div class="irk-spacer"></div>'+
