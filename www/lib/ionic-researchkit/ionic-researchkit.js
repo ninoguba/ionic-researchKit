@@ -139,6 +139,12 @@ angular.module('ionicResearchKit',[])
         }
     };
 
+    service.addConsentBody = function(content) {
+        if (pdfDefinition) {
+            pdfContent.push({ text: content, style: 'paragraph' });
+        }
+    };
+
     service.addParticipantName = function(formdata) {
         pdfName = formdata.participantGivenName + ' ' + formdata.participantFamilyName;
         pdfTitle = formdata.participantTitle;
@@ -1409,6 +1415,15 @@ angular.module('ionicResearchKit',[])
                         
                         var container = angular.element(document.querySelector('.irk-consent-review-derived-content'));
                         container.append(scope.reviewContent);
+                    }
+                    else if (reviewType == 'review' && attrs.hasHtmlContent && attrs.hasHtmlContent == 'true')
+                    {
+                        //Add the consent title to the consent document (PDF)
+                        irkConsentDocument.addConsentTitle(attrs.title);
+
+                        //Add the consent section to the consent document (PDF)
+                        var consentContent = angular.element(document.querySelector('.irk-consent-review-content'));
+                        irkConsentDocument.addConsentBody(consentContent.text());
                     }
                 }
             });
