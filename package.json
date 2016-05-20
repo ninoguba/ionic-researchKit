@@ -21,20 +21,25 @@
     "cordova-plugin-file",
     "cordova-plugin-inappbrowser",
     "ionic-plugin-keyboard",
-    "cordova-plugin-media",
     "cordova-plugin-compat",
     {
       "locator": "https://github.com/apache/cordova-plugin-splashscreen.git",
       "id": "cordova-plugin-splashscreen"
-    }
+    },
+    "cordova-plugin-media"
   ],
   "cordovaPlatforms": [
     "android",
+    "ios",
     {
       "platform": "android",
       "version": "",
       "locator": "android"
     },
-    "ios"
+    {
+      "platform": "ios",
+      "version": "",
+      "locator": "ios"
+    }
   ]
 }

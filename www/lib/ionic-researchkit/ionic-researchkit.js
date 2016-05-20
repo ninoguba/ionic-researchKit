@@ -1715,10 +1715,11 @@ angular.module('ionicResearchKit',[])
 .directive('irkAudioTask', function() {
     return {
         restrict: 'E',
-        controller: ['$scope', '$element', '$attrs', '$interval', '$cordovaMedia', function($scope, $element, $attrs, $interval, $cordovaMedia) {
+        controller: ['$scope', '$element', '$attrs', '$interval', '$cordovaMedia', '$ionicPopup', function($scope, $element, $attrs, $interval, $cordovaMedia, $ionicPopup) {
 
             $scope.activeStepID;
             $scope.audioSample;
+            $scope.audioDisabled;
             $scope.audioActive;
             $scope.audioActivity;
             $scope.audioTimer = ' ';
@@ -1753,18 +1754,6 @@ angular.module('ionicResearchKit',[])
 
                 $scope.audioSample = $cordovaMedia.newMedia(audioFileName);
 
-                /*
-                // Get amplitude every 250 ms
-                mediaTimer = $interval(function() {
-                    audioSample.getRecordLevels(function(amp) {
-                        console.log(JSON.stringify(amp));
-                    },
-                    function (e) {
-                        console.log("Error getting amp=" + e);
-                    });
-                }, 250);
-                */
-
                 // Record audio
                 $scope.progress = $scope.duration;
                 $scope.updateTimer();
@@ -1784,6 +1773,52 @@ angular.module('ionicResearchKit',[])
                         if (!$attrs.autoComplete || $attrs.autoComplete=="true") $scope.$parent.doStepNext();
                     }
                 }, 1000, $scope.duration);
+
+                /*
+                $scope.audioSample = new Media(audioFileName, 
+                // success callback
+                function() {
+                    console.log("recordAudio():Audio Success");
+
+                    // Record audio
+                    $scope.progress = $scope.duration;
+                    $scope.updateTimer();
+                    $scope.audioSample.startRecord();
+                    $scope.audioActive = true;
+                    $scope.audioActivity = "Recording";
+                    console.log('Audio recording started');
+
+                    // Show timer
+                    $scope.$parent.currentCountdown = $interval(function() {
+                        $scope.progress--;
+                        $scope.updateTimer();
+
+                        if ($scope.progress==0) {
+                            $scope.audioSample.stopRecord();
+                            $scope.audioActive = false;
+                            console.log('Audio recording stopped');
+                            if (!$attrs.autoComplete || $attrs.autoComplete=="true") $scope.$parent.doStepNext();
+                        }
+                    }, 1000, $scope.duration);
+
+                },
+                // error callback
+                function(err) {
+                    console.log("recordAudio():Audio Error: "+ err.code);
+                    $scope.killAudio();
+                    $scope.audioDisabled = true;
+                    $scope.$parent.formData[$scope.activeStepID] = {};
+
+                    var audioPopup = $ionicPopup.alert({
+                        title: 'Audio Recording Disabled',
+                        template: 'Please go to your Settings and allow the app access to the Microphone.'
+                    });
+
+                    audioPopup.then(function(res) {
+                        console.log("recordAudio():Audio Error Alerted");
+                    });
+                });
+                */
             }
 
             $scope.playAudio = function() {
@@ -1846,7 +1881,7 @@ angular.module('ionicResearchKit',[])
                     '<h4 class="dark">{{audioTimer}}</h4>'+
                     '</div>'+
                     '<div class="irk-audio-button-container" ng-hide="audioActive">'+
-                    '<button class="button button-outline button-positive irk-audio-button irk-button-audio-record icon ion-android-microphone" ng-click="recordAudio()"></button>'+
+                    '<button class="button button-outline button-positive irk-audio-button irk-button-audio-record icon ion-android-microphone" ng-click="recordAudio()" ng-disabled="audioDisabled"></button>'+
                     '<button class="button button-outline button-positive irk-audio-button irk-button-audio-play icon ion-play" ng-click="playAudio()" ng-disabled="!audioSample"></button>'+
                     '</div>'+
                     '</div>'+

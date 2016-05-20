@@ -12,9 +12,9 @@ It works in all modern desktop and mobile browsers and doesn't depend on any ext
 ## Installation
 You can install the latest release using [Bower](http://bower.io/) - `bower install signature_pad`.
 
-You can also download the latest release from GitHub [releases page](https://github.com/szimek/signature_pad/releases) or go to the latest release tag (e.g. [v1.2.4](https://github.com/szimek/signature_pad/tree/v1.2.4)) and download  `signature_pad.js` or `signature_pad.min.js` files directly.
+You can also download the latest release from GitHub [releases page](https://github.com/szimek/signature_pad/releases) or go to the latest release tag (e.g. [v1.5.2](https://github.com/szimek/signature_pad/tree/v1.5.2)) and download  `signature_pad.js` or `signature_pad.min.js` files directly.
 
-The master branch can contain undocumented or backward compatiblity breaking changes.
+The master branch can contain undocumented or backward compatibility breaking changes.
 
 ## Usage
 ### API
@@ -23,8 +23,9 @@ var canvas = document.querySelector("canvas");
 
 var signaturePad = new SignaturePad(canvas);
 
-// Returns signature image as data URL
-signaturePad.toDataURL();
+// Returns signature image as data URL (see https://mdn.io/todataurl for the list of possible paramters)
+signaturePad.toDataURL(); // save image as PNG
+signaturePad.toDataURL("image/jpeg"); // save image as JPEG
 
 // Draws signature image from data URL
 signaturePad.fromDataURL("data:image/png;base64,iVBORw0K...");
@@ -79,7 +80,28 @@ signaturePad.penColor = "rgb(66, 133, 244)";
 ```
 
 
-### Handling data URI encoded images on the server side
+### Tips and tricks
+#### Handling high DPI screens
+To correctly handle canvas on low and high DPI screens one has to take `devicePixelRatio` into account and scale the canvas accordingly. This scaling is also necessary to properly display signatures loaded via `SignaturePad#fromDataURL`. Here's an example how it can be done:
+```javascript
+function resizeCanvas() {
+    var ratio =  Math.max(window.devicePixelRatio || 1, 1);
+    canvas.width = canvas.offsetWidth * ratio;
+    canvas.height = canvas.offsetHeight * ratio;
+    canvas.getContext("2d").scale(ratio, ratio);
+    signaturePad.clear(); // otherwise isEmpty() might return incorrect value
+}
+
+window.addEventListener("resize", resizeCanvas);
+resizeCanvas();
+```
+Instead of `resize` event you can listen to screen orientation change, if you're using this library only on mobile devices. You can also throttle the `resize` event - you can find some examples on [this MDN page](https://developer.mozilla.org/en-US/docs/Web/Events/resize).
+
+When you modify width or height of a canvas, it will be automatically cleared by the browser. SignaturePad doesn't know about it by itself, so you can call `signaturePad.clear()` to make sure that `signaturePad.isEmpty()` returns correct value in this case.
+
+This clearing of the canvas by the browser can be annoying, especially on mobile devices e.g. when screen orientation is changed. There are a few workarounds though, e.g. you can [lock screen orientation](https://developer.mozilla.org/en-US/docs/Web/API/Screen/lockOrientation), or read an image from the canvas before resizing it and write the image back after.
+
+#### Handling data URI encoded images on the server side
 If you are not familiar with data URI scheme, you can read more about it on [Wikipedia](http://en.wikipedia.org/wiki/Data_URI_scheme).
 
 There are 2 ways you can handle data URI encoded images.
@@ -103,63 +125,18 @@ decoded_image = Base64.decode64(encoded_image)
 File.open("signature.png", "wb") { |f| f.write(decoded_image) }
 ```
 
-And an example in PHP:
+Here's an example in PHP:
 
 ``` php
-$data_uri = "data:image/png;base64,iVBORw0K..."
+$data_uri = "data:image/png;base64,iVBORw0K...";
 $data_pieces = explode(",", $data_uri);
 $encoded_image = $data_pieces[1];
-$decoded_image = base64_decode($encoded_image)
+$decoded_image = base64_decode($encoded_image);
 file_put_contents( "signature.png",$decoded_image);
 ```
 
-## Changelog
-### 1.5.1
-* Prevent duplicate events on tap in iOS Safari. [PerfectPixel](https://github.com/PerfectPixel)
-
-### 1.5.0
-* Add `on` method that rebinds all event handlers. [Alplob](https://github.com/Alplob)
-
-### 1.4.0
-* Add `off` method that unbinds all event handlers. [Rob-ot](https://github.com/Rob-ot)
-
-### 1.3.6
-* Fix support for Browserify. [chevett](https://github.com/chevett)
-
-### 1.3.5
-* Add support for CommonJS/AMD/UMD.
-
-### 1.3.4
-* Really fix `fromDataURL` on HiDPI screens.
-
-### 1.3.3
-* Fix `fromDataURL` on HiDPI screens.
-
-### 1.3.2
-* Fix `onBegin` and `onEnd` callbacks when passed as options to constructor. [yinsee](https://github.com/yinsee)
-
-### 1.3.1
-* Fix handling touch events on mobile IE. [tocsoft](https://github.com/tocsoft)
-
-### 1.3.0
-* Add `onBegin` and `onEnd` callbacks. [rogerz](https://github.com/rogerz)
-
-### 1.2.4
-* Fix bug where stroke becomes very thin. [mvirkkunen](https://github.com/mvirkkunen)
-
-### 1.2.3
-* Fix `SignaturePad#fromDataURL` on Firefox. [Fr3nzzy](https://github.com/Fr3nzzy)
-
-### 1.2.2
-* Make `SignaturePad#isEmpty` return false after loading an image using `SignaturePad#fromDataURL`. [krisivanov](https://github.com/krisivanov)
-
-### 1.2.1
-* Fixed `SignaturePad#clear()`.
-
-### 1.2.0
-* Add `backgroundColor` option to set custom color of the background on `SignaturePad#clear()`.
-* Rename `color` option to `penColor`.
-* Fix passing arguments to canvas element on `SignaturePad#toDataURL()`.
+### Removing empty space around a signature
+If you'd like to remove (trim) empty space around a signature, you can do it on the server side or the client side. On the server side you can use e.g. ImageMagic and its `trim` option: `convert -trim input.jpg output.jpg`. If you don't have access to the server, or just want to trim the image before submitting it to the server, you can do it on the client side as well. Here's an example: https://github.com/szimek/signature_pad/issues/49#issue-29108215.
 
 ## License
 Released under the [MIT License](http://www.opensource.org/licenses/MIT).
