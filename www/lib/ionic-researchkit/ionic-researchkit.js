@@ -1715,7 +1715,7 @@ angular.module('ionicResearchKit',[])
 .directive('irkAudioTask', function() {
     return {
         restrict: 'E',
-        controller: ['$scope', '$element', '$attrs', '$interval', '$cordovaMedia', '$ionicPopup', function($scope, $element, $attrs, $interval, $cordovaMedia, $ionicPopup) {
+        controller: ['$scope', '$element', '$attrs', '$interval', '$cordovaMedia', '$cordovaFile', '$ionicPopup', function($scope, $element, $attrs, $interval, $cordovaMedia, $cordovaFile, $ionicPopup) {
 
             $scope.activeStepID;
             $scope.audioSample;
@@ -1745,8 +1745,9 @@ angular.module('ionicResearchKit',[])
             }
 
             $scope.recordAudio = function() {
+                var audioFileDirectory = (ionic.Platform.isAndroid() ? cordova.file.dataDirectory : cordova.file.documentsDirectory);
                 var audioFileName = "irk-sample" + (new Date().getTime()) + (ionic.Platform.isAndroid() ? ".amr" : ".wav");
-                $scope.$parent.formData[$scope.activeStepID].fileURL = audioFileName;
+                $scope.$parent.formData[$scope.activeStepID].fileURL = audioFileDirectory + audioFileName;
                 $scope.$parent.formData[$scope.activeStepID].contentType = "audio/" + (ionic.Platform.isAndroid() ? "amr" : "wav");
                 //var audioFileName = "irk-sample" + (new Date().getTime()) + ".m4a";
                 //$scope.$parent.formData[$scope.activeStepID].fileURL = "documents://" + audioFileName;
