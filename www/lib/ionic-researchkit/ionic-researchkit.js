@@ -1553,7 +1553,7 @@ angular.module('ionicResearchKit',[])
         restrict: 'E',
         controller: ['$scope', '$element', '$attrs', '$interval', function($scope, $element, $attrs, $interval) {
             $scope.startCountdown = function() {
-                $scope.duration = ($attrs.duration?$parseInt($attrs.duration,10):5);
+                $scope.duration = ($attrs.duration?parseInt($attrs.duration,10):5);
                 $scope.countdown = $scope.duration;
 
                 $scope.$parent.currentCountdown = $interval(function() {
@@ -1638,7 +1638,7 @@ angular.module('ionicResearchKit',[])
             }
 
             $scope.startProgress = function() {
-                $scope.duration = ($attrs.duration?$parseInt($attrs.duration,10):20);
+                $scope.duration = ($attrs.duration?parseInt($attrs.duration,10):20);
                 $scope.progress = 0;
                 $scope.toggleProgressBar(true);
 
