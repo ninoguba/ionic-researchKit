@@ -1087,7 +1087,7 @@ angular.module('ionicResearchKit',[])
         require: '^?irkImageChoiceQuestionStep',
         template: function(elem, attr) {
             return  '<div class="col">'+
-                    '<button class="button button-clear '+(attr.type=='image'?'irk-image':'irk-icon-large icon')+' '+attr.normalStateImage+'"></button>'+
+                    '<button class="button button-clear '+(attr.type=='image'?'irk-image':'irk-icon-large button-stable icon')+' '+attr.normalStateImage+'"></button>'+
                     '</div>';
         },
         link: function(scope, element, attrs) {
