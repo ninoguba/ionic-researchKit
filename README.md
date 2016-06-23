@@ -12,6 +12,12 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
 
 [Audio Task demo](https://youtu.be/f560Pvetbm0?rel=0)
 
+# Ionic Version Compatibility
+
+- Ionic 1.1.x --> Fully Compatible
+- Ionic 1.2.x, 1.3.x --> Compatible except for irkScaleQuestionStep
+- Ionic 2.x --> Not Yet Tested
+
 # Installation
 
 1. Download and import the plugin script.<br />
