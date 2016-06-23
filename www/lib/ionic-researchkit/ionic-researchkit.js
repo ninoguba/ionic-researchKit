@@ -314,7 +314,10 @@ angular.module('ionicResearchKit',[])
                 };
 
                 $scope.doSkip = function() {
-                    $scope.doNext();
+                    if (slider.currentIndex() < slider.slidesCount()-1)
+                        slider.next();
+                    else
+                        $scope.doEnd();
                 };
 
                 $scope.doNext = function() {
