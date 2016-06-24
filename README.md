@@ -304,9 +304,11 @@ The consent document PDF is automatically generated as a base64-encoded string a
 # Roadmap
 
 - [x] Task View 
+  - [ ] Navigable Tasks 
 - [x] Survey directives
   - [x] Instruction Step
     - [x] Support optional image
+    - [ ] Support video
   - [x] Scale Question Step
     - [ ] Support step bars
     - [ ] Support vertical orientation
@@ -327,6 +329,8 @@ The consent document PDF is automatically generated as a base64-encoded string a
     - [x] Support images
   - [x] Form Step directive
     - [ ] Support more answer formats
+  - [ ] Location Step
+  - [ ] Validated Answer Step
 - [x] Consent directives
   - [x] Visual Consent
     - [x] In Document Only Type
@@ -339,11 +343,19 @@ The consent document PDF is automatically generated as a base64-encoded string a
 - [ ] Active Tasks directives
   - [x] Countdown Step
   - [x] Completion Step
-  - [ ] Fitness Task
-  - [x] Audio Task
-  - [ ] Gait and Balance Task
   - [x] Tapping Speed Task
+  - [x] Audio Task
+  - [ ] Image Capture Task
+  - [ ] Video Capture Task
+  - [ ] Fitness Task
+  - [ ] Gait and Balance Task
   - [ ] Spacial Memory Task
+- [ ] Charts
+- [ ] Accounts
+  - [ ] Login Step
+  - [ ] Registration Step
+  - [ ] Wait Step
+  - [ ] Passcode Step
 - [x] Results
   - [x] Output results in JSON
   - [ ] Collect results into LocalStorage (save/resume)
