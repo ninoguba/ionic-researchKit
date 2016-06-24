@@ -1743,20 +1743,20 @@ angular.module('ionicResearchKit',[])
 
             $scope.queueAudio = function() {
                 if ($scope.$parent.formData[$scope.activeStepID].fileURL) {
-                    $scope.audioSample = $cordovaMedia.newMedia($scope.$parent.formData[$scope.activeStepID].fileURL);    
+                    $scope.audioSample = $cordovaMedia.newMedia("documents://" + $scope.$parent.formData[$scope.activeStepID].fileURL);    
                 }
             }
 
             $scope.recordAudio = function() {
                 var audioFileDirectory = (ionic.Platform.isAndroid() ? cordova.file.dataDirectory : cordova.file.documentsDirectory);
                 var audioFileName = "irk-sample" + (new Date().getTime()) + (ionic.Platform.isAndroid() ? ".amr" : ".wav");
-                $scope.$parent.formData[$scope.activeStepID].fileURL = audioFileDirectory + audioFileName;
+                $scope.$parent.formData[$scope.activeStepID].fileURL = audioFileName;
                 $scope.$parent.formData[$scope.activeStepID].contentType = "audio/" + (ionic.Platform.isAndroid() ? "amr" : "wav");
                 //var audioFileName = "irk-sample" + (new Date().getTime()) + ".m4a";
                 //$scope.$parent.formData[$scope.activeStepID].fileURL = "documents://" + audioFileName;
                 //$scope.$parent.formData[$scope.activeStepID].contentType = "audio/m4a";
 
-                $scope.audioSample = $cordovaMedia.newMedia(audioFileName);
+                $scope.audioSample = $cordovaMedia.newMedia("documents://" + audioFileName);
 
                 // Record audio
                 $scope.progress = $scope.duration;
