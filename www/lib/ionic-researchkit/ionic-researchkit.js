@@ -1743,12 +1743,17 @@ angular.module('ionicResearchKit',[])
 
             $scope.queueAudio = function() {
                 if ($scope.$parent.formData[$scope.activeStepID].fileURL) {
-                    $scope.audioSample = $cordovaMedia.newMedia("documents://" + $scope.$parent.formData[$scope.activeStepID].fileURL);    
+                    var audioFileURL = $scope.$parent.formData[$scope.activeStepID].fileURL;
+                    if (ionic.Platform.isAndroid()) {
+                        $scope.audioSample = $cordovaMedia.newMedia(cordova.file.externalRootDirectory + audioFileURL);
+                    } else {
+                        $scope.audioSample = $cordovaMedia.newMedia("documents://" + audioFileURL);
+                    }                    
                 }
             }
 
             $scope.recordAudio = function() {
-                var audioFileDirectory = (ionic.Platform.isAndroid() ? cordova.file.dataDirectory : cordova.file.documentsDirectory);
+                var audioFileDirectory = (ionic.Platform.isAndroid() ? cordova.file.externalRootDirectory : cordova.file.documentsDirectory);
                 var audioFileName = "irk-sample" + (new Date().getTime()) + (ionic.Platform.isAndroid() ? ".amr" : ".wav");
                 $scope.$parent.formData[$scope.activeStepID].fileURL = audioFileName;
                 $scope.$parent.formData[$scope.activeStepID].contentType = "audio/" + (ionic.Platform.isAndroid() ? "amr" : "wav");
@@ -1756,7 +1761,11 @@ angular.module('ionicResearchKit',[])
                 //$scope.$parent.formData[$scope.activeStepID].fileURL = "documents://" + audioFileName;
                 //$scope.$parent.formData[$scope.activeStepID].contentType = "audio/m4a";
 
-                $scope.audioSample = $cordovaMedia.newMedia("documents://" + audioFileName);
+                if (ionic.Platform.isAndroid()) {
+                    $scope.audioSample = $cordovaMedia.newMedia(audioFileDirectory + audioFileName);
+                } else {
+                    $scope.audioSample = $cordovaMedia.newMedia("documents://" + audioFileName);
+                }
 
                 // Record audio
                 $scope.progress = $scope.duration;
