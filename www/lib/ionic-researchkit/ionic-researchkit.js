@@ -543,7 +543,7 @@ angular.module('ionicResearchKit',[])
             }],
 
             template:
-                '<div class="slider irk-slider">'+
+                '<div class="scroll slider irk-slider">'+
                 '<div class="slider-slides irk-slider-slides" ng-transclude>'+
                 '</div>'+
                 //FOOTER BAR FOR SURVEY STEPS
