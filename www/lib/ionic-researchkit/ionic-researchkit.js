@@ -1059,6 +1059,13 @@ angular.module('ionicResearchKit',[])
         transclude: true,
         controller: ['$scope', function($scope) {
             $scope.selected = {};
+
+            $scope.initStep = function(stepID) {
+                if ($scope.$parent.formData[stepID]) {
+                    $scope.selected.text = $scope.$parent.formData[stepID];
+                    $scope.$parent.dirty();
+                }
+            }            
         }],
         template: function(elem, attr) {
             return  '<form name="form.'+attr.id+'" class="irk-slider" novalidate>'+
@@ -1076,6 +1083,16 @@ angular.module('ionicResearchKit',[])
         },
         link: function(scope, element, attrs, controller) {
             element.addClass('irk-step');
+
+            scope.$on("slideBox.slideChanged", function(e, index, count) {
+                var step = angular.element(document.querySelectorAll('.irk-slider-slide')[index].querySelector('.irk-step'));
+                var stepType = step.prop('tagName');
+                var stepID = step.attr('id');
+
+                if (stepType=='IRK-IMAGE-CHOICE-QUESTION-STEP' && stepID==attrs.id) {
+                    scope.initStep(stepID);
+                }
+            });      
         }
     }
 })
