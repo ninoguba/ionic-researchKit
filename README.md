@@ -7,11 +7,13 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
 - MIT Voice Up
 
 [Get it on iTunes](https://itunes.apple.com/us/app/mit-voice-up/id1160735265?ls=1&mt=8)
+
 [Get it on Google Play](https://play.google.com/store/apps/details?id=edu.mit.voiceup)
 
 - Civique.org
 
 [Get it on iTunes](https://itunes.apple.com/ch/app/civique.org/id1119089346?mt=8)
+
 [Get it on Google Play](https://play.google.com/store/apps/details?id=org.civique)
 
 # Demo
