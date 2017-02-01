@@ -1,6 +1,20 @@
 # What is ionicResearchKit?
 
-An open source library equivalent of Apple's [ResearchKit Framework](https://github.com/ResearchKit/ResearchKit) built on [Ionic](https://github.com/driftyco/ionic) which makes it easy to create cross-platform hybrid native apps for medical research or for other research projects.
+An open source library equivalent of Apple's [ResearchKit Framework](https://github.com/ResearchKit/ResearchKit) built on [Ionic](https://github.com/driftyco/ionic) which makes it easy to create cross-platform hybrid native apps for medical or non-medical research and for other survey-type projects.
+
+# App Showcase
+
+- MIT Voice Up
+
+[Get it on iTunes](https://itunes.apple.com/us/app/mit-voice-up/id1160735265?ls=1&mt=8)
+
+[Get it on Google Play](https://play.google.com/store/apps/details?id=edu.mit.voiceup)
+
+- Civique.org
+
+[Get it on iTunes](https://itunes.apple.com/ch/app/civique.org/id1119089346?mt=8)
+
+[Get it on Google Play](https://play.google.com/store/apps/details?id=org.civique)
 
 # Demo
 
@@ -10,7 +24,12 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
 
 [Finger Tapping Task demo](https://youtu.be/pANOG-KW2PM?rel=0)
 
-[Audio Task demo](https://youtu.be/V_O9v6lK9Xo?rel=0)
+[Audio Task demo](https://youtu.be/f560Pvetbm0?rel=0)
+
+# Ionic Version Compatibility
+
+- Ionic 1.1.x - 1.3.x --> Fully Compatible
+- Ionic 2.x --> Not Yet Tested
 
 # Installation
 
@@ -25,7 +44,8 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
 
 - checklist-model [https://github.com/vitalets/checklist-model](https://github.com/vitalets/checklist-model)
 - signature_pad [https://github.com/szimek/signature_pad](https://github.com/szimek/signature_pad)
-- angular-dialgauge [https://github.com/cdjackson/angular-dialgauge](https://github.com/cdjackson/angular-dialgauge)
+- angular-svg-round-progressbar [https://github.com/crisbeto/angular-svg-round-progressbar](https://github.com/crisbeto/angular-svg-round-progressbar)
+- pdfmake [https://github.com/bpampuch/pdfmake](https://github.com/bpampuch/pdfmake)
 
 # Usage
 
@@ -252,27 +272,27 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
 
 `<irk-task>` is the equivalent of the `ORKTask` class and will encompass one of the available `<irk-*-step>` elements.
 
-`<irk-instruction-step>` is the equivalent of the `ORKInstructionStep` class and includes the `id`, `title` and `text` attributes.
+`<irk-instruction-step>` is the equivalent of the `ORKInstructionStep` class and includes the `id`, `title`, `text`, `link`, `link-text` and `image` attributes.
 
-`<irk-scale-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKScaleAnswerFormat` classes combined and includes the `id`, `title`, `text`, `min`, `max`, `step`, `value`, `min-text`, and `max-text` attributes.
+`<irk-scale-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKScaleAnswerFormat` classes combined and includes the `id`, `title`, `text`, `min`, `max`, `step`, `value`, `min-text`, `max-text`, and `optional` attributes.
 
-`<irk-boolean-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKBooleanAnswerFormat` classes combined and includes the `id`, `title`, `text`, `trueText`, and `falseText` attributes.
+`<irk-boolean-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKBooleanAnswerFormat` classes combined and includes the `id`, `title`, `text`, `true-value`, `true-text`, `false-value`, `false-text`, and `optional` attributes.
 
-`<irk-text-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKTextAnswerFormat` classes combined and includes the `id`, `title`, `text`, `maxLength`, and `multipleLines` attributes.
+`<irk-text-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKTextAnswerFormat` classes combined and includes the `id`, `title`, `text`, `placeholder`, `max-length`, `multiple-lines`, and `optional` attributes.
 
-`<irk-text-choice-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKTextChoiceAnswerFormat` classes  combined and includes the `id`, `title`, `text`, and `style` attributes. This encompass several `<irk-text-choice>` elements where each include the `value`, `text`, and `detail-text` attributes.
+`<irk-text-choice-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKTextChoiceAnswerFormat` classes  combined and includes the `id`, `title`, `text`, and `optional` attributes. This encompass several `<irk-text-choice>` elements where each include the `value`, `text`, and `detail-text` attributes.
 
-`<irk-numeric-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKNumericAnswerFormat` classes combined and includes the `id`, `title`, `text`, `min`, `max`, and `unit` attributes.
+`<irk-numeric-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKNumericAnswerFormat` classes combined and includes the `id`, `title`, `text`, `min`, `max`, `unit`, `placeholder`, and `optional` attributes.
 
-`<irk-date-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKDateAnswerFormat` classes combined and includes the `id`, `title`, `text` attributes.
+`<irk-date-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKDateAnswerFormat` classes combined and includes the `id`, `title`, `text`, and `optional` attributes.
 
-`<irk-time-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKTimeOfDayAnswerFormat` classes combined and includes the `id`, `title`, `text` attributes.
+`<irk-time-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKTimeOfDayAnswerFormat` classes combined and includes the `id`, `title`, `text`, and `optional` attributes.
 
-`<irk-value-picker-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKValuePickerAnswerFormat` classes combined and includes the `id`, `title`, `text` attributes. This encompass several `<irk-picker-choice>` elements where each include the `value`, `text` attributes.
+`<irk-value-picker-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKValuePickerAnswerFormat` classes combined and includes the `id`, `title`, `text`, and `optional` attributes. This encompass several `<irk-picker-choice>` elements where each include the `value`, `text` attributes.
 
-`<irk-image-choice-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKImageChoiceAnswerFormat` classes combined and includes the `id`, `title`, `text` attributes. This encompass several `<irk-image-choice>` elements where each include the `value`, `text`, `type`, `normal-state-image`, `selected-state-image` attributes.
+`<irk-image-choice-question-step>` is the equivalent of the `ORKQuestionStep` and `ORKImageChoiceAnswerFormat` classes combined and includes the `id`, `title`, `text`, and `optional` attributes. This encompass several `<irk-image-choice>` elements where each include the `value`, `text`, `type`, `normal-state-image`, `selected-state-image` attributes.
 
-`<irk-form-step>` is the equivalent of the `ORKFormStep` class and includes the `id`, `title`, `text` attributes. This encompass several `<irk-form-item>` elements which are the equivalent of the `ORKFormItem` class and each include the `title`, `id`, `type`, `text` attributes.
+`<irk-form-step>` is the equivalent of the `ORKFormStep` class and includes the `id`, `title`, `text` attributes. This encompass several `<irk-form-item>` elements which are the equivalent of the `ORKFormItem` class and each include the `title`, `id`, `type`, `text` and `placeholder` , and `optional` attributes.
 
 ### Consent
 
@@ -280,7 +300,9 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
 
 `<irk-consent-sharing-step>` is the equivalent of the `ORKConsentSharingStep` class.
 
-`<irk-consent-review-step>` is the equivalent of the `ORKConsentReviewStep` class.  Depending on it's `type` attribute, it could encompass one or more `<irk-consent-name>` or `<irk-consent-signature>` elements which are the broken up equivalent of the `ORKConsentSignature` class.
+`<irk-consent-review-step>` is the equivalent of the `ORKConsentReviewStep` class.  Depending on it's `type` attribute, it could encompass either `<irk-consent-name>` or `<irk-consent-signature>` elements which are the broken up equivalent of the `ORKConsentSignature` class.
+
+The consent document PDF is automatically generated as a base64-encoded string and can be retrieved by using `irkConsentDocument.getDocument().getDataUrl()`.
 
 ### Active Tasks
 
@@ -290,14 +312,16 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
 
 `<irk-two-finger-tapping-interval-task>` is the equivalent of the `ORKPredefinedActiveTask` class that is for two finger tapping and supports the `text` and `duration` attributes.
 
-`<irk-audio-task>` is the equivalent of the `ORKPredefinedActiveTask` class that is for audio capture and supports the `text` and `duration` attributes.
+`<irk-audio-task>` is the equivalent of the `ORKPredefinedActiveTask` class that is for audio capture and supports the `text`, `duration`, `auto-record`, `auto-complete`, and `optional` attributes.
 
 # Roadmap
 
 - [x] Task View 
+  - [ ] Navigable Tasks 
 - [x] Survey directives
   - [x] Instruction Step
     - [x] Support optional image
+    - [ ] Support video
   - [x] Scale Question Step
     - [ ] Support step bars
     - [ ] Support vertical orientation
@@ -318,6 +342,8 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
     - [x] Support images
   - [x] Form Step directive
     - [ ] Support more answer formats
+  - [ ] Location Step
+  - [ ] Validated Answer Step
 - [x] Consent directives
   - [x] Visual Consent
     - [x] In Document Only Type
@@ -326,15 +352,23 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
   - [x] Consent Review
     - [x] Name Capture
     - [x] Signature Capture
-  - [ ] PDF Generation
+  - [x] PDF Generation
 - [ ] Active Tasks directives
   - [x] Countdown Step
   - [x] Completion Step
-  - [ ] Fitness Task
-  - [x] Audio Task
-  - [ ] Gait and Balance Task
   - [x] Tapping Speed Task
+  - [x] Audio Task
+  - [ ] Image Capture Task
+  - [ ] Video Capture Task
+  - [ ] Fitness Task
+  - [ ] Gait and Balance Task
   - [ ] Spacial Memory Task
+- [ ] Charts
+- [ ] Accounts
+  - [ ] Login Step
+  - [ ] Registration Step
+  - [ ] Wait Step
+  - [ ] Passcode Step
 - [x] Results
   - [x] Output results in JSON
   - [ ] Collect results into LocalStorage (save/resume)
