@@ -1,6 +1,18 @@
 # What is ionicResearchKit?
 
-An open source library equivalent of Apple's [ResearchKit Framework](https://github.com/ResearchKit/ResearchKit) built on [Ionic](https://github.com/driftyco/ionic) which makes it easy to create cross-platform hybrid native apps for medical research or for other research projects.
+An open source library equivalent of Apple's [ResearchKit Framework](https://github.com/ResearchKit/ResearchKit) built on [Ionic](https://github.com/driftyco/ionic) which makes it easy to create cross-platform hybrid native apps for medical or non-medical research and for other survey-type projects.
+
+# App Showcase
+
+- MIT Voice Up
+
+[Get it on iTunes](https://itunes.apple.com/us/app/mit-voice-up/id1160735265?ls=1&mt=8)
+[Get it on Google Play](https://play.google.com/store/apps/details?id=edu.mit.voiceup)
+
+- Civique.org
+
+[Get it on iTunes](https://itunes.apple.com/ch/app/civique.org/id1119089346?mt=8)
+[Get it on Google Play](https://play.google.com/store/apps/details?id=org.civique)
 
 # Demo
 
