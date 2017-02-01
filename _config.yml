@@ -1,0 +1,8 @@
+title: Ionic-ResearchKit
+description: An open source library equivalent of Apple's ResearchKit Framework built on Ionic which makes it easy to create cross-platform hybrid native apps for medical research or for other research projects.
+google_analytics: UA-67994808-1
+show_downloads: true
+theme: jekyll-theme-architect
+
+gems:
+  - jekyll-mentions
