@@ -46,13 +46,6 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
 3. Add `ionicResearchKit` to your angular app module dependencies list.<br />
 `angular.module('myApp', ['ionicResearchKit']);`
 
-# Dependencies
-
-- checklist-model [https://github.com/vitalets/checklist-model](https://github.com/vitalets/checklist-model)
-- signature_pad [https://github.com/szimek/signature_pad](https://github.com/szimek/signature_pad)
-- angular-svg-round-progressbar [https://github.com/crisbeto/angular-svg-round-progressbar](https://github.com/crisbeto/angular-svg-round-progressbar)
-- pdfmake [https://github.com/bpampuch/pdfmake](https://github.com/bpampuch/pdfmake)
-
 # Usage
 
 1. Add a modal view to your app using [$ionicModal](http://ionicframework.com/docs/api/service/$ionicModal/)
@@ -320,68 +313,6 @@ The consent document PDF is automatically generated as a base64-encoded string a
 
 `<irk-audio-task>` is the equivalent of the `ORKPredefinedActiveTask` class that is for audio capture and supports the `text`, `duration`, `auto-record`, `auto-complete`, and `optional` attributes.
 
-# Roadmap
-
-- [x] Task View 
-  - [ ] Navigable Tasks 
-- [x] Survey directives
-  - [x] Instruction Step
-    - [x] Support optional image
-    - [ ] Support video
-  - [x] Scale Question Step
-    - [ ] Support step bars
-    - [ ] Support vertical orientation
-  - [x] Boolean Question Step
-  - [x] Text Question Step
-    - [x] Multi lines
-    - [x] Single line
-  - [x] Text Choice Question Step
-    - [x] Single choice
-    - [x] Multiple choice
-  - [x] Numeric Question Step
-  - [x] Date Question Step
-  - [x] Time Question Step
-    - [ ] Time Interval Question Step
-  - [x] Value Picker Question Step
-  - [x] Image Choice Question Step
-    - [x] Support icons
-    - [x] Support images
-  - [x] Form Step directive
-    - [ ] Support more answer formats
-  - [ ] Location Step
-  - [ ] Validated Answer Step
-- [x] Consent directives
-  - [x] Visual Consent
-    - [x] In Document Only Type
-    - [x] Support custom image
-  - [x] Consent Sharing
-  - [x] Consent Review
-    - [x] Name Capture
-    - [x] Signature Capture
-  - [x] PDF Generation
-- [ ] Active Tasks directives
-  - [x] Countdown Step
-  - [x] Completion Step
-  - [x] Tapping Speed Task
-  - [x] Audio Task
-  - [ ] Image Capture Task
-  - [ ] Video Capture Task
-  - [ ] Fitness Task
-  - [ ] Gait and Balance Task
-  - [ ] Spacial Memory Task
-- [ ] Charts
-- [ ] Accounts
-  - [ ] Login Step
-  - [ ] Registration Step
-  - [ ] Wait Step
-  - [ ] Passcode Step
-- [x] Results
-  - [x] Output results in JSON
-  - [ ] Collect results into LocalStorage (save/resume)
-- [ ] Integrations
-  - [ ] HealthKit
-  - [ ] Google Fit
-  - [ ] Samsung S Health
 
 License
 =======
