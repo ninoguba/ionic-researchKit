@@ -4,17 +4,23 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
 
 # App Showcase
 
-- MIT Voice Up
+- MIT Voice Up - allows users to track various aspects of their mental health through a series of survey questions and speech prompts.
 
 [Get it on iTunes](https://itunes.apple.com/us/app/mit-voice-up/id1160735265?ls=1&mt=8)
 
 [Get it on Google Play](https://play.google.com/store/apps/details?id=edu.mit.voiceup)
 
-- Civique.org
+- Civique.org - the platform helps cities and organizations to create challenges on topics that matter to citizens and communities which also helps them document their cause, make sense of their data, and engage with people.
 
 [Get it on iTunes](https://itunes.apple.com/ch/app/civique.org/id1119089346?mt=8)
 
 [Get it on Google Play](https://play.google.com/store/apps/details?id=org.civique)
+
+- Bites'n'Bits - a research project of the Ecole Polytechnique Fédérale de Lausanne which aims to understand the modes of consumption and the perception of food and beverages consumed in everyday life.
+
+[Get it on iTunes](https://itunes.apple.com/us/app/bitesnbits/id1132530860?mt=8)
+
+[Get it on Google Play](https://play.google.com/store/apps/details?id=org.civique.nrc&hl=en)
 
 # Demo
 
@@ -39,13 +45,6 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
 `<link href="lib/ionic-researchkit/ionic-researchkit.css" rel="stylesheet">`
 3. Add `ionicResearchKit` to your angular app module dependencies list.<br />
 `angular.module('myApp', ['ionicResearchKit']);`
-
-# Dependencies
-
-- checklist-model [https://github.com/vitalets/checklist-model](https://github.com/vitalets/checklist-model)
-- signature_pad [https://github.com/szimek/signature_pad](https://github.com/szimek/signature_pad)
-- angular-svg-round-progressbar [https://github.com/crisbeto/angular-svg-round-progressbar](https://github.com/crisbeto/angular-svg-round-progressbar)
-- pdfmake [https://github.com/bpampuch/pdfmake](https://github.com/bpampuch/pdfmake)
 
 # Usage
 
@@ -314,68 +313,6 @@ The consent document PDF is automatically generated as a base64-encoded string a
 
 `<irk-audio-task>` is the equivalent of the `ORKPredefinedActiveTask` class that is for audio capture and supports the `text`, `duration`, `auto-record`, `auto-complete`, and `optional` attributes.
 
-# Roadmap
-
-- [x] Task View 
-  - [ ] Navigable Tasks 
-- [x] Survey directives
-  - [x] Instruction Step
-    - [x] Support optional image
-    - [ ] Support video
-  - [x] Scale Question Step
-    - [ ] Support step bars
-    - [ ] Support vertical orientation
-  - [x] Boolean Question Step
-  - [x] Text Question Step
-    - [x] Multi lines
-    - [x] Single line
-  - [x] Text Choice Question Step
-    - [x] Single choice
-    - [x] Multiple choice
-  - [x] Numeric Question Step
-  - [x] Date Question Step
-  - [x] Time Question Step
-    - [ ] Time Interval Question Step
-  - [x] Value Picker Question Step
-  - [x] Image Choice Question Step
-    - [x] Support icons
-    - [x] Support images
-  - [x] Form Step directive
-    - [ ] Support more answer formats
-  - [ ] Location Step
-  - [ ] Validated Answer Step
-- [x] Consent directives
-  - [x] Visual Consent
-    - [x] In Document Only Type
-    - [x] Support custom image
-  - [x] Consent Sharing
-  - [x] Consent Review
-    - [x] Name Capture
-    - [x] Signature Capture
-  - [x] PDF Generation
-- [ ] Active Tasks directives
-  - [x] Countdown Step
-  - [x] Completion Step
-  - [x] Tapping Speed Task
-  - [x] Audio Task
-  - [ ] Image Capture Task
-  - [ ] Video Capture Task
-  - [ ] Fitness Task
-  - [ ] Gait and Balance Task
-  - [ ] Spacial Memory Task
-- [ ] Charts
-- [ ] Accounts
-  - [ ] Login Step
-  - [ ] Registration Step
-  - [ ] Wait Step
-  - [ ] Passcode Step
-- [x] Results
-  - [x] Output results in JSON
-  - [ ] Collect results into LocalStorage (save/resume)
-- [ ] Integrations
-  - [ ] HealthKit
-  - [ ] Google Fit
-  - [ ] Samsung S Health
 
 License
 =======
