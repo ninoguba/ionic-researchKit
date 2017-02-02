@@ -4,17 +4,23 @@ An open source library equivalent of Apple's [ResearchKit Framework](https://git
 
 # App Showcase
 
-- MIT Voice Up
+- MIT Voice Up - allows users to track various aspects of their mental health through a series of survey questions and speech prompts.
 
 [Get it on iTunes](https://itunes.apple.com/us/app/mit-voice-up/id1160735265?ls=1&mt=8)
 
 [Get it on Google Play](https://play.google.com/store/apps/details?id=edu.mit.voiceup)
 
-- Civique.org
+- Civique.org - the platform helps cities and organizations to create challenges on topics that matter to citizens and communities which also helps them document their cause, make sense of their data, and engage with people.
 
 [Get it on iTunes](https://itunes.apple.com/ch/app/civique.org/id1119089346?mt=8)
 
 [Get it on Google Play](https://play.google.com/store/apps/details?id=org.civique)
+
+- Bites'n'Bits - a research project of the Ecole Polytechnique Fédérale de Lausanne which aims to understand the modes of consumption and the perception of food and beverages consumed in everyday life.
+
+[Get it on iTunes](https://itunes.apple.com/us/app/bitesnbits/id1132530860?mt=8)
+
+[Get it on Google Play](https://play.google.com/store/apps/details?id=org.civique.nrc&hl=en)
 
 # Demo
 
