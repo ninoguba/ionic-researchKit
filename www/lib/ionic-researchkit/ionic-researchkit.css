@@ -315,3 +315,53 @@ button.irk-image:before {
   width: 100px;
   height: 100px;
 }
+
+.irk-image-button-container {
+  position: absolute; 
+  bottom: 150px; 
+  width: 100%;
+}
+
+.irk-image-button {
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
+}
+
+.irk-spatial-tile-quiescent{
+  height: 100px;
+  width: 100px;
+}
+
+.irk-spatial-tile-correct{
+  background-color: #008CBA;
+  height: 100px;
+  width: 100px;
+}
+
+.irk-spatial-tile-incorrect{
+  background-color: #f44336;
+  height: 100px;
+  width: 100px;
+}
+
+.irk-spatial-score-container{
+  float:bottom;
+}
+
+.irk-small-button{
+  width: 20%;
+}
+
+.irk-fitness-meters{
+  font-size: 30px;
+  margin-top:20px;
+  margin-bottom:20px;
+  vertical-align: middle;
+}
+
+.irk-fitness-meters{
+  font-size: 30px;
+  vertical-align: bottom;
+  margin-bottom:30px;
+}
