@@ -74,6 +74,58 @@ angular.module('starter.controllers', [])
     });
   };
 
+  $scope.openModalImageActiveTask = function() {
+    $ionicModal.fromTemplateUrl('templates/modal-activetasks-image.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modal = modal;
+      $scope.modal.show();
+    });
+  };
+
+   $scope.openModalVideoActiveTask = function() {
+    $ionicModal.fromTemplateUrl('templates/modal-activetasks-video.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modal = modal;
+      $scope.modal.show();
+    });
+  };
+
+  $scope.openModalSpatialActiveTask = function() {
+    $ionicModal.fromTemplateUrl('templates/modal-activetasks-spatial.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modal = modal;
+      $scope.modal.show();
+    });
+  };
+
+  $scope.openModalGaitBalanceActiveTask = function() {
+    $ionicModal.fromTemplateUrl('templates/modal-activetasks-gait-balance.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modal = modal;
+      $scope.modal.show();
+    });
+  };
+
+  $scope.openModalFitnessTask = function() {
+    $ionicModal.fromTemplateUrl('templates/modal-activetasks-fitness.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modal = modal;
+      $scope.modal.show();
+    });
+  };
+
+
+
   $scope.closeModal = function() {
     $scope.modal.remove();
   };

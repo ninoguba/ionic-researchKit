@@ -1,0 +1,26 @@
+<ion-modal-view class="irk-modal">
+
+<irk-ordered-tasks>
+
+  <irk-task>
+    <irk-instruction-step id="a1" title="Video Capture" text="Video Capture activity." button-text="Next" image="irk-voice" footer-attach="true"/>
+  </irk-task>
+
+  <irk-task>
+    <irk-instruction-step id="a2" title="Video Capture" text="Take a video.<br><br>Tap Get Started to begin." button-text="Get Started" image="irk-voice-recording" footer-attach="true"/>
+  </irk-task>
+  <!--
+  <irk-task>
+    <irk-countdown-step id="a3"/>
+  </irk-task>
+  -->
+  <irk-task>
+    <irk-video-capture-task id="a4"/>
+  </irk-task>
+  <irk-task>
+    <irk-completion-step id="a5"/>
+  </irk-task>
+
+</irk-ordered-tasks>
+
+</ion-modal-view>
